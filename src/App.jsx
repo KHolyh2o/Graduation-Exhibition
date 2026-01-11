@@ -1,0 +1,30 @@
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import MainPage from './pages/MainPage';
+import ProjectPage from './pages/ProjectPage';
+import DepartmentPage from './pages/DepartmentPage';
+import GalleryPage from './pages/GalleryPage';
+import OthersPage from './pages/OthersPage';
+import './App.css';
+
+function App() {
+  return (
+    <Router>
+      <div className="App">
+        <Navbar />
+        <div className="content">
+          <Routes>
+            <Route path="/" element={<MainPage />} />
+            <Route path="/project" element={<ProjectPage />} />
+            <Route path="/department" element={<DepartmentPage />} />
+            <Route path="/gallery" element={<GalleryPage />} />
+            <Route path="/others" element={<OthersPage />} />
+          </Routes>
+        </div>
+      </div>
+    </Router>
+  );
+}
+
+export default App;
