@@ -25,7 +25,7 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Transfer build files (SCP)
+      - name: Transfer build files to Temp folder (SCP)
         uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.SERVER_HOST }}
@@ -33,5 +33,25 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.SERVER_PORT }}
           source: "dist/*"
-          target: "/var/www/html/2026"
+          target: "/home/${{ secrets.USERNAME }}/temp-deploy"
           strip_components: 1
+
+      - name: Move files to Web Root using sudo (SSH)
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.SERVER_PORT }}
+          script: |
+            # sudo 권한을 사용해 기존 파일들을 날리고 새 파일 덮어쓰기
+            # (비밀번호를 파이프로 넘겨주어 sudo 비밀번호 입력을 자동화합니다)
+            
+            # 1. 목적지 폴더가 없다면 생성 (보통 Nginx 디폴트 경로 등을 씀)
+            echo "${{ secrets.PASSWORD }}" | sudo -S mkdir -p /var/www/html/2026
+            
+            # 2. 업로드한 새 파일들을 웹 루트 폴더로 복사 (덮어쓰기)
+            echo "${{ secrets.PASSWORD }}" | sudo -S cp -r /home/${{ secrets.USERNAME }}/temp-deploy/* /var/www/html/2026/
+            
+            # 3. 임시 폴더 삭제 (정리)
+            rm -rf /home/${{ secrets.USERNAME }}/temp-deploy
