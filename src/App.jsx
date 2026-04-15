@@ -10,7 +10,7 @@ import './App.css';
 
 function App() {
   return (
-    <Router>
+    <Router basename="/2026/">
       <div className="App">
         <Navbar />
         <div className="content">
