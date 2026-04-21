@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="2026 서원대학교 미디어콘텐츠학부 졸업전시 - 학부소개 및 교수진 페이지." />
+  <title>학부소개 | 2026 서원대학교 미디어콘텐츠학부 졸업전시</title>
+  <style>
+    /* ===================================================
+       RESET & BASE
+    =================================================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ph-light:    #E0E0E0;
+      --ph-mid:      #CCCCCC;
+      --ph-dark:     #AAAAAA;
+      --ph-text:     #888888;
+
+      --color-bg:      #F7F7F7;
+      --color-header:  #FFFFFF;
+      --color-border:  #DDDDDD;
+      --color-text:    #222222;
+      --color-muted:   #666666;
+      --color-btn:     #222222;
+
+      --font-main:   'Noto Sans KR', sans-serif;
+      --radius:      6px;
+      --shadow:      0 4px 18px rgba(0,0,0,0.10);
+      --transition:  0.22s ease;
+
+      --header-h:    68px;
+      --content-max: 1180px;
+      --section-gap: 96px;
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-main);
+      background: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* ===================================================
+       PLACEHOLDER UTILITY
+    =================================================== */
+    .ph {
+      background: var(--ph-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ph-text);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      text-align: center;
+      border: 1.5px dashed var(--ph-mid);
+      border-radius: var(--radius);
+      padding: 8px;
+      user-select: none;
+    }
+
+    /* ===================================================
+       LAYOUT
+    =================================================== */
+    .container {
+      width: 100%;
+      max-width: var(--content-max);
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    section {
+      padding: var(--section-gap) 0;
+    }
+
+    /* ===================================================
+       HEADER
+    =================================================== */
+    #site-header {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: var(--header-h);
+      background: var(--color-header);
+      border-bottom: 1px solid var(--color-border);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: var(--content-max);
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .logo-ph {
+      width: 42px; height: 42px;
+      flex-shrink: 0;
+      font-size: 0.6rem;
+    }
+
+    .logo-text { display: flex; flex-direction: column; line-height: 1.3; }
+    .logo-text .subtitle { font-size: 0.64rem; color: var(--color-muted); }
+    .logo-text .title    { font-size: 0.88rem; font-weight: 700; }
+
+    .site-nav { display: flex; align-items: center; gap: 8px; }
+
+    .nav-link {
+      display: block;
+      padding: 8px 14px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--color-muted);
+      text-decoration: none;
+      border-radius: var(--radius);
+      transition: background var(--transition), color var(--transition);
+      white-space: nowrap;
+    }
+    .nav-link:hover,
+    .nav-link.active { background: var(--ph-light); color: var(--color-text); }
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+      background: none;
+      border: none;
+      border-radius: var(--radius);
+    }
+    .menu-toggle span {
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--color-text);
+      border-radius: 2px;
+    }
+
+    /* ===================================================
+       PAGE HERO (서브 공통)
+    =================================================== */
+    .page-hero {
+      margin-top: var(--header-h);
+      padding: 56px 0 40px;
+      background: #FFFFFF;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .page-breadcrumb {
+      font-size: 0.72rem;
+      color: var(--ph-text);
+      margin-bottom: 8px;
+      letter-spacing: 0.06em;
+    }
+
+    .page-title {
+      font-size: 2rem;
+      font-weight: 900;
+      line-height: 1.2;
+    }
+
+    .page-desc {
+      font-size: 0.9rem;
+      color: var(--color-muted);
+      margin-top: 8px;
+      word-break: keep-all;
+      max-width: 600px;
+    }
+
+    /* ===================================================
+       SECTION 1 — 학부 소개 인트로
+    =================================================== */
+    #dept-intro {
+      background: #FFFFFF;
+      border-bottom: 1px solid var(--color-border);
+      text-align: center;
+    }
+
+    .dept-intro-inner {
+      max-width: 740px;
+      margin: 0 auto;
+    }
+
+    .section-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ph-text);
+      margin-bottom: 18px;
+    }
+
+    .dept-main-title {
+      font-size: 2.8rem;
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 24px;
+      letter-spacing: -0.02em;
+    }
+
+    .dept-divider {
+      width: 48px;
+      height: 3px;
+      background: var(--color-text);
+      border-radius: 2px;
+      margin: 0 auto 24px;
+    }
+
+    .dept-sub-text {
+      font-size: 1rem;
+      color: var(--color-muted);
+      line-height: 2;
+      word-break: keep-all;
+    }
+
+    /* ===================================================
+       SECTION 2 — 교육목표
+    =================================================== */
+    #edu-goal {
+      background: var(--color-bg);
+    }
+
+    .section-header {
+      margin-bottom: 52px;
+    }
+
+    .section-title {
+      font-size: 1.7rem;
+      font-weight: 900;
+      margin-bottom: 16px;
+    }
+
+    .section-overview {
+      font-size: 0.94rem;
+      color: var(--color-muted);
+      line-height: 2;
+      max-width: 780px;
+      word-break: keep-all;
+    }
+
+    /* ── 핵심역량 다이어그램 ── */
+    .competency-diagram {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      margin-bottom: 64px;
+      flex-wrap: wrap;
+      gap: 0;
+    }
+
+    .comp-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 200px;
+      height: 200px;
+      border: 2px solid var(--color-border);
+      border-radius: 50%;
+      background: #FFFFFF;
+      text-align: center;
+      padding: 20px;
+      flex-shrink: 0;
+      position: relative;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+
+    .comp-node:hover {
+      border-color: var(--ph-dark);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.10);
+    }
+
+    .comp-node-en {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ph-text);
+      margin-bottom: 6px;
+    }
+
+    .comp-node-kr {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--color-text);
+      line-height: 1.3;
+    }
+
+    /* 연결 교량 요소 */
+    .comp-bridge {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 0 12px;
+      flex-shrink: 0;
+    }
+
+    .comp-bridge-line {
+      width: 56px;
+      height: 1.5px;
+      background: var(--ph-mid);
+      position: relative;
+    }
+
+    .comp-bridge-tag {
+      font-size: 0.64rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--ph-text);
+      background: var(--ph-light);
+      border: 1px solid var(--color-border);
+      border-radius: 100px;
+      padding: 3px 9px;
+      white-space: nowrap;
+      text-align: center;
+    }
+
+    /* ── 3대 세부 교육방향 카드 ── */
+    .edu-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .edu-card {
+      border: 1.5px solid var(--color-border);
+      border-radius: 10px;
+      background: #FFFFFF;
+      padding: 28px 24px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: box-shadow var(--transition), transform var(--transition);
+    }
+
+    .edu-card:hover {
+      box-shadow: 0 8px 28px rgba(0,0,0,0.09);
+      transform: translateY(-4px);
+    }
+
+    .edu-card-num {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--ph-text);
+    }
+
+    .edu-card-title {
+      font-size: 0.96rem;
+      font-weight: 700;
+      color: var(--color-text);
+      line-height: 1.5;
+      border-bottom: 1.5px solid var(--color-border);
+      padding-bottom: 16px;
+      word-break: keep-all;
+    }
+
+    .edu-card-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .edu-card-list li {
+      font-size: 0.85rem;
+      color: var(--color-muted);
+      line-height: 1.65;
+      padding-left: 14px;
+      position: relative;
+      word-break: keep-all;
+    }
+
+    .edu-card-list li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--ph-mid);
+      font-size: 0.72rem;
+      top: 3px;
+    }
+
+    /* ===================================================
+       SECTION 3 — 교수진 소개
+    =================================================== */
+    #professors {
+      background: #FFFFFF;
+      border-top: 1px solid var(--color-border);
+    }
+
+    /* 교수 그리드 */
+    .prof-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 24px;
+    }
+
+    .prof-card {
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      padding: 20px 16px 22px;
+      border: 1.5px solid var(--color-border);
+      border-radius: 10px;
+      background: #FFFFFF;
+      transition: box-shadow var(--transition), transform var(--transition), border-color var(--transition);
+      text-align: center;
+    }
+
+    .prof-card:hover {
+      box-shadow: 0 8px 28px rgba(0,0,0,0.10);
+      transform: translateY(-5px);
+      border-color: var(--ph-dark);
+    }
+
+    .prof-img-ph {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      flex-shrink: 0;
+    }
+
+    .prof-name {
+      font-size: 0.94rem;
+      font-weight: 700;
+      color: var(--color-text);
+    }
+
+    .prof-subject {
+      font-size: 0.78rem;
+      color: var(--color-muted);
+      line-height: 1.5;
+      word-break: keep-all;
+    }
+
+    /* ===================================================
+       MODAL — 교수 상세
+    =================================================== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.65);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+      backdrop-filter: blur(3px);
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-box {
+      background: #FFFFFF;
+      border-radius: 14px;
+      width: 100%;
+      max-width: 600px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.28);
+      transform: scale(0.93) translateY(16px);
+      transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+    }
+
+    .modal-overlay.active .modal-box {
+      transform: scale(1) translateY(0);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px; right: 16px;
+      width: 34px; height: 34px;
+      background: var(--ph-light);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      color: var(--color-text);
+      transition: background var(--transition);
+      z-index: 10;
+    }
+    .modal-close:hover { background: var(--ph-mid); }
+
+    /* 모달 헤더 */
+    .modal-head {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      padding: 32px 32px 24px;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .modal-prof-img {
+      width: 90px;
+      height: 110px;
+      flex-shrink: 0;
+      border-radius: 6px;
+      font-size: 0.7rem;
+    }
+
+    .modal-prof-info {
+      flex: 1;
+    }
+
+    .modal-prof-info .modal-eyebrow {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ph-text);
+      margin-bottom: 6px;
+    }
+
+    .modal-prof-info .modal-name {
+      font-size: 1.4rem;
+      font-weight: 900;
+      margin-bottom: 6px;
+    }
+
+    .modal-prof-info .modal-subject {
+      font-size: 0.84rem;
+      color: var(--color-muted);
+      line-height: 1.6;
+    }
+
+    /* 모달 바디 */
+    .modal-body {
+      padding: 28px 32px 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .modal-section-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ph-text);
+      margin-bottom: 8px;
+    }
+
+    .modal-message-box {
+      background: var(--ph-light);
+      border: 1.5px dashed var(--ph-mid);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      font-size: 0.88rem;
+      color: var(--color-muted);
+      line-height: 2;
+      word-break: keep-all;
+    }
+
+    /* ===================================================
+       FOOTER
+    =================================================== */
+    #site-footer {
+      background: var(--color-text);
+      color: rgba(255,255,255,0.65);
+      padding: 56px 0;
+      border-top: 1px solid #333;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+
+    .footer-brand .school-name { font-size: 1rem; font-weight: 700; color: #FFFFFF; margin-bottom: 8px; }
+    .footer-brand .dept-name   { font-size: 0.82rem; margin-bottom: 4px; }
+    .footer-brand .exhibit-name-small { font-size: 0.78rem; opacity: 0.5; }
+
+    .footer-info { display: flex; flex-direction: column; gap: 6px; font-size: 0.82rem; text-align: right; }
+    .footer-info span { display: flex; align-items: center; gap: 6px; justify-content: flex-end; }
+
+    .footer-copy {
+      width: 100%;
+      padding-top: 32px;
+      margin-top: 32px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.74rem;
+      text-align: center;
+      opacity: 0.4;
+    }
+
+    /* ===================================================
+       SCROLL REVEAL
+    =================================================== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ===================================================
+       RESPONSIVE
+    =================================================== */
+    @media (max-width: 1024px) {
+      .prof-grid { grid-template-columns: repeat(4, 1fr); }
+      .edu-cards { grid-template-columns: repeat(2, 1fr); }
+      .comp-node { width: 170px; height: 170px; }
+    }
+
+    @media (max-width: 768px) {
+      .prof-grid { grid-template-columns: repeat(3, 1fr); }
+      .edu-cards { grid-template-columns: 1fr; }
+      .dept-main-title { font-size: 2rem; }
+      .section-title { font-size: 1.4rem; }
+      .competency-diagram { flex-direction: column; gap: 12px; }
+      .comp-bridge { flex-direction: row; }
+      .comp-bridge-line { width: 24px; }
+      .modal-head { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (max-width: 620px) {
+      :root { --section-gap: 60px; }
+      .prof-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+      .site-nav { display: none; flex-direction: column; }
+      .site-nav.open {
+        display: flex;
+        position: fixed;
+        top: var(--header-h);
+        left: 0; width: 100%;
+        background: #FFFFFF;
+        border-bottom: 1px solid var(--color-border);
+        padding: 12px 0 16px;
+        z-index: 999;
+        box-shadow: var(--shadow);
+      }
+      .nav-link { padding: 12px 28px; }
+      .menu-toggle { display: flex; }
+      .footer-inner { flex-direction: column; }
+      .footer-info { text-align: left; }
+      .footer-info span { justify-content: flex-start; }
+      .modal-body { padding: 20px; }
+      .modal-head { padding: 24px 20px 20px; }
+      .dept-main-title { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==============================
+       HEADER
+  ============================== -->
+  <header id="site-header" role="banner">
+    <div class="header-inner">
+      <a href="index.html" class="logo-area" aria-label="메인 홈으로">
+        <div class="ph logo-ph">LOGO</div>
+        <div class="logo-text">
+          <span class="subtitle">서원대학교 미디어콘텐츠학부</span>
+          <span class="title">2026 졸업전시</span>
+        </div>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="메뉴 열기" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="site-nav" id="siteNav" aria-label="주요 메뉴">
+        <a href="sub1.html" class="nav-link">작품소개</a>
+        <a href="sub2.html" class="nav-link active">학부소개</a>
+        <a href="sub3.html" class="nav-link">기록들</a>
+        <a href="sub4.html" class="nav-link">과거전시보기</a>
+      </nav>
+    </div>
+  </header>
+
+
+  <!-- ==============================
+       PAGE HERO
+  ============================== -->
+  <div class="page-hero">
+    <div class="container">
+      <p class="page-breadcrumb">HOME › 학부소개</p>
+      <h1 class="page-title">학부소개</h1>
+      <p class="page-desc">미디어콘텐츠학부의 교육목표, 핵심 역량, 교수진을 소개합니다.</p>
+    </div>
+  </div>
+
+
+  <!-- ==============================
+       SECTION 1 — 미디어콘텐츠학부 소개
+  ============================== -->
+  <section id="dept-intro" aria-label="미디어콘텐츠학부 소개">
+    <div class="container">
+      <div class="dept-intro-inner reveal">
+        <p class="section-eyebrow">Department of Media Contents</p>
+        <h2 class="dept-main-title">미디어콘텐츠학부</h2>
+        <div class="dept-divider"></div>
+        <p class="dept-sub-text">
+          미래산업의 핵심·인재·창의 융합형 멀티미디어 콘텐츠 전문가를 양성하는<br>
+          미디어콘텐츠학부를 소개합니다.
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==============================
+       SECTION 2 — 미디어콘텐츠학부 교육목표
+  ============================== -->
+  <section id="edu-goal" aria-label="교육목표">
+    <div class="container">
+
+      <!-- 섹션 헤더 -->
+      <div class="section-header reveal">
+        <h2 class="section-title">미디어콘텐츠학부 교육목표</h2>
+        <p class="section-overview">
+          멀티미디어환경에 유기적으로 대응할 수 있는 첨단실용학문으로 실무에서 요구하는
+          '멀티형 인재'로 성장하기 위한 지능형·감성형·실감형 3단계 융합미디어교육과정을 통해
+          스마트미디어콘텐츠전문가를 양성합니다.
+        </p>
+      </div>
+
+      <!-- 핵심역량 다이어그램 -->
+      <div class="competency-diagram reveal" aria-label="핵심 역량 다이어그램">
+
+        <!-- 좌측 노드 -->
+        <div class="comp-node">
+          <span class="comp-node-en">Intelligent Contents</span>
+          <span class="comp-node-kr">지능형<br>콘텐츠</span>
+        </div>
+
+        <!-- 연결 브리지 1 -->
+        <div class="comp-bridge">
+          <span class="comp-bridge-tag">브랜드 마케팅</span>
+          <div class="comp-bridge-line"></div>
+          <span class="comp-bridge-tag">공통영역</span>
+          <div class="comp-bridge-line"></div>
+          <span class="comp-bridge-tag">기획설계</span>
+        </div>
+
+        <!-- 중앙 노드 -->
+        <div class="comp-node" style="border-color: var(--ph-dark); background: var(--ph-light);">
+          <span class="comp-node-en">Emotional Contents</span>
+          <span class="comp-node-kr">감성형<br>콘텐츠</span>
+        </div>
+
+        <!-- 연결 브리지 2 -->
+        <div class="comp-bridge">
+          <span class="comp-bridge-tag">실무 프로젝트</span>
+          <div class="comp-bridge-line"></div>
+          <span class="comp-bridge-tag">디자인제작</span>
+        </div>
+
+        <!-- 우측 노드 -->
+        <div class="comp-node">
+          <span class="comp-node-en">Immersive Contents</span>
+          <span class="comp-node-kr">실감형<br>콘텐츠</span>
+        </div>
+
+      </div><!-- /competency-diagram -->
+
+      <!-- 3대 세부 교육방향 카드 -->
+      <div class="edu-cards" aria-label="3대 세부 교육방향">
+
+        <!-- 카드 1 -->
+        <article class="edu-card reveal">
+          <span class="edu-card-num">01</span>
+          <h3 class="edu-card-title">실무 중심 콘텐츠 전문가 교육과정</h3>
+          <ul class="edu-card-list">
+            <li>직무 전공별 특화 실무 교육 진행</li>
+            <li>국가직무능력표준기반 교육 커리큘럼 운영</li>
+            <li>스마트콘텐츠, 영상미디어, 게임 등 진로디자인로드맵 운영</li>
+            <li>실무 중심 교수진 및 교과·비교과 프로그램 구성</li>
+          </ul>
+        </article>
+
+        <!-- 카드 2 -->
+        <article class="edu-card reveal">
+          <span class="edu-card-num">02</span>
+          <h3 class="edu-card-title">산학협력 프로젝트 활성화</h3>
+          <ul class="edu-card-list">
+            <li>첨단융합스튜디오 운영 및 활성화</li>
+            <li>실무 프로젝트 형 취·창업 동아리와 산학협력 연계</li>
+            <li>창업캡스톤디자인 과목 연계를 통합 산학연 프로젝트 진행</li>
+            <li>공모전, 경진대회 등 현업 실무자 지도 및 컨설팅 진행</li>
+          </ul>
+        </article>
+
+        <!-- 카드 3 -->
+        <article class="edu-card reveal">
+          <span class="edu-card-num">03</span>
+          <h3 class="edu-card-title">멀티미디어 융복합콘텐츠 연구 개발</h3>
+          <ul class="edu-card-list">
+            <li>스마트디바이스를 활용한 스마트콘텐츠 제작 및 구현</li>
+            <li>[New Media Contents Zone] 영상미디어콘텐츠 제작</li>
+            <li>[XR Contents Zone] 3D, 게임, VR·AR, 홀로그램 개발</li>
+            <li>[Co-working Space] 콘텐츠 아이디어·아이템 개발 구현</li>
+          </ul>
+        </article>
+
+      </div><!-- /edu-cards -->
+    </div>
+  </section>
+
+
+  <!-- ==============================
+       SECTION 3 — 교수진 소개
+  ============================== -->
+  <section id="professors" aria-label="교수진 소개">
+    <div class="container">
+
+      <div class="section-header reveal">
+        <h2 class="section-title">교수진 소개</h2>
+        <p class="section-overview">
+          프로필을 클릭하면 교수님의 담당 과목과 졸업생들을 향한 응원 메시지를 확인할 수 있습니다.
+        </p>
+      </div>
+
+      <div class="prof-grid" id="profGrid">
+        <!-- JS로 렌더링 -->
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ==============================
+       FOOTER
+  ============================== -->
+  <footer id="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <p class="school-name">서원대학교</p>
+          <p class="dept-name">미디어콘텐츠학부</p>
+          <p class="exhibit-name-small">2026 졸업전시</p>
+        </div>
+        <div class="footer-info">
+          <span>📍 충청북도 청주시 서원구 무심서로 377-3</span>
+          <span>📞 043-299-8114</span>
+        </div>
+      </div>
+      <p class="footer-copy">
+        &copy; 2026 서원대학교 미디어콘텐츠학부 졸업전시. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+
+  <!-- ==============================
+       MODAL — 교수 상세
+  ============================== -->
+  <div
+    class="modal-overlay"
+    id="profModal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modalProfName"
+  >
+    <div class="modal-box" id="modalBox">
+      <button class="modal-close" id="modalClose" aria-label="닫기">✕</button>
+
+      <div class="modal-head">
+        <div class="ph modal-prof-img" id="modalProfImg">교수님 사진</div>
+        <div class="modal-prof-info">
+          <p class="modal-eyebrow" id="modalEyebrow">Professor</p>
+          <p class="modal-name" id="modalProfName">—</p>
+          <p class="modal-subject" id="modalSubject">—</p>
+        </div>
+      </div>
+
+      <div class="modal-body">
+        <div>
+          <p class="modal-section-label">졸업생들을 향한 응원 메시지</p>
+          <div class="modal-message-box" id="modalMessage">
+            —
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ==============================
+       SCRIPT
+  ============================== -->
+  <script>
+    /* ─────────── 교수진 데이터 ─────────── */
+    const professors = [
+      {
+        id: 1,
+        name: '김○○ 교수',
+        subject: '스마트콘텐츠 기획 / 멀티미디어 제작론',
+        message: '여러분이 4년간 쌓아온 모든 경험과 지식은 결코 헛되지 않습니다. 세상은 여러분의 창의적인 시선과 도전을 기다리고 있습니다. 자신을 믿고 두려움 없이 나아가세요. 졸업을 진심으로 축하합니다!'
+      },
+      {
+        id: 2,
+        name: '이○○ 교수',
+        subject: '영상미디어 제작 / 영상편집 실습',
+        message: '졸업은 끝이 아니라 새로운 시작입니다. 미디어 산업은 빠르게 변화하지만, 여러분이 배운 탄탄한 기초 위에서 무한히 성장할 수 있습니다. 항상 배움을 멈추지 말고 꿈을 향해 힘차게 전진하길 응원합니다!'
+      },
+      {
+        id: 3,
+        name: '박○○ 교수',
+        subject: '게임디자인 / XR 콘텐츠 개발',
+        message: '3D, VR, AR 등 실감형 콘텐츠의 시대가 열리고 있습니다. 여러분은 그 최전선에서 활약할 최고의 인재들입니다. 현장에서 부딪히며 배우는 모든 순간이 여러분을 더욱 빛나게 할 것입니다. 파이팅!'
+      },
+      {
+        id: 4,
+        name: '최○○ 교수',
+        subject: 'UI/UX 디자인 / 웹 퍼블리싱',
+        message: '사용자를 감동시키는 디자인을 만드는 여러분이 자랑스럽습니다. 디테일에서 차이가 나는 법입니다. 작은 것 하나하나에 최선을 다하는 습관을 유지한다면 반드시 빛날 날이 올 것입니다. 졸업을 축하합니다!'
+      },
+      {
+        id: 5,
+        name: '정○○ 교수',
+        subject: '브랜드 마케팅 / 콘텐츠 전략',
+        message: '콘텐츠는 세상과 소통하는 언어입니다. 여러분이 만들어 낼 이야기들이 세상을 더욱 풍요롭게 만들 것이라 확신합니다. 도전을 두려워하지 말고, 실패해도 다시 일어나는 회복탄력성을 길러나가세요!'
+      },
+      {
+        id: 6,
+        name: '한○○ 교수',
+        subject: '광고영상 제작 / 다큐멘터리 기획',
+        message: '카메라 너머로 세상을 바라보는 여러분만의 시선이 가장 큰 무기입니다. 졸업 후에도 끊임없이 세상에 질문을 던지는 창작자로 살아가길 바랍니다. 여러분의 앞날을 진심으로 응원합니다!'
+      },
+      {
+        id: 7,
+        name: '윤○○ 교수',
+        subject: '애니메이션 / 모션그래픽',
+        message: '움직임 하나에 감정을 담는 것이 얼마나 어렵고도 보람 있는 일인지 여러분은 이미 알고 있을 것입니다. 그 열정을 잃지 마세요. 세상 어딘가에서 여러분의 작품이 누군가를 웃게 만들 것입니다. 축하합니다!'
+      },
+      {
+        id: 8,
+        name: '임○○ 교수',
+        subject: '데이터 저널리즘 / 미디어 리터러시',
+        message: '정보가 넘쳐나는 시대일수록 진실을 꿰뚫는 비판적 사고가 중요합니다. 여러분이 배운 미디어 리터러시를 현장에서도 발휘하여 올바른 콘텐츠를 만들어 가는 전문가가 되길 기대합니다. 수고 많으셨습니다!'
+      },
+      {
+        id: 9,
+        name: '강○○ 교수',
+        subject: '사운드 디자인 / 음향 제작',
+        message: '보이지 않는 소리가 콘텐츠의 감동을 완성합니다. 여러분이 만드는 모든 작품에 혼을 담는 것을 잊지 마세요. 사운드 하나로 세상을 바꿀 수 있다는 자신감을 갖고 힘차게 날아오르길 응원합니다!'
+      },
+      {
+        id: 10,
+        name: '오○○ 교수',
+        subject: '1인 미디어 창작 / 크리에이터 스튜디오',
+        message: '여러분 한 사람 한 사람이 이미 하나의 미디어입니다. 자신의 이야기를 담대하게 세상에 내놓으세요. 실수를 두려워하지 말고, 꾸준히 콘텐츠를 만들다 보면 반드시 여러분만의 팬층이 생길 것입니다. 졸업 축하드립니다!'
+      }
+    ];
+
+    /* ─────────── 교수 카드 렌더링 ─────────── */
+    const grid = document.getElementById('profGrid');
+
+    professors.forEach((prof) => {
+      const card = document.createElement('div');
+      card.className = 'prof-card reveal';
+      card.setAttribute('role', 'button');
+      card.setAttribute('tabindex', '0');
+      card.setAttribute('aria-label', `${prof.name} 상세보기`);
+      card.dataset.id = prof.id;
+
+      card.innerHTML = `
+        <div class="ph prof-img-ph">${prof.name}<br>사진</div>
+        <p class="prof-name">${prof.name}</p>
+        <p class="prof-subject">${prof.subject.split(' / ')[0]}</p>
+      `;
+
+      card.addEventListener('click', () => openModal(prof));
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(prof); }
+      });
+
+      grid.appendChild(card);
+    });
+
+    /* ─────────── 모달 제어 ─────────── */
+    const overlay  = document.getElementById('profModal');
+    const closeBtn = document.getElementById('modalClose');
+
+    function openModal(prof) {
+      document.getElementById('modalProfImg').textContent   = `${prof.name}\n사진`;
+      document.getElementById('modalProfName').textContent  = prof.name;
+      document.getElementById('modalSubject').textContent   = prof.subject;
+      document.getElementById('modalMessage').textContent   = prof.message;
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      closeBtn.focus();
+    }
+
+    function closeModal() {
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    closeBtn.addEventListener('click', closeModal);
+
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) closeModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && overlay.classList.contains('active')) closeModal();
+    });
+
+    /* ─────────── 햄버거 메뉴 ─────────── */
+    const toggle = document.getElementById('menuToggle');
+    const nav    = document.getElementById('siteNav');
+
+    toggle.addEventListener('click', () => {
+      const isOpen = nav.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', isOpen);
+    });
+
+    /* ─────────── 스크롤 리빌 ─────────── */
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+    revealEls.forEach((el) => observer.observe(el));
+  </script>
+
+</body>
+</html>
