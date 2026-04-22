@@ -45,9 +45,13 @@ jobs:
           port: ${{ secrets.SERVER_PORT }}
           script: |
             echo "${{ secrets.PASSWORD }}" | sudo -S mkdir -p /var/www/html/2026
-            
+
             # 서버에 들어간 압축 파일을 해제하며 바로 목적지에 덮어씌웁니다.
             echo "${{ secrets.PASSWORD }}" | sudo -S tar -xzf /tmp/dist.tar.gz -C /var/www/html/2026/ --strip-components=1
-            
+
             # 찌꺼기 파일 정리
             echo "${{ secrets.PASSWORD }}" | sudo -S rm -f /tmp/dist.tar.gz
+
+            # React SPA 새로고침 404 방지: /2026/ 하위 경로를 index.html로 라우팅
+            echo "${{ secrets.PASSWORD }}" | sudo -S bash -c 'printf "location /2026/ {\n    root /var/www/html;\n    try_files \$uri \$uri/ /2026/index.html;\n}\n" > /etc/nginx/conf.d/2026-spa.conf'
+            echo "${{ secrets.PASSWORD }}" | sudo -S nginx -t && echo "${{ secrets.PASSWORD }}" | sudo -S systemctl reload nginx

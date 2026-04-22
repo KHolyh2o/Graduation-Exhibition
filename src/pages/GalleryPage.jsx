@@ -1,12 +1,33 @@
 import React from 'react';
+import useScrollReveal from '../hooks/useScrollReveal';
+import './GalleryPage.css';
 
 const GalleryPage = () => {
-    return (
-        <div style={{ padding: '20px' }}>
-            <h1>사진갤러리 페이지 (Gallery Page)</h1>
-            <p>Image gallery goes here.</p>
+  useScrollReveal();
+
+  return (
+    <main id="records" aria-label="졸업전시 준비과정 영상">
+      <div className="records-inner">
+
+        <div className="records-head reveal">
+          <p className="records-eyebrow">Behind the Exhibition</p>
+          <h1 className="records-title">우리의 준비 과정</h1>
+          <div className="records-divider"></div>
+          <p className="records-desc">
+            2026 졸업전시를 완성하기까지의 모든 순간을 담은 영상을 만나보세요.
+          </p>
         </div>
-    );
+
+        <div className="video-wrapper reveal" style={{ transitionDelay: '0.15s' }}>
+          <div className="video-ph" role="img" aria-label="졸업전시 준비과정 영상 재생 영역">
+            <div className="play-btn" aria-hidden="true"></div>
+            <span className="video-ph-label">졸업전시 준비과정 영상 재생 영역</span>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  );
 };
 
 export default GalleryPage;
