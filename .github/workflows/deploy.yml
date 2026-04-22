@@ -52,6 +52,9 @@ jobs:
             # 찌꺼기 파일 정리
             echo "${{ secrets.PASSWORD }}" | sudo -S rm -f /tmp/dist.tar.gz
 
-            # React SPA 새로고침 404 방지: /2026/ 하위 경로를 index.html로 라우팅
-            echo "${{ secrets.PASSWORD }}" | sudo -S bash -c 'printf "location /2026/ {\n    root /var/www/html;\n    try_files \$uri \$uri/ /2026/index.html;\n}\n" > /etc/nginx/conf.d/2026-spa.conf'
+            # 이전에 잘못 생성된 conf.d 파일 제거
+            echo "${{ secrets.PASSWORD }}" | sudo -S rm -f /etc/nginx/conf.d/2026-spa.conf
+
+            # React SPA 새로고침 404 방지: location /2026/ 블록이 없을 때만 삽입
+            echo "${{ secrets.PASSWORD }}" | sudo -S grep -q 'location /2026/' /etc/nginx/sites-available/default || echo "${{ secrets.PASSWORD }}" | sudo -S sed -i "s|location / {|location /2026/ {\n        root /var/www/html;\n        try_files \$uri \$uri/ /2026/index.html;\n    }\n\n    location / {|" /etc/nginx/sites-available/default
             echo "${{ secrets.PASSWORD }}" | sudo -S nginx -t && echo "${{ secrets.PASSWORD }}" | sudo -S systemctl reload nginx
