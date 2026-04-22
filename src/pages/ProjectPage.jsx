@@ -1,122 +1,34 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
+import { CATEGORIES, TAB_KEYS, WORKS } from '../data/projects';
+import useScrollReveal from '../hooks/useScrollReveal';
+import useModal from '../hooks/useModal';
+import Modal from '../components/Modal';
+import PageHero from '../components/PageHero';
 import './ProjectPage.css';
 
-/* ─────────── 카테고리 데이터 ─────────── */
-const CATEGORIES = {
-  multimedia: {
-    label: '멀티미디어',
-    total: 30,
-    groups: [
-      { id: 'pm',     label: 'Product Manager', icon: '📋', count: 10, sub: 'Product Manager' },
-      { id: 'dev',    label: 'Developer',        icon: '💻', count: 10, sub: 'Developer' },
-      { id: 'design', label: 'Designer',         icon: '🎨', count: 10, sub: 'Designer' },
-    ],
-  },
-  video: {
-    label: '영상미디어',
-    total: 30,
-    groups: [
-      { id: '2d', label: '2D 제품 홍보', icon: '🎬', count: 10, sub: '2D 제품 홍보' },
-      { id: '3d', label: '3D',           icon: '🧊', count: 10, sub: '3D' },
-      { id: 'ai', label: 'AI 기획',      icon: '🤖', count: 10, sub: 'AI 기획' },
-    ],
-  },
-  team: {
-    label: '팀프로젝트',
-    total: 23,
-    groups: [
-      { id: 'u300',   label: 'U300',          icon: '🚀', count: 10, sub: 'U300' },
-      { id: 'hanium', label: '한이음',        icon: '🔗', count: 10, sub: '한이음' },
-      { id: 'game',   label: 'Game 프로젝트', icon: '🎮', count: 3,  sub: 'Game 프로젝트' },
-    ],
-  },
-};
-
-const TAB_KEYS = Object.keys(CATEGORIES);
-
-/* 작업 카드 더미 데이터 생성 */
-const buildWorks = () => {
-  const result = {};
-  Object.entries(CATEGORIES).forEach(([catKey, cat]) => {
-    cat.groups.forEach((group) => {
-      result[group.id] = Array.from({ length: group.count }, (_, i) => ({
-        catKey,
-        catLabel:  cat.label,
-        sub:       group.sub,
-        icon:      group.icon,
-        num:       String(i + 1).padStart(2, '0'),
-      }));
-    });
-  });
-  return result;
-};
-
-const WORKS = buildWorks();
-
-/* ─────────── 컴포넌트 ─────────── */
 const ProjectPage = () => {
   const [activeTab,  setActiveTab]  = useState('multimedia');
   const [totalCount, setTotalCount] = useState(CATEGORIES.multimedia.total);
-  const [modalData,  setModalData]  = useState(null);
+  const { modalData, setModalData } = useModal();
   const categoryBarRef = useRef(null);
 
-  /* 탭 전환 */
+  // activeTab을 dep으로 넘겨 탭 전환 시 새 패널 요소도 관찰
+  useScrollReveal(activeTab, 0.08);
+
   const switchTab = (key) => {
     setActiveTab(key);
     setTotalCount(CATEGORIES[key].total);
     categoryBarRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    // 새 패널의 reveal 요소 관찰
-    setTimeout(setupReveal, 50);
   };
 
-  /* 스크롤 Reveal */
-  const setupReveal = () => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.08 });
-    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  };
-
-  useEffect(() => {
-    const cleanup = setupReveal();
-    return cleanup;
-  }, []);
-
-  /* 모달 body overflow & ESC */
-  useEffect(() => {
-    document.body.style.overflow = modalData ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
-  }, [modalData]);
-
-  useEffect(() => {
-    if (!modalData) return;
-    const onKey = (e) => { if (e.key === 'Escape') setModalData(null); };
-    document.addEventListener('keydown', onKey);
-    return () => document.removeEventListener('keydown', onKey);
-  }, [modalData]);
-
-  /* ─────────── JSX ─────────── */
   return (
     <div>
-      {/* PAGE HERO */}
-      <div className="page-hero">
-        <div className="container">
-          <div className="page-hero-inner">
-            <div>
-              <p className="page-breadcrumb">HOME › 작품소개</p>
-              <h1 className="page-title">작품소개</h1>
-              <p className="page-desc">미디어콘텐츠학부 졸업생들의 작품을 카테고리별로 만나보세요.</p>
-            </div>
-            <span className="page-total-badge">전체 {totalCount}개 작품</span>
-          </div>
-        </div>
-      </div>
+      <PageHero
+        breadcrumb="HOME › 작품소개"
+        title="작품소개"
+        desc="미디어콘텐츠학부 졸업생들의 작품을 카테고리별로 만나보세요."
+        badge={<span className="page-total-badge">전체 {totalCount}개 작품</span>}
+      />
 
       {/* CATEGORY TABS */}
       <div id="category-bar" ref={categoryBarRef} role="tablist" aria-label="작품 카테고리">
@@ -192,29 +104,18 @@ const ProjectPage = () => {
         </div>
       </main>
 
-      {/* MODAL — 작품 상세 */}
-      <div
-        className={`modal-overlay${modalData ? ' active' : ''}`}
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="modalWorkTitle"
-        onClick={(e) => { if (e.target === e.currentTarget) setModalData(null); }}
+      <Modal
+        isOpen={!!modalData}
+        onClose={() => setModalData(null)}
+        boxClassName="work-modal-box"
+        ariaLabelledby="modalWorkTitle"
       >
         {modalData && (
-          <div className="modal-box work-modal-box" onClick={(e) => e.stopPropagation()}>
-            <button
-              className="modal-close"
-              aria-label="모달 닫기"
-              onClick={() => setModalData(null)}
-            >✕</button>
-
-            {/* 영상 영역 */}
+          <>
             <div className="modal-video-ph">
               <div className="play-icon" aria-hidden="true"></div>
               <span>{modalData.catLabel} {modalData.sub} No.{modalData.num} 작품 소개 영상</span>
             </div>
-
-            {/* 텍스트 영역 */}
             <div className="work-modal-body">
               <span className="modal-badge">{modalData.catLabel} &gt; {modalData.sub}</span>
               <h2 className="modal-work-title" id="modalWorkTitle">
@@ -255,9 +156,9 @@ const ProjectPage = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </>
         )}
-      </div>
+      </Modal>
     </div>
   );
 };
