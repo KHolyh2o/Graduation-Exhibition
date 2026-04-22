@@ -52,9 +52,11 @@ jobs:
             # 찌꺼기 파일 정리
             echo "${{ secrets.PASSWORD }}" | sudo -S rm -f /tmp/dist.tar.gz
 
-            # 이전에 잘못 생성된 conf.d 파일 제거
+            # 잘못 생성된 conf.d 파일 제거
             echo "${{ secrets.PASSWORD }}" | sudo -S rm -f /etc/nginx/conf.d/2026-spa.conf
 
-            # React SPA 새로고침 404 방지: location /2026/ 블록이 없을 때만 삽입
-            echo "${{ secrets.PASSWORD }}" | sudo -S grep -q 'location /2026/' /etc/nginx/sites-available/default || echo "${{ secrets.PASSWORD }}" | sudo -S sed -i "s|location / {|location /2026/ {\n        root /var/www/html;\n        try_files \$uri \$uri/ /2026/index.html;\n    }\n\n    location / {|" /etc/nginx/sites-available/default
+            # React SPA 새로고침 404 방지: sites-available/default를 올바른 설정으로 교체
+            printf 'server {\n    listen 80 default_server;\n    listen [::]:80 default_server;\n    root /var/www/html;\n    index index.html index.htm index.nginx-debian.html;\n    server_name _;\n\n    location /2026/ {\n        root /var/www/html;\n        try_files $uri $uri/ /2026/index.html;\n    }\n\n    location / {\n        try_files $uri $uri/ =404;\n    }\n}\n' > /tmp/nginx_default
+            echo "${{ secrets.PASSWORD }}" | sudo -S mv /tmp/nginx_default /etc/nginx/sites-available/default
+            echo "${{ secrets.PASSWORD }}" | sudo -S chmod 644 /etc/nginx/sites-available/default
             echo "${{ secrets.PASSWORD }}" | sudo -S nginx -t && echo "${{ secrets.PASSWORD }}" | sudo -S systemctl reload nginx
