@@ -33,8 +33,6 @@ jobs:
           # 빌드 결과물 전송
           cat dist.tar.gz | sshpass -p "${{ secrets.PASSWORD }}" ssh -o StrictHostKeyChecking=no -p ${{ secrets.SERVER_PORT }} ${{ secrets.USERNAME }}@${{ secrets.SERVER_HOST }} 'cat > /tmp/dist.tar.gz'
 
-          # nginx 설정 파일 전송 (이스케이프 없이 레포 파일을 그대로 전송)
-          cat nginx/default | sshpass -p "${{ secrets.PASSWORD }}" ssh -o StrictHostKeyChecking=no -p ${{ secrets.SERVER_PORT }} ${{ secrets.USERNAME }}@${{ secrets.SERVER_HOST }} 'cat > /tmp/nginx_default'
 
       - name: Deploy on server
         uses: appleboy/ssh-action@master
@@ -49,13 +47,6 @@ jobs:
             # 빌드 결과물 배포
             echo "${{ secrets.PASSWORD }}" | sudo -S tar -xzf /tmp/dist.tar.gz -C /var/www/html/2026/ --strip-components=1
             echo "${{ secrets.PASSWORD }}" | sudo -S rm -f /tmp/dist.tar.gz
-
-            # 잘못 생성된 conf.d 파일 제거
-            echo "${{ secrets.PASSWORD }}" | sudo -S rm -f /etc/nginx/conf.d/2026-spa.conf
-
-            # 레포에서 전송한 nginx 설정 파일을 배포
-            echo "${{ secrets.PASSWORD }}" | sudo -S mv /tmp/nginx_default /etc/nginx/sites-available/default
-            echo "${{ secrets.PASSWORD }}" | sudo -S chmod 644 /etc/nginx/sites-available/default
 
             # nginx 설정 테스트 후 재시작 (reload 아닌 restart로 다운 상태도 복구)
             echo "${{ secrets.PASSWORD }}" | sudo -S nginx -t
