@@ -1,23 +1,45 @@
 import React, { useState, useRef } from 'react';
-import { CATEGORIES, TAB_KEYS, WORKS } from '../data/projects';
+import { PROJECT_TABS, getSubCategories } from '../data/projectTabs';
+import { projects } from '../data/projects';
+import { teamProjects } from '../data/teamProjects';
+import { graduateByStudentId } from '../data/graduates';
+import { FALLBACK } from '../hooks/useImageFallback';
+import SafeImg from '../components/SafeImg';
 import useScrollReveal from '../hooks/useScrollReveal';
 import useModal from '../hooks/useModal';
 import Modal from '../components/Modal';
 import PageHero from '../components/PageHero';
 import './ProjectPage.css';
 
+const getWorks = (tabId, subId) => {
+  if (tabId === 'team') return teamProjects.filter((p) => p.group === subId);
+  return projects.filter((p) => p.tab === tabId && p.role === subId);
+};
+
+const getTabTotal = (tabId) => {
+  if (tabId === 'team') return teamProjects.length;
+  return projects.filter((p) => p.tab === tabId).length;
+};
+
+const toEmbedUrl = (url) => {
+  if (!url) return '';
+  if (url.includes('/embed/')) return url;
+  const short = url.match(/youtu\.be\/([^?&]+)/);
+  if (short) return `https://www.youtube.com/embed/${short[1]}`;
+  const long = url.match(/[?&]v=([^?&]+)/);
+  if (long) return `https://www.youtube.com/embed/${long[1]}`;
+  return url;
+};
+
 const ProjectPage = () => {
   const [activeTab,  setActiveTab]  = useState('multimedia');
-  const [totalCount, setTotalCount] = useState(CATEGORIES.multimedia.total);
   const { modalData, setModalData } = useModal();
   const categoryBarRef = useRef(null);
 
-  // activeTab을 dep으로 넘겨 탭 전환 시 새 패널 요소도 관찰
   useScrollReveal(activeTab, 0.08);
 
-  const switchTab = (key) => {
-    setActiveTab(key);
-    setTotalCount(CATEGORIES[key].total);
+  const switchTab = (id) => {
+    setActiveTab(id);
     categoryBarRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
@@ -27,25 +49,24 @@ const ProjectPage = () => {
         breadcrumb="HOME › 작품소개"
         title="작품소개"
         desc="미디어콘텐츠학부 졸업생들의 작품을 카테고리별로 만나보세요."
-        badge={<span className="page-total-badge">전체 {totalCount}개 작품</span>}
+        badge={<span className="page-total-badge">전체 {getTabTotal(activeTab)}개 작품</span>}
       />
 
       {/* CATEGORY TABS */}
       <div id="category-bar" ref={categoryBarRef} role="tablist" aria-label="작품 카테고리">
         <div className="container">
           <div className="tab-inner">
-            {TAB_KEYS.map((key) => (
+            {PROJECT_TABS.map((tab) => (
               <button
-                key={key}
-                className={`tab-btn${activeTab === key ? ' active' : ''}`}
-                id={`tab-${key}`}
+                key={tab.id}
+                className={`tab-btn${activeTab === tab.id ? ' active' : ''}`}
+                id={`tab-${tab.id}`}
                 role="tab"
-                aria-selected={activeTab === key}
-                aria-controls={`panel-${key}`}
-                data-cat={key}
-                onClick={() => switchTab(key)}
+                aria-selected={activeTab === tab.id}
+                aria-controls={`panel-${tab.id}`}
+                onClick={() => switchTab(tab.id)}
               >
-                {CATEGORIES[key].label}
+                {tab.label}
               </button>
             ))}
           </div>
@@ -55,50 +76,59 @@ const ProjectPage = () => {
       {/* CONTENT AREA */}
       <main id="content-area">
         <div className="container">
-          {TAB_KEYS.map((catKey) => (
+          {PROJECT_TABS.map((tab) => (
             <section
-              key={catKey}
-              className={`cat-panel${activeTab === catKey ? ' active' : ''}`}
-              id={`panel-${catKey}`}
+              key={tab.id}
+              className={`cat-panel${activeTab === tab.id ? ' active' : ''}`}
+              id={`panel-${tab.id}`}
               role="tabpanel"
-              aria-labelledby={`tab-${catKey}`}
+              aria-labelledby={`tab-${tab.id}`}
             >
-              {CATEGORIES[catKey].groups.map((group) => (
-                <div key={group.id} className="work-group reveal">
-                  <div className="sub-cat-strip">
-                    <span className="sub-cat-name">{group.sub}</span>
-                    <span className="sub-cat-count">{group.count}개</span>
-                  </div>
-                  <div className="work-grid">
-                    {WORKS[group.id].map((work) => (
-                      <div
-                        key={`${work.sub}-${work.num}`}
-                        className="work-card"
-                        tabIndex={0}
-                        role="button"
-                        aria-label={`${group.label} ${work.num}번 작품 상세 보기`}
-                        onClick={() => setModalData(work)}
-                        onKeyDown={(e) => {
-                          if (e.key === 'Enter' || e.key === ' ') {
-                            e.preventDefault();
-                            setModalData(work);
-                          }
-                        }}
-                      >
-                        <div className="work-thumb">
-                          <span className="work-thumb-icon">{work.icon}</span>
-                          <span>작품 썸네일 이미지<br />({work.sub} {work.num})</span>
+              {getSubCategories(tab).map((sub) => {
+                const works = getWorks(tab.id, sub.id);
+                return (
+                  <div key={sub.id} className="work-group reveal">
+                    <div className="sub-cat-strip">
+                      <span className="sub-cat-name">{sub.label}</span>
+                      <span className="sub-cat-count">{works.length}개</span>
+                    </div>
+                    <div className="work-grid">
+                      {works.map((work) => (
+                        <div
+                          key={work.id}
+                          className="work-card"
+                          tabIndex={0}
+                          role="button"
+                          aria-label={`${work.title} 상세 보기`}
+                          onClick={() => setModalData({ ...work, tabLabel: tab.label, subLabel: sub.label })}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                              e.preventDefault();
+                              setModalData({ ...work, tabLabel: tab.label, subLabel: sub.label });
+                            }
+                          }}
+                        >
+                          <div className="work-thumb">
+                            {work.thumbnail ? (
+                              <SafeImg src={work.thumbnail} fallbackSrc={FALLBACK.image} alt={work.title} />
+                            ) : (
+                              <>
+                                <span className="work-thumb-icon">{sub.icon}</span>
+                                <span>작품 썸네일 이미지<br />({sub.label})</span>
+                              </>
+                            )}
+                          </div>
+                          <div className="work-info">
+                            <p className="work-num">{tab.label} · {sub.label}</p>
+                            <p className="work-name">{work.title}</p>
+                            <p className="work-author">{work.members ? work.teamName : (graduateByStudentId[work.studentId]?.name ?? '-')}</p>
+                          </div>
                         </div>
-                        <div className="work-info">
-                          <p className="work-num">{work.catLabel} · {work.sub} No.{work.num}</p>
-                          <p className="work-name">작품명 입력 예정</p>
-                          <p className="work-author">제작자 이름</p>
-                        </div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </section>
           ))}
         </div>
@@ -112,49 +142,75 @@ const ProjectPage = () => {
       >
         {modalData && (
           <>
-            <div className="modal-video-ph">
-              <div className="play-icon" aria-hidden="true"></div>
-              <span>{modalData.catLabel} {modalData.sub} No.{modalData.num} 작품 소개 영상</span>
-            </div>
+            {modalData.videoUrl ? (
+              <div className="modal-video-ph">
+                <iframe
+                  src={toEmbedUrl(modalData.videoUrl)}
+                  title={modalData.title}
+                  allowFullScreen
+                  loading="lazy"
+                />
+              </div>
+            ) : (
+              <div className="modal-video-ph">
+                <div className="play-icon" aria-hidden="true" />
+                <span>소개 영상 준비 중</span>
+              </div>
+            )}
+
             <div className="work-modal-body">
-              <span className="modal-badge">{modalData.catLabel} &gt; {modalData.sub}</span>
-              <h2 className="modal-work-title" id="modalWorkTitle">
-                [{modalData.sub}] 작품명 입력 예정
-              </h2>
-              <p className="modal-work-author">제작자 이름 · 미디어콘텐츠학부</p>
-              <div className="modal-divider"></div>
+              <span className="modal-badge">{modalData.tabLabel} &gt; {modalData.subLabel}</span>
+              <h2 className="modal-work-title" id="modalWorkTitle">{modalData.title}</h2>
+              <p className="modal-work-author">
+                {modalData.members ? modalData.teamName : (graduateByStudentId[modalData.studentId]?.name ?? '-')} · 미디어콘텐츠학부
+              </p>
+              <div className="modal-divider" />
 
               <p className="modal-section-label">작품 소개</p>
-              <div className="work-modal-text-ph">
-                이 영역에는 &quot;{modalData.sub}&quot; 분야 No.{modalData.num} 작품에 대한 소개 문구가 들어갑니다.
-                졸업생의 기획 의도, 제작 과정, 사용한 기술 스택 및 툴, 작품의 주요 특징 등을 기술합니다.
-              </div>
+              <div className="work-modal-text-ph">{modalData.description}</div>
 
-              <p className="modal-section-label">제안서 및 작품 정보</p>
-              <div className="work-modal-text-ph">
-                제안서 주요 내용이 이 영역에 표시됩니다. 문제 정의, 솔루션 방향, 기대 효과,
-                활용 기술, 일정 계획 등의 항목이 포함됩니다.
-                실제 제안서 PDF 링크 또는 발표 자료 링크도 이곳에 첨부될 예정입니다.
-              </div>
+              {modalData.proposalImages?.length > 0 && (
+                <>
+                  <p className="modal-section-label">제안서 이미지</p>
+                  <div className="proposal-images">
+                    {modalData.proposalImages.map((src, i) => (
+                      <SafeImg key={i} src={src} fallbackSrc={FALLBACK.image} alt={`제안서 ${i + 1}`} />
+                    ))}
+                  </div>
+                </>
+              )}
 
               <div className="modal-meta-grid">
                 <div className="modal-meta-item">
                   <p className="m-label">카테고리</p>
-                  <p className="m-value">{modalData.catLabel}</p>
+                  <p className="m-value">{modalData.tabLabel}</p>
                 </div>
                 <div className="modal-meta-item">
-                  <p className="m-label">서브 카테고리</p>
-                  <p className="m-value">{modalData.sub}</p>
+                  <p className="m-label">직군 / 그룹</p>
+                  <p className="m-value">{modalData.subLabel}</p>
                 </div>
                 <div className="modal-meta-item">
-                  <p className="m-label">제작자</p>
-                  <p className="m-value">제작자 이름</p>
+                  <p className="m-label">이메일</p>
+                  <p className="m-value">{modalData.contact?.email ?? '-'}</p>
                 </div>
-                <div className="modal-meta-item">
-                  <p className="m-label">작품 번호</p>
-                  <p className="m-value">No.{modalData.num}</p>
-                </div>
+                {modalData.contact?.phone && (
+                  <div className="modal-meta-item">
+                    <p className="m-label">전화번호</p>
+                    <p className="m-value">{modalData.contact.phone}</p>
+                  </div>
+                )}
               </div>
+
+              {modalData.members && (
+                <>
+                  <p className="modal-section-label">팀원</p>
+                  <ul className="modal-members">
+                    {modalData.members.map((m, i) => (
+                      <li key={i}>{m.name} · {m.role}</li>
+                    ))}
+                  </ul>
+                </>
+              )}
             </div>
           </>
         )}

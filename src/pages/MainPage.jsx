@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { graduates, TOTAL } from '../data/graduates';
+import { graduates } from '../data/graduates';
+import { FALLBACK } from '../hooks/useImageFallback';
+import SafeImg from '../components/SafeImg';
 import useScrollReveal from '../hooks/useScrollReveal';
 import useModal from '../hooks/useModal';
 import useCarousel from '../hooks/useCarousel';
@@ -9,7 +11,7 @@ import './MainPage.css';
 
 const MainPage = () => {
   const { modalData, setModalData } = useModal();
-  const { curIdx, cardW, trackRef, trackOuterRef, moveTo, maxIdx, progressPct, progressLabel } = useCarousel(TOTAL);
+  const { curIdx, cardW, trackRef, trackOuterRef, moveTo, maxIdx, progressPct, progressLabel } = useCarousel(graduates.length);
   useScrollReveal();
 
   return (
@@ -102,7 +104,7 @@ const MainPage = () => {
               <div className="carousel-track" ref={trackRef}>
                 {graduates.map((g) => (
                   <div
-                    key={g.num}
+                    key={g.id}
                     className="profile-card"
                     tabIndex={0}
                     role="button"
@@ -117,13 +119,12 @@ const MainPage = () => {
                     }}
                   >
                     <div className="profile-card-img">
-                      <div className="img-icon" aria-hidden="true">👤</div>
-                      <span>프로필 사진 영역</span>
+                      <SafeImg src={g.profileImage} fallbackSrc={FALLBACK.avatar} alt={g.name} />
                     </div>
                     <div className="profile-card-body">
-                      <span className="profile-card-num">No.{g.num}</span>
+                      <span className="profile-card-num">{g.id}</span>
                       <span className="profile-card-name">{g.name}</span>
-                      <span className="profile-card-work">작품명 입력 예정</span>
+                      <span className="profile-card-work">{g.role}</span>
                     </div>
                   </div>
                 ))}
@@ -190,30 +191,20 @@ const MainPage = () => {
         {modalData && (
           <>
             <div className="modal-header">
-              <div className="ph modal-profile-img" role="img" aria-label="프로필 사진">프로필 사진</div>
+              <SafeImg className="modal-profile-img" src={modalData.profileImage} fallbackSrc={FALLBACK.avatar} alt={modalData.name} />
               <div className="modal-profile-info">
-                <p className="modal-num">No. {modalData.num}</p>
+                <p className="modal-num">{modalData.id}</p>
                 <h2 className="modal-name" id="modalName">{modalData.name}</h2>
-                <p className="modal-major">{modalData.major}</p>
+                <p className="modal-major">미디어콘텐츠학부 · 2026년 졸업</p>
               </div>
             </div>
 
             <div className="modal-body">
               <div>
                 <p className="modal-section-title">기본 정보</p>
-                <div className="modal-text-ph">{modalData.info}</div>
-              </div>
-              <div>
-                <p className="modal-section-title">담당 졸업 작품</p>
-                <div className="modal-work-ph">
-                  <p className="work-title">작품 제목 / 장르</p>
-                  <div className="ph modal-work-thumb" role="img" aria-label="작품 썸네일">작품 썸네일 이미지</div>
-                  <p className="modal-work-desc">{modalData.work}</p>
+                <div className="modal-text-ph">
+                  학번: {modalData.studentId} &nbsp;|&nbsp; 직군: {modalData.role}
                 </div>
-              </div>
-              <div>
-                <p className="modal-section-title">졸업 소감</p>
-                <div className="modal-text-ph">{modalData.comment}</div>
               </div>
             </div>
           </>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300">
+  <rect width="300" height="300" fill="#e8e8e8"/>
+  <!-- head -->
+  <circle cx="150" cy="108" r="52" fill="#c0c0c0"/>
+  <!-- body -->
+  <ellipse cx="150" cy="240" rx="80" ry="60" fill="#c0c0c0"/>
+  <!-- label -->
+  <text x="150" y="292" font-family="sans-serif" font-size="16" fill="#888888" text-anchor="middle" letter-spacing="1">No image</text>
+</svg>

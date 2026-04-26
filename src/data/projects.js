@@ -1,49 +1,204 @@
-export const CATEGORIES = {
-  multimedia: {
-    label: '멀티미디어',
-    total: 30,
-    groups: [
-      { id: 'pm',     label: 'Product Manager', icon: '📋', count: 10, sub: 'Product Manager' },
-      { id: 'dev',    label: 'Developer',        icon: '💻', count: 10, sub: 'Developer' },
-      { id: 'design', label: 'Designer',         icon: '🎨', count: 10, sub: 'Designer' },
-    ],
-  },
-  video: {
-    label: '영상미디어',
-    total: 30,
-    groups: [
-      { id: '2d', label: '2D 제품 홍보', icon: '🎬', count: 10, sub: '2D 제품 홍보' },
-      { id: '3d', label: '3D',           icon: '🧊', count: 10, sub: '3D' },
-      { id: 'ai', label: 'AI 기획',      icon: '🤖', count: 10, sub: 'AI 기획' },
-    ],
-  },
-  team: {
-    label: '팀프로젝트',
-    total: 23,
-    groups: [
-      { id: 'u300',   label: 'U300',          icon: '🚀', count: 10, sub: 'U300' },
-      { id: 'hanium', label: '한이음',        icon: '🔗', count: 10, sub: '한이음' },
-      { id: 'game',   label: 'Game 프로젝트', icon: '🎮', count: 3,  sub: 'Game 프로젝트' },
-    ],
-  },
-};
+// 개인 작품 60개 (멀티미디어 30 + 영상미디어 30).
+// 팀 작품은 teamProjects.js 참조.
+// studentId → graduates.js의 studentId와 1:1 연결.
+// contact.phone: 공개 동의한 학생만 입력 (비동의 시 null).
+//
+// 📌 이미지 파일 위치: public/images/projects/썸네일.jpg
+//                       public/images/projects/proposals/제안서.jpg
+// 📌 YouTube: https://www.youtube.com/watch?v=영상ID 형식으로 입력
 
-export const TAB_KEYS = Object.keys(CATEGORIES);
+const _make = (id, studentId, tab, role) => ({
+  id,
+  studentId,
+  tab,
+  role,
+  title: '작품명 입력',
+  thumbnail: '',
+  description: '작품 설명을 입력하세요.',
+  videoUrl: '',
+  proposalImages: [],
+  contact: { email: 'email@seowon.ac.kr', phone: null },
+  members: null,
+});
 
-const buildWorks = () => {
-  const result = {};
-  Object.entries(CATEGORIES).forEach(([catKey, cat]) => {
-    cat.groups.forEach((group) => {
-      result[group.id] = Array.from({ length: group.count }, (_, i) => ({
-        catKey,
-        catLabel: cat.label,
-        sub:      group.sub,
-        icon:     group.icon,
-        num:      String(i + 1).padStart(2, '0'),
-      }));
-    });
-  });
-  return result;
-};
+export const projects = [
+  // ── 멀티미디어 · Product Manager ──────────────────────────────────────────
+  {
+    id: 'p-mm-pm-01',
+    studentId: '2022001001',      // graduates.js studentId와 일치시킬 것
+    tab: 'multimedia',
+    role: 'pm',
+    title: '스마트 캠퍼스 길찾기 앱 기획',
+    thumbnail: '/images/projects/썸네일.png',   // public/ 기준 경로
+    description:
+      '교내 길찾기와 강의실 정보를 통합한 스마트 캠퍼스 모바일 앱을 기획했습니다. ' +
+      '사용자 인터뷰와 경쟁사 분석을 바탕으로 핵심 기능을 정의하고, ' +
+      '와이어프레임부터 프로토타입까지 PM 전 과정을 담당했습니다.',
+    videoUrl: 'https://www.youtube.com/watch?v=rFjRsWPGZxY',  // YouTube 링크
+    proposalImages: [
+      '/images/projects/proposals/제안서_1.png',
+      '/images/projects/proposals/제안서_2.png',
+    ],
+    contact: { email: 'hong@seowon.ac.kr', phone: '010-0000-0000' },
+    members: null,
+  },
+  _make('p-mm-pm-02', '2022001002', 'multimedia', 'pm'),
+  _make('p-mm-pm-03', '2022001003', 'multimedia', 'pm'),
+  _make('p-mm-pm-04', '2022001004', 'multimedia', 'pm'),
+  _make('p-mm-pm-05', '2022001005', 'multimedia', 'pm'),
+  _make('p-mm-pm-06', '2022001006', 'multimedia', 'pm'),
+  _make('p-mm-pm-07', '2022001007', 'multimedia', 'pm'),
+  _make('p-mm-pm-08', '2022001008', 'multimedia', 'pm'),
+  _make('p-mm-pm-09', '2022001009', 'multimedia', 'pm'),
+  _make('p-mm-pm-10', '2022001010', 'multimedia', 'pm'),
 
-export const WORKS = buildWorks();
+  // ── 멀티미디어 · Developer ────────────────────────────────────────────────
+  {
+    id: 'p-mm-dev-01',
+    studentId: '2022001011',
+    tab: 'multimedia',
+    role: 'dev',
+    title: 'AR 기반 졸업전시 안내 웹 서비스',
+    thumbnail: '/images/projects/썸네일.png',
+    description:
+      'WebXR API를 활용해 스마트폰 카메라로 전시 작품 앞에 서면 ' +
+      '작품 정보가 AR로 오버레이되는 웹 서비스를 개발했습니다. ' +
+      'React + Three.js 기반으로 구현했으며, QR 코드 없이 즉시 실행 가능합니다.',
+    videoUrl: 'https://www.youtube.com/watch?v=rFjRsWPGZxY',
+    proposalImages: [
+      '/images/projects/proposals/제안서_1.png',
+      '/images/projects/proposals/제안서_2.png',
+    ],
+    contact: { email: 'minjun@seowon.ac.kr', phone: null },
+    members: null,
+  },
+  _make('p-mm-dev-02', '2022001012', 'multimedia', 'dev'),
+  _make('p-mm-dev-03', '2022001013', 'multimedia', 'dev'),
+  _make('p-mm-dev-04', '2022001014', 'multimedia', 'dev'),
+  _make('p-mm-dev-05', '2022001015', 'multimedia', 'dev'),
+  _make('p-mm-dev-06', '2022001016', 'multimedia', 'dev'),
+  _make('p-mm-dev-07', '2022001017', 'multimedia', 'dev'),
+  _make('p-mm-dev-08', '2022001018', 'multimedia', 'dev'),
+  _make('p-mm-dev-09', '2022001019', 'multimedia', 'dev'),
+  _make('p-mm-dev-10', '2022001020', 'multimedia', 'dev'),
+
+  // ── 멀티미디어 · Designer ─────────────────────────────────────────────────
+  {
+    id: 'p-mm-ds-01',
+    studentId: '2022001021',
+    tab: 'multimedia',
+    role: 'design',
+    title: '미디어아트 브랜드 아이덴티티 디자인',
+    thumbnail: '/images/projects/썸네일.png',
+    description:
+      '신진 미디어아트 작가를 위한 브랜드 아이덴티티를 기획·디자인했습니다. ' +
+      '로고, 컬러 팔레트, 타이포그래피 시스템, 명함·포스터 등 ' +
+      '전체 브랜드 가이드라인을 Figma로 제작했습니다.',
+    videoUrl: 'https://www.youtube.com/watch?v=rFjRsWPGZxY',
+    proposalImages: [
+      '/images/projects/proposals/제안서_1.png',
+      '/images/projects/proposals/제안서_2.png',
+    ],
+    contact: { email: 'seoyeon@seowon.ac.kr', phone: '010-0000-0000' },
+    members: null,
+  },
+  _make('p-mm-ds-02', '2022001022', 'multimedia', 'design'),
+  _make('p-mm-ds-03', '2022001023', 'multimedia', 'design'),
+  _make('p-mm-ds-04', '2022001024', 'multimedia', 'design'),
+  _make('p-mm-ds-05', '2022001025', 'multimedia', 'design'),
+  _make('p-mm-ds-06', '2022001026', 'multimedia', 'design'),
+  _make('p-mm-ds-07', '2022001027', 'multimedia', 'design'),
+  _make('p-mm-ds-08', '2022001028', 'multimedia', 'design'),
+  _make('p-mm-ds-09', '2022001029', 'multimedia', 'design'),
+  _make('p-mm-ds-10', '2022001030', 'multimedia', 'design'),
+
+  // ── 영상미디어 · 2D 제품 홍보 ────────────────────────────────────────────
+  {
+    id: 'p-vd-2d-01',
+    studentId: '2022002001',
+    tab: 'video',
+    role: '2d',
+    title: '친환경 텀블러 2D 제품 광고 영상',
+    thumbnail: '/images/projects/썸네일.png',
+    description:
+      'MZ세대를 타깃으로 한 친환경 텀블러 브랜드의 2D 모션그래픽 광고 영상입니다. ' +
+      'After Effects로 캐릭터 리깅부터 최종 렌더링까지 전 과정을 담당했으며, ' +
+      '30초 TV용·15초 SNS용 두 버전으로 제작했습니다.',
+    videoUrl: 'https://www.youtube.com/watch?v=rFjRsWPGZxY',
+    proposalImages: [
+      '/images/projects/proposals/제안서_1.png',
+      '/images/projects/proposals/제안서_2.png',
+    ],
+    contact: { email: 'jihun@seowon.ac.kr', phone: null },
+    members: null,
+  },
+  _make('p-vd-2d-02', '2022002002', 'video', '2d'),
+  _make('p-vd-2d-03', '2022002003', 'video', '2d'),
+  _make('p-vd-2d-04', '2022002004', 'video', '2d'),
+  _make('p-vd-2d-05', '2022002005', 'video', '2d'),
+  _make('p-vd-2d-06', '2022002006', 'video', '2d'),
+  _make('p-vd-2d-07', '2022002007', 'video', '2d'),
+  _make('p-vd-2d-08', '2022002008', 'video', '2d'),
+  _make('p-vd-2d-09', '2022002009', 'video', '2d'),
+  _make('p-vd-2d-10', '2022002010', 'video', '2d'),
+
+  // ── 영상미디어 · 3D ───────────────────────────────────────────────────────
+  {
+    id: 'p-vd-3d-01',
+    studentId: '2022002011',
+    tab: 'video',
+    role: '3d',
+    title: '도시 재생 컨셉 3D 건축 시각화 영상',
+    thumbnail: '/images/projects/썸네일.png',
+    description:
+      '노후 산업단지를 문화복합공간으로 재생하는 컨셉을 Blender로 시각화했습니다. ' +
+      '실사급 텍스처와 HDRI 조명을 적용하고 드론 뷰 카메라 워크로 ' +
+      '공간의 전후 변화를 2분 영상으로 구성했습니다.',
+    videoUrl: 'https://www.youtube.com/watch?v=rFjRsWPGZxY',
+    proposalImages: [
+      '/images/projects/proposals/제안서_1.png',
+      '/images/projects/proposals/제안서_2.png',
+    ],
+    contact: { email: 'yerin@seowon.ac.kr', phone: '010-0000-0000' },
+    members: null,
+  },
+  _make('p-vd-3d-02', '2022002012', 'video', '3d'),
+  _make('p-vd-3d-03', '2022002013', 'video', '3d'),
+  _make('p-vd-3d-04', '2022002014', 'video', '3d'),
+  _make('p-vd-3d-05', '2022002015', 'video', '3d'),
+  _make('p-vd-3d-06', '2022002016', 'video', '3d'),
+  _make('p-vd-3d-07', '2022002017', 'video', '3d'),
+  _make('p-vd-3d-08', '2022002018', 'video', '3d'),
+  _make('p-vd-3d-09', '2022002019', 'video', '3d'),
+  _make('p-vd-3d-10', '2022002020', 'video', '3d'),
+
+  // ── 영상미디어 · AI 기획 ─────────────────────────────────────────────────
+  {
+    id: 'p-vd-ai-01',
+    studentId: '2022002021',
+    tab: 'video',
+    role: 'ai',
+    title: 'AI 큐레이터 - 개인 맞춤형 영상 콘텐츠 추천 서비스 기획',
+    thumbnail: '/images/projects/썸네일.png',
+    description:
+      '시청 이력과 감정 분석을 결합한 AI 기반 영상 콘텐츠 추천 서비스를 기획했습니다. ' +
+      '서비스 기획서, UX 플로우, 알고리즘 설계 문서를 포함한 완성형 제안서를 작성하고 ' +
+      '프로토타입 시뮬레이션 영상을 제작했습니다.',
+    videoUrl: 'https://www.youtube.com/watch?v=rFjRsWPGZxY',
+    proposalImages: [
+      '/images/projects/proposals/제안서_1.png',
+      '/images/projects/proposals/제안서_2.png',
+    ],
+    contact: { email: 'daeun@seowon.ac.kr', phone: null },
+    members: null,
+  },
+  _make('p-vd-ai-02', '2022002022', 'video', 'ai'),
+  _make('p-vd-ai-03', '2022002023', 'video', 'ai'),
+  _make('p-vd-ai-04', '2022002024', 'video', 'ai'),
+  _make('p-vd-ai-05', '2022002025', 'video', 'ai'),
+  _make('p-vd-ai-06', '2022002026', 'video', 'ai'),
+  _make('p-vd-ai-07', '2022002027', 'video', 'ai'),
+  _make('p-vd-ai-08', '2022002028', 'video', 'ai'),
+  _make('p-vd-ai-09', '2022002029', 'video', 'ai'),
+  _make('p-vd-ai-10', '2022002030', 'video', 'ai'),
+];

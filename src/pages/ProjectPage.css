@@ -134,8 +134,10 @@
 }
 
 .work-thumb {
+  position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
+  overflow: hidden;
   background: var(--ph-light);
   display: flex;
   align-items: center;
@@ -152,6 +154,15 @@
 }
 
 .work-card:hover .work-thumb { background: var(--ph-mid); }
+
+.work-thumb img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 
 .work-thumb-icon {
   font-size: 1.4rem;
@@ -188,6 +199,40 @@
 }
 
 /* ===================================================
+   PROPOSAL IMAGES & MEMBERS
+=================================================== */
+.proposal-images {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.proposal-images img {
+  width: 100%;
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+  display: block;
+}
+
+.modal-members {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.modal-members li {
+  font-size: 0.87rem;
+  color: var(--color-text);
+  padding: 8px 12px;
+  background: var(--ph-light);
+  border-radius: var(--radius);
+}
+
+/* ===================================================
    WORK MODAL
 =================================================== */
 .work-modal-box {
@@ -208,6 +253,14 @@
   font-size: 0.85rem;
   border-radius: 14px 14px 0 0;
   border-bottom: 1px solid var(--color-border);
+  overflow: hidden;
+}
+
+.modal-video-ph iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
 }
 
 .modal-video-ph .play-icon {

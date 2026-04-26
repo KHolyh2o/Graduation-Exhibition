@@ -1,5 +1,7 @@
 import React from 'react';
 import { professors } from '../data/professors';
+import { FALLBACK } from '../hooks/useImageFallback';
+import SafeImg from '../components/SafeImg';
 import useScrollReveal from '../hooks/useScrollReveal';
 import useModal from '../hooks/useModal';
 import Modal from '../components/Modal';
@@ -134,9 +136,9 @@ const DepartmentPage = () => {
                   }
                 }}
               >
-                <div className="ph prof-img-ph">{prof.name}<br />사진</div>
+                <SafeImg className="prof-img" src={prof.photo} fallbackSrc={FALLBACK.avatar} alt={prof.name} />
                 <p className="prof-name">{prof.name}</p>
-                <p className="prof-subject">{prof.subject.split(' / ')[0]}</p>
+                <p className="prof-subject">{prof.subjects[0]}</p>
               </div>
             ))}
           </div>
@@ -152,11 +154,11 @@ const DepartmentPage = () => {
         {modalProf && (
           <>
             <div className="modal-head">
-              <div className="ph modal-prof-img">{modalProf.name}<br />사진</div>
+              <SafeImg className="modal-prof-img" src={modalProf.photo} fallbackSrc={FALLBACK.avatar} alt={modalProf.name} />
               <div className="modal-prof-info">
                 <p className="modal-eyebrow">Professor</p>
                 <p className="modal-name" id="modalProfName">{modalProf.name}</p>
-                <p className="modal-subject">{modalProf.subject}</p>
+                <p className="modal-subject">{modalProf.subjects.join(' / ')}</p>
               </div>
             </div>
             <div className="prof-modal-body">
