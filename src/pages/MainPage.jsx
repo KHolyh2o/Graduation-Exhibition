@@ -119,7 +119,14 @@ const MainPage = () => {
                     }}
                   >
                     <div className="profile-card-img">
-                      <SafeImg src={g.profileImage} fallbackSrc={FALLBACK.avatar} alt={g.name} />
+                      {g.profileImage ? (
+                        <SafeImg src={g.profileImage} fallbackSrc={FALLBACK.avatar} alt={g.name} />
+                      ) : (
+                        <>
+                          <div className="img-icon" aria-hidden="true">👤</div>
+                          <span>프로필 사진 영역</span>
+                        </>
+                      )}
                     </div>
                     <div className="profile-card-body">
                       <span className="profile-card-num">{g.id}</span>
