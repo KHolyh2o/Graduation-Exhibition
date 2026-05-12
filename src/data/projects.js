@@ -36,8 +36,8 @@ export const projects = [
       '와이어프레임부터 프로토타입까지 PM 전 과정을 담당했습니다.',
     videoUrl: 'https://www.youtube.com/watch?v=rFjRsWPGZxY',  // YouTube 링크
     proposalImages: [
-      '/images/projects/proposals/제안서_1.png',
-      '/images/projects/proposals/제안서_2.png',
+      '/images/projects/proposals/proposal_1.jpeg',
+      '/images/projects/proposals/proposal_2.png',
     ],
     contact: { email: 'hong@seowon.ac.kr', phone: '010-0000-0000' },
     members: null,
@@ -66,8 +66,8 @@ export const projects = [
       'React + Three.js 기반으로 구현했으며, QR 코드 없이 즉시 실행 가능합니다.',
     videoUrl: 'https://www.youtube.com/watch?v=rFjRsWPGZxY',
     proposalImages: [
-      '/images/projects/proposals/제안서_1.png',
-      '/images/projects/proposals/제안서_2.png',
+      '/images/projects/proposals/proposal_1.jpeg',
+      '/images/projects/proposals/proposal_2.png',
     ],
     contact: { email: 'minjun@seowon.ac.kr', phone: null },
     members: null,
@@ -96,8 +96,8 @@ export const projects = [
       '전체 브랜드 가이드라인을 Figma로 제작했습니다.',
     videoUrl: 'https://www.youtube.com/watch?v=rFjRsWPGZxY',
     proposalImages: [
-      '/images/projects/proposals/제안서_1.png',
-      '/images/projects/proposals/제안서_2.png',
+      '/images/projects/proposals/proposal_1.jpeg',
+      '/images/projects/proposals/proposal_2.png',
     ],
     contact: { email: 'seoyeon@seowon.ac.kr', phone: '010-0000-0000' },
     members: null,
@@ -126,8 +126,8 @@ export const projects = [
       '30초 TV용·15초 SNS용 두 버전으로 제작했습니다.',
     videoUrl: 'https://www.youtube.com/watch?v=rFjRsWPGZxY',
     proposalImages: [
-      '/images/projects/proposals/제안서_1.png',
-      '/images/projects/proposals/제안서_2.png',
+      '/images/projects/proposals/proposal_1.jpeg',
+      '/images/projects/proposals/proposal_2.png',
     ],
     contact: { email: 'jihun@seowon.ac.kr', phone: null },
     members: null,
@@ -156,8 +156,8 @@ export const projects = [
       '공간의 전후 변화를 2분 영상으로 구성했습니다.',
     videoUrl: 'https://www.youtube.com/watch?v=rFjRsWPGZxY',
     proposalImages: [
-      '/images/projects/proposals/제안서_1.png',
-      '/images/projects/proposals/제안서_2.png',
+      '/images/projects/proposals/proposal_1.jpeg',
+      '/images/projects/proposals/proposal_2.png',
     ],
     contact: { email: 'yerin@seowon.ac.kr', phone: '010-0000-0000' },
     members: null,
@@ -186,8 +186,8 @@ export const projects = [
       '프로토타입 시뮬레이션 영상을 제작했습니다.',
     videoUrl: 'https://www.youtube.com/watch?v=rFjRsWPGZxY',
     proposalImages: [
-      '/images/projects/proposals/제안서_1.png',
-      '/images/projects/proposals/제안서_2.png',
+      '/images/projects/proposals/proposal_1.jpeg',
+      '/images/projects/proposals/proposal_2.png',
     ],
     contact: { email: 'daeun@seowon.ac.kr', phone: null },
     members: null,
