@@ -7,6 +7,7 @@ import ProjectPage from './pages/ProjectPage';
 import DepartmentPage from './pages/DepartmentPage';
 import GalleryPage from './pages/GalleryPage';
 import OthersPage from './pages/OthersPage';
+import NotFoundPage from './pages/NotFoundPage';
 import './App.css';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
             <Route path="/department" element={<DepartmentPage />} />
             <Route path="/gallery"    element={<GalleryPage />} />
             <Route path="/others"     element={<OthersPage />} />
+            <Route path="*"           element={<NotFoundPage />} />
           </Routes>
         </div>
         <Footer />

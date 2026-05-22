@@ -116,7 +116,7 @@
   #records { padding: 60px 20px 80px; }
 }
 
-@media (max-width: 620px) {
+@media (max-width: 640px) {
   .records-title { font-size: 1.4rem; }
   #records { padding: 48px 16px 64px; }
   .play-btn { width: 56px; height: 56px; }

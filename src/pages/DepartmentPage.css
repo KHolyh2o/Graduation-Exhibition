@@ -333,7 +333,7 @@
   .modal-head        { flex-direction: column; align-items: flex-start; }
 }
 
-@media (max-width: 620px) {
+@media (max-width: 640px) {
   :root { --section-gap: 60px; }
   .prof-grid         { grid-template-columns: repeat(2, 1fr); gap: 16px; }
   .dept-main-title   { font-size: 1.6rem; }

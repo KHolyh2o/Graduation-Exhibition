@@ -7,7 +7,10 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "validate": "node scripts/validate-data.js",
+    "csv:graduates": "node scripts/csv-to-data.js --graduates",
+    "csv:projects": "node scripts/csv-to-data.js --projects"
   },
   "dependencies": {
     "react": "^19.2.0",

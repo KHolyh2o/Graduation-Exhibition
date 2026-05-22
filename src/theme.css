@@ -1,0 +1,47 @@
+/* ===================================================
+   THEME — 컨셉 확정 후 이 파일만 수정하세요.
+   색상, 폰트, 주요 간격, 브레이크포인트를 한 곳에서 관리합니다.
+=================================================== */
+
+/* ── Google Fonts ───────────────────────────────── */
+/* 폰트 교체 시 아래 @import와 --font-* 변수를 함께 변경 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+
+:root {
+  /* ── Typography ─────────────────────────────── */
+  --font-main:    'Noto Sans KR', sans-serif;
+  --font-heading: var(--font-main); /* 제목용 폰트가 달라질 경우 별도 지정 */
+
+  /* ── Color Palette ──────────────────────────── */
+  --color-bg:       #F7F7F7;
+  --color-header:   #FFFFFF;
+  --color-border:   #DDDDDD;
+  --color-text:     #222222;
+  --color-muted:    #666666;
+  --color-accent:   #333333; /* 강조색 — 컨셉 컬러로 교체 예정 */
+  --color-btn:      #222222;
+  --color-btn-hover:#444444;
+
+  /* ── Placeholder (데이터 미입력 영역) ───────── */
+  --ph-light:  #E0E0E0;
+  --ph-mid:    #CCCCCC;
+  --ph-dark:   #AAAAAA;
+  --ph-text:   #888888;
+
+  /* ── Shape & Motion ─────────────────────────── */
+  --radius:     6px;
+  --shadow:     0 4px 18px rgba(0,0,0,0.10);
+  --transition: 0.22s ease;
+
+  /* ── Layout ─────────────────────────────────── */
+  --header-h:    68px;
+  --section-gap: 100px;
+  --content-max: 1180px;
+
+  /* ── Breakpoints (참조용 주석 — @media 안에서는 px 직접 사용)
+     lg : 1024px  tablet landscape
+     md : 768px   tablet portrait
+     sm : 640px   large mobile
+     xs : 480px   small mobile
+  ─────────────────────────────────────────────── */
+}

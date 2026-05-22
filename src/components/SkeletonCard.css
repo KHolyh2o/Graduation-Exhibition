@@ -1,0 +1,67 @@
+/* ── shimmer animation ── */
+@keyframes sk-shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+.sk {
+  background: linear-gradient(90deg, var(--ph-light) 25%, var(--ph-mid) 50%, var(--ph-light) 75%);
+  background-size: 800px 100%;
+  animation: sk-shimmer 1.4s infinite linear;
+  border-radius: var(--radius);
+}
+
+/* ── project card ── */
+.skeleton-card {
+  background: #fff;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+}
+
+.sk-thumb {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 0;
+}
+
+.sk-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sk-tag  { height: 14px; width: 48px; }
+.sk-title { height: 18px; width: 75%; }
+.sk-line  { height: 13px; width: 100%; }
+.sk-line--short { width: 60%; }
+
+/* ── profile card ── */
+.skeleton-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 16px;
+}
+
+.sk-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+.sk-name { height: 16px; width: 80px; }
+.sk-role { height: 13px; width: 56px; }
+
+/* ── empty state ── */
+.empty-state {
+  padding: 60px 24px;
+  text-align: center;
+}
+
+.empty-state-msg {
+  font-size: 0.92rem;
+  color: var(--color-muted);
+}
