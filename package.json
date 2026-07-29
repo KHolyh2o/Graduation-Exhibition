@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "validate": "node scripts/validate-data.js",
     "csv:graduates": "node scripts/csv-to-data.js --graduates",
-    "csv:projects": "node scripts/csv-to-data.js --projects"
+    "csv:projects": "node scripts/csv-to-data.js --projects",
+    "csv:teamProjects": "node scripts/csv-to-data.js --teamProjects"
   },
   "dependencies": {
     "react": "^19.2.0",

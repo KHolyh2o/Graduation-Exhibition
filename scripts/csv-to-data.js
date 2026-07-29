@@ -17,6 +17,10 @@
  *   id, studentId, tab, role, title, thumbnail, description, videoUrl,
  *   proposalImages, contactEmail, contactPhone
  *   (proposalImages: 세미콜론으로 구분  ex. /images/a.jpg;/images/b.jpg)
+ *
+ * [teamProjects.csv]
+ *   id, group, teamName, title, thumbnail, description, videoUrl,
+ *   proposalImages, contactEmail, m1_name, m1_role, m1_id, m2_name, m2_role, m2_id, ... m6_id
  */
 
 import fs   from 'fs';
@@ -72,6 +76,40 @@ function generateProjects(rows) {
   return `export const projects = [\n${entries.join('\n')}\n];\n`;
 }
 
+/* ── teamProjects ────────────────────────────────────────────────── */
+function generateTeamProjects(rows) {
+  const entries = rows.map((r) => {
+    const proposals = r.proposalImages
+      ? r.proposalImages.split(';').filter(Boolean).map((p) => `'${p.trim()}'`).join(', ')
+      : '';
+      
+    const members = [];
+    for (let i = 1; i <= 6; i++) {
+      const name = r[`m${i}_name`];
+      const role = r[`m${i}_role`];
+      const studentId = r[`m${i}_id`];
+      if (name) {
+        members.push(`{ name: '${name}', role: '${role || ''}', studentId: '${studentId || ''}' }`);
+      }
+    }
+
+    return (
+      `  {\n` +
+      `    id: '${r.id}', tab: 'team', group: '${r.group}',\n` +
+      `    teamName: '${r.teamName}', title: '${r.title}',\n` +
+      `    thumbnail: '${r.thumbnail}',\n` +
+      `    description: '${r.description.replace(/'/g, "\\'")}',\n` +
+      `    videoUrl: '${r.videoUrl}',\n` +
+      `    proposalImages: [${proposals}],\n` +
+      `    contact: { email: '${r.contactEmail}' },\n` +
+      `    members: [\n      ${members.join(',\n      ')}\n    ],\n` +
+      `  },`
+    );
+  });
+
+  return `export const teamProjects = [\n${entries.join('\n')}\n];\n`;
+}
+
 /* ── main ────────────────────────────────────────────────────────── */
 const args = process.argv.slice(2);
 const flag = (name) => {
@@ -81,8 +119,9 @@ const flag = (name) => {
 
 const graduatesCsv = flag('--graduates');
 const projectsCsv  = flag('--projects');
+const teamProjectsCsv = flag('--teamProjects');
 
-if (!graduatesCsv && !projectsCsv) {
+if (!graduatesCsv && !projectsCsv && !teamProjectsCsv) {
   console.error('사용법: node scripts/csv-to-data.js --graduates <path> [--projects <path>]');
   process.exit(1);
 }
@@ -103,4 +142,13 @@ if (projectsCsv) {
   const dest = path.join(SRC_DATA, 'projects.js');
   fs.writeFileSync(dest, out, 'utf8');
   console.log(`✓ projects.js 생성 완료 (${rows.length}개) → ${dest}`);
+}
+
+if (teamProjectsCsv) {
+  const raw  = fs.readFileSync(path.resolve(teamProjectsCsv), 'utf8');
+  const rows = parseCsv(raw);
+  const out  = generateTeamProjects(rows);
+  const dest = path.join(SRC_DATA, 'teamProjects.js');
+  fs.writeFileSync(dest, out, 'utf8');
+  console.log(`✓ teamProjects.js 생성 완료 (${rows.length}팀) → ${dest}`);
 }
