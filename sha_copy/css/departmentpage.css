@@ -1,0 +1,342 @@
+/* ===================================================
+   SECTION 1 — 학부 소개 인트로
+=================================================== */
+#dept-intro {
+  background: #FFFFFF;
+  border-bottom: 1px solid var(--color-border);
+  text-align: center;
+}
+
+.dept-intro-inner {
+  max-width: 740px;
+  margin: 0 auto;
+}
+
+.section-eyebrow {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ph-text);
+  margin-bottom: 18px;
+}
+
+.dept-main-title {
+  font-size: 2.8rem;
+  font-weight: 900;
+  line-height: 1.15;
+  margin-bottom: 24px;
+  letter-spacing: -0.02em;
+}
+
+.dept-divider {
+  width: 48px;
+  height: 3px;
+  background: var(--color-text);
+  border-radius: 2px;
+  margin: 0 auto 24px;
+}
+
+.dept-sub-text {
+  font-size: 1rem;
+  color: var(--color-muted);
+  line-height: 2;
+  word-break: keep-all;
+}
+
+/* ===================================================
+   SECTION 2 — 교육목표
+=================================================== */
+#edu-goal {
+  background: var(--color-bg);
+}
+
+/* 핵심역량 다이어그램 */
+.competency-diagram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0;
+  margin-bottom: 64px;
+}
+
+.comp-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 200px;
+  border: 2px solid var(--color-border);
+  border-radius: 50%;
+  background: #FFFFFF;
+  text-align: center;
+  padding: 20px;
+  flex-shrink: 0;
+  position: relative;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.comp-node:hover {
+  border-color: var(--ph-dark);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.10);
+}
+
+.comp-node-en {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ph-text);
+  margin-bottom: 6px;
+}
+
+.comp-node-kr {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.3;
+}
+
+.comp-bridge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 12px;
+  flex-shrink: 0;
+}
+
+.comp-bridge-line {
+  width: 56px;
+  height: 1.5px;
+  background: var(--ph-mid);
+}
+
+.comp-bridge-tag {
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--ph-text);
+  background: var(--ph-light);
+  border: 1px solid var(--color-border);
+  border-radius: 100px;
+  padding: 3px 9px;
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* 교육방향 카드 */
+.edu-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.edu-card {
+  border: 1.5px solid var(--color-border);
+  border-radius: 10px;
+  background: #FFFFFF;
+  padding: 28px 24px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.edu-card:hover {
+  box-shadow: 0 8px 28px rgba(0,0,0,0.09);
+  transform: translateY(-4px);
+}
+
+.edu-card-num {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ph-text);
+}
+
+.edu-card-title {
+  font-size: 0.96rem;
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.5;
+  border-bottom: 1.5px solid var(--color-border);
+  padding-bottom: 16px;
+  word-break: keep-all;
+}
+
+.edu-card-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.edu-card-list li {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  line-height: 1.65;
+  padding-left: 14px;
+  position: relative;
+  word-break: keep-all;
+}
+
+.edu-card-list li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--ph-mid);
+  font-size: 0.72rem;
+  top: 3px;
+}
+
+/* ===================================================
+   SECTION 3 — 교수진
+=================================================== */
+#professors {
+  background: #FFFFFF;
+  border-top: 1px solid var(--color-border);
+}
+
+.prof-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 24px;
+}
+
+.prof-card {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 16px 22px;
+  border: 1.5px solid var(--color-border);
+  border-radius: 10px;
+  background: #FFFFFF;
+  transition: box-shadow var(--transition), transform var(--transition), border-color var(--transition);
+  text-align: center;
+}
+
+.prof-card:hover {
+  box-shadow: 0 8px 28px rgba(0,0,0,0.10);
+  transform: translateY(-5px);
+  border-color: var(--ph-dark);
+}
+
+.prof-img-ph {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  flex-shrink: 0;
+}
+
+.prof-name {
+  font-size: 0.94rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.prof-subject {
+  font-size: 0.78rem;
+  color: var(--color-muted);
+  line-height: 1.5;
+  word-break: keep-all;
+}
+
+/* ===================================================
+   PROFESSOR MODAL
+=================================================== */
+.prof-modal-box {
+  max-width: 600px;
+}
+
+.modal-head {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  padding: 32px 32px 24px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.modal-prof-img {
+  width: 90px;
+  height: 110px;
+  flex-shrink: 0;
+  border-radius: 6px;
+  font-size: 0.7rem;
+}
+
+.modal-prof-info { flex: 1; }
+
+.modal-prof-info .modal-eyebrow {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ph-text);
+  margin-bottom: 6px;
+}
+
+.modal-prof-info .modal-name {
+  font-size: 1.4rem;
+  font-weight: 900;
+  margin-bottom: 6px;
+}
+
+.modal-prof-info .modal-subject {
+  font-size: 0.84rem;
+  color: var(--color-muted);
+  line-height: 1.6;
+}
+
+.prof-modal-body {
+  padding: 28px 32px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.modal-message-box {
+  background: var(--ph-light);
+  border: 1.5px dashed var(--ph-mid);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  font-size: 0.88rem;
+  color: var(--color-muted);
+  line-height: 2;
+  word-break: keep-all;
+}
+
+/* ===================================================
+   RESPONSIVE
+=================================================== */
+@media (max-width: 1024px) {
+  .prof-grid  { grid-template-columns: repeat(5, 1fr); gap: 16px; }
+  .edu-cards  { grid-template-columns: repeat(2, 1fr); }
+  .comp-node  { width: 170px; height: 170px; }
+}
+
+@media (max-width: 768px) {
+  .prof-grid         { grid-template-columns: repeat(2, 1fr); }
+  .edu-cards         { grid-template-columns: 1fr; }
+  .dept-main-title   { font-size: 2rem; }
+  .section-title     { font-size: 1.4rem; }
+  .competency-diagram { flex-direction: column; gap: 12px; }
+  .comp-bridge       { flex-direction: row; }
+  .comp-bridge-line  { width: 24px; }
+  .modal-head        { flex-direction: column; align-items: flex-start; }
+}
+
+@media (max-width: 640px) {
+  :root { --section-gap: 60px; }
+  .prof-grid         { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .dept-main-title   { font-size: 1.6rem; }
+  .prof-modal-body   { padding: 20px; }
+  .modal-head        { padding: 24px 20px 20px; }
+}

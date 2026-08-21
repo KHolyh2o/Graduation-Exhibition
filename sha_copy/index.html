@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2026 서원대학교 미디어콘텐츠학부 졸업전시 (sha_copy 미리보기)</title>
+
+    <!-- sha_copy 안에 있는 CSS입니다. 자유롭게 고쳐도 실제 프로젝트에는 영향 없습니다. -->
+    <link rel="stylesheet" href="/sha_copy/css/index.css" />
+    <link rel="stylesheet" href="/sha_copy/css/app.css" />
+    <link rel="stylesheet" href="/sha_copy/css/navbar.css" />
+    <link rel="stylesheet" href="/sha_copy/css/footer.css" />
+    <link rel="stylesheet" href="/sha_copy/css/mainpage.css" />
+  </head>
+  <body>
+    <div class="App">
+
+      <!-- 상단 내비게이션 -->
+      <header id="site-header" role="banner">
+        <div class="header-inner">
+          <a href="/sha_copy/index.html" class="logo-area" aria-label="홈으로">
+            <div class="ph logo-ph">LOGO</div>
+            <div class="logo-text">
+              <span class="subtitle">서원대학교 미디어콘텐츠학부</span>
+              <span class="title">2026 졸업전시</span>
+            </div>
+          </a>
+          <button class="menu-toggle" id="menuToggle" aria-label="메뉴 열기" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+          <nav class="site-nav" id="siteNav" aria-label="주요 메뉴">
+            <a class="nav-link" href="/sha_copy/project.html">작품소개</a>
+            <a class="nav-link" href="/sha_copy/department.html">학부소개</a>
+            <a class="nav-link" href="/sha_copy/gallery.html">기록들</a>
+            <a class="nav-link" href="/sha_copy/others.html">과거전시보기</a>
+          </nav>
+        </div>
+      </header>
+
+      <div class="content">
+        <main>
+
+          <!-- SECTION 1 · 프로모션 영상 Hero -->
+          <section id="hero" aria-label="프로모션 영상">
+            <div class="ph hero-video-ph" role="img" aria-label="프로모션 영상 재생 영역">
+              <div class="play-icon" aria-hidden="true"></div>
+              <span>프로모션 영상 재생 영역</span>
+            </div>
+            <p class="hero-scroll-hint" aria-hidden="true">↓ SCROLL</p>
+          </section>
+
+          <!-- SECTION 2 · 전시 소개 -->
+          <section id="intro" aria-labelledby="intro-title">
+            <div class="container">
+              <div class="intro-grid">
+
+                <div class="ph intro-poster reveal" role="img" aria-label="졸업전시 공식 포스터 이미지">
+                  졸업전시<br />공식 포스터
+                </div>
+
+                <div class="intro-content reveal">
+                  <p class="section-label">2026 Graduation Exhibition</p>
+                  <div class="exhibit-year" aria-hidden="true">2026</div>
+                  <h1 class="exhibit-title" id="intro-title">
+                    전시 타이틀을<br />이곳에 입력합니다
+                  </h1>
+                  <div class="exhibit-divider" aria-hidden="true"></div>
+
+                  <p class="exhibit-concept">
+                    이곳에는 졸업전시의 핵심 컨셉과 테마를 소개하는 문구가 들어갑니다.
+                    미디어콘텐츠학부 학생들이 4년간 쌓아온 열정과 창의성을 담아 선보이는
+                    특별한 전시입니다.
+                  </p>
+                  <p class="exhibit-concept">
+                    각 졸업생들이 직접 기획하고 제작한 작품들을 통해 미래 미디어 산업의
+                    가능성을 탐색합니다. 전시 기간 동안 다양한 부대 행사와 함께 관람객
+                    여러분을 맞이할 예정입니다.
+                  </p>
+
+                  <div class="exhibit-meta">
+                    <div class="meta-card">
+                      <div class="meta-label">전시 기간</div>
+                      <div class="meta-value">2026. 00. 00 — 00. 00</div>
+                    </div>
+                    <div class="meta-card">
+                      <div class="meta-label">전시 장소</div>
+                      <div class="meta-value">서원대학교 ○○관</div>
+                    </div>
+                    <div class="meta-card">
+                      <div class="meta-label">참여 인원</div>
+                      <div class="meta-value">40명</div>
+                    </div>
+                    <div class="meta-card">
+                      <div class="meta-label">관람 시간</div>
+                      <div class="meta-value">00:00 — 00:00</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- SECTION 3 · 졸업생 프로필 캐러셀 -->
+          <section id="profiles" aria-labelledby="profiles-title">
+            <div class="container">
+
+              <div class="profiles-header reveal">
+                <div>
+                  <p class="section-label">Class of 2026</p>
+                  <h2 class="profiles-title" id="profiles-title">졸업생 프로필</h2>
+                </div>
+                <div class="profiles-header-right">
+                  <span class="profiles-count" id="profilesCount"></span>
+                  <a href="/sha_copy/project.html" class="profiles-more-btn" aria-label="작품소개 페이지로 이동">
+                    더보기
+                    <span class="btn-arrow" aria-hidden="true">→</span>
+                  </a>
+                </div>
+              </div>
+
+              <div class="carousel-wrap reveal" aria-label="졸업생 프로필 슬라이드">
+                <div class="carousel-track-outer" id="trackOuter">
+                  <div class="carousel-track" id="track"><!-- 졸업생 카드는 main.js가 graduates.js 데이터로 자동 생성합니다 --></div>
+                </div>
+
+                <div class="carousel-progress">
+                  <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" id="progressFill" style="width: 0%"></div>
+                  </div>
+                  <span class="progress-label" id="progressLabel"></span>
+                  <div class="carousel-arrows">
+                    <button class="carousel-btn" id="prevBtn" aria-label="이전 슬라이드">←</button>
+                    <button class="carousel-btn" id="nextBtn" aria-label="다음 슬라이드">→</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- SECTION 4 · 아카이브 CTA -->
+          <section id="archive" aria-labelledby="archive-title">
+            <div class="container">
+              <div class="archive-inner reveal">
+                <p class="archive-eyebrow">Exhibition Archive</p>
+                <h2 class="archive-heading" id="archive-title">
+                  지난 졸업전시의<br />기억을 만나보세요
+                </h2>
+                <p class="archive-desc">
+                  서원대학교 미디어콘텐츠학부 선배들의 열정과 창의력이 담긴<br />
+                  역대 졸업전시 아카이브를 둘러보세요.
+                </p>
+
+                <a href="/sha_copy/others.html" class="cta-btn" aria-label="지난 년도 작품 구경하기 페이지로 이동">
+                  지난 년도 작품 구경하기
+                  <span class="arrow" aria-hidden="true">→</span>
+                </a>
+
+                <div class="year-tags" aria-label="연도별 아카이브">
+                  <a href="/sha_copy/others.html" class="year-tag">2025</a>
+                  <a href="/sha_copy/others.html" class="year-tag">2024</a>
+                  <a href="/sha_copy/others.html" class="year-tag">2023</a>
+                  <a href="/sha_copy/others.html" class="year-tag">2022</a>
+                  <a href="/sha_copy/others.html" class="year-tag">2021</a>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 졸업생 프로필 모달 -->
+          <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalName">
+            <div class="modal-box main-modal-box" id="modalBox">
+              <button class="modal-close" aria-label="모달 닫기" id="modalCloseBtn">✕</button>
+              <div class="modal-header">
+                <img class="modal-profile-img" id="modalImg" src="" alt="" />
+                <div class="modal-profile-info">
+                  <p class="modal-num" id="modalNum"></p>
+                  <h2 class="modal-name" id="modalName"></h2>
+                  <p class="modal-major">미디어콘텐츠학부 · 2026년 졸업</p>
+                </div>
+              </div>
+              <div class="modal-body">
+                <div>
+                  <p class="modal-section-title">기본 정보</p>
+                  <div class="modal-text-ph" id="modalInfo"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </main>
+      </div>
+
+      <!-- 하단 푸터 -->
+      <footer id="site-footer" role="contentinfo">
+        <div class="container">
+          <div class="footer-inner">
+            <div class="footer-brand">
+              <p class="school-name">서원대학교</p>
+              <p class="dept-name">미디어콘텐츠학부</p>
+              <p class="exhibit-name-small">2026 졸업전시</p>
+            </div>
+            <div class="footer-info">
+              <span>충청북도 청주시 서원구 무심서로 377-3</span>
+              <span>043-299-8800</span>
+              <span>media@seowon.ac.kr</span>
+            </div>
+          </div>
+          <p class="footer-copy">© 2026 서원대학교 미디어콘텐츠학부. All rights reserved.</p>
+        </div>
+      </footer>
+
+    </div>
+
+    <script type="module" src="/sha_copy/js/index.js"></script>
+  </body>
+</html>

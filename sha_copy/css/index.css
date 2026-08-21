@@ -1,0 +1,191 @@
+@import './theme.css';
+
+/* ===================================================
+   RESET & BASE
+=================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-main);
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+/* ===================================================
+   PLACEHOLDER UTILITY
+=================================================== */
+.ph {
+  background: var(--ph-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ph-text);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  text-align: center;
+  border: 1.5px dashed var(--ph-mid);
+  border-radius: var(--radius);
+  padding: 8px;
+  user-select: none;
+}
+
+/* ===================================================
+   LAYOUT HELPERS
+=================================================== */
+.container {
+  width: 100%;
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+section {
+  padding: var(--section-gap) 0;
+}
+
+.section-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ph-text);
+  margin-bottom: 12px;
+}
+
+/* ===================================================
+   SCROLL REVEAL
+=================================================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===================================================
+   COMMON MODAL
+=================================================== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+  backdrop-filter: blur(3px);
+}
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-box {
+  background: #FFFFFF;
+  border-radius: 14px;
+  width: 100%;
+  max-height: 88vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  transform: scale(0.93) translateY(16px);
+  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+}
+.modal-overlay.active .modal-box {
+  transform: scale(1) translateY(0);
+}
+
+.modal-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 34px;
+  height: 34px;
+  background: var(--ph-light);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: var(--color-text);
+  transition: background var(--transition);
+  z-index: 10;
+}
+.modal-close:hover { background: var(--ph-mid); }
+
+/* ===================================================
+   SHARED PAGE HERO (서브 페이지 공통)
+=================================================== */
+.page-hero {
+  margin-top: var(--header-h);
+  padding: 56px 0 40px;
+  background: #FFFFFF;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.page-hero-inner {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.page-breadcrumb {
+  font-size: 0.72rem;
+  color: var(--ph-text);
+  margin-bottom: 8px;
+  letter-spacing: 0.06em;
+}
+
+.page-title {
+  font-size: 2rem;
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.page-desc {
+  font-size: 0.9rem;
+  color: var(--color-muted);
+  margin-top: 8px;
+  word-break: keep-all;
+}
+
+/* ===================================================
+   SHARED SECTION HEADER
+=================================================== */
+.section-header {
+  margin-bottom: 52px;
+}
+
+.section-title {
+  font-size: 1.7rem;
+  font-weight: 900;
+  margin-bottom: 16px;
+}
+
+.section-overview {
+  font-size: 0.94rem;
+  color: var(--color-muted);
+  line-height: 2;
+  max-width: 780px;
+  word-break: keep-all;
+}

@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>작품소개 · 2026 서원대학교 미디어콘텐츠학부 졸업전시 (sha_copy 미리보기)</title>
+
+    <link rel="stylesheet" href="/sha_copy/css/index.css" />
+    <link rel="stylesheet" href="/sha_copy/css/app.css" />
+    <link rel="stylesheet" href="/sha_copy/css/navbar.css" />
+    <link rel="stylesheet" href="/sha_copy/css/footer.css" />
+    <link rel="stylesheet" href="/sha_copy/css/projectpage.css" />
+  </head>
+  <body>
+    <div class="App">
+
+      <header id="site-header" role="banner">
+        <div class="header-inner">
+          <a href="/sha_copy/index.html" class="logo-area" aria-label="홈으로">
+            <div class="ph logo-ph">LOGO</div>
+            <div class="logo-text">
+              <span class="subtitle">서원대학교 미디어콘텐츠학부</span>
+              <span class="title">2026 졸업전시</span>
+            </div>
+          </a>
+          <button class="menu-toggle" id="menuToggle" aria-label="메뉴 열기" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+          <nav class="site-nav" id="siteNav" aria-label="주요 메뉴">
+            <a class="nav-link active" href="/sha_copy/project.html">작품소개</a>
+            <a class="nav-link" href="/sha_copy/department.html">학부소개</a>
+            <a class="nav-link" href="/sha_copy/gallery.html">기록들</a>
+            <a class="nav-link" href="/sha_copy/others.html">과거전시보기</a>
+          </nav>
+        </div>
+      </header>
+
+      <div class="content">
+        <div>
+          <div class="page-hero">
+            <div class="container">
+              <div class="page-hero-inner">
+                <div>
+                  <p class="page-breadcrumb">HOME › 작품소개</p>
+                  <h1 class="page-title">작품소개</h1>
+                  <p class="page-desc">미디어콘텐츠학부 졸업생들의 작품을 카테고리별로 만나보세요.</p>
+                </div>
+                <span class="page-total-badge" id="totalBadge"></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- CATEGORY TABS : project.js가 projectTabs.js 데이터로 자동 생성합니다 -->
+          <div id="category-bar" role="tablist" aria-label="작품 카테고리">
+            <div class="container">
+              <div class="tab-inner" id="tabInner"></div>
+            </div>
+          </div>
+
+          <!-- CONTENT AREA : project.js가 projects.js / teamProjects.js 데이터로 자동 생성합니다 -->
+          <main id="content-area">
+            <div class="container" id="panelsContainer"></div>
+          </main>
+
+          <!-- 작품 상세 모달 -->
+          <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalWorkTitle">
+            <div class="modal-box work-modal-box" id="modalBox">
+              <button class="modal-close" aria-label="모달 닫기" id="modalCloseBtn">✕</button>
+              <div id="modalVideoWrap"></div>
+              <div class="work-modal-body">
+                <span class="modal-badge" id="modalBadge"></span>
+                <h2 class="modal-work-title" id="modalWorkTitle"></h2>
+                <p class="modal-work-author" id="modalAuthor"></p>
+                <div class="modal-divider"></div>
+
+                <p class="modal-section-label">작품 소개</p>
+                <div class="work-modal-text-ph" id="modalDesc"></div>
+
+                <div id="modalProposalWrap"></div>
+
+                <div class="modal-meta-grid" id="modalMetaGrid"></div>
+
+                <div id="modalMembersWrap"></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <footer id="site-footer" role="contentinfo">
+        <div class="container">
+          <div class="footer-inner">
+            <div class="footer-brand">
+              <p class="school-name">서원대학교</p>
+              <p class="dept-name">미디어콘텐츠학부</p>
+              <p class="exhibit-name-small">2026 졸업전시</p>
+            </div>
+            <div class="footer-info">
+              <span>충청북도 청주시 서원구 무심서로 377-3</span>
+              <span>043-299-8800</span>
+              <span>media@seowon.ac.kr</span>
+            </div>
+          </div>
+          <p class="footer-copy">© 2026 서원대학교 미디어콘텐츠학부. All rights reserved.</p>
+        </div>
+      </footer>
+
+    </div>
+
+    <script type="module" src="/sha_copy/js/project.js"></script>
+  </body>
+</html>

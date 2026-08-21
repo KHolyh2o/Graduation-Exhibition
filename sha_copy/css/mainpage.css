@@ -1,0 +1,617 @@
+/* ===================================================
+   SECTION 1 — HERO
+=================================================== */
+#hero {
+  margin-top: var(--header-h);
+  padding: 0;
+}
+
+.hero-video-ph {
+  width: 100%;
+  height: calc(100vh - var(--header-h));
+  min-height: 480px;
+  max-height: 800px;
+  border-radius: 0;
+  border: none;
+  font-size: 1rem;
+  background: var(--ph-mid);
+  flex-direction: column;
+  gap: 16px;
+}
+
+.hero-video-ph .play-icon {
+  width: 64px;
+  height: 64px;
+  border: 3px solid var(--ph-text);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-video-ph .play-icon::after {
+  content: '';
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  border-left: 20px solid var(--ph-text);
+  margin-left: 4px;
+}
+
+.hero-scroll-hint {
+  text-align: center;
+  padding: 18px 0 10px;
+  font-size: 0.78rem;
+  color: var(--ph-text);
+  letter-spacing: 0.08em;
+  animation: bounce 1.8s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(6px); }
+}
+
+/* ===================================================
+   SECTION 2 — 전시 소개
+=================================================== */
+#intro {
+  background: #FFFFFF;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.intro-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.intro-poster {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  flex-shrink: 0;
+  position: sticky;
+  top: calc(var(--header-h) + 24px);
+}
+
+.intro-content {
+  padding-top: 8px;
+}
+
+.exhibit-year {
+  font-size: 5rem;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--ph-light);
+  margin-bottom: -10px;
+  letter-spacing: -0.04em;
+}
+
+.exhibit-title {
+  font-size: 2.2rem;
+  font-weight: 900;
+  line-height: 1.2;
+  margin-bottom: 24px;
+  word-break: keep-all;
+}
+
+.exhibit-divider {
+  width: 48px;
+  height: 3px;
+  background: var(--color-text);
+  margin-bottom: 24px;
+  border-radius: 2px;
+}
+
+.exhibit-concept {
+  font-size: 0.96rem;
+  color: var(--color-muted);
+  line-height: 2;
+  margin-bottom: 20px;
+  word-break: keep-all;
+}
+
+.exhibit-meta {
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.meta-card {
+  background: var(--ph-light);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+}
+
+.meta-card .meta-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--ph-text);
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
+
+.meta-card .meta-value {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+/* ===================================================
+   SECTION 3 — 졸업생 프로필 캐러셀
+=================================================== */
+#profiles {
+  background: var(--color-bg);
+  overflow: hidden;
+}
+
+.profiles-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 36px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.profiles-title {
+  font-size: 1.8rem;
+  font-weight: 900;
+}
+
+.profiles-header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.profiles-count {
+  font-size: 0.84rem;
+  color: var(--ph-text);
+  font-weight: 500;
+}
+
+.profiles-more-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 20px;
+  border: 1.5px solid var(--color-border);
+  border-radius: 100px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--color-text);
+  text-decoration: none;
+  background: #FFFFFF;
+  transition: background var(--transition), border-color var(--transition), color var(--transition), transform var(--transition);
+  white-space: nowrap;
+}
+
+.profiles-more-btn:hover {
+  background: var(--color-text);
+  border-color: var(--color-text);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+}
+
+.btn-arrow {
+  font-size: 0.9rem;
+  transition: transform var(--transition);
+}
+
+.profiles-more-btn:hover .btn-arrow {
+  transform: translateX(4px);
+}
+
+/* 캐러셀 래퍼 */
+.carousel-wrap {
+  position: relative;
+}
+
+.carousel-track-outer {
+  overflow: hidden;
+  margin: 0 -28px;
+  padding: 0 28px;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 20px;
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+/* 큰 세로형 프로필 카드 */
+.profile-card {
+  flex: 0 0 280px;
+  width: 280px;
+  cursor: pointer;
+  border-radius: 12px;
+  border: 1.5px solid var(--color-border);
+  background: #FFFFFF;
+  overflow: hidden;
+  transition: transform var(--transition), box-shadow var(--transition);
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+}
+
+.profile-card-img {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: var(--ph-light);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--ph-text);
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-align: center;
+  padding: 12px;
+}
+
+.profile-card-img img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.profile-card-img .img-icon {
+  width: 48px;
+  height: 48px;
+  border: 2px dashed var(--ph-dark);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: var(--ph-dark);
+  margin-bottom: 4px;
+}
+
+.profile-card-body {
+  padding: 18px 20px 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.profile-card-num {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--ph-text);
+  text-transform: uppercase;
+}
+
+.profile-card-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.profile-card-work {
+  font-size: 0.78rem;
+  color: var(--color-muted);
+  margin-top: 4px;
+}
+
+/* 화살표 버튼 */
+.carousel-arrows {
+  display: flex;
+  gap: 10px;
+  margin-top: 0;
+}
+
+.carousel-btn {
+  width: 46px;
+  height: 46px;
+  background: #FFFFFF;
+  border: 1.5px solid var(--color-border);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: var(--color-text);
+  transition: background var(--transition), border-color var(--transition), color var(--transition);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  flex-shrink: 0;
+}
+
+.carousel-btn:hover {
+  background: var(--color-text);
+  border-color: var(--color-text);
+  color: #FFFFFF;
+}
+
+.carousel-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.carousel-btn:disabled:hover {
+  background: #FFFFFF;
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+
+/* 진행 바 */
+.carousel-progress {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.progress-bar-bg {
+  flex: 1;
+  height: 3px;
+  background: var(--ph-light);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: var(--color-text);
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+
+.progress-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ph-text);
+  white-space: nowrap;
+  min-width: 72px;
+  text-align: right;
+}
+
+/* ===================================================
+   SECTION 4 — 아카이브 CTA
+=================================================== */
+#archive {
+  background: #FFFFFF;
+  border-top: 1px solid var(--color-border);
+  text-align: center;
+}
+
+.archive-inner {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.archive-eyebrow {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ph-text);
+  margin-bottom: 20px;
+}
+
+.archive-heading {
+  font-size: 2.4rem;
+  font-weight: 900;
+  line-height: 1.2;
+  margin-bottom: 16px;
+  word-break: keep-all;
+}
+
+.archive-desc {
+  font-size: 0.94rem;
+  color: var(--color-muted);
+  margin-bottom: 44px;
+  line-height: 1.9;
+}
+
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 44px;
+  background: var(--color-btn);
+  color: #FFFFFF;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 100px;
+  letter-spacing: 0.04em;
+  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  border: none;
+  cursor: pointer;
+}
+
+.cta-btn:hover {
+  background: var(--color-btn-hover);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.2);
+}
+
+.cta-btn .arrow {
+  font-size: 1.1rem;
+  transition: transform var(--transition);
+}
+
+.cta-btn:hover .arrow {
+  transform: translateX(5px);
+}
+
+.year-tags {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 36px;
+  flex-wrap: wrap;
+}
+
+.year-tag {
+  padding: 6px 16px;
+  border: 1.5px solid var(--color-border);
+  border-radius: 100px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-muted);
+  cursor: pointer;
+  transition: border-color var(--transition), color var(--transition);
+  text-decoration: none;
+}
+
+.year-tag:hover {
+  border-color: var(--color-text);
+  color: var(--color-text);
+}
+
+/* ===================================================
+   PROFILE MODAL
+=================================================== */
+.main-modal-box {
+  max-width: 620px;
+}
+
+.modal-header {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  padding: 32px 32px 24px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.modal-profile-img {
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+  border-radius: 50%;
+}
+
+.modal-profile-info {
+  flex: 1;
+}
+
+.modal-profile-info .modal-num {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--ph-text);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.modal-profile-info .modal-name {
+  font-size: 1.3rem;
+  font-weight: 900;
+  margin-bottom: 4px;
+}
+
+.modal-profile-info .modal-major {
+  font-size: 0.84rem;
+  color: var(--color-muted);
+}
+
+.modal-body {
+  padding: 28px 32px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.modal-section-title {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ph-text);
+  margin-bottom: 8px;
+}
+
+.modal-text-ph {
+  background: var(--ph-light);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  font-size: 0.88rem;
+  color: var(--ph-text);
+  line-height: 1.9;
+  border: 1.5px dashed var(--ph-mid);
+  white-space: pre-wrap;
+}
+
+.modal-work-ph {
+  background: var(--ph-light);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  border: 1.5px dashed var(--ph-mid);
+}
+
+.modal-work-ph .work-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--ph-text);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.modal-work-thumb {
+  width: 100%;
+  height: 160px;
+  margin-bottom: 12px;
+  border-radius: 4px;
+  font-size: 0.78rem;
+}
+
+.modal-work-desc {
+  font-size: 0.86rem;
+  color: var(--ph-text);
+  line-height: 1.8;
+  white-space: pre-wrap;
+}
+
+/* ===================================================
+   RESPONSIVE
+=================================================== */
+@media (max-width: 1024px) {
+  .intro-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .intro-poster {
+    width: 220px;
+    position: static;
+    margin: 0 auto;
+  }
+
+  .exhibit-year  { font-size: 3.5rem; }
+  .exhibit-title { font-size: 1.7rem; }
+  .archive-heading { font-size: 1.8rem; }
+}
+
+@media (max-width: 640px) {
+  :root { --section-gap: 60px; }
+  .exhibit-meta { grid-template-columns: 1fr; }
+  .modal-header { flex-direction: column; align-items: flex-start; }
+  .archive-heading { font-size: 1.5rem; }
+  .cta-btn { padding: 16px 32px; font-size: 0.92rem; }
+  .profiles-header { flex-direction: column; align-items: flex-start; }
+  .profiles-header-right { width: 100%; justify-content: space-between; }
+}

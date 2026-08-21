@@ -1,0 +1,76 @@
+/* ===================================================
+   FOOTER
+=================================================== */
+#site-footer {
+  background: var(--color-text);
+  color: rgba(255,255,255,0.65);
+  padding: 56px 0;
+  border-top: 1px solid #333;
+}
+
+.footer-inner {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.footer-brand .school-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 8px;
+}
+
+.footer-brand .dept-name {
+  font-size: 0.82rem;
+  margin-bottom: 4px;
+}
+
+.footer-brand .exhibit-name-small {
+  font-size: 0.78rem;
+  opacity: 0.5;
+}
+
+.footer-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.82rem;
+  text-align: right;
+}
+
+.footer-info span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: flex-end;
+}
+
+.footer-copy {
+  width: 100%;
+  padding-top: 32px;
+  margin-top: 32px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  font-size: 0.74rem;
+  text-align: center;
+  opacity: 0.4;
+}
+
+/* ===================================================
+   RESPONSIVE
+=================================================== */
+@media (max-width: 640px) {
+  .footer-inner {
+    flex-direction: column;
+  }
+
+  .footer-info {
+    text-align: left;
+  }
+
+  .footer-info span {
+    justify-content: flex-start;
+  }
+}
