@@ -1,5 +1,5 @@
-﻿id,studentId,name,tab,role,profileImage
-g-01,2022001001,이름 입력,multimedia,pm,
+id,studentId,name,tab,role,profileImage
+g-01,2022001001,홍길동,multimedia,pm,/images/graduates/2022001001_홍길동_프로필.jpg
 g-02,2022001002,이름 입력,multimedia,pm,
 g-03,2022001003,이름 입력,multimedia,pm,
 g-04,2022001004,이름 입력,multimedia,pm,
