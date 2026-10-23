@@ -131,7 +131,7 @@ const MainPage = () => {
                     <div className="profile-card-body">
                       <span className="profile-card-num">{g.id}</span>
                       <span className="profile-card-name">{g.name}</span>
-                      <span className="profile-card-work">{g.role}</span>
+                      <span className="profile-card-work">{g.jobTitle || g.role}</span>
                     </div>
                   </div>
                 ))}
@@ -210,7 +210,7 @@ const MainPage = () => {
               <div>
                 <p className="modal-section-title">기본 정보</p>
                 <div className="modal-text-ph">
-                  학번: {modalData.studentId} &nbsp;|&nbsp; 직군: {modalData.role}
+                  학번: {modalData.studentId} &nbsp;|&nbsp; 직군: {modalData.jobTitle || modalData.role}
                 </div>
               </div>
             </div>

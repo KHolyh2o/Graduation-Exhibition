@@ -116,7 +116,7 @@ const DepartmentPage = () => {
           <div className="section-header reveal">
             <h2 className="section-title">교수진 소개</h2>
             <p className="section-overview">
-              프로필을 클릭하면 교수님의 담당 과목과 졸업생들을 향한 응원 메시지를 확인할 수 있습니다.
+              프로필을 클릭하면 교수님들이 졸업생들에게 전하는 격려사를 확인할 수 있습니다.
             </p>
           </div>
 
@@ -138,7 +138,7 @@ const DepartmentPage = () => {
               >
                 <SafeImg className="prof-img" src={prof.photo} fallbackSrc={FALLBACK.avatar} alt={prof.name} />
                 <p className="prof-name">{prof.name}</p>
-                <p className="prof-subject">{prof.subjects[0]}</p>
+                <p className="prof-subject">{prof.role}</p>
               </div>
             ))}
           </div>
@@ -158,12 +158,15 @@ const DepartmentPage = () => {
               <div className="modal-prof-info">
                 <p className="modal-eyebrow">Professor</p>
                 <p className="modal-name" id="modalProfName">{modalProf.name}</p>
-                <p className="modal-subject">{modalProf.subjects.join(' / ')}</p>
+                <p className="modal-subject">{modalProf.role}</p>
               </div>
             </div>
             <div className="prof-modal-body">
-              <p className="modal-section-label">졸업생들을 향한 응원 메시지</p>
-              <div className="modal-message-box">{modalProf.message}</div>
+              <p className="modal-section-label">격려사</p>
+              <div className="modal-message-box">
+                <p className="modal-message-headline">{modalProf.headline}</p>
+                {modalProf.message}
+              </div>
             </div>
           </>
         )}

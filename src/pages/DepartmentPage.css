@@ -311,6 +311,15 @@
   color: var(--color-muted);
   line-height: 2;
   word-break: keep-all;
+  white-space: pre-line;
+}
+
+.modal-message-headline {
+  margin-bottom: 14px;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.7;
+  color: var(--color-text);
 }
 
 /* ===================================================

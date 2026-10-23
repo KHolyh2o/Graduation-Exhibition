@@ -13,7 +13,7 @@ import './ProjectPage.css';
 
 const getWorks = (tabId, subId) => {
   if (tabId === 'team') return teamProjects.filter((p) => p.group === subId);
-  return projects.filter((p) => p.tab === tabId && p.role === subId);
+  return projects.filter((p) => p.tab === tabId && (p.roles ?? [p.role]).includes(subId));
 };
 
 const getTabTotal = (tabId) => {

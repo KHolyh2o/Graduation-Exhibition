@@ -10,8 +10,9 @@
  * CSV 컬럼 형식:
  *
  * [graduates.csv]
- *   id, studentId, name, tab, role, profileImage
- *   g-01, 2022001001, 홍길동, multimedia, pm, /images/profiles/홍길동.jpg
+ *   id, studentId, name, tab, role, jobTitle, profileImage
+ *   g-01, 2022001001, 홍길동, multimedia, pm, 기획자, /images/profiles/홍길동.jpg
+ *   (role: 필터용 코드 / jobTitle: 화면에 표시할 한글 직함 — 쉼표 금지, 2개면 ' · '로 구분)
  *
  * [projects.csv]
  *   id, studentId, tab, role, title, thumbnail, description, videoUrl,
@@ -32,20 +33,34 @@ const ROOT      = path.resolve(__dirname, '..');
 const SRC_DATA  = path.join(ROOT, 'src', 'data');
 
 /* ── CSV parser ──────────────────────────────────────────────────── */
+// '#'으로 시작하는 행은 주석 처리된 데이터 (__comment: true) — graduates에서만 JS 주석으로 출력
 function parseCsv(raw) {
   const lines = raw.trim().split(/\r?\n/);
   const headers = lines[0].split(',').map((h) => h.trim());
   return lines.slice(1).map((line) => {
-    const values = line.split(',').map((v) => v.trim());
-    return Object.fromEntries(headers.map((h, i) => [h, values[i] ?? '']));
+    const isComment = line.startsWith('#');
+    const values = (isComment ? line.slice(1) : line).split(',').map((v) => v.trim());
+    const row = Object.fromEntries(headers.map((h, i) => [h, values[i] ?? '']));
+    return isComment ? { ...row, __comment: true } : row;
   });
 }
+const activeRows = (rows) => rows.filter((r) => !r.__comment);
+
+// role 칸은 세미콜론으로 복수 직군 허용 (ex. pm;dev) — 첫 값이 주 직군(role), 2개 이상이면 roles 배열도 출력
+const roleFields = (roleCell) => {
+  const list = roleCell.split(';').map((v) => v.trim()).filter(Boolean);
+  const primary = list[0] ?? '';
+  return list.length > 1
+    ? `role: '${primary}', roles: [${list.map((v) => `'${v}'`).join(', ')}]`
+    : `role: '${primary}'`;
+};
 
 /* ── graduates ───────────────────────────────────────────────────── */
 function generateGraduates(rows) {
   const entries = rows.map((r) =>
-    `  { id: '${r.id}', studentId: '${r.studentId}', name: '${r.name}', ` +
-    `tab: '${r.tab}', role: '${r.role}', profileImage: '${r.profileImage}' },`
+    (r.__comment ? '  // ' : '  ') +
+    `{ id: '${r.id}', studentId: '${r.studentId}', name: '${r.name}', ` +
+    `tab: '${r.tab}', ${roleFields(r.role)}, jobTitle: '${r.jobTitle ?? ''}', profileImage: '${r.profileImage}' },`
   );
 
   return `export const graduates = [\n${entries.join('\n')}\n];\n\n` +
@@ -62,7 +77,7 @@ function generateProjects(rows) {
     return (
       `  {\n` +
       `    id: '${r.id}', studentId: '${r.studentId}',\n` +
-      `    tab: '${r.tab}', role: '${r.role}',\n` +
+      `    tab: '${r.tab}', ${roleFields(r.role)},\n` +
       `    title: '${r.title}',\n` +
       `    thumbnail: '${r.thumbnail}',\n` +
       `    description: '${r.description.replace(/'/g, "\\'")}',\n` +
@@ -132,12 +147,12 @@ if (graduatesCsv) {
   const out  = generateGraduates(rows);
   const dest = path.join(SRC_DATA, 'graduates.js');
   fs.writeFileSync(dest, out, 'utf8');
-  console.log(`✓ graduates.js 생성 완료 (${rows.length}명) → ${dest}`);
+  console.log(`✓ graduates.js 생성 완료 (${activeRows(rows).length}명, 주석 ${rows.filter((r) => r.__comment).length}) → ${dest}`);
 }
 
 if (projectsCsv) {
   const raw  = fs.readFileSync(path.resolve(projectsCsv), 'utf8');
-  const rows = parseCsv(raw);
+  const rows = activeRows(parseCsv(raw));
   const out  = generateProjects(rows);
   const dest = path.join(SRC_DATA, 'projects.js');
   fs.writeFileSync(dest, out, 'utf8');
@@ -146,7 +161,7 @@ if (projectsCsv) {
 
 if (teamProjectsCsv) {
   const raw  = fs.readFileSync(path.resolve(teamProjectsCsv), 'utf8');
-  const rows = parseCsv(raw);
+  const rows = activeRows(parseCsv(raw));
   const out  = generateTeamProjects(rows);
   const dest = path.join(SRC_DATA, 'teamProjects.js');
   fs.writeFileSync(dest, out, 'utf8');

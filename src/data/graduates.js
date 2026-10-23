@@ -1,61 +1,48 @@
-// 졸업생 40명 프로필.
-// tab: projectTabs.js의 탭 id와 일치 ('multimedia' | 'video' | 'team')
-// role: 멀티미디어/영상미디어는 roles[].id, 팀은 groups[].id
-// studentId는 projects.js / teamProjects.js와의 연결 키
-
 export const graduates = [
-  // ── 멀티미디어 · Product Manager (10명) ──
-  { id: 'g-01', studentId: '2022001001', name: '이름 입력', tab: 'multimedia', role: 'pm',     profileImage: '' },
-  { id: 'g-02', studentId: '2022001002', name: '이름 입력', tab: 'multimedia', role: 'pm',     profileImage: '' },
-  { id: 'g-03', studentId: '2022001003', name: '이름 입력', tab: 'multimedia', role: 'pm',     profileImage: '' },
-  { id: 'g-04', studentId: '2022001004', name: '이름 입력', tab: 'multimedia', role: 'pm',     profileImage: '' },
-  { id: 'g-05', studentId: '2022001005', name: '이름 입력', tab: 'multimedia', role: 'pm',     profileImage: '' },
-  { id: 'g-06', studentId: '2022001006', name: '이름 입력', tab: 'multimedia', role: 'pm',     profileImage: '' },
-  { id: 'g-07', studentId: '2022001007', name: '이름 입력', tab: 'multimedia', role: 'pm',     profileImage: '' },
-  { id: 'g-08', studentId: '2022001008', name: '이름 입력', tab: 'multimedia', role: 'pm',     profileImage: '' },
-  { id: 'g-09', studentId: '2022001009', name: '이름 입력', tab: 'multimedia', role: 'pm',     profileImage: '' },
-  { id: 'g-10', studentId: '2022001010', name: '이름 입력', tab: 'multimedia', role: 'pm',     profileImage: '' },
-
-  // ── 멀티미디어 · Developer (10명) ──
-  { id: 'g-11', studentId: '2022001011', name: '이름 입력', tab: 'multimedia', role: 'dev',    profileImage: '' },
-  { id: 'g-12', studentId: '2022001012', name: '이름 입력', tab: 'multimedia', role: 'dev',    profileImage: '' },
-  { id: 'g-13', studentId: '2022001013', name: '이름 입력', tab: 'multimedia', role: 'dev',    profileImage: '' },
-  { id: 'g-14', studentId: '2022001014', name: '이름 입력', tab: 'multimedia', role: 'dev',    profileImage: '' },
-  { id: 'g-15', studentId: '2022001015', name: '이름 입력', tab: 'multimedia', role: 'dev',    profileImage: '' },
-  { id: 'g-16', studentId: '2022001016', name: '이름 입력', tab: 'multimedia', role: 'dev',    profileImage: '' },
-  { id: 'g-17', studentId: '2022001017', name: '이름 입력', tab: 'multimedia', role: 'dev',    profileImage: '' },
-  { id: 'g-18', studentId: '2022001018', name: '이름 입력', tab: 'multimedia', role: 'dev',    profileImage: '' },
-  { id: 'g-19', studentId: '2022001019', name: '이름 입력', tab: 'multimedia', role: 'dev',    profileImage: '' },
-  { id: 'g-20', studentId: '2022001020', name: '이름 입력', tab: 'multimedia', role: 'dev',    profileImage: '' },
-
-  // ── 멀티미디어 · Designer (10명) ──
-  { id: 'g-21', studentId: '2022001021', name: '이름 입력', tab: 'multimedia', role: 'design', profileImage: '' },
-  { id: 'g-22', studentId: '2022001022', name: '이름 입력', tab: 'multimedia', role: 'design', profileImage: '' },
-  { id: 'g-23', studentId: '2022001023', name: '이름 입력', tab: 'multimedia', role: 'design', profileImage: '' },
-  { id: 'g-24', studentId: '2022001024', name: '이름 입력', tab: 'multimedia', role: 'design', profileImage: '' },
-  { id: 'g-25', studentId: '2022001025', name: '이름 입력', tab: 'multimedia', role: 'design', profileImage: '' },
-  { id: 'g-26', studentId: '2022001026', name: '이름 입력', tab: 'multimedia', role: 'design', profileImage: '' },
-  { id: 'g-27', studentId: '2022001027', name: '이름 입력', tab: 'multimedia', role: 'design', profileImage: '' },
-  { id: 'g-28', studentId: '2022001028', name: '이름 입력', tab: 'multimedia', role: 'design', profileImage: '' },
-  { id: 'g-29', studentId: '2022001029', name: '이름 입력', tab: 'multimedia', role: 'design', profileImage: '' },
-  { id: 'g-30', studentId: '2022001030', name: '이름 입력', tab: 'multimedia', role: 'design', profileImage: '' },
-
-  // ── 영상미디어 (10명) ──
-  { id: 'g-31', studentId: '2022002001', name: '이름 입력', tab: 'video',      role: '2d',     profileImage: '' },
-  { id: 'g-32', studentId: '2022002002', name: '이름 입력', tab: 'video',      role: '2d',     profileImage: '' },
-  { id: 'g-33', studentId: '2022002003', name: '이름 입력', tab: 'video',      role: '3d',     profileImage: '' },
-  { id: 'g-34', studentId: '2022002004', name: '이름 입력', tab: 'video',      role: '3d',     profileImage: '' },
-  { id: 'g-35', studentId: '2022002005', name: '이름 입력', tab: 'video',      role: '3d',     profileImage: '' },
-  { id: 'g-36', studentId: '2022002006', name: '이름 입력', tab: 'video',      role: 'ai',     profileImage: '' },
-  { id: 'g-37', studentId: '2022002007', name: '이름 입력', tab: 'video',      role: 'ai',     profileImage: '' },
-
-  // ── 팀프로젝트 (3명 · 대표 리드만 graduates에 등록) ──
-  { id: 'g-38', studentId: '2022003001', name: '이름 입력', tab: 'team',       role: 'u300',   profileImage: '' },
-  { id: 'g-39', studentId: '2022003002', name: '이름 입력', tab: 'team',       role: 'hanium', profileImage: '' },
-  { id: 'g-40', studentId: '2022003003', name: '이름 입력', tab: 'team',       role: 'game',   profileImage: '' },
+  { id: 'g-01', studentId: '202110030', name: '강태구', tab: 'video', role: 'producer', jobTitle: '영상 기획자', profileImage: '/images/graduates/202110030_강태구_프로필.png' },
+  { id: 'g-02', studentId: '202311138', name: '김가영', tab: 'video', role: 'motion', jobTitle: '모션그래퍼 · 광고 영상 편집', profileImage: '/images/graduates/202311138_김가영_프로필.png' },
+  { id: 'g-03', studentId: '202110120', name: '김남준', tab: 'video', role: 'director', jobTitle: '영상 기획 및 연출 PD', profileImage: '/images/graduates/202110120_김남준_프로필.png' },
+  { id: 'g-04', studentId: '202110206', name: '김성민', tab: 'video', role: 'producer', jobTitle: '영상 기획 및 제작', profileImage: '/images/graduates/202110206_김성민_프로필.png' },
+  { id: 'g-05', studentId: '202210246', name: '김성수', tab: 'multimedia', role: 'pm', roles: ['pm', 'dev'], jobTitle: '기획 · 개발', profileImage: '/images/graduates/202210246_김성수_프로필.png' },
+  { id: 'g-06', studentId: '202311148', name: '김지현', tab: 'video', role: 'motion', jobTitle: '모션그래픽 · 영상 편집', profileImage: '/images/graduates/202311148_김지현_프로필.png' },
+  { id: 'g-07', studentId: '202311153', name: '박다인', tab: 'multimedia', role: 'design', jobTitle: '디자이너', profileImage: '/images/graduates/202311153_박다인_프로필.png' },
+  { id: 'g-08', studentId: '202311155', name: '박소희', tab: 'video', role: 'motion', jobTitle: '모션그래픽 · 광고 영상 편집', profileImage: '/images/graduates/202311155_박소희_프로필.png' },
+  { id: 'g-09', studentId: '202110584', name: '박재민', tab: 'video', role: 'producer', jobTitle: '영상 기획 · 편집', profileImage: '/images/graduates/202110584_박재민_프로필.png' },
+  { id: 'g-10', studentId: '202110598', name: '박주원', tab: 'multimedia', role: 'pm', jobTitle: 'UX/UI 기획자', profileImage: '/images/graduates/202110598_박주원_프로필.png' },
+  { id: 'g-11', studentId: '202311158', name: '박희원', tab: 'multimedia', role: 'pm', jobTitle: '기획자', profileImage: '/images/graduates/202311158_박희원_프로필.png' },
+  { id: 'g-12', studentId: 'TBD-01', name: '배은경', tab: 'video', role: 'producer', jobTitle: '기획', profileImage: '' },
+  { id: 'g-13', studentId: '202110667', name: '변대섭', tab: 'multimedia', role: 'design', jobTitle: '디자이너', profileImage: '/images/graduates/202110667_변대섭_프로필.png' },
+  { id: 'g-14', studentId: '202311159', name: '변재영', tab: 'multimedia', role: 'design', jobTitle: 'UX·UI 디자인', profileImage: '/images/graduates/202311159_변재영_프로필.png' },
+  { id: 'g-15', studentId: '202110748', name: '신권철', tab: 'video', role: 'concept', jobTitle: '영상제작', profileImage: '/images/graduates/202110748_신권철_프로필.png' },
+  { id: 'g-16', studentId: '202110753', name: '신상호', tab: 'video', role: 'producer', jobTitle: '영상기획', profileImage: '/images/graduates/202110753_신상호_프로필.png' },
+  { id: 'g-17', studentId: '202311164', name: '신현아', tab: 'multimedia', role: 'design', jobTitle: '디자이너', profileImage: '/images/graduates/202311164_신현아_프로필.png' },
+  { id: 'g-18', studentId: '202110786', name: '심규현', tab: 'video', role: 'producer', jobTitle: '영상콘텐츠기획', profileImage: '/images/graduates/202110786_심규현_프로필.png' },
+  { id: 'g-19', studentId: '202311165', name: '안세연', tab: 'video', role: 'producer', jobTitle: '영상 기획자', profileImage: '/images/graduates/202311165_안세연_프로필.png' },
+  { id: 'g-20', studentId: '202311168', name: '연수현', tab: 'video', role: 'producer', jobTitle: '영상 기획', profileImage: '/images/graduates/202311168_연수현_프로필.png' },
+  { id: 'g-21', studentId: '202210950', name: '우나경', tab: 'video', role: 'producer', jobTitle: '영상 기획', profileImage: '/images/graduates/202210950_우나경_프로필.png' },
+  { id: 'g-22', studentId: '202010966', name: '유성원', tab: 'multimedia', role: 'pm', jobTitle: '기획자', profileImage: '/images/graduates/202010966_유성원_프로필.png' },
+  { id: 'g-23', studentId: '202311170', name: '유세연', tab: 'multimedia', role: 'design', jobTitle: '디자이너', profileImage: '/images/graduates/202311170_유세연_프로필.png' },
+  { id: 'g-24', studentId: '202311171', name: '육근원', tab: 'video', role: 'producer', jobTitle: '영상 기획 · 제작', profileImage: '/images/graduates/202311171_육근원_프로필.png' },
+  { id: 'g-25', studentId: '202311173', name: '윤예원', tab: 'video', role: 'producer', jobTitle: '영상 기획', profileImage: '/images/graduates/202311173_윤예원_프로필.png' },
+  { id: 'g-26', studentId: '202110979', name: '이경현', tab: 'video', role: 'producer', jobTitle: '콘텐츠 기획', profileImage: '/images/graduates/202110979_이경현_프로필.png' },
+  { id: 'g-27', studentId: '202311177', name: '이서영', tab: 'multimedia', role: 'pm', jobTitle: '기획자', profileImage: '/images/graduates/202311177_이서영_프로필.png' },
+  { id: 'g-28', studentId: '202111042', name: '이세현', tab: 'video', role: 'producer', jobTitle: '영상 기획 · 제작자', profileImage: '/images/graduates/202111042_이세현_프로필.png' },
+  { id: 'g-29', studentId: '202211227', name: '이지은', tab: 'video', role: 'producer', jobTitle: '콘텐츠 기획', profileImage: '/images/graduates/202211227_이지은_프로필.png' },
+  { id: 'g-30', studentId: '202311186', name: '장초빈', tab: 'video', role: 'producer', jobTitle: '영상 기획', profileImage: '/images/graduates/202311186_장초빈_프로필.png' },
+  { id: 'g-31', studentId: '202211414', name: '정소희', tab: 'multimedia', role: 'pm', jobTitle: '기획자', profileImage: '/images/graduates/202211414_정소희_프로필.png' },
+  { id: 'g-32', studentId: '202111439', name: '조찬혁', tab: 'video', role: 'producer', jobTitle: '콘텐츠 기획', profileImage: '/images/graduates/202111439_조찬혁_프로필.png' },
+  { id: 'g-33', studentId: '202311189', name: '채미영', tab: 'video', role: 'producer', jobTitle: '영상기획자', profileImage: '/images/graduates/202311189_채미영_프로필.png' },
+  { id: 'g-34', studentId: '202111492', name: '최명근', tab: 'multimedia', role: 'pm', jobTitle: '기획자', profileImage: '/images/graduates/202111492_최명근_프로필.png' },
+  { id: 'g-35', studentId: 'TBD-02', name: '최정후', tab: 'video', role: 'director', jobTitle: 'AI 영상 기획 · 연출', profileImage: '' },
+  { id: 'g-36', studentId: '202011639', name: '최준영', tab: 'multimedia', role: 'pm', jobTitle: '브랜드 마케터', profileImage: '/images/graduates/202011639_최준영_프로필.png' },
+  { id: 'g-37', studentId: '202311196', name: '최지희', tab: 'video', role: 'producer', jobTitle: '영상기획자', profileImage: '/images/graduates/202311196_최지희_프로필.png' },
+  { id: 'g-38', studentId: '202311198', name: '한지연', tab: 'multimedia', role: 'pm', jobTitle: '기획자', profileImage: '/images/graduates/202311198_한지연_프로필.png' },
+  { id: 'g-39', studentId: '202311199', name: '한태희', tab: 'video', role: 'director', jobTitle: '영상 기획 · 촬영', profileImage: '/images/graduates/202311199_한태희_프로필.png' },
+  { id: 'g-40', studentId: '202211755', name: 'Botirov Asadbek', tab: 'multimedia', role: 'design', jobTitle: 'UX/UI Product', profileImage: '/images/graduates/202211755_Botirov_Asadbek_프로필.png' },
+  // { id: 'g-41', studentId: '202111122', name: '이재상', tab: 'video', role: '', jobTitle: '', profileImage: '/images/graduates/202111122_이재상_프로필.png' },
+  // { id: 'g-42', studentId: '202311179', name: '이종원', tab: 'video', role: '', jobTitle: '', profileImage: '/images/graduates/202311179_이종원_프로필.png' },
 ];
 
-// studentId 기준 빠른 조회용 맵 (ProjectPage에서 작품-학생 이름 연결에 사용)
 export const graduateByStudentId = Object.fromEntries(
   graduates.map((g) => [g.studentId, g])
 );

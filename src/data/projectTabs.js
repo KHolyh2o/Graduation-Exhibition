@@ -14,9 +14,10 @@ export const PROJECT_TABS = [
     id: 'video',
     label: '영상미디어',
     roles: [
-      { id: '2d', label: '2D 제품 홍보', icon: '🎬' },
-      { id: '3d', label: '3D',           icon: '🧊' },
-      { id: 'ai', label: 'AI 기획',      icon: '🤖' },
+      { id: 'producer', label: 'Video Producer',          icon: '🎬' },
+      { id: 'motion',   label: 'Motion Graphics Designer', icon: '✨' },
+      { id: 'director', label: 'Film Director',            icon: '🎥' },
+      { id: 'concept',  label: 'Character Concept Artist', icon: '🎨' },
     ],
   },
   {
