@@ -5,19 +5,18 @@ export const PROJECT_TABS = [
     id: 'multimedia',
     label: '멀티미디어',
     roles: [
-      { id: 'pm',     label: 'Product Manager', icon: '📋' },
-      { id: 'dev',    label: 'Developer',        icon: '💻' },
-      { id: 'design', label: 'Designer',         icon: '🎨' },
+      { id: 'pm',     label: '기획자',   icon: '📋' },
+      { id: 'dev',    label: '개발',     icon: '💻' },
+      { id: 'design', label: '디자이너', icon: '🎨' },
     ],
   },
   {
     id: 'video',
     label: '영상미디어',
     roles: [
-      { id: 'producer', label: 'Video Producer',          icon: '🎬' },
-      { id: 'motion',   label: 'Motion Graphics Designer', icon: '✨' },
-      { id: 'director', label: 'Film Director',            icon: '🎥' },
-      { id: 'concept',  label: 'Character Concept Artist', icon: '🎨' },
+      { id: 'producer', label: '영상 기획',   icon: '🎬' },
+      { id: 'motion',   label: '모션그래픽',  icon: '✨' },
+      { id: 'director', label: '연출 · 제작', icon: '🎥' },
     ],
   },
   {

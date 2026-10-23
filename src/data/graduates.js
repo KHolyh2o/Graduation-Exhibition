@@ -13,7 +13,7 @@ export const graduates = [
   { id: 'g-12', studentId: 'TBD-01', name: '배은경', tab: 'video', role: 'producer', jobTitle: '기획', profileImage: '' },
   { id: 'g-13', studentId: '202110667', name: '변대섭', tab: 'multimedia', role: 'design', jobTitle: '디자이너', profileImage: '/images/graduates/202110667_변대섭_프로필.png' },
   { id: 'g-14', studentId: '202311159', name: '변재영', tab: 'multimedia', role: 'design', jobTitle: 'UX·UI 디자인', profileImage: '/images/graduates/202311159_변재영_프로필.png' },
-  { id: 'g-15', studentId: '202110748', name: '신권철', tab: 'video', role: 'concept', jobTitle: '영상제작', profileImage: '/images/graduates/202110748_신권철_프로필.png' },
+  { id: 'g-15', studentId: '202110748', name: '신권철', tab: 'video', role: 'director', jobTitle: '영상제작', profileImage: '/images/graduates/202110748_신권철_프로필.png' },
   { id: 'g-16', studentId: '202110753', name: '신상호', tab: 'video', role: 'producer', jobTitle: '영상기획', profileImage: '/images/graduates/202110753_신상호_프로필.png' },
   { id: 'g-17', studentId: '202311164', name: '신현아', tab: 'multimedia', role: 'design', jobTitle: '디자이너', profileImage: '/images/graduates/202311164_신현아_프로필.png' },
   { id: 'g-18', studentId: '202110786', name: '심규현', tab: 'video', role: 'producer', jobTitle: '영상콘텐츠기획', profileImage: '/images/graduates/202110786_심규현_프로필.png' },

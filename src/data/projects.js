@@ -370,7 +370,7 @@ export const projects = [
     contact: { email: 'email@seowon.ac.kr', phone: null },
   },
   {
-    id: 'p-vd-director-02', studentId: 'TBD-02',
+    id: 'p-vd-director-02', studentId: '202110748',
     tab: 'video', role: 'director',
     title: '작품명 입력',
     thumbnail: '',
@@ -380,7 +380,7 @@ export const projects = [
     contact: { email: 'email@seowon.ac.kr', phone: null },
   },
   {
-    id: 'p-vd-director-03', studentId: '202311199',
+    id: 'p-vd-director-03', studentId: 'TBD-02',
     tab: 'video', role: 'director',
     title: '작품명 입력',
     thumbnail: '',
@@ -390,8 +390,8 @@ export const projects = [
     contact: { email: 'email@seowon.ac.kr', phone: null },
   },
   {
-    id: 'p-vd-concept-01', studentId: '202110748',
-    tab: 'video', role: 'concept',
+    id: 'p-vd-director-04', studentId: '202311199',
+    tab: 'video', role: 'director',
     title: '작품명 입력',
     thumbnail: '',
     description: '작품 설명을 입력하세요.',
