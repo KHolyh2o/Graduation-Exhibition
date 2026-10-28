@@ -1,0 +1,421 @@
+
+/* ==========================================
+   COMMON HEADER / FOOTER
+========================================== */
+
+.common-header *,
+.common-footer * {
+  box-sizing: border-box;
+}
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.common-header {
+  width: 100%;
+  position: relative;
+  z-index: 100;
+  background: #fff;
+  color: #161616;
+}
+
+.common-header-inner {
+  width: calc(100% - 40px);
+  max-width: 1024px;
+  height: 62px;
+  margin: 0 auto;
+  padding-top: 8px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+/* 로고 영역 */
+.common-brand {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  min-height: 41px;
+
+  color: inherit;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.common-logo {
+  display: block;
+  width: 75px;
+  height: 41px;
+  overflow: hidden;
+}
+
+.common-logo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.common-brand-text {
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.23;
+  letter-spacing: -0.055em;
+  white-space: nowrap;
+}
+
+/* 내비게이션 */
+.common-nav {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  height: 32px;
+}
+
+.common-nav a {
+  font-size: 12px;
+  font-weight: 500;
+  color: #161616;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+
+.common-nav a:hover,
+.common-nav a.is-active {
+  color: #008dc1;
+}
+
+/* 검색 버튼 */
+.common-search-toggle {
+  width: 22px;
+  height: 24px;
+  padding: 0;
+
+  display: grid;
+  place-items: center;
+
+  border: none;
+  background: transparent;
+  color: #161616;
+  cursor: pointer;
+}
+
+.common-search-toggle svg {
+  width: 18px;
+  height: 18px;
+
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+}
+
+/* 검색창 */
+.common-search-panel {
+  width: calc(100% - 32px);
+  max-width: 1024px;
+
+  position: absolute;
+  top: 62px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 12px 18px;
+  border: 1px solid #ddd;
+  background: #fff;
+  box-shadow: 0 8px 18px rgb(0 0 0 / 8%);
+}
+
+.common-search-panel[hidden] {
+  display: none !important;
+}
+
+.common-search-panel input {
+  width: 100%;
+  min-width: 0;
+  padding: 6px 0;
+
+  border: none;
+  outline: none;
+  background: transparent;
+
+  font-size: 15px;
+}
+
+.common-search-close {
+  border: none;
+  background: transparent;
+  color: #111;
+
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.common-search-toggle:focus-visible,
+.common-search-close:focus-visible,
+.common-nav a:focus-visible {
+  outline: 2px solid #008dc1;
+  outline-offset: 4px;
+}
+
+
+/* ==========================================
+   FOOTER
+========================================== */
+
+/* 작품 영역과 푸터 사이 여백 */
+#common-footer {
+  margin-top: 114px;
+}
+
+/* 푸터 전체 */
+.common-footer {
+  width: 100%;
+  min-height: 204px;
+  padding: 42px 0 24px;
+
+  background: #111;
+  color: #ededed;
+}
+
+/* 푸터 내부
+   왼쪽 8% / 오른쪽 84% 위치 */
+.common-footer-inner {
+  width: 76%;
+  margin-left: 8%;
+  margin-right: 0;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 30px;
+}
+
+/* 공통 텍스트 */
+.common-footer p {
+  margin: 0 0 5px;
+
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.58;
+  color: #ededed;
+}
+
+/* 왼쪽 정보 */
+.common-footer-left {
+  text-align: left;
+}
+
+.common-footer-copyright {
+  margin-top: 9px !important;
+}
+
+/* 오른쪽 정보 */
+.common-footer-right {
+  margin-left: auto;
+  text-align: right;
+}
+
+/* SNS 이미지 영역 */
+.common-footer-sns {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 9px;
+  margin-top: 11px;
+}
+
+.common-sns-link {
+  display: block;
+  width: 32px;
+  height: 32px;
+  text-decoration: none;
+}
+
+.common-sns-icon {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.common-sns-icon img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.common-sns-link:hover {
+  opacity: 0.65;
+}
+
+.common-sns-link:not([href]) {
+  cursor: default;
+}
+
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 760px) {
+
+  /* 헤더 */
+  .common-header-inner {
+    height: auto;
+    min-height: 70px;
+    align-items: center;
+    flex-wrap: wrap;
+    row-gap: 12px;
+
+    padding-top: 12px;
+    padding-bottom: 10px;
+  }
+
+  .common-nav {
+    gap: 13px;
+  }
+
+  .common-nav a {
+    font-size: 11px;
+  }
+
+  .common-search-panel {
+    top: 70px;
+  }
+
+  /* 푸터 */
+  #common-footer {
+    margin-top: 85px;
+  }
+}
+
+@media (max-width: 470px) {
+
+  /* 헤더 */
+  .common-header-inner {
+    align-items: flex-start;
+  }
+
+  .common-brand {
+    width: 100%;
+  }
+
+  .common-logo {
+    width: 65px;
+  }
+
+  .common-brand-text {
+    font-size: 9px;
+  }
+
+  .common-nav {
+    width: 100%;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .common-nav a {
+    font-size: 11px;
+  }
+
+  .common-search-panel {
+    top: 105px;
+  }
+
+  /* 푸터 */
+  .common-footer {
+    min-height: 0;
+    padding: 28px 0 30px;
+  }
+
+  .common-footer-inner {
+    width: calc(100% - 40px);
+    margin: 0 20px;
+
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  .common-footer p {
+    font-size: 11px;
+  }
+
+  .common-footer-right {
+    margin-left: 0;
+    text-align: left;
+  }
+
+  .common-footer-sns {
+    justify-content: flex-start;
+  }
+}
+
+
+
+/* ==========================================
+   COMMON HEADER / FOOTER - 1160px
+========================================== */
+
+/* 헤더 */
+.common-header-inner {
+  width: calc(100% - 40px);
+  max-width: 1160px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 검색창 */
+.common-search-panel {
+  width: calc(100% - 40px);
+  max-width: 1160px;
+}
+
+/* 푸터 */
+.common-footer-inner {
+  width: calc(100% - 40px);
+  max-width: 1160px;
+
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 30px;
+}
+
+/* 푸터 좌측 */
+.common-footer-left {
+  margin: 0;
+  text-align: left;
+}
+
+/* 푸터 우측 */
+.common-footer-right {
+  margin: 0;
+  text-align: right;
+}
+
+/* 모바일 */
+@media (max-width: 768px) {
+  .common-footer-inner {
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  .common-footer-right {
+    text-align: left;
+  }
+}

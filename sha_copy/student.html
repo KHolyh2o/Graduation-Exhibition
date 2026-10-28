@@ -1,0 +1,149 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio | 2026 Graduation Exhibition</title>
+
+  <link rel="stylesheet" href="css/student.css">
+    <!-- 공통 헤더 / 푸터 CSS -->
+  <link rel="stylesheet" href="css/common.css" />
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- 공통 헤더 / 푸터 JS -->
+  <script src="js/common.js" defer></script>
+
+
+  <script src="js/student.js" defer></script>
+</head>
+
+<body>
+  <div id="common-header"></div>
+  <main id="top">
+
+    <!-- 페이지 타이틀 -->
+    <section class="page-title">
+      <h1>Profile</h1>
+      <p>2026 Seowon University Graduates</p>
+<span id="peopleCount">40 People</span>    </section>
+
+    <!-- 학생 소개 -->
+    <section class="portfolio-section">
+
+      <!-- 카테고리 탭 -->
+      <div class="category-tabs" role="tablist" aria-label="학생 분류">
+
+        <button
+          type="button"
+          class="tab active"
+          id="tab-all"
+          data-filter="all"
+          role="tab"
+          aria-selected="true"
+        >
+          전체
+        </button>
+
+        <button
+          type="button"
+          class="tab"
+          id="tab-multimedia"
+          data-filter="multimedia"
+          role="tab"
+          aria-selected="false"
+        >
+          멀티미디어
+        </button>
+
+        <button
+          type="button"
+          class="tab"
+          id="tab-video"
+          data-filter="video"
+          role="tab"
+          aria-selected="false"
+        >
+          영상미디어
+        </button>
+
+        <button
+          type="button"
+          class="tab"
+          id="tab-committee"
+          data-filter="committee"
+          role="tab"
+          aria-selected="false"
+        >
+          졸업전시위원회
+        </button>
+
+      </div>
+
+      <!-- 학생 카드 자동 생성 영역 -->
+      <div
+        class="student-panel"
+        id="studentPanel"
+        role="tabpanel"
+        aria-labelledby="tab-all"
+      >
+        <div class="student-grid" id="studentGrid"></div>
+
+        <p id="emptyState" class="empty-state" hidden>
+          검색 결과가 없습니다.
+        </p>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- 맨 위로 이동 -->
+  <button
+    class="top-button"
+    id="topButton"
+    type="button"
+    aria-label="맨 위로 이동"
+  >
+    ↑
+  </button>
+ <div id="common-footer"></div>
+ 
+<!-- ==============================
+     STUDENT DETAIL POPUP
+============================== -->
+
+<div
+  id="graduateModal"
+  class="graduate-modal"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="modalStudentName"
+  hidden
+>
+  <div class="graduate-modal-inner">
+
+    <!-- 닫기 버튼 -->
+    <button
+      type="button"
+      class="graduate-modal-close"
+      id="modalClose"
+      aria-label="팝업 닫기"
+    >
+      <span></span>
+      <span></span>
+    </button>
+
+    <!-- 상단 로고 이미지 영역 -->
+    <div class="graduate-modal-logo" id="modalLogo">
+    </div>
+
+    <!-- 학생별 상세 데이터 자동 출력 -->
+    <div id="modalContent"></div>
+
+  </div>
+</div>
+
+</body>
+</html>

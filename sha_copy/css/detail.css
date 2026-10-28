@@ -1,0 +1,311 @@
+
+/* ==========================================
+   WORK DETAIL
+   전체 최대 너비 1160px
+========================================== */
+
+.work-detail-page {
+  width: calc(100% - 40px);
+  max-width: 1160px;
+  margin: 0 auto;
+  padding-top: 20px;
+}
+
+/* 뒤로가기 */
+.work-detail-back {
+  display: inline-block;
+  margin-bottom: 30px;
+
+  color: #222;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.work-detail-back:hover {
+  color: #e52d42;
+}
+
+/* 전체 2열 구조 */
+.work-detail-layout {
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  gap: 36px;
+  align-items: start;
+}
+
+
+/* ==========================================
+   LEFT - STUDENT PROFILE
+========================================== */
+
+.student-sidebar {
+  min-width: 0;
+  padding-top: 12px;
+}
+
+/* 학생 사진 */
+.student-profile-photo {
+  width: 112px;
+  height: 122px;
+  margin: 0 auto 16px;
+
+  background: #dedede;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.student-profile-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 이름 */
+.student-name {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.student-name strong {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.student-name span {
+  font-size: 15px;
+  color: #888;
+}
+
+/* 담당 분야 */
+.student-role {
+  margin: 0 0 12px;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* 자기소개 */
+.student-description {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.65;
+  letter-spacing: -0.035em;
+  white-space: pre-line;
+  overflow-wrap: break-word;
+}
+
+
+/* ==========================================
+   OTHER PROJECT
+========================================== */
+
+.other-projects {
+  margin-top: 38px;
+}
+
+.other-projects h2 {
+  margin: 0 0 16px;
+  text-align: right;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+/* 링크 목록 */
+.other-project-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: stretch;
+}
+
+/* 각 작품 링크 */
+.other-project-link {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+
+  font-size: 16px;
+  color: #333;
+  text-align: right;
+  text-decoration: none;
+
+  transition: color 0.2s ease;
+}
+
+.other-project-link:hover {
+  color: #e52d42;
+}
+
+.other-project-arrow {
+  font-size: 22px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.other-project-empty {
+  text-align: right;
+  color: #888;
+  font-size: 13px;
+}
+
+
+/* ==========================================
+   RIGHT - PROJECT MEDIA
+========================================== */
+
+.detail-work-content {
+  width: 100%;
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* 상단 영상 / 이미지 */
+.detail-main-media {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+
+  background: #dedede;
+  overflow: hidden;
+}
+
+/* 영상과 이미지 공통 */
+.detail-main-media img,
+.detail-main-media video,
+.detail-main-media iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: none;
+  object-fit: contain;
+}
+
+/* 하단 세로형 작품 이미지 */
+.detail-poster {
+  width: 100%;
+  aspect-ratio: 0.46;
+  background: #dedede;
+  overflow: hidden;
+}
+
+/* 이미지가 들어오면 원본 세로 비율 사용 */
+.detail-poster.has-image {
+  aspect-ratio: auto;
+  background: transparent;
+  overflow: visible;
+}
+
+.detail-poster img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* 이미지가 아직 없는 경우 */
+.detail-main-media.is-empty,
+.detail-poster.is-empty {
+  background: #dedede;
+}
+
+
+/* ==========================================
+   TOP BUTTON
+========================================== */
+
+.detail-top-button {
+  position: fixed;
+  right: 30px;
+  bottom: 35px;
+  z-index: 20;
+
+  width: 46px;
+  height: 46px;
+
+  border: 1px solid #eee;
+  border-radius: 50%;
+
+  background: #fff;
+  color: #111;
+
+  font-size: 28px;
+  line-height: 1;
+
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 12%);
+}
+
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 900px) {
+
+  .work-detail-layout {
+    grid-template-columns: 240px minmax(0, 1fr);
+    gap: 24px;
+  }
+
+  .student-description {
+    font-size: 13px;
+  }
+
+  .other-project-link {
+    font-size: 14px;
+  }
+
+}
+
+@media (max-width: 650px) {
+
+  .work-detail-page {
+    padding-top: 15px;
+  }
+
+  /* 모바일에서는 세로 배치 */
+  .work-detail-layout {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+
+  .student-sidebar {
+    padding-top: 0;
+  }
+
+  .student-description {
+    max-width: 480px;
+    margin: 0 auto;
+    font-size: 14px;
+  }
+
+  .other-projects {
+    max-width: 480px;
+    margin: 30px auto 0;
+  }
+
+  .detail-work-content {
+    gap: 14px;
+  }
+
+  .detail-top-button {
+    width: 42px;
+    height: 42px;
+    right: 18px;
+    bottom: 20px;
+  }
+
+}
+
+/* 공통 푸터 여백 */
+#common-footer {
+  margin-top: 100px;
+}

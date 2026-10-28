@@ -1,0 +1,994 @@
+
+/* =========================
+   BASIC
+========================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  color: var(--text);
+  background: #fff;
+  font-family: "DM Sans", "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+
+/* =========================
+   PAGE TITLE
+========================= */
+
+.page-title {
+  text-align: center;
+  padding: 54px 20px 48px;
+}
+
+
+.page-title h1 {
+  margin: 0 0 8px;
+  font-family: 'Playfair Display', serif;
+  font-size: 76px;
+  font-weight: 700;
+  letter-spacing: 0px;
+  line-height: 1.15;
+}
+
+
+.page-title p {
+  margin: 0 0 7px;
+  font-size: 15px;
+  color: #999;
+}
+
+.page-title span {
+  display: block;
+  font-size: 14px;
+  color: #999;
+}
+
+
+/* =========================
+   PORTFOLIO SECTION
+========================= */
+
+.portfolio-section {
+  max-width: 1160px;
+  width: calc(100% - 60px);
+  margin: 0 auto;
+  padding-bottom: 160px;
+}
+
+
+/* =========================
+   CATEGORY TABS
+========================= */
+
+.category-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  margin-bottom: 48px;
+  border-bottom: 1px solid #d6d6d6;
+}
+
+.tab {
+  height: 48px;
+  margin-bottom: -1px;
+
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+
+  color: #aaa;
+  font-size: 14px;
+  font-weight: 400;
+
+  transition: color 0.2s ease;
+}
+
+.tab:hover {
+  color: #333;
+}
+
+.tab.active {
+  color: #008fca;
+  border-bottom-color: #008fca;
+  font-weight: 500;
+}
+
+
+/* =========================
+   STUDENT GRID
+========================= */
+
+.student-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  column-gap: 30px;
+  row-gap: 38px;
+}
+
+
+/* =========================
+   STUDENT CARD
+========================= */
+
+.student-card {
+  display: block;
+  min-width: 0;
+  color: inherit;
+  text-decoration: none;
+}
+
+
+/* 학생 이미지 영역 - 3:4 고정 */
+
+.student-photo {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+
+  background: #d3d3d3;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+/* 실제 학생 이미지 */
+
+.student-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 이미지가 없을 때 표시되는 영역 */
+
+.photo-placeholder {
+  width: 100%;
+  height: 100%;
+  background: #d3d3d3;
+}
+
+
+/* =========================
+   STUDENT INFORMATION
+========================= */
+
+.student-info {
+  padding-top: 12px;
+}
+
+.student-name {
+  margin: 0;
+
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: -0.3px;
+}
+
+.student-english {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+
+
+/* 카드 호버 */
+
+a.student-card .student-photo {
+  transition: opacity 0.2s ease;
+}
+
+a.student-card:hover .student-photo {
+  opacity: 0.8;
+}
+
+a.student-card:hover .student-name {
+  color: #008fca;
+}
+
+
+/* 검색 결과 없음 */
+
+.empty-state {
+  text-align: center;
+  padding: 80px 0;
+
+  color: #999;
+  font-size: 14px;
+}
+
+.empty-state[hidden] {
+  display: none;
+}
+
+
+/* =========================
+   TOP BUTTON
+========================= */
+
+.top-button {
+  position: fixed;
+  right: 30px;
+  bottom: 45px;
+  z-index: 100;
+
+  width: 42px;
+  height: 42px;
+
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 50%;
+
+  font-family: Arial, sans-serif;
+  font-size: 24px;
+  font-weight: 300;
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+
+  transition: 0.25s ease;
+}
+
+.top-button.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.top-button:hover {
+  background: #f7f7f7;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 1000px) {
+
+  .student-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 32px 24px;
+  }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+  .page-title {
+    padding: 55px 15px 38px;
+  }
+
+  .page-title h1 {
+    font-size: 46px;
+  }
+
+  .page-title p,
+  .page-title span {
+    font-size: 12px;
+  }
+
+  .portfolio-section {
+    width: calc(100% - 32px);
+    padding-bottom: 100px;
+  }
+
+  /* 모바일 탭 가로 스크롤 */
+
+  .category-tabs {
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: none;
+    margin-bottom: 30px;
+  }
+
+  .category-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tab {
+    flex: 0 0 auto;
+    min-width: 110px;
+    padding: 0 14px;
+
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  /* 모바일 학생 2열 */
+
+  .student-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 14px;
+    row-gap: 28px;
+  }
+
+  .student-info {
+    padding-top: 9px;
+  }
+
+  .student-name {
+    font-size: 14px;
+  }
+
+  .student-english {
+    font-size: 11px;
+  }
+
+  .student-email {
+    font-size: 10px;
+  }
+
+  .top-button {
+    right: 16px;
+    bottom: 22px;
+  }
+
+}
+
+/* =================================
+   STUDENT CARD CLICK
+================================= */
+
+button.student-card {
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: transparent;
+  text-align: left;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+button.student-card .student-photo {
+  transition: opacity 0.2s ease;
+}
+
+button.student-card:hover .student-photo {
+  opacity: 0.8;
+}
+
+button.student-card:hover .student-name {
+  color: #008fca;
+}
+
+button.student-card:focus-visible {
+  outline: 2px solid #008fca;
+  outline-offset: 5px;
+}
+
+
+/* =================================
+   POPUP BASE
+================================= */
+
+body.graduate-modal-open {
+  overflow: hidden;
+}
+
+.graduate-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
+
+  background: #fafafa;
+
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.graduate-modal[hidden] {
+  display: none;
+}
+
+.graduate-modal-inner {
+  position: relative;
+
+  max-width: 1220px;
+  width: calc(100% - 56px);
+
+  margin: 0 auto;
+  padding: 30px 40px 70px;
+}
+
+
+/* =================================
+   CLOSE BUTTON
+================================= */
+
+.graduate-modal-close {
+  position: fixed;
+  top: 28px;
+  right: 30px;
+  z-index: 10001;
+
+  width: 38px;
+  height: 38px;
+
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.graduate-modal-close span {
+  position: absolute;
+  top: 18px;
+  left: 3px;
+
+  width: 32px;
+  height: 2px;
+
+  background: #aaa;
+  transition: background 0.2s ease;
+}
+
+.graduate-modal-close span:first-child {
+  transform: rotate(45deg);
+}
+
+.graduate-modal-close span:last-child {
+  transform: rotate(-45deg);
+}
+
+.graduate-modal-close:hover span {
+  background: #111;
+}
+
+
+/* =================================
+   TOP LOGO IMAGE
+================================= */
+
+.graduate-modal-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 190px;
+  height: 70px;
+
+  margin: 0 auto 22px;
+}
+
+.graduate-modal-logo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* 로고 이미지가 없을 때 */
+
+.graduate-logo-placeholder {
+  width: 100%;
+  height: 100%;
+
+  background: #f2f2f2;
+  border: 1px dashed #ccc;
+}
+
+
+/* =================================
+   STUDENT PROFILE
+================================= */
+
+.graduate-profile {
+  display: grid;
+  grid-template-columns: 170px minmax(0, 1fr);
+
+  gap: 34px;
+  align-items: center;
+}
+
+/* 학생 프로필 이미지 3:4 */
+
+.graduate-profile-photo {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+
+  overflow: hidden;
+  background: #d3d3d3;
+}
+
+.graduate-profile-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.graduate-profile-photo-placeholder {
+  width: 100%;
+  height: 100%;
+  background: #d3d3d3;
+}
+
+
+/* =================================
+   PROFILE TEXT
+================================= */
+
+.graduate-profile-info {
+  min-width: 0;
+}
+
+.graduate-name-line {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  column-gap: 14px;
+  row-gap: 4px;
+
+  margin-bottom: 4px;
+}
+
+.graduate-name {
+  margin: 0;
+
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: -1px;
+  line-height: 1.3;
+}
+
+.graduate-english-name {
+  font-size: 24px;
+  color: #888;
+  letter-spacing: -0.7px;
+}
+
+.graduate-job {
+  margin: 0 0 18px;
+
+  font-size: 22px;
+  font-weight: 400;
+  color: #333;
+}
+
+.graduate-introduction {
+  margin: 0 0 22px;
+
+  font-size: 17px;
+  line-height: 1.65;
+  color: #555;
+  word-break: keep-all;
+  white-space: pre-line;
+}
+
+
+/* =================================
+   CONTACT INFORMATION
+================================= */
+
+.graduate-contact {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+  column-gap: 36px;
+  row-gap: 14px;
+}
+
+.graduate-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.graduate-contact-item a,
+.graduate-contact-item .contact-text {
+  font-size: 16px;
+  color: #111;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.graduate-contact-item a:hover {
+  color: #008fca;
+}
+
+/* 전화 / 이메일 이미지 공간 */
+
+.graduate-contact-icon {
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+}
+
+.graduate-contact-icon img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.graduate-icon-placeholder {
+  width: 100%;
+  height: 100%;
+
+  border: 1px dashed #bbb;
+  background: #e8f6fa;
+}
+
+
+/* =================================
+   PROJECT SECTION
+================================= */
+
+.graduate-project-section {
+  margin-top: 36px;
+}
+
+.graduate-section-title {
+  margin: 0 0 16px;
+
+  font-family: "Pretendard", Arial, sans-serif;
+  font-size: 36px;
+  font-weight: 600;
+  letter-spacing: -1.5px;
+  line-height: 1.2;
+}
+
+/* 프로젝트 4열 */
+
+.graduate-project-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.graduate-project-card {
+  display: block;
+  min-width: 0;
+  color: #111;
+  text-decoration: none;
+}
+
+/* 프로젝트 이미지 16:9 */
+
+.graduate-project-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+
+  overflow: hidden;
+  background: #707070;
+}
+
+.graduate-project-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.graduate-project-placeholder {
+  width: 100%;
+  height: 100%;
+  background: #707070;
+}
+
+/* 프로젝트 제목 */
+
+.graduate-project-name {
+  margin: 10px 0 0;
+
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  word-break: keep-all;
+}
+
+a.graduate-project-card .graduate-project-image {
+  transition: opacity 0.2s;
+}
+
+a.graduate-project-card:hover .graduate-project-image {
+  opacity: 0.8;
+}
+
+
+/* =================================
+   YOUTUBE VIDEO SECTION
+================================= */
+
+.graduate-video-section {
+  margin-top: 42px;
+}
+
+/* 유튜브 영상 16:9 */
+
+.graduate-video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+
+  background: #2992b5;
+  overflow: hidden;
+}
+
+/* 아직 영상이 없을 때 */
+
+.graduate-video-placeholder {
+  width: 100%;
+  height: 100%;
+  background: #2992b5;
+}
+
+/* 영상이 등록되었을 때 */
+
+.graduate-video iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+
+/* =================================
+   TABLET
+================================= */
+
+@media (max-width: 900px) {
+
+  .graduate-modal-inner {
+    width: calc(100% - 40px);
+    padding: 30px 10px 50px;
+  }
+
+  .graduate-profile {
+    grid-template-columns: 150px minmax(0, 1fr);
+    gap: 24px;
+  }
+
+  .graduate-name {
+    font-size: 29px;
+  }
+
+  .graduate-english-name {
+    font-size: 20px;
+  }
+
+  .graduate-job {
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+
+  .graduate-introduction {
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+
+  .graduate-contact {
+    gap: 14px 24px;
+  }
+
+  .graduate-contact-item a,
+  .graduate-contact-item .contact-text {
+    font-size: 13px;
+  }
+
+  .graduate-project-grid {
+    gap: 14px;
+  }
+
+  .graduate-project-name {
+    font-size: 13px;
+  }
+
+}
+
+
+/* =================================
+   MOBILE
+================================= */
+
+@media (max-width: 600px) {
+
+  .graduate-modal-inner {
+    width: calc(100% - 32px);
+    padding: 65px 0 40px;
+  }
+
+  .graduate-modal-close {
+    top: 15px;
+    right: 12px;
+    width: 34px;
+    height: 34px;
+  }
+
+  .graduate-modal-close span {
+    width: 26px;
+  }
+
+  .graduate-modal-logo {
+    width: 140px;
+    height: 54px;
+    margin-bottom: 30px;
+  }
+
+  /* 학생 프로필 세로 배치 */
+
+  .graduate-profile {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .graduate-profile-photo {
+    width: 150px;
+  }
+
+  .graduate-name {
+    font-size: 27px;
+  }
+
+  .graduate-english-name {
+    font-size: 18px;
+  }
+
+  .graduate-job {
+    font-size: 17px;
+    margin-bottom: 15px;
+  }
+
+  .graduate-introduction {
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 22px;
+  }
+
+  .graduate-contact {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .graduate-contact-item {
+    gap: 10px;
+  }
+
+  .graduate-contact-item a,
+  .graduate-contact-item .contact-text {
+    font-size: 13px;
+  }
+
+  .graduate-contact-icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .graduate-project-section {
+    margin-top: 48px;
+  }
+
+  .graduate-section-title {
+    font-size: 29px;
+    margin-bottom: 18px;
+  }
+
+  /* 모바일 프로젝트 2열 */
+
+  .graduate-project-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px 12px;
+  }
+
+  .graduate-project-name {
+    font-size: 12px;
+    margin-top: 8px;
+  }
+
+  .graduate-video-section {
+    margin-top: 35px;
+  }
+
+}
+
+/* ================================
+   POPUP 1280px CENTER
+================================ */
+
+/* 팝업 배경 */
+.graduate-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 100dvh;
+
+  padding: 32px;
+  background: rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+}
+
+.graduate-modal[hidden] {
+  display: none;
+}
+
+/* 팝업 본문 - 최대 1280px */
+.graduate-modal-inner {
+  position: relative;
+
+  width: 100%;
+  max-width: 1280px;
+  max-height: 100%;
+
+  margin: 0;
+  padding: 30px 40px 70px;
+
+  background: #fafafa;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* 닫기 버튼도 팝업 안쪽에 배치 */
+.graduate-modal-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+}
+
+/* 태블릿 */
+@media (max-width: 900px) {
+  .graduate-modal {
+    padding: 20px;
+  }
+
+  .graduate-modal-inner {
+    width: 100%;
+    padding: 30px 24px 50px;
+  }
+}
+
+/* 모바일 */
+@media (max-width: 600px) {
+  .graduate-modal {
+    padding: 0;
+  }
+
+  .graduate-modal-inner {
+    width: 100%;
+    max-height: 100dvh;
+    min-height: 100dvh;
+    padding: 65px 16px 40px;
+  }
+
+  .graduate-modal-close {
+    top: 15px;
+    right: 12px;
+  }
+}

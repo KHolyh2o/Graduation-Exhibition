@@ -1,0 +1,132 @@
+
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>작품 소개 | 2026 졸업전시회</title>
+
+  <!-- 폰트 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- 공통 / 기존 / 상세 스타일 -->
+  <link rel="stylesheet" href="css/projectpage.css">
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/detail.css">
+
+  <!-- 공통 / 기존 작품 데이터 / 상세 기능 -->
+  <script src="js/common.js" defer></script>
+  <script src="js/project.js" defer></script>
+  <script src="js/detail.js" defer></script>
+</head>
+
+<body>
+
+  <!-- 공통 헤더 -->
+  <div id="common-header"></div>
+
+  <main class="work-detail-page">
+
+    <!-- 뒤로가기 -->
+    <a
+      href="project.html"
+      id="detail-back-link"
+      class="work-detail-back"
+    >
+      ← 돌아가기
+    </a>
+
+    <div class="work-detail-layout">
+
+      <!-- ===========================
+           왼쪽: 학생 정보
+      =========================== -->
+      <aside class="student-sidebar">
+
+        <!-- 빨간 영역: 학생 사진 -->
+        <div
+          class="student-profile-photo"
+          id="student-profile-photo"
+        ></div>
+
+        <!-- 학생 이름 -->
+        <div class="student-name">
+          <strong id="student-name-ko">학생명</strong>
+          <span id="student-name-en">Student Name</span>
+        </div>
+
+        <!-- 담당 분야 -->
+        <h2
+          class="student-role"
+          id="student-role"
+        >
+          담당 분야
+        </h2>
+
+        <!-- 자기소개 -->
+        <p
+          class="student-description"
+          id="student-description"
+        ></p>
+
+        <!-- 녹색 영역: 다른 작품 -->
+        <section class="other-projects">
+
+          <h2>Other Project</h2>
+
+          <div
+            class="other-project-list"
+            id="other-project-list"
+          ></div>
+
+        </section>
+
+      </aside>
+
+
+      <!-- ===========================
+           오른쪽: 작품 콘텐츠
+      =========================== -->
+      <article class="detail-work-content">
+
+        <!-- 파란 영역: 영상 / 이미지 -->
+        <div
+          class="detail-main-media"
+          id="detail-main-media"
+          aria-label="작품 대표 영상 또는 이미지"
+        ></div>
+
+        <!-- 빨간 영역: 세로형 작품 이미지 -->
+        <div
+          class="detail-poster"
+          id="detail-poster"
+          aria-label="작품 상세 이미지"
+        ></div>
+
+      </article>
+
+    </div>
+
+  </main>
+
+  <!-- 공통 푸터 -->
+  <div id="common-footer"></div>
+
+  <!-- 맨 위로 이동 -->
+  <button
+    type="button"
+    class="detail-top-button"
+    id="detail-top-button"
+    aria-label="맨 위로 이동"
+  >
+    ↑
+  </button>
+
+</body>
+</html>

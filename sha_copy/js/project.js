@@ -1,256 +1,550 @@
-// 데이터는 진짜 프로젝트(../src/data)에서 그대로 가져옵니다.
-import { PROJECT_TABS, getSubCategories } from '../../src/data/projectTabs.js';
-import { projects } from '../../src/data/projects.js';
-import { teamProjects } from '../../src/data/teamProjects.js';
-import { graduateByStudentId } from '../../src/data/graduates.js';
 
-const FALLBACK_IMAGE = '/sha_copy/images/no-image.svg';
+"use strict";
 
-// src/data 안 이미지 경로('/images/...')에 'sha_copy/images'(진짜 public/images로
-// 연결된 심볼릭 링크)를 앞에 붙여줍니다.
-function safeImg(el, src, fallback) {
-  el.src = src ? `/sha_copy${src}` : fallback;
-  el.onerror = () => { el.onerror = null; el.src = fallback; };
-}
-
-const getWorks = (tabId, subId) => {
-  if (tabId === 'team') return teamProjects.filter((p) => p.group === subId);
-  return projects.filter((p) => p.tab === tabId && p.role === subId);
+/* ==========================================
+   1. 이미지 경로
+   비워두면 이미지 공간만 표시
+========================================== */
+const IMAGE_PATHS = {
+  logo: "",
+  multimedia: "",
+  video: "",
+  xr: "",
+  instagram: "",
+  youtube: ""
 };
 
-const getTabTotal = (tabId) => {
-  if (tabId === 'team') return teamProjects.length;
-  return projects.filter((p) => p.tab === tabId).length;
+const SOCIAL_URLS = {
+  instagram: "",
+  youtube: ""
 };
 
-const toEmbedUrl = (url) => {
-  if (!url) return '';
-  if (url.includes('/embed/')) return url;
-  const short = url.match(/youtu\.be\/([^?&]+)/);
-  if (short) return `https://www.youtube.com/embed/${short[1]}`;
-  const long = url.match(/[?&]v=([^?&]+)/);
-  if (long) return `https://www.youtube.com/embed/${long[1]}`;
-  return url;
+/* ==========================================
+   2. 카테고리 및 필터
+========================================== */
+const CATEGORY_NAMES = {
+  multimedia: "멀티미디어",
+  video: "영상미디어",
+  xr: "XR 프로젝트"
 };
 
-let activeTab = 'multimedia';
+const FILTERS = {
+  multimedia: [
+    { key: "all", label: "ALL" },
+    { key: "pm", label: "Project Manager" },
+    { key: "designer", label: "Designer" },
+    { key: "marketer", label: "Marketer" },
+    { key: "developer", label: "Developer" },
+    { key: "mteam", label: "M-team" }
+  ],
 
-/* ── 탭 버튼 렌더링 ──────────────────────────────────────────── */
-const tabInner = document.getElementById('tabInner');
-const categoryBar = document.getElementById('category-bar');
-const totalBadge = document.getElementById('totalBadge');
+  video: [
+    { key: "all", label: "ALL" },
+    { key: "planning", label: "기획" },
+    { key: "production", label: "제작" }
+  ],
 
-PROJECT_TABS.forEach((tab) => {
-  const btn = document.createElement('button');
-  btn.className = 'tab-btn';
-  btn.id = `tab-${tab.id}`;
-  btn.setAttribute('role', 'tab');
-  btn.setAttribute('aria-controls', `panel-${tab.id}`);
-  btn.textContent = tab.label;
-  btn.addEventListener('click', () => switchTab(tab.id));
-  tabInner.appendChild(btn);
-});
+  xr: [
+    { key: "all", label: "ALL" }
+  ]
+};
 
-function switchTab(id) {
-  activeTab = id;
-  render();
-  categoryBar.scrollIntoView({ behavior: 'smooth', block: 'start' });
+/* ==========================================
+   3. 작품 데이터
+========================================== */
+
+// 기존 시안에 있는 임시 작품명
+const multimediaTitles = [
+  "현대리바트", "하나은행",
+  "롯데아울렛", "롯데아울렛",
+  "롯데아울렛", "롯데아울렛",
+  "롯데아울렛", "롯데아울렛",
+  "롯데아울렛", "롯데아울렛",
+  "롯데아울렛", "롯데아울렛",
+  "롯데아울렛", "롯데아울렛",
+  "롯데아울렛", "롯데아울렛",
+  "롯데아울렛", "롯데아울렛",
+  "롯데아울렛", "롯데아울렛",
+  "롯데아울렛", "스타벅스",
+  "메가MGC커피", "롯데아울렛"
+];
+
+// 멀티미디어 27개
+// PM 10 / Designer 13 / Marketer 2 / Developer 2
+const multimediaRoles = [
+  ...Array(10).fill("pm"),
+  ...Array(13).fill("designer"),
+  ...Array(2).fill("marketer"),
+  ...Array(2).fill("developer")
+];
+
+const projects = [
+
+  // 멀티미디어 27개
+  ...multimediaRoles.map((role, index) => ({
+    id: `multimedia-${String(index + 1).padStart(2, "0")}`,
+    category: "multimedia",
+    role: role,
+
+    // M-team 5개 임시 지정
+    // 실제 해당 작품에 맞게 true/false 수정
+    mteam: index < 5,
+
+    title: multimediaTitles[index]
+      || `멀티미디어 작품 ${index + 1}`,
+
+    author: "작가명",
+    thumbnail: "",
+    description: "",
+    link: ""
+  })),
+
+  // 영상미디어 50개
+  // 기획 8 / 제작 42
+  ...Array.from({ length: 50 }, (_, index) => ({
+    id: `video-${String(index + 1).padStart(2, "0")}`,
+    category: "video",
+
+    role: index < 8
+      ? "planning"
+      : "production",
+
+    mteam: false,
+
+    title: `영상미디어 작품 ${String(index + 1).padStart(2, "0")}`,
+    author: "작가명",
+    thumbnail: "",
+    description: "",
+    link: ""
+  })),
+
+  // XR 프로젝트 9개
+  ...Array.from({ length: 9 }, (_, index) => ({
+    id: `xr-${String(index + 1).padStart(2, "0")}`,
+    category: "xr",
+    role: "all",
+    mteam: false,
+
+    title: `XR 프로젝트 ${String(index + 1).padStart(2, "0")}`,
+    author: "작가명",
+    thumbnail: "",
+    description: "",
+    link: ""
+  }))
+
+];
+
+/* ==========================================
+   4. 필터 조건
+========================================== */
+function matchesFilter(project, filter) {
+  if (filter === "all") return true;
+
+  if (filter === "mteam") {
+    return project.mteam;
+  }
+
+  return project.role === filter;
 }
 
-/* ── 작품 카드 + 패널 렌더링 ─────────────────────────────────── */
-const panelsContainer = document.getElementById('panelsContainer');
+/* ==========================================
+   5. 이미지 삽입
+========================================== */
+function loadImageSlots() {
+  document
+    .querySelectorAll("[data-image-key]")
+    .forEach((slot) => {
 
-function workCardHtml(work, tab, sub) {
-  const author = work.members ? work.teamName : (graduateByStudentId[work.studentId]?.name ?? '-');
-  return `
-    <div class="work-card" tabindex="0" role="button" aria-label="${work.title} 상세 보기">
-      <div class="work-thumb" data-thumb></div>
-      <div class="work-info">
-        <p class="work-num">${tab.label} · ${sub.label}</p>
-        <p class="work-name">${work.title}</p>
-        <p class="work-author">${author}</p>
-      </div>
-    </div>
-  `;
-}
+      const path = IMAGE_PATHS[slot.dataset.imageKey];
+      slot.replaceChildren();
 
-function render() {
-  // 탭 버튼 active 상태
-  PROJECT_TABS.forEach((tab) => {
-    const btn = document.getElementById(`tab-${tab.id}`);
-    const isActive = tab.id === activeTab;
-    btn.classList.toggle('active', isActive);
-    btn.setAttribute('aria-selected', String(isActive));
-  });
+      if (!path) return;
 
-  totalBadge.textContent = `전체 ${getTabTotal(activeTab)}개 작품`;
+      const img = document.createElement("img");
+      img.src = path;
+      img.alt = "";
 
-  // 패널 (탭마다 하나, 이미 만들어져 있으면 재사용)
-  panelsContainer.innerHTML = '';
-  PROJECT_TABS.forEach((tab) => {
-    const section = document.createElement('section');
-    section.className = `cat-panel${tab.id === activeTab ? ' active' : ''}`;
-    section.id = `panel-${tab.id}`;
-    section.setAttribute('role', 'tabpanel');
-    section.setAttribute('aria-labelledby', `tab-${tab.id}`);
-    if (tab.id !== activeTab) { panelsContainer.appendChild(section); return; }
+      img.onerror = () => img.remove();
 
-    getSubCategories(tab).forEach((sub) => {
-      const works = getWorks(tab.id, sub.id);
-      const group = document.createElement('div');
-      group.className = 'work-group reveal';
-      group.innerHTML = `
-        <div class="sub-cat-strip">
-          <span class="sub-cat-name">${sub.label}</span>
-          <span class="sub-cat-count">${works.length}개</span>
-        </div>
-        <div class="work-grid">
-          ${works.map((w) => workCardHtml(w, tab, sub)).join('')}
-        </div>
-      `;
+      slot.append(img);
+    });
 
-      // 썸네일 채우기 (있으면 이미지, 없으면 플레이스홀더)
-      const cards = group.querySelectorAll('.work-card');
-      works.forEach((work, i) => {
-        const thumb = cards[i].querySelector('[data-thumb]');
-        if (work.thumbnail) {
-          const img = document.createElement('img');
-          img.alt = work.title;
-          img.loading = 'lazy';
-          safeImg(img, work.thumbnail, FALLBACK_IMAGE);
-          thumb.appendChild(img);
-        } else {
-          thumb.innerHTML = `<span class="work-thumb-icon">${sub.icon}</span><span>작품 썸네일 이미지<br />(${sub.label})</span>`;
-        }
-        const open = () => openModal(work, tab, sub);
-        cards[i].addEventListener('click', open);
-        cards[i].addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
+  document
+    .querySelectorAll("[data-social]")
+    .forEach((link) => {
+
+      const url = SOCIAL_URLS[link.dataset.social];
+
+      if (url) {
+        link.href = url;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+      } else {
+        link.addEventListener("click", (event) => {
+          event.preventDefault();
         });
+      }
+    });
+}
+
+/* ==========================================
+   6. 작품 카드 생성
+========================================== */
+function createProjectCard(project) {
+
+  const article = document.createElement("article");
+  article.className = "project-card";
+
+  // 카드 전체를 클릭 가능한 링크로 만듦
+  const link = document.createElement("a");
+  link.className = "project-link";
+
+  // 별도 상세 페이지 주소가 있으면 해당 주소 사용
+  // 없으면 공통 상세 페이지로 이동
+  link.href = project.link ||
+    `detail.html?id=${encodeURIComponent(project.id)}`;
+
+  link.setAttribute(
+    "aria-label",
+    `${project.title} 작품 소개 보기`
+  );
+
+  // 썸네일
+  const thumb = document.createElement("span");
+  thumb.className = "project-thumb";
+
+  if (project.thumbnail) {
+    const img = document.createElement("img");
+
+    img.src = project.thumbnail;
+    img.alt = "";
+    img.loading = "lazy";
+
+    img.onerror = () => img.remove();
+
+    thumb.append(img);
+  }
+
+  // 작품명
+  const title = document.createElement("h2");
+  title.className = "project-title";
+  title.textContent = project.title;
+
+  // 제작자
+  const author = document.createElement("p");
+  author.className = "project-author";
+  author.textContent = project.author;
+
+  link.append(thumb, title, author);
+  article.append(link);
+
+  return article;
+}
+
+/* ==========================================
+   7. 메인 포트폴리오 페이지
+========================================== */
+function initGallery() {
+
+  const grid = document.getElementById("portfolio-grid");
+
+  if (!grid) return;
+
+  const roleFilters = document.getElementById("role-filters");
+  const emptyState = document.getElementById("empty-state");
+
+  const categoryButtons =
+    document.querySelectorAll(".media-category");
+
+  const searchToggle =
+    document.getElementById("search-toggle");
+
+  const searchPanel =
+    document.getElementById("search-panel");
+
+  const searchInput =
+    document.getElementById("project-search");
+
+  const searchClose =
+    document.getElementById("search-close");
+
+  const urlCategory =
+    new URLSearchParams(location.search).get("category");
+
+  const state = {
+    category: Object.hasOwn(CATEGORY_NAMES, urlCategory)
+      ? urlCategory
+      : "multimedia",
+
+    filter: "all",
+    keyword: ""
+  };
+
+  /* 작품 목록 출력 */
+  function renderProjects() {
+
+    const keyword =
+      state.keyword.trim().toLocaleLowerCase();
+
+    const visible = projects.filter((project) => {
+
+      return (
+        project.category === state.category &&
+        matchesFilter(project, state.filter) &&
+
+        (
+          !keyword ||
+          `${project.title} ${project.author}`
+            .toLocaleLowerCase()
+            .includes(keyword)
+        )
+      );
+    });
+
+    grid.replaceChildren(
+      ...visible.map(createProjectCard)
+    );
+
+    emptyState.hidden = visible.length > 0;
+  }
+
+  /* 카테고리에 맞는 하위 필터 생성 */
+  function renderFilters() {
+
+    const categoryProjects = projects.filter(
+      (project) => project.category === state.category
+    );
+
+    const buttons = FILTERS[state.category].map(
+      ({ key, label }) => {
+
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "role-button";
+
+        const isActive = state.filter === key;
+
+        button.classList.toggle(
+          "is-active",
+          isActive
+        );
+
+        button.setAttribute(
+          "aria-pressed",
+          String(isActive)
+        );
+
+        // 필터 이름
+        const name = document.createElement("span");
+        name.textContent = label;
+
+        // 해당 필터 작품 수
+        const count = document.createElement("span");
+        count.className = "filter-count";
+
+        count.textContent = String(
+          categoryProjects.filter(
+            (project) => matchesFilter(project, key)
+          ).length
+        );
+
+        button.append(name);
+
+        // 하위 필터 클릭
+        button.addEventListener("click", () => {
+
+          state.filter = key;
+
+          renderFilters();
+          renderProjects();
+
+        });
+
+        return button;
+      }
+    );
+
+    roleFilters.replaceChildren(...buttons);
+  }
+
+  /* 메인 카테고리 클릭 */
+  categoryButtons.forEach((button) => {
+
+    button.addEventListener("click", () => {
+
+      state.category = button.dataset.category;
+
+      // 카테고리 변경 시 ALL부터 시작
+      state.filter = "all";
+
+      categoryButtons.forEach((b) => {
+
+        const active = b === button;
+
+        b.classList.toggle("is-active", active);
+
+        b.setAttribute(
+          "aria-pressed",
+          String(active)
+        );
       });
 
-      section.appendChild(group);
+      renderFilters();
+      renderProjects();
+
     });
 
-    panelsContainer.appendChild(section);
+    const active =
+      button.dataset.category === state.category;
+
+    button.classList.toggle("is-active", active);
+    button.setAttribute("aria-pressed", String(active));
   });
 
-  document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
-}
+  /* 검색창 */
+  function toggleSearch(forceOpen) {
 
-/* ── 모달 ────────────────────────────────────────────────────── */
-const modalOverlay = document.getElementById('modalOverlay');
-const modalCloseBtn = document.getElementById('modalCloseBtn');
+    const open =
+      typeof forceOpen === "boolean"
+        ? forceOpen
+        : searchPanel.hidden;
 
-function openModal(work, tab, sub) {
-  const videoWrap = document.getElementById('modalVideoWrap');
-  if (work.videoUrl) {
-    videoWrap.innerHTML = `
-      <div class="modal-video-ph">
-        <iframe src="${toEmbedUrl(work.videoUrl)}" title="${work.title}" allowfullscreen loading="lazy"></iframe>
-      </div>
-    `;
-  } else {
-    videoWrap.innerHTML = `
-      <div class="modal-video-ph">
-        <div class="play-icon" aria-hidden="true"></div>
-        <span>소개 영상 준비 중</span>
-      </div>
-    `;
+    searchPanel.hidden = !open;
+
+    searchToggle.setAttribute(
+      "aria-expanded",
+      String(open)
+    );
+
+    if (open) {
+      searchInput.focus();
+    } else {
+      searchInput.value = "";
+      state.keyword = "";
+
+      renderProjects();
+      searchToggle.focus();
+    }
   }
 
-  const author = work.members ? work.teamName : (graduateByStudentId[work.studentId]?.name ?? '-');
-  document.getElementById('modalBadge').textContent = `${tab.label} > ${sub.label}`;
-  document.getElementById('modalWorkTitle').textContent = work.title;
-  document.getElementById('modalAuthor').textContent = `${author} · 미디어콘텐츠학부`;
-  document.getElementById('modalDesc').textContent = work.description;
+  searchToggle.addEventListener("click", () => {
+    toggleSearch();
+  });
 
-  const proposalWrap = document.getElementById('modalProposalWrap');
-  if (work.proposalImages?.length > 0) {
-    proposalWrap.innerHTML = `
-      <p class="modal-section-label">제안서 이미지</p>
-      <div class="proposal-images">
-        ${work.proposalImages.map((src, i) => `<img alt="제안서 ${i + 1}" data-proposal-src="${src}" />`).join('')}
-      </div>
-    `;
-    proposalWrap.querySelectorAll('[data-proposal-src]').forEach((img) => {
-      safeImg(img, img.dataset.proposalSrc, FALLBACK_IMAGE);
-    });
-  } else {
-    proposalWrap.innerHTML = '';
-  }
+  searchClose.addEventListener("click", () => {
+    toggleSearch(false);
+  });
 
-  const metaGrid = document.getElementById('modalMetaGrid');
-  metaGrid.innerHTML = `
-    <div class="modal-meta-item">
-      <p class="m-label">카테고리</p>
-      <p class="m-value">${tab.label}</p>
-    </div>
-    <div class="modal-meta-item">
-      <p class="m-label">직군 / 그룹</p>
-      <p class="m-value">${sub.label}</p>
-    </div>
-    <div class="modal-meta-item">
-      <p class="m-label">이메일</p>
-      <p class="m-value">${work.contact?.email ?? '-'}</p>
-    </div>
-    ${work.contact?.phone ? `
-    <div class="modal-meta-item">
-      <p class="m-label">전화번호</p>
-      <p class="m-value">${work.contact.phone}</p>
-    </div>` : ''}
-  `;
+  searchInput.addEventListener("input", () => {
+    state.keyword = searchInput.value;
+    renderProjects();
+  });
 
-  const membersWrap = document.getElementById('modalMembersWrap');
-  if (work.members) {
-    membersWrap.innerHTML = `
-      <p class="modal-section-label">팀원</p>
-      <ul class="modal-members">
-        ${work.members.map((m) => `<li>${m.name} · ${m.role}</li>`).join('')}
-      </ul>
-    `;
-  } else {
-    membersWrap.innerHTML = '';
-  }
-
-  modalOverlay.classList.add('active');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeModal() {
-  modalOverlay.classList.remove('active');
-  document.body.style.overflow = '';
-  document.getElementById('modalVideoWrap').innerHTML = '';
-}
-
-modalCloseBtn.addEventListener('click', closeModal);
-modalOverlay.addEventListener('click', (e) => {
-  if (e.target === modalOverlay) closeModal();
-});
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') closeModal();
-});
-
-/* ── 스크롤 reveal 애니메이션 ────────────────────────────────── */
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      revealObserver.unobserve(entry.target);
+  document.addEventListener("keydown", (event) => {
+    if (
+      event.key === "Escape" &&
+      !searchPanel.hidden
+    ) {
+      toggleSearch(false);
     }
   });
-}, { threshold: 0.08 });
 
-/* ── 상단 메뉴 (모바일 햄버거) ───────────────────────────────── */
-const menuToggle = document.getElementById('menuToggle');
-const siteNav = document.getElementById('siteNav');
-menuToggle.addEventListener('click', () => {
-  const open = siteNav.classList.toggle('open');
-  menuToggle.setAttribute('aria-expanded', String(open));
-});
-window.addEventListener('scroll', () => {
-  document.getElementById('site-header').style.boxShadow =
-    window.scrollY > 10 ? '0 2px 16px rgba(0,0,0,0.10)' : 'none';
-});
+  renderFilters();
+  renderProjects();
+}
 
-render();
+/* ==========================================
+   8. 작품 상세 페이지
+========================================== */
+function initDetailPage() {
+
+  const titleElement =
+    document.getElementById("detail-title");
+
+  if (!titleElement) return;
+
+  const id = new URLSearchParams(
+    location.search
+  ).get("id");
+
+  const project = projects.find(
+    (item) => item.id === id
+  );
+
+  const authorElement =
+    document.getElementById("detail-author");
+
+  const categoryElement =
+    document.getElementById("detail-category");
+
+  const imageElement =
+    document.getElementById("detail-image");
+
+  const descriptionElement =
+    document.getElementById("detail-description");
+
+  const backLink =
+    document.getElementById("detail-back");
+
+  if (!project) {
+    titleElement.textContent =
+      "작품을 찾을 수 없습니다.";
+
+    authorElement.textContent =
+      "작품 주소를 다시 확인해 주세요.";
+
+    imageElement.hidden = true;
+    descriptionElement.hidden = true;
+
+    return;
+  }
+
+  titleElement.textContent = project.title;
+  authorElement.textContent = project.author;
+
+  categoryElement.textContent =
+    CATEGORY_NAMES[project.category];
+
+  descriptionElement.textContent =
+    project.description ||
+    "작품 소개 내용이 아직 등록되지 않았습니다.";
+
+  backLink.href =
+    `index.html?category=${encodeURIComponent(project.category)}`;
+
+  document.title = `${project.title} | Portfolio`;
+
+  if (project.thumbnail) {
+
+    const image = document.createElement("img");
+
+    image.src = project.thumbnail;
+    image.alt = `${project.title} 작품 이미지`;
+
+    image.onerror = () => image.remove();
+
+    imageElement.append(image);
+  }
+}
+
+/* ==========================================
+   9. 초기 실행
+========================================== */
+loadImageSlots();
+initGallery();
+initDetailPage();
+
+// 맨 위로 이동
+const backToTop =
+  document.getElementById("back-to-top");
+
+if (backToTop) {
+  backToTop.addEventListener("click", () => {
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+  });
+}
