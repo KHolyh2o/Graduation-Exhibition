@@ -98,9 +98,6 @@
  "p-mm-func-10": [
   "/images/projects/proposals/p-mm-func-10.webp"
  ],
- "p-mm-device-06": [
-  "/images/projects/proposals/p-mm-device-06.webp"
- ],
  "p-mm-device-01": [
   "/images/projects/proposals/p-mm-device-01.webp"
  ],
@@ -331,5 +328,11 @@
  ],
  "p-vd-202311199-3": [
   "/images/projects/proposals/p-vd-202311199.webp"
+ ],
+ "p-mm-device-07": [
+  "/images/projects/proposals/p-mm-device-07.webp"
+ ],
+ "p-mm-device-06": [
+  "/images/projects/proposals/p-mm-device-06.webp"
  ]
 }
