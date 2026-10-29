@@ -1,76 +1,120 @@
 /* ===================================================
-   FOOTER
+   FOOTER  (sha_copy common-footer 기준)
 =================================================== */
-#site-footer {
-  background: var(--color-text);
-  color: rgba(255,255,255,0.65);
-  padding: 56px 0;
-  border-top: 1px solid #333;
+.common-footer {
+  width: 100%;
+  min-height: 204px;
+  margin-top: 114px;
+  padding: 42px 0 24px;
+  background: var(--color-footer);
+  color: var(--color-footer-text);
 }
 
-.footer-inner {
+.common-footer *,
+.common-footer *::before,
+.common-footer *::after {
+  box-sizing: border-box;
+}
+
+.common-footer-inner {
+  width: calc(100% - 40px);
+  max-width: var(--content-max);
+  margin: 0 auto;
   display: flex;
-  align-items: flex-start;
   justify-content: space-between;
-  gap: 32px;
-  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 30px;
 }
 
-.footer-brand .school-name {
-  font-size: 1rem;
-  font-weight: 700;
-  color: #FFFFFF;
-  margin-bottom: 8px;
+.common-footer p {
+  margin: 0 0 5px;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.58;
+  color: var(--color-footer-text);
 }
 
-.footer-brand .dept-name {
-  font-size: 0.82rem;
-  margin-bottom: 4px;
+.common-footer-left {
+  text-align: left;
 }
 
-.footer-brand .exhibit-name-small {
-  font-size: 0.78rem;
-  opacity: 0.5;
+.common-footer-copyright {
+  margin-top: 9px !important;
 }
 
-.footer-info {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  font-size: 0.82rem;
+.common-footer-right {
+  margin-left: auto;
   text-align: right;
 }
 
-.footer-info span {
+/* SNS */
+.common-footer-sns {
   display: flex;
-  align-items: center;
-  gap: 6px;
   justify-content: flex-end;
+  align-items: center;
+  gap: 9px;
+  margin-top: 11px;
 }
 
-.footer-copy {
+.common-sns-link {
+  display: block;
+  width: 32px;
+  height: 32px;
+  text-decoration: none;
+}
+
+.common-sns-icon {
+  display: block;
   width: 100%;
-  padding-top: 32px;
-  margin-top: 32px;
-  border-top: 1px solid rgba(255,255,255,0.1);
-  font-size: 0.74rem;
-  text-align: center;
-  opacity: 0.4;
+  height: 100%;
+  overflow: hidden;
+}
+
+.common-sns-icon img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.common-sns-link:hover {
+  opacity: 0.65;
 }
 
 /* ===================================================
    RESPONSIVE
 =================================================== */
-@media (max-width: 640px) {
-  .footer-inner {
-    flex-direction: column;
+@media (max-width: 768px) {
+  .common-footer {
+    margin-top: 85px;
   }
 
-  .footer-info {
+  .common-footer-inner {
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  .common-footer-right {
+    margin-left: 0;
     text-align: left;
   }
 
-  .footer-info span {
+  .common-footer-sns {
     justify-content: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .common-footer {
+    min-height: 0;
+    padding: 28px 0 30px;
+  }
+
+  .common-footer-inner {
+    gap: 22px;
+  }
+
+  .common-footer p {
+    font-size: 11px;
   }
 }

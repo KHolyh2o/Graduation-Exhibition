@@ -1,44 +1,45 @@
 import React from 'react';
 import './Footer.css';
 
+// SNS 주소가 정해지면 채우세요. 비어 있으면 아이콘을 표시하지 않습니다.
+const SNS_LINKS = [
+  { label: 'Instagram', url: '' },
+  { label: 'YouTube',   url: '' },
+];
+
 const Footer = () => (
-  <footer id="site-footer" role="contentinfo">
-    <div className="container">
-      <div className="footer-inner">
+  <footer className="common-footer">
+    <div className="common-footer-inner">
 
-        <div className="footer-brand">
-          <p className="school-name">서원대학교</p>
-          <p className="dept-name">미디어콘텐츠학부</p>
-          <p className="exhibit-name-small">2026 졸업전시</p>
-        </div>
-
-        <div className="footer-info">
-          <span>
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-              <circle cx="12" cy="10" r="3"/>
-            </svg>
-            충청북도 청주시 서원구 무심서로 377-3
-          </span>
-          <span>
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.36 12a19.79 19.79 0 0 1-3.07-8.68A2 2 0 0 1 3.29 1.14h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.03z"/>
-            </svg>
-            043-299-8800
-          </span>
-          <span>
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-              <polyline points="22,6 12,13 2,6"/>
-            </svg>
-            media@seowon.ac.kr
-          </span>
-        </div>
-
+      <div className="common-footer-left">
+        <p>서원대학교</p>
+        <p>미디어콘텐츠학부</p>
+        <p className="common-footer-copyright">
+          © 2026 서원대학교 미디어콘텐츠학부. All rights reserved.
+        </p>
       </div>
-      <p className="footer-copy">
-        © 2026 서원대학교 미디어콘텐츠학부. All rights reserved.
-      </p>
+
+      <div className="common-footer-right">
+        <p>충청북도 청주시 서원구 무심서로 377-3</p>
+        <p>043-299-8800</p>
+        <p>media@seowon.ac.kr</p>
+
+        <div className="common-footer-sns">
+          {SNS_LINKS.filter(({ url }) => url).map(({ label, url }) => (
+            <a
+              key={label}
+              className="common-sns-link"
+              href={url}
+              aria-label={label}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span className="common-sns-icon" />
+            </a>
+          ))}
+        </div>
+      </div>
+
     </div>
   </footer>
 );

@@ -1,70 +1,91 @@
-import React, { useState, useEffect } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import React, { useState, useRef, useEffect } from 'react';
+import { NavLink, Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 
 const Navbar = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const navigate = useNavigate();
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [keyword, setKeyword] = useState('');
+  const toggleRef = useRef(null);
+  const inputRef = useRef(null);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 10);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    if (searchOpen) inputRef.current?.focus();
+  }, [searchOpen]);
 
-  // ESC 또는 외부 클릭 시 메뉴 닫기
-  useEffect(() => {
-    if (!menuOpen) return;
-    const handleKey = (e) => { if (e.key === 'Escape') setMenuOpen(false); };
-    document.addEventListener('keydown', handleKey);
-    return () => document.removeEventListener('keydown', handleKey);
-  }, [menuOpen]);
+  const closeSearch = () => {
+    setSearchOpen(false);
+    setKeyword('');
+    toggleRef.current?.focus();
+  };
 
-  const closeMenu = () => setMenuOpen(false);
+  const handleKeyDown = (e) => {
+    if (e.key === 'Escape') {
+      closeSearch();
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      const q = keyword.trim();
+      if (!q) return;
+      navigate(`/project?q=${encodeURIComponent(q)}`);
+      closeSearch();
+    }
+  };
 
-  const getNavClass = ({ isActive }) =>
-    isActive ? 'nav-link active' : 'nav-link';
+  const getNavClass = ({ isActive }) => (isActive ? 'is-active' : undefined);
 
   return (
-    <header
-      id="site-header"
-      role="banner"
-      style={{ boxShadow: scrolled ? '0 2px 16px rgba(0,0,0,0.10)' : 'none' }}
-    >
-      <div className="header-inner">
-        {/* 로고 */}
-        <Link to="/" className="logo-area" aria-label="홈으로">
-          <div className="ph logo-ph">LOGO</div>
-          <div className="logo-text">
-            <span className="subtitle">서원대학교 미디어콘텐츠학부</span>
-            <span className="title">2026 졸업전시</span>
-          </div>
+    <header className="common-header" id="top">
+      <div className="common-header-inner">
+        <Link to="/" className="common-brand" aria-label="메인 페이지로 이동">
+          <span className="common-logo" />
+          <span className="common-brand-text">
+            서원대학교 미디어콘텐츠학부<br />
+            2026 졸업전시회
+          </span>
         </Link>
 
-        {/* 햄버거 버튼 */}
-        <button
-          className="menu-toggle"
-          id="menuToggle"
-          aria-label="메뉴 열기"
-          aria-expanded={menuOpen}
-          onClick={() => setMenuOpen((prev) => !prev)}
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
+        <nav className="common-nav" aria-label="주 메뉴">
+          <NavLink to="/project"    className={getNavClass}>WORK</NavLink>
+          <NavLink to="/student"    className={getNavClass}>GRADUATES</NavLink>
+          <NavLink to="/department" className={getNavClass}>ABOUT</NavLink>
+          <NavLink to="/others"     className={getNavClass}>ARCHIVE</NavLink>
 
-        {/* 내비게이션 */}
-        <nav
-          className={`site-nav${menuOpen ? ' open' : ''}`}
-          id="siteNav"
-          aria-label="주요 메뉴"
-        >
-          <NavLink to="/project"    className={getNavClass} onClick={closeMenu}>작품소개</NavLink>
-          <NavLink to="/department" className={getNavClass} onClick={closeMenu}>학부소개</NavLink>
-          <NavLink to="/gallery"    className={getNavClass} onClick={closeMenu}>기록들</NavLink>
-          <NavLink to="/others"     className={getNavClass} onClick={closeMenu}>과거전시보기</NavLink>
+          <button
+            type="button"
+            ref={toggleRef}
+            className="common-search-toggle"
+            aria-label="작품 검색 열기"
+            aria-controls="search-panel"
+            aria-expanded={searchOpen}
+            onClick={() => (searchOpen ? closeSearch() : setSearchOpen(true))}
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="10.7" cy="10.7" r="6.4" />
+              <path d="m15.5 15.5 5.1 5.1" />
+            </svg>
+          </button>
         </nav>
+      </div>
+
+      <div className="common-search-panel" id="search-panel" hidden={!searchOpen}>
+        <input
+          ref={inputRef}
+          type="search"
+          placeholder="작품명 또는 이름을 검색하세요"
+          aria-label="작품명 또는 이름 검색"
+          autoComplete="off"
+          value={keyword}
+          onChange={(e) => setKeyword(e.target.value)}
+          onKeyDown={handleKeyDown}
+        />
+        <button
+          type="button"
+          className="common-search-close"
+          aria-label="검색 닫기"
+          onClick={closeSearch}
+        >
+          ×
+        </button>
       </div>
     </header>
   );

@@ -22,6 +22,12 @@
   --color-btn:      #222222;
   --color-btn-hover:#444444;
 
+  /* ── Header / Footer (sha_copy common 기준) ─── */
+  --color-ink:         #161616;
+  --color-point:       #008dc1; /* 메뉴 활성·포커스 */
+  --color-footer:      #111111;
+  --color-footer-text: #EDEDED;
+
   /* ── Placeholder (데이터 미입력 영역) ───────── */
   --ph-light:  #E0E0E0;
   --ph-mid:    #CCCCCC;
@@ -34,7 +40,7 @@
   --transition: 0.22s ease;
 
   /* ── Layout ─────────────────────────────────── */
-  --header-h:    68px;
+  --header-h:    62px;
   --section-gap: 100px;
   --content-max: 1180px;
 
