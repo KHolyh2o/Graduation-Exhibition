@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import MainPage from './pages/MainPage';
 import ProjectPage from './pages/ProjectPage';
+import DetailPage from './pages/DetailPage';
 import StudentPage from './pages/StudentPage';
 import DepartmentPage from './pages/DepartmentPage';
 import GalleryPage from './pages/GalleryPage';
@@ -20,6 +21,7 @@ function App() {
           <Routes>
             <Route path="/"           element={<MainPage />} />
             <Route path="/project"    element={<ProjectPage />} />
+            <Route path="/project/:id" element={<DetailPage />} />
             <Route path="/student"    element={<StudentPage />} />
             <Route path="/department" element={<DepartmentPage />} />
             <Route path="/gallery"    element={<GalleryPage />} />

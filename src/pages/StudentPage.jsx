@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { graduates } from '../data/graduates';
-import { projects } from '../data/projects';
-import { teamProjects } from '../data/teamProjects';
+import { getWorksByStudent, getWorkTitle } from '../data/works';
 import SafeImg from '../components/SafeImg';
 import { FALLBACK } from '../hooks/useImageFallback';
 import './StudentPage.css';
@@ -24,12 +23,6 @@ const getYoutubeId = (url) => {
   const m = String(url || '').match(/(?:youtu\.be\/|[?&]v=|\/embed\/)([a-zA-Z0-9_-]{11})/);
   return m ? m[1] : '';
 };
-
-// 졸업생 한 명의 작품(개인 + 팀) 목록
-const getStudentProjects = (studentId) => [
-  ...projects.filter((p) => p.studentId === studentId),
-  ...teamProjects.filter((t) => t.members?.some((m) => m.studentId === studentId)),
-];
 
 const StudentPage = () => {
   const [filter, setFilter] = useState('all');
@@ -101,7 +94,7 @@ const StudentPage = () => {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const studentProjects = selected ? getStudentProjects(selected.studentId) : [];
+  const studentProjects = selected ? getWorksByStudent(selected.studentId) : [];
   const contact = studentProjects.find((p) => p.contact?.email || p.contact?.phone)?.contact;
   const youtubeId = getYoutubeId(studentProjects.find((p) => p.videoUrl)?.videoUrl);
 
@@ -150,7 +143,7 @@ const StudentPage = () => {
                   </div>
                   <div className="student-info">
                     <h3 className="student-name">{g.name}</h3>
-                    <p className="student-english">{g.jobTitle}</p>
+                    <p className="student-english">{g.englishName}</p>
                   </div>
                 </button>
               ))}
@@ -206,9 +199,12 @@ const StudentPage = () => {
               <div className="graduate-profile-info">
                 <div className="graduate-name-line">
                   <h2 className="graduate-name" id="modalStudentName">{selected.name}</h2>
+                  <span className="graduate-english-name">{selected.englishName}</span>
                 </div>
 
                 <p className="graduate-job">{selected.jobTitle}</p>
+
+                <p className="graduate-introduction">{selected.intro}</p>
 
                 <div className="graduate-contact">
                   <div className="graduate-contact-item">
@@ -240,16 +236,16 @@ const StudentPage = () => {
               <h2 className="graduate-section-title">Project</h2>
               <div className="graduate-project-grid">
                 {studentProjects.map((p) => (
-                  <div className="graduate-project-card" key={p.id}>
+                  <Link className="graduate-project-card" key={p.id} to={`/project/${p.id}`}>
                     <div className="graduate-project-image">
                       {p.thumbnail ? (
-                        <SafeImg src={p.thumbnail} fallbackSrc={FALLBACK.image} alt={p.title} />
+                        <SafeImg src={p.thumbnail} fallbackSrc={FALLBACK.image} alt={getWorkTitle(p)} />
                       ) : (
                         <div className="graduate-project-placeholder"></div>
                       )}
                     </div>
-                    <p className="graduate-project-name">{p.title}</p>
-                  </div>
+                    <p className="graduate-project-name">{getWorkTitle(p)}</p>
+                  </Link>
                 ))}
               </div>
             </section>

@@ -1,386 +1,413 @@
 /* ===================================================
-   CATEGORY TABS
+   PROJECT PAGE — sha_copy/css/projectpage.css 이식본
+   모든 선택자는 .project-page 로 한정 (전역 충돌 방지)
 =================================================== */
-#category-bar {
-  position: sticky;
-  top: var(--header-h);
-  z-index: 500;
-  background: #FFFFFF;
-  border-bottom: 1px solid var(--color-border);
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+
+/* 페이지 바탕이 흰색이라, 푸터 위 여백까지 흰색으로 이어지게 한다 */
+body:has(.project-page) {
+  background: #fff;
 }
 
-.tab-inner {
-  display: flex;
-  align-items: stretch;
-  gap: 0;
-  overflow-x: auto;
-  scrollbar-width: none;
+.project-page {
+  --text: #161616;
+  --accent: #e52d42;
+  --thumbnail: #d9d9d9;
+
+  padding-top: var(--header-h);
+  padding-bottom: 114px;
+  background: #fff;
+  color: var(--text);
+  font-family: "DM Sans", "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
-.tab-inner::-webkit-scrollbar { display: none; }
+/* index.css 의 전역 section 여백(--section-gap)을 이 페이지에서는 쓰지 않는다 */
+.project-page section {
+  padding: 0;
+}
 
-.tab-btn {
-  flex: 1;
-  min-width: 120px;
-  padding: 18px 24px;
-  font-size: 0.94rem;
-  font-weight: 600;
-  color: var(--color-muted);
-  background: none;
-  border: none;
-  border-bottom: 3px solid transparent;
+.project-page button {
+  font: inherit;
   cursor: pointer;
-  white-space: nowrap;
-  transition: color var(--transition), border-color var(--transition), background var(--transition);
+}
+
+.project-page a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.project-page button:focus-visible,
+.project-page a:focus-visible {
+  outline: 2px solid var(--color-point);
+  outline-offset: 4px;
+}
+
+/* --------------------------------------------------
+   중앙 소개
+-------------------------------------------------- */
+.project-page .intro {
+  margin: 28px auto 0;
+  padding: 0 16px;
   text-align: center;
 }
 
-.tab-btn:hover { color: var(--color-text); background: var(--ph-light); }
-
-.tab-btn.active {
-  color: var(--color-text);
-  border-bottom-color: var(--color-text);
+.project-page .intro h1 {
+  margin: 0;
+  font-family: "Playfair Display", "Bodoni MT", Didot, Georgia, serif;
   font-weight: 700;
+  font-size: 76px;
+  letter-spacing: -0.066em;
+  line-height: 1.11;
 }
 
-/* ===================================================
-   PAGE BADGE
-=================================================== */
-.page-total-badge {
-  display: inline-flex;
+.project-page .intro-korean {
+  margin: 7px 0 0;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.06em;
+}
+
+.project-page .intro-english {
+  margin: 8px 0 0;
+  font-size: 16px;
+  font-weight: 400;
+  color: #363636;
+}
+
+/* --------------------------------------------------
+   카테고리 3개
+-------------------------------------------------- */
+.project-page .media-section {
+  margin-top: 39px;
+}
+
+.project-page .media-categories {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  gap: 107px;
+}
+
+.project-page .media-category {
+  display: flex;
+  width: 90px;
+  flex-direction: column;
   align-items: center;
   gap: 6px;
-  padding: 6px 14px;
-  background: var(--ph-light);
-  border-radius: 100px;
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: var(--ph-text);
-  white-space: nowrap;
-  align-self: flex-end;
+  border: none;
+  padding: 0;
+  background: transparent;
+  color: #202020;
 }
 
-/* ===================================================
-   SUB-CATEGORY STRIP
-=================================================== */
-.sub-cat-strip {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin: 0 0 20px;
-}
-
-.sub-cat-name {
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--ph-text);
-}
-
-.sub-cat-count {
-  font-size: 0.72rem;
-  font-weight: 600;
-  color: var(--ph-text);
-  background: var(--ph-light);
-  padding: 2px 8px;
-  border-radius: 100px;
-}
-
-/* ===================================================
-   CONTENT AREA
-=================================================== */
-#content-area {
-  padding: 60px 0 80px;
-}
-
-.cat-panel {
-  display: none;
-}
-
-.cat-panel.active {
+/* 아이콘 이미지 자리 — 비어 있어도 공간만 유지 */
+.project-page .asset-slot {
   display: block;
-}
-
-.work-group {
-  margin-bottom: 56px;
-}
-
-.work-group:last-child { margin-bottom: 0; }
-
-/* ===================================================
-   WORK GRID
-=================================================== */
-.work-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 16px;
-}
-
-.work-card {
-  cursor: pointer;
-  border-radius: 10px;
+  flex: none;
   overflow: hidden;
-  background: #FFFFFF;
-  border: 1.5px solid var(--color-border);
-  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.project-page .asset-slot img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.project-page .category-icon {
+  width: 75px;
+  height: 65px;
+}
+
+.project-page .category-label {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  white-space: nowrap;
+}
+
+.project-page .media-category.is-active .category-label,
+.project-page .media-category:hover .category-label {
+  color: var(--accent);
+}
+
+/* --------------------------------------------------
+   하위 필터
+-------------------------------------------------- */
+.project-page .portfolio-section {
+  width: calc(100% - 40px);
+  max-width: 1160px;
+  margin: 0 auto;
+}
+
+.project-page .role-filters {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 24px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 39px;
 }
 
-.work-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 28px rgba(0,0,0,0.11);
+.project-page .role-button {
+  border: 0;
+  background: transparent;
+  padding: 7px 0;
+  color: #272727;
+  font-size: 17px;
+  line-height: 1.35;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
 }
 
-.work-thumb {
-  position: relative;
+.project-page .role-button.is-active {
+  padding: 7px 13px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 100px;
+}
+
+.project-page .role-button:not(.is-active):hover {
+  color: var(--accent);
+}
+
+/* --------------------------------------------------
+   작품 목록 — 16:9, 가로 4개
+-------------------------------------------------- */
+.project-page .portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: 40px;
+  row-gap: 22px;
+  margin-top: 57px;
+}
+
+.project-page .project-card {
+  min-width: 0;
+}
+
+.project-page .project-link {
+  display: block;
+  width: 100%;
+  cursor: pointer;
+}
+
+.project-page .project-thumb {
+  display: block;
   width: 100%;
   aspect-ratio: 16 / 9;
   overflow: hidden;
-  background: var(--ph-light);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 6px;
-  color: var(--ph-text);
-  font-size: 0.7rem;
-  font-weight: 500;
-  text-align: center;
-  border-bottom: 1px solid var(--color-border);
-  padding: 8px;
-  transition: background var(--transition);
+  border-radius: 6px;
+  background: var(--thumbnail);
 }
 
-.work-card:hover .work-thumb { background: var(--ph-mid); }
-
-.work-thumb img {
-  position: absolute;
-  inset: 0;
+.project-page .project-thumb img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
+  transition: transform 0.25s ease;
 }
 
-.work-thumb-icon {
-  font-size: 1.4rem;
-  line-height: 1;
+.project-page .project-card:hover .project-thumb img {
+  transform: scale(1.025);
 }
 
-.work-info {
-  padding: 12px 14px 14px;
-  flex: 1;
+.project-page .project-link:hover .project-thumb,
+.project-page .project-link:focus-visible .project-thumb {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
-.work-num {
-  font-size: 0.64rem;
+.project-page .project-link:hover .project-title {
+  color: var(--accent);
+}
+
+.project-page .project-title {
+  margin: 9px 0 0;
+  font-size: 18px;
   font-weight: 700;
-  letter-spacing: 0.1em;
-  color: var(--ph-text);
-  text-transform: uppercase;
-  margin-bottom: 3px;
+  line-height: 1.35;
+  letter-spacing: -0.055em;
+  overflow-wrap: anywhere;
 }
 
-.work-name {
-  font-size: 0.88rem;
-  font-weight: 700;
-  color: var(--color-text);
-  margin-bottom: 2px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.project-page .project-author {
+  margin: 5px 0 0;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: -0.04em;
 }
 
-.work-author {
-  font-size: 0.76rem;
-  color: var(--color-muted);
+.project-page .empty-state {
+  padding: 100px 10px 140px;
+  text-align: center;
+  font-size: 16px;
+  color: #777;
 }
 
-/* ===================================================
-   PROPOSAL IMAGES & MEMBERS
-=================================================== */
-.proposal-images {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-bottom: 20px;
-}
-
-.proposal-images img {
-  width: 100%;
-  border-radius: var(--radius);
-  border: 1px solid var(--color-border);
-  display: block;
-}
-
-.modal-members {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.modal-members li {
-  font-size: 0.87rem;
-  color: var(--color-text);
-  padding: 8px 12px;
-  background: var(--ph-light);
-  border-radius: var(--radius);
-}
-
-/* ===================================================
-   WORK MODAL
-=================================================== */
-.work-modal-box {
-  max-width: 720px;
-  padding: 0;
-}
-
-.modal-video-ph {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  background: var(--ph-mid);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  color: var(--ph-text);
-  font-size: 0.85rem;
-  border-radius: 14px 14px 0 0;
-  border-bottom: 1px solid var(--color-border);
-  overflow: hidden;
-}
-
-.modal-video-ph iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-  display: block;
-}
-
-.modal-video-ph .play-icon {
-  width: 52px;
-  height: 52px;
-  border: 2.5px solid var(--ph-text);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.modal-video-ph .play-icon::after {
-  content: '';
-  border-top: 9px solid transparent;
-  border-bottom: 9px solid transparent;
-  border-left: 15px solid var(--ph-text);
-  margin-left: 3px;
-}
-
-.work-modal-body {
-  padding: 28px 32px 32px;
-}
-
-.modal-badge {
-  display: inline-block;
-  padding: 3px 10px;
-  background: var(--ph-light);
-  border-radius: 100px;
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ph-text);
-  margin-bottom: 10px;
-}
-
-.modal-work-title {
-  font-size: 1.4rem;
-  font-weight: 900;
-  margin-bottom: 6px;
-}
-
-.modal-work-author {
-  font-size: 0.86rem;
-  color: var(--color-muted);
-  margin-bottom: 20px;
-}
-
-.modal-divider {
-  width: 40px;
-  height: 2px;
-  background: var(--color-border);
-  margin-bottom: 20px;
-  border-radius: 2px;
-}
-
-.modal-section-label {
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--ph-text);
-  margin-bottom: 8px;
-}
-
-.work-modal-text-ph {
-  background: var(--ph-light);
-  border: 1.5px dashed var(--ph-mid);
-  border-radius: var(--radius);
-  padding: 14px 16px;
-  font-size: 0.87rem;
-  color: var(--ph-text);
-  line-height: 1.9;
-  margin-bottom: 20px;
-}
-
-.modal-meta-grid {
+/* --------------------------------------------------
+   맨 위로 (플로팅)
+-------------------------------------------------- */
+.project-page .back-to-top {
+  position: fixed;
+  right: max(24px, calc((100vw - 1120px) / 2 - 15px));
+  bottom: 54px;
+  z-index: 5;
+  width: 46px;
+  height: 46px;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-  margin-top: 20px;
+  place-items: center;
+  color: #111;
+  background: #fff;
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 0.17);
 }
 
-.modal-meta-item {
-  background: var(--ph-light);
-  border-radius: var(--radius);
-  padding: 12px 14px;
+.project-page .back-to-top svg {
+  width: 29px;
+  height: 29px;
 }
 
-.modal-meta-item .m-label {
-  font-size: 0.66rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  color: var(--ph-text);
-  text-transform: uppercase;
-  margin-bottom: 3px;
-}
-
-.modal-meta-item .m-value {
-  font-size: 0.88rem;
-  font-weight: 600;
-  color: var(--color-text);
-}
-
-/* ===================================================
-   RESPONSIVE
-=================================================== */
+/* =========================
+   TABLET
+========================= */
 @media (max-width: 1024px) {
-  .work-grid { grid-template-columns: repeat(4, 1fr); }
+  .project-page .portfolio-grid {
+    column-gap: 28px;
+  }
 }
 
+/* =========================
+   MOBILE
+========================= */
 @media (max-width: 768px) {
-  .work-grid { grid-template-columns: repeat(3, 1fr); }
-  .modal-meta-grid { grid-template-columns: 1fr; }
-  .page-title { font-size: 1.5rem; }
+  .project-page .intro {
+    margin-top: 33px;
+  }
+
+  .project-page .intro h1 {
+    font-size: clamp(48px, 10vw, 69px);
+  }
+
+  .project-page .intro-korean {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .project-page .intro-english {
+    font-size: 13px;
+  }
+
+  .project-page .media-section {
+    margin-top: 37px;
+  }
+
+  .project-page .media-categories {
+    gap: clamp(16px, 7vw, 80px);
+  }
+
+  .project-page .role-filters {
+    margin-top: 36px;
+    gap: 14px;
+  }
+
+  .project-page .role-button {
+    font-size: 14px;
+  }
+
+  .project-page .portfolio-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 20px;
+    row-gap: 23px;
+    margin-top: 37px;
+  }
+
+  .project-page .project-title {
+    font-size: 16px;
+  }
+
+  .project-page .project-author {
+    font-size: 13px;
+  }
+
+  .project-page {
+    padding-bottom: 85px;
+  }
 }
 
-@media (max-width: 640px) {
-  .work-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-  .tab-btn { padding: 14px 16px; font-size: 0.85rem; min-width: 90px; }
-  .work-modal-body { padding: 20px; }
+@media (max-width: 480px) {
+  .project-page .intro {
+    margin-top: 32px;
+  }
+
+  .project-page .intro h1 {
+    font-size: 50px;
+  }
+
+  .project-page .intro-korean,
+  .project-page .intro-english {
+    font-size: 12px;
+  }
+
+  .project-page .media-categories {
+    gap: 16px;
+  }
+
+  .project-page .media-category {
+    width: 82px;
+  }
+
+  .project-page .category-icon {
+    width: 65px;
+    height: 56px;
+  }
+
+  .project-page .category-label {
+    font-size: 12px;
+  }
+
+  .project-page .role-filters {
+    gap: 8px 15px;
+  }
+
+  .project-page .role-button {
+    font-size: 13px;
+  }
+
+  .project-page .role-button.is-active {
+    padding: 6px 12px;
+  }
+
+  .project-page .portfolio-grid {
+    column-gap: 13px;
+    row-gap: 22px;
+  }
+
+  .project-page .project-title {
+    margin-top: 7px;
+    font-size: 14px;
+  }
+
+  .project-page .project-author {
+    margin-top: 3px;
+    font-size: 12px;
+  }
+
+  .project-page .back-to-top {
+    width: 40px;
+    height: 40px;
+    right: 18px;
+    bottom: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-page .project-thumb img {
+    transition: none;
+  }
 }

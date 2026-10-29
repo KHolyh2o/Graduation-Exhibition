@@ -1,0 +1,324 @@
+/* ===================================================
+   WORK DETAIL PAGE — sha_copy/css/detail.css 이식본
+   모든 선택자는 .detail-page 로 한정 (전역 충돌 방지)
+=================================================== */
+
+/* 페이지 바탕이 흰색이라, 푸터 위 여백까지 흰색으로 이어지게 한다 */
+body:has(.detail-page) {
+  background: #fff;
+}
+
+.detail-page {
+  padding-top: var(--header-h);
+  padding-bottom: 100px;
+  background: #fff;
+  color: #161616;
+  font-family: "DM Sans", "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.detail-page a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.detail-page button {
+  font: inherit;
+  cursor: pointer;
+}
+
+.detail-page a:focus-visible,
+.detail-page button:focus-visible {
+  outline: 2px solid var(--color-point);
+  outline-offset: 4px;
+}
+
+.detail-page .work-detail-page {
+  width: calc(100% - 40px);
+  max-width: 1160px;
+  margin: 0 auto;
+  padding-top: 20px;
+}
+
+.detail-page .work-detail-back {
+  display: inline-block;
+  margin-bottom: 30px;
+  color: #222;
+  font-size: 14px;
+}
+
+.detail-page .work-detail-back:hover {
+  color: #e52d42;
+}
+
+.detail-page .detail-not-found {
+  padding: 80px 0;
+  color: #777;
+  font-size: 16px;
+}
+
+.detail-page .work-detail-layout {
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  gap: 36px;
+  align-items: start;
+}
+
+/* =========================
+   LEFT — STUDENT PROFILE
+========================= */
+.detail-page .student-sidebar {
+  min-width: 0;
+  padding-top: 12px;
+}
+
+/* 공동 작품이면 학생 카드가 나란히 놓인다 */
+.detail-page .student-group {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px 16px;
+  margin-bottom: 4px;
+}
+
+.detail-page .student-person {
+  flex: 1 1 112px;
+  max-width: 140px;
+  min-width: 0;
+}
+
+.detail-page .student-profile-photo {
+  width: 112px;
+  height: 122px;
+  margin: 0 auto 16px;
+  background: #dedede;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.detail-page .student-profile-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* 3:4 사진이 거의 정사각형인 박스에 들어가므로 머리가 잘리지 않게 위쪽 기준 */
+  object-position: center top;
+}
+
+.detail-page .student-name {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.detail-page .student-name strong {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.detail-page .student-role {
+  margin: 0 0 12px;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.detail-page .student-description {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.65;
+  letter-spacing: -0.035em;
+  white-space: pre-line;
+  overflow-wrap: break-word;
+}
+
+.detail-page .student-description + .student-description {
+  margin-top: 14px;
+}
+
+.detail-page .student-members {
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 13px;
+  line-height: 1.7;
+  color: #555;
+}
+
+/* =========================
+   OTHER PROJECT
+========================= */
+.detail-page .other-projects {
+  margin-top: 38px;
+  padding: 0;
+}
+
+.detail-page .other-projects h2 {
+  margin: 0 0 16px;
+  text-align: right;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.detail-page .other-project-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: stretch;
+}
+
+.detail-page .other-project-link {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  font-size: 16px;
+  color: #333;
+  text-align: right;
+  transition: color 0.2s ease;
+}
+
+.detail-page .other-project-link:hover {
+  color: #e52d42;
+}
+
+.detail-page .other-project-arrow {
+  font-size: 22px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.detail-page .other-project-empty {
+  text-align: right;
+  color: #888;
+  font-size: 13px;
+}
+
+/* =========================
+   RIGHT — PROJECT MEDIA
+========================= */
+.detail-page .detail-work-content {
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.detail-page .detail-main-media {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #dedede;
+  overflow: hidden;
+}
+
+.detail-page .detail-main-media iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* 하단 세로형 작품 이미지 — 비어 있으면 회색 자리만 */
+.detail-page .detail-poster {
+  width: 100%;
+  aspect-ratio: 0.46;
+  background: #dedede;
+  overflow: hidden;
+}
+
+/* 이미지가 들어오면 원본 세로 비율 사용 */
+.detail-page .detail-poster.has-image {
+  aspect-ratio: auto;
+  background: transparent;
+  overflow: visible;
+}
+
+.detail-page .detail-poster img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* =========================
+   TOP BUTTON
+========================= */
+.detail-page .detail-top-button {
+  position: fixed;
+  right: 30px;
+  bottom: 35px;
+  z-index: 20;
+  width: 46px;
+  height: 46px;
+  border: 1px solid #eee;
+  border-radius: 50%;
+  background: #fff;
+  color: #111;
+  font-size: 28px;
+  line-height: 1;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 12%);
+}
+
+/* =========================
+   TABLET
+========================= */
+@media (max-width: 1024px) {
+  .detail-page .work-detail-layout {
+    grid-template-columns: 240px minmax(0, 1fr);
+    gap: 24px;
+  }
+
+  .detail-page .student-description {
+    font-size: 13px;
+  }
+
+  .detail-page .other-project-link {
+    font-size: 14px;
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+@media (max-width: 640px) {
+  .detail-page .work-detail-page {
+    padding-top: 15px;
+  }
+
+  .detail-page .work-detail-layout {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+
+  .detail-page .student-sidebar {
+    padding-top: 0;
+  }
+
+  .detail-page .student-description,
+  .detail-page .student-members {
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 14px;
+  }
+
+  .detail-page .other-projects {
+    max-width: 480px;
+    margin: 30px auto 0;
+  }
+
+  .detail-page .detail-work-content {
+    gap: 14px;
+  }
+
+  .detail-page .detail-top-button {
+    width: 42px;
+    height: 42px;
+    right: 18px;
+    bottom: 20px;
+  }
+}

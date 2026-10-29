@@ -1,220 +1,129 @@
-import React, { useState, useRef } from 'react';
-import { PROJECT_TABS, getSubCategories } from '../data/projectTabs';
-import { projects } from '../data/projects';
-import { teamProjects } from '../data/teamProjects';
-import { graduateByStudentId } from '../data/graduates';
+import React, { useState, useMemo } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
+import { PROJECT_TABS, TAB_MAP, getSubCategories } from '../data/projectTabs';
+import { allWorks, getWorkAuthor, getWorkTitle, matchesSub } from '../data/works';
 import { FALLBACK } from '../hooks/useImageFallback';
 import SafeImg from '../components/SafeImg';
-import useScrollReveal from '../hooks/useScrollReveal';
-import useModal from '../hooks/useModal';
-import Modal from '../components/Modal';
-import PageHero from '../components/PageHero';
 import './ProjectPage.css';
 
-const getWorks = (tabId, subId) => {
-  if (tabId === 'team') return teamProjects.filter((p) => p.group === subId);
-  return projects.filter((p) => p.tab === tabId && (p.roles ?? [p.role]).includes(subId));
-};
-
-const getTabTotal = (tabId) => {
-  if (tabId === 'team') return teamProjects.length;
-  return projects.filter((p) => p.tab === tabId).length;
-};
-
-const toEmbedUrl = (url) => {
-  if (!url) return '';
-  if (url.includes('/embed/')) return url;
-  const short = url.match(/youtu\.be\/([^?&]+)/);
-  if (short) return `https://www.youtube.com/embed/${short[1]}`;
-  const long = url.match(/[?&]v=([^?&]+)/);
-  if (long) return `https://www.youtube.com/embed/${long[1]}`;
-  return url;
-};
+const matchesKeyword = (work, keyword) =>
+  !keyword || `${getWorkTitle(work)} ${getWorkAuthor(work)}`.toLowerCase().includes(keyword);
 
 const ProjectPage = () => {
-  const [activeTab,  setActiveTab]  = useState('multimedia');
-  const { modalData, setModalData } = useModal();
-  const categoryBarRef = useRef(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [filter, setFilter] = useState('all');
 
-  useScrollReveal(activeTab, 0.08);
+  // ?q=<검색어> (Navbar 검색), ?category=<탭 id> (상세 페이지 돌아가기)
+  const keyword = (searchParams.get('q') ?? '').trim().toLowerCase();
+  const categoryParam = searchParams.get('category');
+
+  // 카테고리 지정이 없고 검색 중이면, 결과가 있는 첫 탭을 연다
+  const activeTab = useMemo(() => {
+    if (TAB_MAP[categoryParam]) return categoryParam;
+    if (keyword) {
+      const hit = PROJECT_TABS.find((t) => allWorks.some((w) => w.tab === t.id && matchesKeyword(w, keyword)));
+      if (hit) return hit.id;
+    }
+    return PROJECT_TABS[0].id;
+  }, [categoryParam, keyword]);
+
+  const tab = TAB_MAP[activeTab];
+  const filters = [{ id: 'all', label: 'ALL' }, ...getSubCategories(tab)];
+
+  const visible = allWorks.filter(
+    (w) => w.tab === activeTab && matchesSub(w, filter) && matchesKeyword(w, keyword)
+  );
 
   const switchTab = (id) => {
-    setActiveTab(id);
-    categoryBarRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const next = new URLSearchParams(searchParams);
+    next.set('category', id);
+    setSearchParams(next, { replace: true });
+    setFilter('all');
   };
 
   return (
-    <div>
-      <PageHero
-        breadcrumb="HOME › 작품소개"
-        title="작품소개"
-        desc="미디어콘텐츠학부 졸업생들의 작품을 카테고리별로 만나보세요."
-        badge={<span className="page-total-badge">전체 {getTabTotal(activeTab)}개 작품</span>}
-      />
+    <div className="project-page">
+      <main id="work">
+        <section className="intro" aria-labelledby="page-title">
+          <h1 id="page-title">Portfolio</h1>
+          <p className="intro-korean">질문에서 시작된 가능성이 하나의 결과물을 만들어낸 순간을 소개합니다.</p>
+          <p className="intro-english">2026 Seowon University Graduates</p>
+        </section>
 
-      {/* CATEGORY TABS */}
-      <div id="category-bar" ref={categoryBarRef} role="tablist" aria-label="작품 카테고리">
-        <div className="container">
-          <div className="tab-inner">
-            {PROJECT_TABS.map((tab) => (
+        <section className="media-section" aria-label="작품 분야 선택">
+          <div className="media-categories">
+            {PROJECT_TABS.map((t) => (
               <button
-                key={tab.id}
-                className={`tab-btn${activeTab === tab.id ? ' active' : ''}`}
-                id={`tab-${tab.id}`}
-                role="tab"
-                aria-selected={activeTab === tab.id}
-                aria-controls={`panel-${tab.id}`}
-                onClick={() => switchTab(tab.id)}
+                key={t.id}
+                type="button"
+                className={`media-category${activeTab === t.id ? ' is-active' : ''}`}
+                aria-pressed={activeTab === t.id}
+                onClick={() => switchTab(t.id)}
               >
-                {tab.label}
+                <span className="asset-slot category-icon" />
+                <span className="category-label">{t.label}</span>
               </button>
             ))}
           </div>
-        </div>
-      </div>
+        </section>
 
-      {/* CONTENT AREA */}
-      <main id="content-area">
-        <div className="container">
-          {PROJECT_TABS.map((tab) => (
-            <section
-              key={tab.id}
-              className={`cat-panel${activeTab === tab.id ? ' active' : ''}`}
-              id={`panel-${tab.id}`}
-              role="tabpanel"
-              aria-labelledby={`tab-${tab.id}`}
-            >
-              {getSubCategories(tab).map((sub) => {
-                const works = getWorks(tab.id, sub.id);
-                return (
-                  <div key={sub.id} className="work-group reveal">
-                    <div className="sub-cat-strip">
-                      <span className="sub-cat-name">{sub.label}</span>
-                      <span className="sub-cat-count">{works.length}개</span>
-                    </div>
-                    <div className="work-grid">
-                      {works.map((work) => (
-                        <div
-                          key={work.id}
-                          className="work-card"
-                          tabIndex={0}
-                          role="button"
-                          aria-label={`${work.title} 상세 보기`}
-                          onClick={() => setModalData({ ...work, tabLabel: tab.label, subLabel: sub.label })}
-                          onKeyDown={(e) => {
-                            if (e.key === 'Enter' || e.key === ' ') {
-                              e.preventDefault();
-                              setModalData({ ...work, tabLabel: tab.label, subLabel: sub.label });
-                            }
-                          }}
-                        >
-                          <div className="work-thumb">
-                            {work.thumbnail ? (
-                              <SafeImg src={work.thumbnail} fallbackSrc={FALLBACK.image} alt={work.title} />
-                            ) : (
-                              <>
-                                <span className="work-thumb-icon">{sub.icon}</span>
-                                <span>작품 썸네일 이미지<br />({sub.label})</span>
-                              </>
-                            )}
-                          </div>
-                          <div className="work-info">
-                            <p className="work-num">{tab.label} · {sub.label}</p>
-                            <p className="work-name">{work.title}</p>
-                            <p className="work-author">{work.members ? work.teamName : (graduateByStudentId[work.studentId]?.name ?? '-')}</p>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                );
-              })}
-            </section>
-          ))}
-        </div>
+        <section className="portfolio-section" aria-label="작품 모아보기">
+          <div className="role-filters" role="group" aria-label="작품 필터">
+            {filters.map((f) => (
+              <button
+                key={f.id}
+                type="button"
+                className={`role-button${filter === f.id ? ' is-active' : ''}`}
+                aria-pressed={filter === f.id}
+                onClick={() => setFilter(f.id)}
+              >
+                {f.label}
+              </button>
+            ))}
+          </div>
+
+          <div className="portfolio-grid" aria-live="polite">
+            {visible.map((work) => (
+              <article key={work.id} className="project-card">
+                <Link
+                  to={`/project/${work.id}`}
+                  className="project-link"
+                  aria-label={`${getWorkTitle(work)} 작품 소개 보기`}
+                >
+                  <span className="project-thumb">
+                    {work.thumbnail && (
+                      <SafeImg src={work.thumbnail} fallbackSrc={FALLBACK.image} alt="" />
+                    )}
+                  </span>
+                  <h2 className="project-title">{getWorkTitle(work)}</h2>
+                  {work.title && <p className="project-author">{getWorkAuthor(work)}</p>}
+                </Link>
+              </article>
+            ))}
+          </div>
+
+          {visible.length === 0 && (
+            <p className="empty-state">해당 조건에 맞는 작품이 없습니다.</p>
+          )}
+        </section>
       </main>
 
-      <Modal
-        isOpen={!!modalData}
-        onClose={() => setModalData(null)}
-        boxClassName="work-modal-box"
-        ariaLabelledby="modalWorkTitle"
+      <button
+        type="button"
+        className="back-to-top"
+        aria-label="맨 위로 이동"
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
       >
-        {modalData && (
-          <>
-            {modalData.videoUrl ? (
-              <div className="modal-video-ph">
-                <iframe
-                  src={toEmbedUrl(modalData.videoUrl)}
-                  title={modalData.title}
-                  allowFullScreen
-                  loading="lazy"
-                />
-              </div>
-            ) : (
-              <div className="modal-video-ph">
-                <div className="play-icon" aria-hidden="true" />
-                <span>소개 영상 준비 중</span>
-              </div>
-            )}
-
-            <div className="work-modal-body">
-              <span className="modal-badge">{modalData.tabLabel} &gt; {modalData.subLabel}</span>
-              <h2 className="modal-work-title" id="modalWorkTitle">{modalData.title}</h2>
-              <p className="modal-work-author">
-                {modalData.members ? modalData.teamName : (graduateByStudentId[modalData.studentId]?.name ?? '-')} · 미디어콘텐츠학부
-              </p>
-              <div className="modal-divider" />
-
-              <p className="modal-section-label">작품 소개</p>
-              <div className="work-modal-text-ph">{modalData.description}</div>
-
-              {modalData.proposalImages?.length > 0 && (
-                <>
-                  <p className="modal-section-label">제안서 이미지</p>
-                  <div className="proposal-images">
-                    {modalData.proposalImages.map((src, i) => (
-                      <SafeImg key={i} src={src} fallbackSrc={FALLBACK.image} alt={`제안서 ${i + 1}`} />
-                    ))}
-                  </div>
-                </>
-              )}
-
-              <div className="modal-meta-grid">
-                <div className="modal-meta-item">
-                  <p className="m-label">카테고리</p>
-                  <p className="m-value">{modalData.tabLabel}</p>
-                </div>
-                <div className="modal-meta-item">
-                  <p className="m-label">직군 / 그룹</p>
-                  <p className="m-value">{modalData.subLabel}</p>
-                </div>
-                <div className="modal-meta-item">
-                  <p className="m-label">이메일</p>
-                  <p className="m-value">{modalData.contact?.email ?? '-'}</p>
-                </div>
-                {modalData.contact?.phone && (
-                  <div className="modal-meta-item">
-                    <p className="m-label">전화번호</p>
-                    <p className="m-value">{modalData.contact.phone}</p>
-                  </div>
-                )}
-              </div>
-
-              {modalData.members && (
-                <>
-                  <p className="modal-section-label">팀원</p>
-                  <ul className="modal-members">
-                    {modalData.members.map((m, i) => (
-                      <li key={i}>{m.name} · {m.role}</li>
-                    ))}
-                  </ul>
-                </>
-              )}
-            </div>
-          </>
-        )}
-      </Modal>
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path
+            d="M12 21V3M4.5 10.5 12 3l7.5 7.5"
+            stroke="currentColor"
+            strokeWidth="1.7"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </button>
     </div>
   );
 };
