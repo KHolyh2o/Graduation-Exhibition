@@ -761,13 +761,11 @@
 /* ==========================================
    PROFESSOR POPUP - 1280px
 ========================================== */
-
-/* 팝업 열리면 배경 스크롤 금지 */
 body.dept-message-open {
   overflow: hidden;
 }
 
-/* 화면 전체 어두운 배경 */
+/* 배경 */
 .dept-message-overlay {
   position: fixed;
   inset: 0;
@@ -786,54 +784,43 @@ body.dept-message-open {
   display: none !important;
 }
 
-/* 실제 흰색 팝업 */
+/* 팝업 전체 박스 */
 .dept-message-panel {
   position: relative;
-
   width: 100%;
-  max-width: 1280px;
-  height: 90vh;
-  height: 90dvh;
-
-  min-height: 0;
-  overflow: hidden;
+  max-width: 1180px;   /* 1280보다 조금 줄임 */
+  height: 88vh;
+  height: 88dvh;
 
   background: #fff;
   color: #222;
 
-  border-radius: 5px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+  border-radius: 4px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
 }
 
-/* 스크롤은 이 영역에서만 */
+/* 내부 스크롤 */
 .dept-message-frame {
   width: 100%;
   height: 100%;
-  min-height: 0;
-
-  margin: 0;
-  padding: 65px 65px 85px;
-
-  box-sizing: border-box;
   overflow-y: auto;
-  overscroll-behavior: contain;
-  scrollbar-gutter: stable;
 
+  padding: 42px 56px 56px;
+  box-sizing: border-box;
+  scrollbar-gutter: stable;
   outline: none;
 }
 
-/* ==========================================
-   닫기 버튼 - 팝업 내부 고정
-========================================== */
-
+/* 닫기 버튼 */
 .dept-message-close {
   position: absolute;
-  top: 16px;
-  right: 20px;
+  top: 14px;
+  right: 18px;
   z-index: 10;
 
-  width: 55px;
-  height: 55px;
+  width: 42px;
+  height: 42px;
 
   display: flex;
   align-items: center;
@@ -841,14 +828,14 @@ body.dept-message-open {
 
   padding: 0;
   border: none;
-  background: #fff;
+  background: transparent;
 
   color: #aaa;
   cursor: pointer;
 }
 
 .dept-message-close span {
-  font-size: 60px;
+  font-size: 44px;
   font-weight: 200;
   line-height: 1;
 }
@@ -857,22 +844,15 @@ body.dept-message-open {
   color: #111;
 }
 
-/* ==========================================
-   팝업 로고
-========================================== */
-
-
-/* 팝업 상단 로고 이미지 */
+/* 상단 로고 */
 .dept-message-logo {
-  width: 160px;
-  height: 80px;
-  margin: 0 auto 65px;
+  width: 110px;
+  height: 56px;
+  margin: 0 auto 34px;
 
   display: flex;
   align-items: center;
   justify-content: center;
-
-  background: transparent;
   overflow: hidden;
 }
 
@@ -883,29 +863,17 @@ body.dept-message-open {
   object-fit: contain;
 }
 
-/* 모바일 */
-@media (max-width: 768px) {
-  .dept-message-logo {
-    width: 110px;
-    height: 60px;
-    margin-bottom: 40px;
-  }
-}
-
-/* ==========================================
-   교수 사진 + 축사
-========================================== */
-
+/* 본문 레이아웃 */
 .dept-message-body {
   display: grid;
-  grid-template-columns: 225px minmax(0, 1fr);
-  gap: 45px;
+  grid-template-columns: 170px minmax(0, 1fr);
+  gap: 38px;
   align-items: start;
 }
 
 /* 교수 사진 */
 .dept-message-photo {
-  width: 225px;
+  width: 170px;
   aspect-ratio: 0.75;
   overflow: hidden;
   background: #c8c8c8;
@@ -918,139 +886,183 @@ body.dept-message-open {
   object-fit: cover;
 }
 
-/* 오른쪽 텍스트 */
-.dept-message-text {
-  min-width: 0;
-}
-
+/* 이름 */
 .dept-message-name {
-  margin: 0 0 8px;
-  font-size: 46px;
+  margin: 0 0 6px;
+  font-size: 28px;
   font-weight: 700;
   line-height: 1.2;
+  letter-spacing: -0.04em;
 }
 
+/* 소속/직책 */
 .dept-message-position {
-  margin: 0 0 42px;
-  color: #555;
-  font-size: 26px;
+  margin: 0 0 28px;
+  color: #666;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
 }
 
+/* ==========================================
+   축사 제목 / 본문 구분
+========================================== */
+
+/* 제목 */
 .dept-message-quote {
-  margin: 0 0 34px;
-  font-size: 26px;
-  font-weight: 500;
-  color: #555;
+  margin: 0 0 18px;
+
+  color: #222;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.6;
+  letter-spacing: -0.03em;
+
+  /* 제목 느낌 강조 */
+  font-family:
+    "Noto Serif KR",
+    "Nanum Myeongjo",
+    "Times New Roman",
+    serif;
 }
 
+/* 본문 */
 .dept-message-content {
-  font-size: 24px;
-  line-height: 1.75;
   color: #555;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.95;
+  letter-spacing: -0.02em;
 
   white-space: pre-line;
   overflow-wrap: break-word;
+
+  font-family:
+    "Pretendard",
+    "Noto Sans KR",
+    "Apple SD Gothic Neo",
+    "Malgun Gothic",
+    sans-serif;
+}
+
+/* 본문 문단 간격 느낌 */
+.dept-message-content br + br {
+  content: "";
 }
 
 /* ==========================================
-   태블릿
+   TABLET
 ========================================== */
 
 @media (max-width: 1000px) {
+  .dept-message-panel {
+    max-width: 960px;
+  }
 
   .dept-message-frame {
-    padding: 65px 35px;
+    padding: 38px 36px 44px;
+  }
+
+  .dept-message-logo {
+    width: 96px;
+    height: 50px;
+    margin-bottom: 28px;
   }
 
   .dept-message-body {
-    grid-template-columns: 180px minmax(0, 1fr);
-    gap: 30px;
+    grid-template-columns: 145px minmax(0, 1fr);
+    gap: 28px;
   }
 
   .dept-message-photo {
-    width: 180px;
+    width: 145px;
   }
 
   .dept-message-name {
-    font-size: 36px;
+    font-size: 24px;
   }
 
-  .dept-message-position,
+  .dept-message-position {
+    font-size: 15px;
+    margin-bottom: 24px;
+  }
+
   .dept-message-quote {
-    font-size: 21px;
+    font-size: 18px;
+    margin-bottom: 16px;
   }
 
   .dept-message-content {
-    font-size: 19px;
+    font-size: 14px;
+    line-height: 1.9;
   }
 }
 
 /* ==========================================
-   모바일
+   MOBILE
 ========================================== */
 
 @media (max-width: 768px) {
-
   .dept-message-overlay {
     padding: 12px;
   }
 
   .dept-message-panel {
-    height: 94vh;
-    height: 94dvh;
-    border-radius: 4px;
+    max-width: 100%;
+    height: 92vh;
+    height: 92dvh;
   }
 
   .dept-message-frame {
-    padding: 65px 22px 50px;
+    padding: 34px 20px 34px;
   }
 
   .dept-message-close {
     top: 10px;
     right: 10px;
-    width: 42px;
-    height: 42px;
+    width: 36px;
+    height: 36px;
   }
 
   .dept-message-close span {
-    font-size: 45px;
+    font-size: 36px;
   }
 
   .dept-message-logo {
-    width: 110px;
-    height: 60px;
-    margin-bottom: 40px;
+    width: 86px;
+    height: 44px;
+    margin-bottom: 24px;
   }
 
   .dept-message-body {
     grid-template-columns: 1fr;
-    gap: 25px;
+    gap: 22px;
   }
 
   .dept-message-photo {
-    width: 150px;
+    width: 120px;
   }
 
   .dept-message-name {
-    font-size: 32px;
+    font-size: 24px;
   }
 
   .dept-message-position {
-    font-size: 18px;
-    margin-bottom: 28px;
+    font-size: 14px;
+    margin-bottom: 20px;
   }
 
   .dept-message-quote {
-    font-size: 20px;
-    margin-bottom: 25px;
+    font-size: 17px;
+    margin-bottom: 14px;
   }
 
   .dept-message-content {
-    font-size: 16px;
-    line-height: 1.8;
+    font-size: 14px;
+    line-height: 1.85;
   }
 }
-
 /* ==========================================
    PROFESSOR CARD 디자인 원상복구
 ========================================== */

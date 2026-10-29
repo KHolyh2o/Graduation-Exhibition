@@ -578,16 +578,23 @@ body.page-index {
 }
 
 
+
 /* ==========================================
-   06. CREDIT
+   CREDIT - 고정 명단
 ========================================== */
 
 .main-credit {
-  padding: 105px 0 70px;
+  padding: 105px 0 80px;
   background: #fff;
 }
 
-/* 제목 / 로고 */
+.credit-inner {
+  width: calc(100% - 40px);
+  max-width: 1160px;
+  margin: 0 auto;
+}
+
+/* 제목 */
 .credit-header {
   display: flex;
   align-items: center;
@@ -598,69 +605,140 @@ body.page-index {
   margin: 0;
   font-size: 37px;
   font-weight: 500;
-  letter-spacing: -0.04em;
 }
 
 .credit-logo {
   width: 245px;
   height: 42px;
-  flex-shrink: 0;
   overflow: hidden;
 }
 
-.credit-logo img {
-  object-fit: contain;
-}
-
-/* 소제목 */
 .credit-subtitle {
-  margin: 8px 0 25px;
-
+  margin: 8px 0 35px;
   font-size: 12px;
   color: #666;
 }
 
-/* 크레딧 행 */
+/* ======================================
+   명단 공통
+====================================== */
+
 .credit-row {
   display: grid;
   grid-template-columns: 160px minmax(0, 1fr);
   gap: 30px;
 
-  padding: 20px 0;
-  border-bottom: 1px solid #d3d3d3;
-}
-
-.credit-row:first-of-type {
-  border-top: 1px solid #d3d3d3;
+  padding: 22px 0;
+  border-bottom: 1px solid #ccc;
 }
 
 .credit-row h3 {
   margin: 0;
   font-size: 15px;
   font-weight: 700;
-}
-
-.credit-content {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px 35px;
-}
-
-.credit-content p {
-  margin: 0;
-
-  font-size: 13px;
   line-height: 1.8;
-  word-break: keep-all;
 }
 
-.credit-content p strong {
-  margin-right: 12px;
+/* ======================================
+   졸업전시위원회
+====================================== */
+
+.credit-committee {
+  display: grid;
+  grid-template-columns: repeat(4, max-content);
+  gap: 14px 32px;
+  align-items: start;
+}
+
+.credit-team {
+  display: flex;
+  align-items: baseline;
+  gap: 15px;
+  white-space: nowrap;
+}
+
+.credit-team strong {
+  font-size: 13px;
   font-weight: 700;
 }
 
-.credit-content p span {
-  color: #444;
+.credit-team span {
+  font-size: 13px;
+  font-weight: 400;
+}
+
+/* ======================================
+   교수진 / 졸업생 명단
+====================================== */
+
+.credit-names {
+  font-size: 13px;
+  line-height: 2;
+  font-weight: 400;
+  word-break: keep-all;
+}
+
+.credit-graduates p {
+  margin: 0 0 5px;
+  font-size: 13px;
+  line-height: 2;
+}
+
+/* ======================================
+   TABLET
+====================================== */
+
+@media (max-width: 1100px) {
+  .credit-committee {
+    grid-template-columns: repeat(2, max-content);
+    gap: 14px 30px;
+  }
+}
+
+/* ======================================
+   MOBILE
+====================================== */
+
+@media (max-width: 768px) {
+
+  .main-credit {
+    padding: 75px 0 60px;
+  }
+
+  .credit-header h2 {
+    font-size: 30px;
+  }
+
+  .credit-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 20px 0;
+  }
+
+  .credit-row h3 {
+    font-size: 14px;
+  }
+
+  .credit-committee {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .credit-team {
+    gap: 15px;
+  }
+
+  .credit-team strong {
+    min-width: 55px;
+  }
+
+  .credit-team strong,
+  .credit-team span,
+  .credit-names,
+  .credit-graduates p {
+    font-size: 12px;
+    line-height: 1.9;
+  }
 }
 
 
@@ -1021,4 +1099,207 @@ body.page-index {
     transition: none;
   }
 
+}
+
+/* ==========================================
+   INDEX INTRO
+========================================== */
+
+/* 인트로 재생 중 배경 스크롤 방지 */
+html.index-intro-pending,
+html.index-intro-pending body {
+  overflow: hidden;
+}
+
+/* 인트로가 끝나기 전 메인 콘텐츠 숨김 */
+html.index-intro-pending body.page-index
+#common-header,
+html.index-intro-pending body.page-index
+.main-page,
+html.index-intro-pending body.page-index
+#common-footer,
+html.index-intro-pending body.page-index
+.main-top-button {
+  visibility: hidden;
+  opacity: 0;
+}
+
+
+/* ==========================================
+   전체 화면 인트로
+========================================== */
+
+.index-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+
+  background: #fff;
+  overflow: hidden;
+
+  opacity: 1;
+  visibility: visible;
+
+  transition:
+    opacity 0.75s ease,
+    visibility 0.75s ease;
+}
+
+/* WebP 이미지 */
+
+/* 인트로 전체 화면 */
+.index-intro {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  z-index: 9999;
+
+  overflow: hidden;
+  background: #fff;
+}
+
+/* WebP 화면 꽉 채우기 */
+.index-intro-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+
+
+/* ==========================================
+   SKIP 버튼
+========================================== */
+
+.index-intro-skip {
+  position: absolute;
+  right: 35px;
+  bottom: 35px;
+  z-index: 2;
+
+  padding: 10px 20px;
+
+  border: 1px solid #777;
+  border-radius: 30px;
+
+  background: rgba(255,255,255,0.85);
+  color: #111;
+
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.index-intro-skip:hover {
+  background: #111;
+  color: #fff;
+}
+
+
+/* ==========================================
+   인트로 종료 → 메인 등장
+========================================== */
+
+html.index-intro-complete body.page-index
+#common-header,
+html.index-intro-complete body.page-index
+.main-page,
+html.index-intro-complete body.page-index
+#common-footer {
+  animation: indexIntroReveal 1s ease-out both;
+}
+
+@keyframes indexIntroReveal {
+
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 768px) {
+
+  .index-intro-image {
+    object-fit: contain;
+  }
+
+  .index-intro-skip {
+    right: 20px;
+    bottom: 25px;
+
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+
+}
+
+/* 움직임 최소화 설정 */
+@media (prefers-reduced-motion: reduce) {
+  .index-intro,
+  html.index-intro-complete body.page-index
+  #common-header,
+  html.index-intro-complete body.page-index
+  .main-page,
+  html.index-intro-complete body.page-index
+  #common-footer {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ==========================================
+   메인 페이지 검색 클릭 문제 수정
+========================================== */
+
+/* 인트로 종료 후 클릭 차단 해제 */
+html.index-intro-complete .index-intro,
+.index-intro.is-hiding {
+  pointer-events: none !important;
+}
+
+/* 인트로 종료 후에는 화면에서 숨김 */
+html.index-intro-complete .index-intro {
+  visibility: hidden;
+}
+
+/* PC 헤더가 메인 영상 위에 표시되도록 */
+@media (min-width: 769px) {
+  .page-index .common-header {
+    position: relative;
+    z-index: 1000;
+  }
+}
+
+/* 모바일 헤더는 기존 sticky 유지 */
+@media (max-width: 768px) {
+  .page-index .common-header {
+    z-index: 1000;
+  }
+}
+
+/* 검색창이 열렸을 때 */
+.page-index .common-search-panel:not([hidden]) {
+  z-index: 1002;
 }

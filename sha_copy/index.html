@@ -13,6 +13,13 @@
     content="2026 서원대학교 미디어콘텐츠학부 졸업전시회"
   >
 
+<!-- 메인 페이지 인트로 준비 -->
+<script>
+  document.documentElement.classList.add(
+    "index-intro-pending"
+  );
+</script>
+
   <!-- 폰트 -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,6 +42,32 @@
   <script src="js/index.js" defer></script>
 </head>
 
+<!-- ======================================
+     INDEX INTRO
+====================================== -->
+
+<div class="index-intro" id="index-intro">
+
+  <!-- 움직이는 WebP 이미지 -->
+  <img
+    class="index-intro-image"
+    id="index-intro-image"
+    src="../public/images/인트로.webp"
+    alt="2026 졸업전시회 인트로 애니메이션"
+    fetchpriority="high"
+  >
+
+  <!-- 인트로 건너뛰기 -->
+  <button
+    type="button"
+    class="index-intro-skip"
+    id="index-intro-skip"
+  >
+    SKIP
+  </button>
+
+</div>
+
 <body class="page-index">
 
   <!-- ======================================
@@ -53,9 +86,11 @@
     <section
       class="main-hero-video"
       aria-label="2026 졸업전시회 메인 영상"
-    >
+    ><img src="../public/images/메인배너_수정예정.png" alt="" srcset="">
 
-      <video
+
+
+      <!-- <video
         class="hero-video"
         id="main-hero-video"
         autoplay
@@ -64,7 +99,7 @@
         playsinline
         preload="metadata"
         aria-label="2026 졸업전시회 메인 비주얼"
-      ></video>
+      ></video>-->
 
     </section>
 
@@ -334,7 +369,7 @@
                 충청북도 청주시 서원구 무심서로 377-3
               </p>
 
-              <p>전시장 상세 위치 입력</p>
+              <p>서원대학교 미래창조관 3층 상상플러스</p>
 
               <p class="info-address-en">
                 377-3 Musimseo-ro, Seowon-gu,<br>
@@ -387,95 +422,103 @@
     <!-- ====================================
          06. CREDIT
     ==================================== -->
-    <section class="main-credit" data-reveal>
+   
+<!-- ======================================
+     06. CREDIT
+====================================== -->
 
-      <div class="credit-inner">
+<section class="main-credit" data-reveal>
+  <div class="credit-inner">
 
-        <!-- Credit 제목 / 로고 -->
-        <div class="credit-header">
+    <!-- 제목 -->
+    <div class="credit-header">
+      <h2>Credit</h2>
 
-          <h2>Credit</h2>
+      <!-- 기존 로고 이미지 공간 유지 -->
+      <div
+        class="credit-logo"
+        data-main-image="creditLogo"
+      ></div>
+    </div>
 
-          <!-- 옆쪽 로고 이미지 공간 -->
-          <div
-            class="credit-logo"
-            data-main-image="creditLogo"
-            aria-label="크레딧 로고 이미지"
-          ></div>
+    <p class="credit-subtitle">
+      2026 Media Contents Graduation · 서원대학교 미디어콘텐츠학부
+    </p>
 
+
+    <!-- 졸업전시위원회 -->
+    <div class="credit-row">
+      <h3>졸업전시위원회</h3>
+
+      <div class="credit-committee">
+
+        <div class="credit-team">
+          <strong>기획팀</strong>
+          <span>박희원 이서영</span>
         </div>
 
-        <p class="credit-subtitle">
-          2026 Media Contents Graduation ·
-          서원대학교 미디어콘텐츠학부
-        </p>
-
-
-        <!-- 졸업전시위원회 -->
-        <div class="credit-row">
-
-          <h3>졸업전시위원회</h3>
-
-          <div class="credit-content">
-            <p>
-              <strong>기획팀</strong>
-              <span>명단 입력</span>
-            </p>
-
-            <p>
-              <strong>디자인팀</strong>
-              <span>명단 입력</span>
-            </p>
-
-            <p>
-              <strong>개발팀</strong>
-              <span>명단 입력</span>
-            </p>
-
-            <p>
-              <strong>영상팀</strong>
-              <span>명단 입력</span>
-            </p>
-          </div>
-
+        <div class="credit-team">
+          <strong>디자인팀</strong>
+          <span>김가영 박소희</span>
         </div>
 
-
-        <!-- 교수진 -->
-        <div class="credit-row">
-
-          <h3>교수진</h3>
-
-          <div class="credit-content">
-
-            <p>
-              김병완 · 최홍렬 · 이병권 · 김금영 · 유해영 ·
-              조한주 · 김명미 · 이가하 · 강경화 · 박동식
-            </p>
-
-          </div>
-
+        <div class="credit-team">
+          <strong>개발팀</strong>
+          <span>김성수 신현아</span>
         </div>
 
+        <div class="credit-team">
+          <strong>영상팀</strong>
+          <span>박주원 박재민</span>
+        </div>
 
-        <!-- 졸업생 -->
-        <div class="credit-row">
-
-          <h3>졸업생</h3>
-
-          <div class="credit-content">
-
-            <p>
-              졸업생 명단 입력
-            </p>
-
-          </div>
-
+        <div class="credit-team">
+          <strong>운영팀</strong>
+          <span>한태희</span>
         </div>
 
       </div>
+    </div>
 
-    </section>
+
+    <!-- 교수진 -->
+    <div class="credit-row">
+      <h3>교수진</h3>
+
+      <div class="credit-names">
+        김병완　최홍렬　이병권　김금영　유해영　
+        조한주　김명미　이가하　강경화　박동식
+      </div>
+    </div>
+
+
+    <!-- 졸업생 -->
+    <div class="credit-row">
+      <h3>졸업생</h3>
+
+      <div class="credit-names credit-graduates">
+
+        <p>
+          강태구　김가영　김남준　김성민　김성수　김지현　박다인
+          박소희　박재민　박주원　박희원　배은경　변대섭　변재영　신권철
+        </p>
+
+        <p>
+          신상호　신현아　심규현　안세연　연수현　우나경　육근원
+          유성원　유세연　윤예원　이경현　이서영　이세현　이지은　장초빈
+        </p>
+
+        <p>
+          정소희　조찬혁　채미영　최영근　최정후　최준영
+          최지혜　한지연　한태희　Botirov Asadbek
+        </p>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
 
   </main>
 

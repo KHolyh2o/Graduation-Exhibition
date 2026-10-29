@@ -10,7 +10,7 @@
 const INDEX_ASSETS = {
 
   // 메인 영상
-  heroVideo: "",
+  heroVideo: "../public/images/메인배너_수정예정.png",
 
   // 전시 콘셉트 이미지
   concept: "",
@@ -21,14 +21,14 @@ const INDEX_ASSETS = {
   xr: "",
 
   // 전시 안내 지도
-  map: "",
+  map: "../public/images/학교지도.png",
 
   // Credit 로고
   creditLogo: "",
 
   // 학생 슬라이드 버튼 이미지
-  arrowPrev: "",
-  arrowNext: ""
+  arrowPrev: "../public/images/UI/slide_pre.png",
+  arrowNext: "../public/images/UI/slide_next.png"
 
 };
 
@@ -569,5 +569,159 @@ if (document.readyState === "loading") {
 } else {
 
   initIndexPage();
+
+}
+
+/* ==========================================
+   INDEX INTRO ANIMATION
+========================================== */
+
+function initIndexIntro() {
+
+  const intro =
+    document.getElementById("index-intro");
+
+  const image =
+    document.getElementById("index-intro-image");
+
+  const skip =
+    document.getElementById("index-intro-skip");
+
+  if (!intro || !image) return;
+
+
+  /* ========================================
+     설정값
+  ======================================== */
+
+  // WebP 애니메이션 길이에 맞게 수정
+  const INTRO_DURATION = 7000;
+
+  // 사라지는 효과
+  const FADE_DURATION = 750;
+
+  let introTimer = null;
+  let safetyTimer = null;
+  let started = false;
+  let finished = false;
+
+
+  /* ========================================
+     인트로 종료
+  ======================================== */
+
+
+/* 인트로 종료 */
+function finishIntro() {
+
+  if (finished) return;
+
+  finished = true;
+
+  clearTimeout(introTimer);
+  clearTimeout(safetyTimer);
+
+  // 인트로 종료 상태 설정
+  document.documentElement.classList.remove(
+    "index-intro-pending"
+  );
+
+  document.documentElement.classList.add(
+    "index-intro-complete"
+  );
+
+  // 인트로가 헤더 클릭을 막지 않도록 설정
+  intro.style.pointerEvents = "none";
+
+  // 서서히 사라지는 효과
+  intro.classList.add("is-hiding");
+
+  // 완전히 제거
+  window.setTimeout(() => {
+    intro.remove();
+  }, 750);
+
+}
+
+
+  /* ========================================
+     WebP 로드 후 재생 시간 시작
+  ======================================== */
+
+  function startIntro() {
+
+    if (started || finished) return;
+
+    started = true;
+
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (reduceMotion) {
+      finishIntro();
+      return;
+    }
+
+    introTimer = window.setTimeout(
+      finishIntro,
+      INTRO_DURATION
+    );
+
+  }
+
+
+  /* 이미지 로드 확인 */
+  if (image.complete) {
+
+    if (image.naturalWidth > 0) {
+      startIntro();
+    } else {
+      finishIntro();
+    }
+
+  } else {
+
+    image.addEventListener(
+      "load",
+      startIntro,
+      { once: true }
+    );
+
+    image.addEventListener(
+      "error",
+      finishIntro,
+      { once: true }
+    );
+
+  }
+
+
+  /* SKIP 버튼 */
+  skip?.addEventListener("click", finishIntro);
+
+  /* 파일 로딩 실패 등에 대비한 안전장치 */
+  safetyTimer = window.setTimeout(() => {
+    finishIntro();
+  }, 10000);
+
+}
+
+
+/* ==========================================
+   실행
+========================================== */
+
+if (document.readyState === "loading") {
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    initIndexIntro,
+    { once: true }
+  );
+
+} else {
+
+  initIndexIntro();
 
 }
