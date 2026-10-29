@@ -135,6 +135,52 @@ const projects = [
 ];
 
 /* ==========================================
+   작품 카드 표시 정보
+   작품마다 개별 수정 가능
+========================================== */
+
+const PROJECT_CARD_DATA = {
+
+  "multimedia-01": {
+    brand: "개인브랜드",
+    proposal: "농협은행",
+    author: "신현아",
+    thumbnail: "../public/images/project_thumnail/신현아_농협은행.png",
+    
+  },
+
+  "multimedia-02": {
+    brand: "하나은행",
+    proposal: "제안 이름",
+    author: "작가명",
+    thumbnail: "",
+  },
+
+  "multimedia-03": {
+    brand: "롯데아울렛",
+    proposal: "제안 이름",
+    author: "작가명",
+    thumbnail: "",
+  }
+
+  // 나머지 작품도 동일한 형식으로 추가
+};
+
+/* 기존 86개 작품 데이터에 반영 */
+projects.forEach((project) => {
+
+  project.brand ||= project.title;
+  project.proposal ||= "제안 이름";
+
+  const cardData = PROJECT_CARD_DATA[project.id];
+
+  if (cardData) {
+    Object.assign(project, cardData);
+  }
+
+});
+
+/* ==========================================
    4. 필터 조건
 ========================================== */
 function matchesFilter(project, filter) {
@@ -190,56 +236,104 @@ function loadImageSlots() {
 /* ==========================================
    6. 작품 카드 생성
 ========================================== */
+
+/* ==========================================
+   작품 카드 생성 - 세로형 디자인
+========================================== */
+
 function createProjectCard(project) {
 
   const article = document.createElement("article");
   article.className = "project-card";
 
-  // 카드 전체를 클릭 가능한 링크로 만듦
+  // 카드 전체 클릭
   const link = document.createElement("a");
   link.className = "project-link";
 
-  // 별도 상세 페이지 주소가 있으면 해당 주소 사용
-  // 없으면 공통 상세 페이지로 이동
   link.href = project.link ||
     `detail.html?id=${encodeURIComponent(project.id)}`;
 
   link.setAttribute(
     "aria-label",
-    `${project.title} 작품 소개 보기`
+    `${project.brand || project.title} ${project.proposal || ""} 작품 소개 보기`
   );
 
-  // 썸네일
-  const thumb = document.createElement("span");
+
+  /* ========================================
+     1. 상단 대표 이미지
+  ======================================== */
+
+  const thumb = document.createElement("div");
   thumb.className = "project-thumb";
 
   if (project.thumbnail) {
+
     const img = document.createElement("img");
 
     img.src = project.thumbnail;
-    img.alt = "";
+    img.alt = `${project.brand || project.title} 대표 이미지`;
     img.loading = "lazy";
 
     img.onerror = () => img.remove();
 
-    thumb.append(img);
+    thumb.appendChild(img);
   }
 
-  // 작품명
-  const title = document.createElement("h2");
-  title.className = "project-title";
-  title.textContent = project.title;
 
-  // 제작자
+  /* ========================================
+     2. 하단 텍스트 영역
+  ======================================== */
+
+  const info = document.createElement("div");
+  info.className = "project-info";
+  
+/* 작품별 하단 배경색 */
+
+
+  // 브랜드명 (파란 표시 영역)
+  const brand = document.createElement("p");
+  brand.className = "project-brand";
+
+  brand.textContent =
+    project.brand || project.title;
+
+
+  // 제안 이름 (주황 표시 영역)
+  const proposal = document.createElement("h2");
+  proposal.className = "project-proposal";
+
+  proposal.textContent =
+    project.proposal || "제안 이름";
+
+
+  // 학생명 (검은 표시 영역)
   const author = document.createElement("p");
   author.className = "project-author";
-  author.textContent = project.author;
 
-  link.append(thumb, title, author);
-  article.append(link);
+  author.textContent =
+    project.author || "작가명";
+
+
+  /* ========================================
+     3. 카드 조립
+  ======================================== */
+
+  info.append(
+    brand,
+    proposal,
+    author
+  );
+
+  link.append(
+    thumb,
+    info
+  );
+
+  article.appendChild(link);
 
   return article;
 }
+
 
 /* ==========================================
    7. 메인 포트폴리오 페이지

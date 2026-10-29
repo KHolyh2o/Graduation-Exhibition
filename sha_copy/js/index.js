@@ -1,190 +1,573 @@
-// 데이터는 진짜 프로젝트(../src/data)에서 그대로 가져옵니다.
-// 이 파일에서 데이터를 고치지 마세요 — src/data 안의 파일을 고치면 여기도 같이 바뀝니다.
-import { graduates } from '../../src/data/graduates.js';
 
-const FALLBACK_AVATAR = '/sha_copy/images/no-avatar.svg';
-const CARD_GAP = 20;
+"use strict";
 
-/* ── 이미지 경로 변환 + 로드 실패 시 대체 이미지 ─────────────────
-   src/data 안 이미지 경로는 '/images/...' 형태라서, 여기서는
-   'sha_copy/images'(진짜 public/images로 연결된 심볼릭 링크)를 앞에 붙여줍니다. */
-function safeImg(el, src, fallback) {
-  el.src = src ? `/sha_copy${src}` : fallback;
-  el.onerror = () => { el.onerror = null; el.src = fallback; };
-}
+/* ==========================================
+   1. 메인 페이지 이미지 / 영상 설정
 
-/* ── 프로필 카드 렌더링 ──────────────────────────────────────── */
-const track = document.getElementById('track');
-document.getElementById('profilesCount').textContent =
-  `총 ${graduates.length}명 · 클릭하면 상세 정보를 볼 수 있습니다`;
+   경로를 비워두면 빈 공간 유지
+========================================== */
 
-graduates.forEach((g) => {
-  const card = document.createElement('div');
-  card.className = 'profile-card';
-  card.tabIndex = 0;
-  card.setAttribute('role', 'button');
-  card.setAttribute('aria-label', `${g.name} 프로필 보기`);
+const INDEX_ASSETS = {
 
-  const imgWrap = document.createElement('div');
-  imgWrap.className = 'profile-card-img';
-  if (g.profileImage) {
-    const img = document.createElement('img');
-    img.alt = g.name;
-    img.loading = 'lazy';
-    safeImg(img, g.profileImage, FALLBACK_AVATAR);
-    imgWrap.appendChild(img);
-  } else {
-    imgWrap.innerHTML = `<div class="img-icon" aria-hidden="true">👤</div><span>프로필 사진 영역</span>`;
-  }
+  // 메인 영상
+  heroVideo: "",
 
-  const body = document.createElement('div');
-  body.className = 'profile-card-body';
-  body.innerHTML = `
-    <span class="profile-card-num">${g.id}</span>
-    <span class="profile-card-name">${g.name}</span>
-    <span class="profile-card-work">${g.role}</span>
-  `;
+  // 전시 콘셉트 이미지
+  concept: "",
 
-  card.appendChild(imgWrap);
-  card.appendChild(body);
+  // TARGET 이미지 3개
+  multimedia: "",
+  video: "",
+  xr: "",
 
-  const open = () => openModal(g);
-  card.addEventListener('click', open);
-  card.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
-  });
+  // 전시 안내 지도
+  map: "",
 
-  track.appendChild(card);
-});
+  // Credit 로고
+  creditLogo: "",
 
-/* ── 캐러셀 ──────────────────────────────────────────────────── */
-const trackOuter   = document.getElementById('trackOuter');
-const prevBtn       = document.getElementById('prevBtn');
-const nextBtn       = document.getElementById('nextBtn');
-const progressFill  = document.getElementById('progressFill');
-const progressLabel = document.getElementById('progressLabel');
+  // 학생 슬라이드 버튼 이미지
+  arrowPrev: "",
+  arrowNext: ""
 
-let curIdx   = 0;
-let cardW    = 280;
-let visibleN = 3.2;
-
-function calcLayout() {
-  const outerW = trackOuter.clientWidth - 56;
-  if (window.innerWidth <= 640) {
-    visibleN = 1.3;
-    cardW = Math.round(outerW / 1.3);
-  } else if (window.innerWidth <= 900) {
-    visibleN = 2.2;
-    cardW = Math.round((outerW - CARD_GAP) / 2.2);
-  } else {
-    visibleN = 3.2;
-    cardW = Math.round((outerW - CARD_GAP * 2) / 3.2);
-  }
-  applyCardWidth();
-}
-
-function applyCardWidth() {
-  track.querySelectorAll('.profile-card').forEach((c) => {
-    c.style.flex = `0 0 ${cardW}px`;
-    c.style.width = `${cardW}px`;
-  });
-  render();
-}
-
-function maxIdx() {
-  return Math.max(0, graduates.length - Math.floor(visibleN));
-}
-
-function moveTo(idx) {
-  curIdx = Math.max(0, Math.min(idx, maxIdx()));
-  render();
-}
-
-function render() {
-  const offset = curIdx * (cardW + CARD_GAP);
-  track.style.transform = `translateX(-${offset}px)`;
-
-  const max = maxIdx();
-  const pct = max > 0 ? (curIdx / max) * 100 : 0;
-  progressFill.style.width = `${pct}%`;
-
-  const shownEnd = Math.min(curIdx + Math.floor(visibleN), graduates.length);
-  progressLabel.textContent =
-    `${String(curIdx + 1).padStart(2, '0')} – ${String(shownEnd).padStart(2, '0')} / ${String(graduates.length).padStart(2, '0')}`;
-
-  prevBtn.disabled = curIdx === 0;
-  nextBtn.disabled = curIdx >= max;
-}
-
-prevBtn.addEventListener('click', () => moveTo(curIdx - 1));
-nextBtn.addEventListener('click', () => moveTo(curIdx + 1));
-window.addEventListener('resize', calcLayout);
-
-// 드래그 / 스와이프
-let startX = 0;
-let isDragging = false;
-trackOuter.addEventListener('mousedown',  (e) => { startX = e.clientX; isDragging = true; });
-trackOuter.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; isDragging = true; }, { passive: true });
-trackOuter.addEventListener('mouseleave', () => { isDragging = false; });
-const onDragEnd = (e) => {
-  if (!isDragging) return;
-  isDragging = false;
-  const endX = e.clientX ?? e.changedTouches?.[0]?.clientX ?? startX;
-  const diff = startX - endX;
-  if (Math.abs(diff) > 50) moveTo(diff > 0 ? curIdx + 1 : curIdx - 1);
 };
-trackOuter.addEventListener('mouseup', onDragEnd);
-trackOuter.addEventListener('touchend', onDragEnd, { passive: true });
 
-calcLayout();
 
-/* ── 모달 ────────────────────────────────────────────────────── */
-const modalOverlay = document.getElementById('modalOverlay');
-const modalCloseBtn = document.getElementById('modalCloseBtn');
+/* ==========================================
+   2. 학생 카드별 이미지 / 이동 주소
 
-function openModal(g) {
-  document.getElementById('modalNum').textContent = g.id;
-  document.getElementById('modalName').textContent = g.name;
-  document.getElementById('modalInfo').textContent = `학번: ${g.studentId}  |  직군: ${g.role}`;
-  safeImg(document.getElementById('modalImg'), g.profileImage, FALLBACK_AVATAR);
-  document.getElementById('modalImg').alt = g.name;
+   각 학생 카드 = 완성 이미지 1장
 
-  modalOverlay.classList.add('active');
-  document.body.style.overflow = 'hidden';
-}
+   아래에 실제 학생별 데이터 추가
+========================================== */
 
-function closeModal() {
-  modalOverlay.classList.remove('active');
-  document.body.style.overflow = '';
-}
+const STUDENT_OVERRIDES = {
 
-modalCloseBtn.addEventListener('click', closeModal);
-modalOverlay.addEventListener('click', (e) => {
-  if (e.target === modalOverlay) closeModal();
-});
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') closeModal();
-});
+  "student-01": {
+    image: "",
+    link: "student.html"
+  },
 
-/* ── 스크롤 reveal 애니메이션 ────────────────────────────────── */
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      revealObserver.unobserve(entry.target);
-    }
+  "student-02": {
+    image: "",
+    link: "student.html"
+  },
+
+  "student-03": {
+    image: "",
+    link: "student.html"
+  }
+
+  // student-04 ~ student-40
+  // 동일한 형식으로 추가 가능
+
+};
+
+
+/* ==========================================
+   3. 학생 40명 데이터 자동 생성
+========================================== */
+
+const MAIN_STUDENTS = Array.from(
+  { length: 40 },
+  (_, index) => {
+
+    const studentId =
+      `student-${String(index + 1).padStart(2, "0")}`;
+
+    const override =
+      STUDENT_OVERRIDES[studentId] || {};
+
+    return {
+      id: studentId,
+
+      image: override.image || "",
+
+      link: override.link || "student.html"
+    };
+
+  }
+);
+
+
+/* ==========================================
+   4. 이미지 삽입 공통 함수
+========================================== */
+
+function setIndexImage(container, imagePath, altText = "") {
+
+  if (!container) return;
+
+  container.replaceChildren();
+  container.classList.remove("has-image");
+
+  // 이미지 경로가 비어 있으면 공간 유지
+  if (!imagePath) return;
+
+  const image = document.createElement("img");
+
+  image.src = imagePath;
+  image.alt = altText;
+  image.loading = "lazy";
+
+  image.addEventListener("load", () => {
+    container.classList.add("has-image");
   });
-}, { threshold: 0.12 });
-document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
 
-/* ── 상단 메뉴 (모바일 햄버거) ───────────────────────────────── */
-const menuToggle = document.getElementById('menuToggle');
-const siteNav = document.getElementById('siteNav');
-menuToggle.addEventListener('click', () => {
-  const open = siteNav.classList.toggle('open');
-  menuToggle.setAttribute('aria-expanded', String(open));
-});
-window.addEventListener('scroll', () => {
-  document.getElementById('site-header').style.boxShadow =
-    window.scrollY > 10 ? '0 2px 16px rgba(0,0,0,0.10)' : 'none';
-});
+  image.addEventListener("error", () => {
+    image.remove();
+    container.classList.remove("has-image");
+  });
+
+  container.appendChild(image);
+
+}
+
+
+/* ==========================================
+   5. 메인 영상 설정
+========================================== */
+
+function initMainHeroVideo() {
+
+  const video =
+    document.getElementById("main-hero-video");
+
+  if (!video) return;
+
+  const videoPath = INDEX_ASSETS.heroVideo;
+
+  // 영상 경로가 없으면 빈 공간 유지
+  if (!videoPath) return;
+
+  video.src = videoPath;
+
+  video.muted = true;
+  video.loop = true;
+  video.autoplay = true;
+  video.playsInline = true;
+
+  video.load();
+
+  // 자동재생 가능한 환경에서 재생
+  video.play().catch(() => {
+    // 브라우저가 자동 재생을 제한하는 경우
+  });
+
+}
+
+
+/* ==========================================
+   6. 메인 이미지 영역 불러오기
+========================================== */
+
+function loadIndexImages() {
+
+  const imageElements =
+    document.querySelectorAll("[data-main-image]");
+
+  const altTexts = {
+
+    concept: "전시 콘셉트 이미지",
+
+    multimedia: "멀티미디어 작품 대표 이미지",
+
+    video: "영상미디어 작품 대표 이미지",
+
+    xr: "XR 프로젝트 대표 이미지",
+
+    map: "졸업전시 장소 안내 지도",
+
+    creditLogo: "졸업전시 크레딧 로고"
+
+  };
+
+  imageElements.forEach((element) => {
+
+    const key = element.dataset.mainImage;
+
+    const imagePath = INDEX_ASSETS[key] || "";
+
+    setIndexImage(
+      element,
+      imagePath,
+      altTexts[key] || ""
+    );
+
+  });
+
+}
+
+
+/* ==========================================
+   7. 학생 카드 생성
+   이미지만 표시, 별도 텍스트 없음
+========================================== */
+
+function createMainStudentCard(student) {
+
+  const card = document.createElement("article");
+
+  card.className = "student-card";
+
+
+  /* 카드 전체 링크 */
+  const link = document.createElement("a");
+
+  link.className = "student-card-link";
+
+  link.href = student.link;
+
+  link.setAttribute(
+    "aria-label",
+    `${student.id} 학생 소개 보기`
+  );
+
+
+  /* 카드 이미지 공간 */
+  const imageContainer =
+    document.createElement("div");
+
+  imageContainer.className = "student-card-image";
+
+
+  /* 이미지 */
+  if (student.image) {
+
+    const image = document.createElement("img");
+
+    image.src = student.image;
+
+    image.alt = `${student.id} 학생 프로필`;
+
+    image.loading = "lazy";
+
+    image.addEventListener("error", () => {
+      image.remove();
+    });
+
+    imageContainer.appendChild(image);
+
+  }
+
+
+  link.appendChild(imageContainer);
+  card.appendChild(link);
+
+  return card;
+
+}
+
+
+/* ==========================================
+   8. 학생 슬라이드 페이지 생성
+========================================== */
+
+function initMainStudentSlider() {
+
+  const track =
+    document.getElementById("students-track");
+
+  const prevButton =
+    document.getElementById("students-prev");
+
+  const nextButton =
+    document.getElementById("students-next");
+
+  const status =
+    document.getElementById("students-slide-status");
+
+  if (!track || !prevButton || !nextButton) {
+    return;
+  }
+
+
+  /* ========================================
+     슬라이드 상태
+  ======================================== */
+
+  let currentPage = 0;
+
+  let pageSize = 10;
+
+  let totalPages = 0;
+
+
+  /* 화면 크기에 따른 페이지당 학생 수 */
+  function getPageSize() {
+
+    return window.matchMedia(
+      "(max-width: 768px)"
+    ).matches ? 4 : 10;
+
+  }
+
+
+  /* ========================================
+     슬라이드 페이지 구성
+  ======================================== */
+
+  function buildPages() {
+
+    pageSize = getPageSize();
+
+    totalPages = Math.ceil(
+      MAIN_STUDENTS.length / pageSize
+    );
+
+    currentPage = Math.min(
+      currentPage,
+      totalPages - 1
+    );
+
+    const pages = [];
+
+    for (let page = 0; page < totalPages; page++) {
+
+      const pageElement =
+        document.createElement("div");
+
+      pageElement.className = "students-page";
+
+
+      /* 해당 페이지의 학생 목록 */
+      const start = page * pageSize;
+
+      const end = start + pageSize;
+
+      const students =
+        MAIN_STUDENTS.slice(start, end);
+
+
+      /* 이미지 그리드 */
+      const grid = document.createElement("div");
+
+      grid.className = "students-grid";
+
+      grid.append(
+        ...students.map(createMainStudentCard)
+      );
+
+
+      pageElement.appendChild(grid);
+
+      pages.push(pageElement);
+
+    }
+
+    track.replaceChildren(...pages);
+
+    updateSlider();
+
+  }
+
+
+  /* ========================================
+     슬라이드 위치 갱신
+  ======================================== */
+
+  function updateSlider() {
+
+    track.style.transform =
+      `translateX(-${currentPage * 100}%)`;
+
+
+    /* 양쪽 버튼 활성화 */
+    prevButton.disabled = currentPage === 0;
+
+    nextButton.disabled =
+      currentPage === totalPages - 1;
+
+
+    /* 현재 페이지 접근성 */
+    const pages =
+      track.querySelectorAll(".students-page");
+
+    pages.forEach((page, index) => {
+
+      const isVisible = index === currentPage;
+
+      page.inert = !isVisible;
+
+      page.setAttribute(
+        "aria-hidden",
+        String(!isVisible)
+      );
+
+    });
+
+
+    /* 현재 페이지 상태 */
+    if (status) {
+
+      status.textContent =
+        `학생 슬라이드 ${currentPage + 1} / ${totalPages}`;
+
+    }
+
+  }
+
+
+  /* ========================================
+     이전 버튼
+  ======================================== */
+
+  prevButton.addEventListener("click", () => {
+
+    if (currentPage <= 0) return;
+
+    currentPage--;
+
+    updateSlider();
+
+  });
+
+
+  /* ========================================
+     다음 버튼
+  ======================================== */
+
+  nextButton.addEventListener("click", () => {
+
+    if (currentPage >= totalPages - 1) return;
+
+    currentPage++;
+
+    updateSlider();
+
+  });
+
+
+  /* ========================================
+     모바일 / PC 전환 시 재구성
+  ======================================== */
+
+  const mobileQuery = window.matchMedia(
+    "(max-width: 768px)"
+  );
+
+  mobileQuery.addEventListener("change", () => {
+
+    // PC / 모바일 전환 시 첫 페이지부터
+    currentPage = 0;
+
+    buildPages();
+
+  });
+
+
+  /* ========================================
+     최초 생성
+  ======================================== */
+
+  buildPages();
+
+}
+
+
+/* ==========================================
+   9. 슬라이드 버튼 이미지 적용
+========================================== */
+
+function loadStudentArrowImages() {
+
+  const arrowSettings = [
+
+    {
+      id: "students-prev-image",
+      path: INDEX_ASSETS.arrowPrev
+    },
+
+    {
+      id: "students-next-image",
+      path: INDEX_ASSETS.arrowNext
+    }
+
+  ];
+
+
+  arrowSettings.forEach(({ id, path }) => {
+
+    const image = document.getElementById(id);
+
+    if (!image || !path) return;
+
+    image.src = path;
+    image.hidden = false;
+
+    image.addEventListener("error", () => {
+      image.hidden = true;
+    });
+
+  });
+
+}
+
+
+/* ==========================================
+   10. 맨 위로 이동
+========================================== */
+
+function initMainTopButton() {
+
+  const button =
+    document.getElementById("main-top-button");
+
+  if (!button) return;
+
+  button.addEventListener("click", () => {
+
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    window.scrollTo({
+
+      top: 0,
+
+      behavior: reduceMotion
+        ? "auto"
+        : "smooth"
+
+    });
+
+  });
+
+}
+
+
+/* ==========================================
+   11. 메인 페이지 실행
+========================================== */
+
+function initIndexPage() {
+
+  initMainHeroVideo();
+
+  loadIndexImages();
+
+  loadStudentArrowImages();
+
+  initMainStudentSlider();
+
+  initMainTopButton();
+
+}
+
+
+/* ==========================================
+   12. 초기화
+========================================== */
+
+if (document.readyState === "loading") {
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    initIndexPage
+  );
+
+} else {
+
+  initIndexPage();
+
+}

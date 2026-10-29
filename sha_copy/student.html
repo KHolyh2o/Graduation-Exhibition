@@ -114,6 +114,9 @@
      STUDENT DETAIL POPUP
 ============================== -->
 
+
+<!-- STUDENT DETAIL POPUP -->
+
 <div
   id="graduateModal"
   class="graduate-modal"
@@ -122,9 +125,11 @@
   aria-labelledby="modalStudentName"
   hidden
 >
-  <div class="graduate-modal-inner">
 
-    <!-- 닫기 버튼 -->
+  <!-- 1280px 팝업 영역 -->
+  <div class="graduate-modal-shell">
+
+    <!-- 고정 닫기 버튼 -->
     <button
       type="button"
       class="graduate-modal-close"
@@ -135,15 +140,22 @@
       <span></span>
     </button>
 
-    <!-- 상단 로고 이미지 영역 -->
-    <div class="graduate-modal-logo" id="modalLogo">
+    <!-- 스크롤되는 콘텐츠 -->
+    <div class="graduate-modal-inner">
+
+      <!-- 상단 로고 -->
+      <div class="graduate-modal-logo" id="modalLogo">
+      </div>
+
+      <!-- 학생별 상세 내용 -->
+      <div id="modalContent"></div>
+
     </div>
 
-    <!-- 학생별 상세 데이터 자동 출력 -->
-    <div id="modalContent"></div>
-
   </div>
+
 </div>
+
 
 </body>
 </html>

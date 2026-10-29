@@ -7,7 +7,7 @@ const COMMON_CONFIG = {
   basePath: "./",
 
   // 이미지 경로
-  logoImage: "",
+  logoImage: "../public/images/로고.png",
   instagramImage: "",
   youtubeImage: "",
 
@@ -280,3 +280,685 @@ function createCommonFooter() {
 ========================================== */
 createCommonHeader();
 createCommonFooter();
+
+/* ==========================================
+   MOBILE HEADER MENU
+========================================== */
+
+function initCommonMobileMenu() {
+
+  const header =
+    document.querySelector(".common-header");
+
+  const nav =
+    header?.querySelector(".common-nav");
+
+  if (!header || !nav) return;
+
+  // 중복 생성 방지
+  if (document.getElementById("common-mobile-menu")) {
+    return;
+  }
+
+  const base = COMMON_CONFIG.basePath || "./";
+
+  /* ========================================
+     1. 햄버거 버튼 생성
+  ======================================== */
+
+  const menuToggle = document.createElement("button");
+
+  menuToggle.type = "button";
+  menuToggle.className = "common-menu-toggle";
+
+  menuToggle.setAttribute(
+    "aria-label",
+    "메뉴 열기"
+  );
+
+  menuToggle.setAttribute(
+    "aria-expanded",
+    "false"
+  );
+
+  menuToggle.setAttribute(
+    "aria-controls",
+    "common-mobile-menu"
+  );
+
+  menuToggle.innerHTML = `
+    <span class="common-hamburger-bars" aria-hidden="true">
+      <span></span>
+      <span></span>
+      <span></span>
+    </span>
+  `;
+
+  // 검색 버튼 오른쪽에 추가
+  nav.appendChild(menuToggle);
+
+
+  /* ========================================
+     2. 모바일 메뉴 생성
+  ======================================== */
+
+  const mobileMenu = document.createElement("nav");
+
+  mobileMenu.id = "common-mobile-menu";
+  mobileMenu.className = "common-mobile-menu";
+
+  mobileMenu.setAttribute(
+    "aria-label",
+    "모바일 메뉴"
+  );
+
+  mobileMenu.hidden = true;
+
+  mobileMenu.innerHTML = `
+
+    <a href="${base}project.html"
+       class="common-mobile-link">
+      WORK
+    </a>
+
+    <a href="${base}student.html"
+       class="common-mobile-link">
+      GRADUATES
+    </a>
+
+    <a href="${base}department.html"
+       class="common-mobile-link">
+      ABOUT
+    </a>
+
+    <a href="${base}archive.html"
+       class="common-mobile-link">
+      ARCHIVE
+    </a>
+
+  `;
+
+  header.appendChild(mobileMenu);
+
+
+  /* ========================================
+     3. 메뉴 열기 / 닫기
+  ======================================== */
+
+  let isNavigating = false;
+
+  function openMenu() {
+
+    // 기존 검색창이 열려 있다면 닫기
+    const searchPanel =
+      document.getElementById("search-panel");
+
+    const searchClose =
+      document.getElementById("search-close");
+
+    if (searchPanel && !searchPanel.hidden) {
+      searchClose?.click();
+    }
+
+    mobileMenu.hidden = false;
+
+    mobileMenu.classList.remove("is-blue");
+
+    menuToggle.classList.add("is-open");
+
+    menuToggle.setAttribute(
+      "aria-expanded",
+      "true"
+    );
+
+    menuToggle.setAttribute(
+      "aria-label",
+      "메뉴 닫기"
+    );
+
+    document.body.classList.add(
+      "mobile-menu-open"
+    );
+
+  }
+
+  function closeMenu() {
+
+    if (isNavigating) return;
+
+    mobileMenu.hidden = true;
+
+    mobileMenu.classList.remove("is-blue");
+
+    menuToggle.classList.remove("is-open");
+
+    menuToggle.setAttribute(
+      "aria-expanded",
+      "false"
+    );
+
+    menuToggle.setAttribute(
+      "aria-label",
+      "메뉴 열기"
+    );
+
+    document.body.classList.remove(
+      "mobile-menu-open"
+    );
+
+  }
+
+  /* 햄버거 클릭 */
+  menuToggle.addEventListener("click", () => {
+
+    if (mobileMenu.hidden) {
+      openMenu();
+    } else {
+      closeMenu();
+    }
+
+  });
+
+
+  /* ========================================
+     4. 메뉴 항목 클릭
+        흰색 → 파란색 → 페이지 이동
+  ======================================== */
+
+const menuLinks =
+  mobileMenu.querySelectorAll(".common-mobile-link");
+
+menuLinks.forEach((link) => {
+
+  link.addEventListener("click", () => {
+
+    // 메뉴 닫기
+    closeMenu();
+
+    // preventDefault를 사용하지 않으므로
+    // 기존 href 주소로 바로 이동
+  });
+
+});
+
+
+  /* ========================================
+     5. 검색 버튼 클릭 시 메뉴 닫기
+  ======================================== */
+
+  const searchToggle =
+    document.getElementById("search-toggle");
+
+  searchToggle?.addEventListener("click", () => {
+    closeMenu();
+  });
+
+
+  /* ========================================
+     6. ESC로 닫기
+  ======================================== */
+
+  document.addEventListener("keydown", (event) => {
+
+    if (
+      event.key === "Escape" &&
+      !mobileMenu.hidden
+    ) {
+
+      closeMenu();
+      menuToggle.focus();
+
+    }
+
+  });
+
+
+  /* ========================================
+     7. PC 전환 시 모바일 메뉴 닫기
+  ======================================== */
+
+  window.addEventListener("resize", () => {
+
+    if (window.innerWidth > 768) {
+      closeMenu();
+    }
+
+  });
+
+  // 뒤로가기 캐시로 복귀했을 때 메뉴 초기화
+  window.addEventListener("pageshow", () => {
+
+    isNavigating = false;
+    closeMenu();
+
+  });
+
+}
+
+
+/* ==========================================
+   실행
+
+   기존 common.js 마지막에
+   createCommonHeader();
+   createCommonFooter();
+   가 실행된 다음 호출
+========================================== */
+
+initCommonMobileMenu();
+
+/* ==========================================
+   SCROLL REVEAL
+   스크롤에 따라 콘텐츠 서서히 등장
+========================================== */
+
+
+/* ==========================================
+   GLOBAL INTERACTION
+   모든 페이지 공통
+========================================== */
+
+function initSiteInteraction() {
+
+  const reduceMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  if (reduceMotion) return;
+
+  // 애니메이션 활성화
+  document.documentElement.classList.add("fx-enabled");
+
+
+  /* ========================================
+     1. 등장 효과 적용 대상
+  ======================================== */
+
+  const selectors = [
+
+    // 메인 페이지
+    ".main-hero-video",
+    ".concept-copy",
+    ".concept-visual",
+    ".target-heading",
+    ".target-card",
+    ".students-heading",
+    ".student-card",
+    ".info-content",
+    ".info-map",
+    ".credit-header",
+    ".credit-row",
+
+    // WORK
+    ".intro",
+    ".media-category",
+    ".role-filters",
+    ".project-card",
+
+    // GRADUATES
+    ".student-profile-card",
+    ".graduate-card",
+    ".student-item",
+
+    // 작품 상세 페이지
+    ".student-sidebar",
+    ".detail-main-media",
+    ".detail-poster",
+    ".other-projects",
+
+    // ABOUT
+    ".dept-poster",
+    ".dept-hero-content",
+    ".dept-introduction",
+    ".dept-education-header",
+    ".dept-diagram-wrap",
+    ".dept-goal",
+    ".dept-professors-header",
+    ".dept-professor-card",
+
+    // 공통 푸터
+    ".common-footer-inner",
+
+    // 수동 적용
+    "[data-reveal]"
+
+  ].join(", ");
+
+
+  /* ========================================
+     2. 화면 진입 감지
+  ======================================== */
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+
+      entries.forEach((entry) => {
+
+        if (!entry.isIntersecting) return;
+
+        entry.target.classList.add("fx-visible");
+
+        // 최초 1회만 실행
+        observer.unobserve(entry.target);
+
+      });
+
+    },
+    {
+      threshold: 0.03,
+
+      // 화면 하단에 살짝 들어온 뒤 실행
+      rootMargin: "0px 0px -80px 0px"
+    }
+  );
+
+
+  /* ========================================
+     3. 카드 순차 등장 시간 설정
+  ======================================== */
+
+  function getDelay(element) {
+
+    // 개별 지연 설정
+    if (element.hasAttribute("data-reveal-delay")) {
+
+      const delay = Number(
+        element.dataset.revealDelay
+      );
+
+      return Number.isFinite(delay)
+        ? Math.max(0, Math.min(delay, 800))
+        : 0;
+    }
+
+
+    // 그리드 카드 순차 등장
+    const cardSelectors = [
+      ".project-card",
+      ".student-card",
+      ".graduate-card",
+      ".student-profile-card",
+      ".dept-professor-card",
+      ".target-card",
+      ".dept-goal"
+    ].join(", ");
+
+    if (element.matches(cardSelectors)) {
+
+      const siblings = Array.from(
+        element.parentElement.children
+      );
+
+      const index = siblings.indexOf(element);
+
+      let columns = 5;
+
+      if (window.innerWidth <= 768) {
+        columns = 2;
+      }
+
+      if (element.matches(".dept-goal")) {
+        columns = window.innerWidth <= 768 ? 1 : 3;
+      }
+
+      return (index % columns) * 120;
+    }
+
+
+    // 메인 카테고리 아이콘
+    if (element.matches(".media-category")) {
+
+      const siblings = Array.from(
+        element.parentElement.children
+      );
+
+      return siblings.indexOf(element) * 150;
+    }
+
+    return 0;
+  }
+
+
+  /* ========================================
+     4. 효과 등록
+  ======================================== */
+
+  function registerReveal(root = document) {
+
+    const elements = [];
+
+    if (
+      root.nodeType === 1 &&
+      root.matches(selectors)
+    ) {
+      elements.push(root);
+    }
+
+    if (root.querySelectorAll) {
+      elements.push(
+        ...root.querySelectorAll(selectors)
+      );
+    }
+
+    const newElements = [];
+
+    elements.forEach((element) => {
+
+      if (element.classList.contains("fx-reveal")) {
+        return;
+      }
+
+      /*
+        부모 섹션과 내부 콘텐츠에
+        효과가 이중 적용되는 문제 방지
+      */
+      if (
+        element.hasAttribute("data-reveal") &&
+        element.querySelector(
+          ".project-card, .student-card, " +
+          ".target-card, .dept-goal, " +
+          ".dept-professor-card, " +
+          ".concept-copy, .concept-visual, " +
+          ".dept-poster, .dept-hero-content"
+        )
+      ) {
+        return;
+      }
+
+      const delay = getDelay(element);
+
+      element.style.setProperty(
+        "--fx-delay",
+        `${delay}ms`
+      );
+
+      element.classList.add("fx-reveal");
+
+      newElements.push(element);
+
+    });
+
+
+    /*
+      중요:
+      먼저 투명한 상태를 화면에 적용한 뒤
+      다음 프레임에서 등장 감지를 시작해야
+      실제 transition이 눈에 보임
+    */
+    requestAnimationFrame(() => {
+
+      requestAnimationFrame(() => {
+
+        newElements.forEach((element) => {
+          observer.observe(element);
+        });
+
+      });
+
+    });
+
+  }
+
+
+  /* ========================================
+     5. 최초 콘텐츠 등록
+  ======================================== */
+
+  registerReveal();
+
+
+  /* ========================================
+     6. 동적 콘텐츠 등록
+     필터 변경 / 학생 슬라이더 등
+  ======================================== */
+
+  const mutationObserver = new MutationObserver(
+    (mutations) => {
+
+      mutations.forEach((mutation) => {
+
+        mutation.addedNodes.forEach((node) => {
+
+          if (node.nodeType !== 1) return;
+
+          registerReveal(node);
+
+        });
+
+      });
+
+    }
+  );
+
+  mutationObserver.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+
+}
+
+
+/* ==========================================
+   7. 페이지 이동 애니메이션
+========================================== */
+
+function initSitePageTransition() {
+
+  const reduceMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  let navigating = false;
+
+  document.addEventListener("click", (event) => {
+
+    if (event.defaultPrevented) return;
+
+    if (event.button !== 0) return;
+
+    if (
+      event.ctrlKey ||
+      event.metaKey ||
+      event.shiftKey ||
+      event.altKey
+    ) {
+      return;
+    }
+
+    const target = event.target;
+
+    if (!(target instanceof Element)) return;
+
+    const link = target.closest("a[href]");
+
+    if (!link) return;
+
+    if (
+      link.hasAttribute("download") ||
+      (link.target && link.target !== "_self")
+    ) {
+      return;
+    }
+
+    const href = link.getAttribute("href");
+
+    if (!href || href.startsWith("#")) return;
+
+    let url;
+
+    try {
+      url = new URL(link.href);
+    } catch {
+      return;
+    }
+
+    // 외부 링크 제외
+    if (url.origin !== location.origin) return;
+
+    // 동일 페이지 이동 제외
+    if (
+      url.pathname === location.pathname &&
+      url.search === location.search
+    ) {
+      return;
+    }
+
+    if (navigating) {
+      event.preventDefault();
+      return;
+    }
+
+    event.preventDefault();
+
+    navigating = true;
+
+    if (reduceMotion) {
+      location.href = url.href;
+      return;
+    }
+
+    document.body.classList.add("fx-leaving");
+
+    setTimeout(() => {
+      location.href = url.href;
+    }, 400);
+
+  });
+
+
+  /* 뒤로가기 복귀 */
+  window.addEventListener("pageshow", () => {
+
+    navigating = false;
+
+    document.body.classList.remove("fx-leaving");
+
+  });
+
+}
+
+
+/* ==========================================
+   8. 실행
+========================================== */
+
+function startSiteInteraction() {
+
+  initSiteInteraction();
+  initSitePageTransition();
+
+}
+
+if (document.readyState === "loading") {
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    startSiteInteraction,
+    { once: true }
+  );
+
+} else {
+
+  startSiteInteraction();
+
+}

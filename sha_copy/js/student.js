@@ -866,3 +866,14 @@ topButton.addEventListener("click", () => {
 
 renderStudents();
 syncModalWithHash();
+
+
+// 팝업 외부 어두운 영역 클릭 시 닫기
+modal.addEventListener("click", (event) => {
+
+  // 팝업 바깥 배경을 직접 클릭했을 때만 닫기
+  if (event.target === modal) {
+    closeStudentModal();
+  }
+
+});

@@ -1,196 +1,419 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>학부소개 · 2026 서원대학교 미디어콘텐츠학부 졸업전시 (sha_copy 미리보기)</title>
 
-    <link rel="stylesheet" href="/sha_copy/css/index.css" />
-    <link rel="stylesheet" href="/sha_copy/css/app.css" />
-    <link rel="stylesheet" href="/sha_copy/css/navbar.css" />
-    <link rel="stylesheet" href="/sha_copy/css/footer.css" />
-    <link rel="stylesheet" href="/sha_copy/css/departmentpage.css" />
-  </head>
-  <body>
-    <div class="App">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-      <header id="site-header" role="banner">
-        <div class="header-inner">
-          <a href="index.html" class="logo-area" aria-label="홈으로">
-            <div class="ph logo-ph">LOGO</div>
-            <div class="logo-text">
-              <span class="subtitle">서원대학교 미디어콘텐츠학부</span>
-              <span class="title">2026 졸업전시</span>
-            </div>
-          </a>
-          <button class="menu-toggle" id="menuToggle" aria-label="메뉴 열기" aria-expanded="false">
-            <span></span><span></span><span></span>
-          </button>
-          <nav class="site-nav" id="siteNav" aria-label="주요 메뉴">
-            <a class="nav-link" href="project.html">작품소개</a>
-            <a class="nav-link active" href="department.html">학부소개</a>
-            <a class="nav-link" href="gallery.html">기록들</a>
-            <a class="nav-link" href="others.html">과거전시보기</a>
-          </nav>
+  <title>ABOUT | 2026 서원대학교 졸업전시회</title>
+
+  <meta
+    name="description"
+    content="2026 서원대학교 미디어콘텐츠학부 졸업전시회 및 학부 소개"
+  >
+
+  <!-- 폰트 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- 공통 CSS -->
+  <link rel="stylesheet" href="css/common.css">
+
+  <!-- ABOUT 페이지 CSS -->
+  <link rel="stylesheet" href="css/departmentpage.css">
+
+  <!-- 공통 JS -->
+  <script src="js/common.js" defer></script>
+
+  <!-- ABOUT 페이지 JS -->
+  <script src="js/department.js" defer></script>
+</head>
+
+<body class="page-department">
+
+  <!-- ======================================
+       공통 HEADER
+  ====================================== -->
+
+  <div id="common-header"></div>
+
+
+  <!-- ======================================
+       ABOUT MAIN
+  ====================================== -->
+
+  <main class="dept-page">
+
+
+    <!-- ====================================
+         01. 졸업전시 소개
+    ==================================== -->
+
+    <section class="dept-hero" data-reveal>
+
+      <!-- 왼쪽: 포스터 이미지 -->
+      <div
+        class="dept-poster dept-image-slot"
+        data-dept-image="poster"
+        role="img"
+        aria-label="2026 졸업전시회 포스터"
+      ></div>
+
+
+      <!-- 오른쪽: 전시 소개 -->
+      <div class="dept-hero-content">
+
+        <h1 class="dept-symbol">
+          과녁
+        </h1>
+
+        <h2 class="dept-hero-title">
+          서로 다른 시선이
+          <span>하나의 과녁</span>을 겨눈다
+        </h2>
+
+        <p class="dept-hero-description">
+          수많은 정보와 가능성 속에서 우리는 각자의 질문을 발견하고,<br>
+          자신만의 방향을 조준해 왔습니다.<br>
+          이번 졸업전시 (과녁)은 학생들이 쌓아온 고민과 과정,<br>
+          그리고 각기 다른 가능성이 하나의 결과물로 세상을<br>
+          향하는 순간을 담습니다.
+        </p>
+
+        <div class="dept-hero-caption">
+          <p>2026 서원대학교 미디어콘텐츠학부 졸업전시회</p>
+          <p>2026 SWU MEDIA CONTENTS EXHIBITION</p>
+          <p>SEOWON UNIVERSITY, 2026</p>
         </div>
-      </header>
 
-      <div class="content">
-        <div>
-          <div class="page-hero">
-            <div class="container">
-              <p class="page-breadcrumb">HOME › 학부소개</p>
-              <h1 class="page-title">학부소개</h1>
-              <p class="page-desc">미디어콘텐츠학부의 교육목표, 핵심 역량, 교수진을 소개합니다.</p>
-            </div>
-          </div>
-
-          <!-- SECTION 1 — 미디어콘텐츠학부 소개 -->
-          <section id="dept-intro" aria-label="미디어콘텐츠학부 소개">
-            <div class="container">
-              <div class="dept-intro-inner reveal">
-                <p class="section-eyebrow">Department of Media Contents</p>
-                <h2 class="dept-main-title">미디어콘텐츠학부</h2>
-                <div class="dept-divider"></div>
-                <p class="dept-sub-text">
-                  미래산업의 핵심·인재·창의 융합형 멀티미디어 콘텐츠 전문가를 양성하는<br />
-                  미디어콘텐츠학부를 소개합니다.
-                </p>
-              </div>
-            </div>
-          </section>
-
-          <!-- SECTION 2 — 교육목표 -->
-          <section id="edu-goal" aria-label="교육목표">
-            <div class="container">
-
-              <div class="section-header reveal">
-                <h2 class="section-title">미디어콘텐츠학부 교육목표</h2>
-                <p class="section-overview">
-                  멀티미디어환경에 유기적으로 대응할 수 있는 첨단실용학문으로 실무에서 요구하는
-                  '멀티형 인재'로 성장하기 위한 지능형·감성형·실감형 3단계 융합미디어교육과정을 통해
-                  스마트미디어콘텐츠전문가를 양성합니다.
-                </p>
-              </div>
-
-              <div class="competency-diagram reveal" aria-label="핵심 역량 다이어그램">
-                <div class="comp-node">
-                  <span class="comp-node-en">Intelligent Contents</span>
-                  <span class="comp-node-kr">지능형<br />콘텐츠</span>
-                </div>
-                <div class="comp-bridge">
-                  <span class="comp-bridge-tag">브랜드 마케팅</span>
-                  <div class="comp-bridge-line"></div>
-                  <span class="comp-bridge-tag">공통영역</span>
-                  <div class="comp-bridge-line"></div>
-                  <span class="comp-bridge-tag">기획설계</span>
-                </div>
-                <div class="comp-node" style="border-color: var(--ph-dark); background: var(--ph-light)">
-                  <span class="comp-node-en">Emotional Contents</span>
-                  <span class="comp-node-kr">감성형<br />콘텐츠</span>
-                </div>
-                <div class="comp-bridge">
-                  <span class="comp-bridge-tag">실무 프로젝트</span>
-                  <div class="comp-bridge-line"></div>
-                  <span class="comp-bridge-tag">디자인제작</span>
-                </div>
-                <div class="comp-node">
-                  <span class="comp-node-en">Immersive Contents</span>
-                  <span class="comp-node-kr">실감형<br />콘텐츠</span>
-                </div>
-              </div>
-
-              <div class="edu-cards" aria-label="3대 세부 교육방향">
-                <article class="edu-card reveal">
-                  <span class="edu-card-num">01</span>
-                  <h3 class="edu-card-title">실무 중심 콘텐츠 전문가 교육과정</h3>
-                  <ul class="edu-card-list">
-                    <li>직무 전공별 특화 실무 교육 진행</li>
-                    <li>국가직무능력표준기반 교육 커리큘럼 운영</li>
-                    <li>스마트콘텐츠, 영상미디어, 게임 등 진로디자인로드맵 운영</li>
-                    <li>실무 중심 교수진 및 교과·비교과 프로그램 구성</li>
-                  </ul>
-                </article>
-                <article class="edu-card reveal">
-                  <span class="edu-card-num">02</span>
-                  <h3 class="edu-card-title">산학협력 프로젝트 활성화</h3>
-                  <ul class="edu-card-list">
-                    <li>첨단융합스튜디오 운영 및 활성화</li>
-                    <li>실무 프로젝트 형 취·창업 동아리와 산학협력 연계</li>
-                    <li>창업캡스톤디자인 과목 연계를 통합 산학연 프로젝트 진행</li>
-                    <li>공모전, 경진대회 등 현업 실무자 지도 및 컨설팅 진행</li>
-                  </ul>
-                </article>
-                <article class="edu-card reveal">
-                  <span class="edu-card-num">03</span>
-                  <h3 class="edu-card-title">멀티미디어 융복합콘텐츠 연구 개발</h3>
-                  <ul class="edu-card-list">
-                    <li>스마트디바이스를 활용한 스마트콘텐츠 제작 및 구현</li>
-                    <li>[New Media Contents Zone] 영상미디어콘텐츠 제작</li>
-                    <li>[XR Contents Zone] 3D, 게임, VR·AR, 홀로그램 개발</li>
-                    <li>[Co-working Space] 콘텐츠 아이디어·아이템 개발 구현</li>
-                  </ul>
-                </article>
-              </div>
-            </div>
-          </section>
-
-          <!-- SECTION 3 — 교수진 소개 -->
-          <section id="professors" aria-label="교수진 소개">
-            <div class="container">
-              <div class="section-header reveal">
-                <h2 class="section-title">교수진 소개</h2>
-                <p class="section-overview">
-                  프로필을 클릭하면 교수님의 담당 과목과 졸업생들을 향한 응원 메시지를 확인할 수 있습니다.
-                </p>
-              </div>
-
-              <div class="prof-grid" id="profGrid"><!-- department.js가 professors.js 데이터로 카드를 자동 생성합니다 --></div>
-            </div>
-          </section>
-
-          <!-- 교수님 모달 -->
-          <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalProfName">
-            <div class="modal-box prof-modal-box" id="modalBox">
-              <button class="modal-close" aria-label="모달 닫기" id="modalCloseBtn">✕</button>
-              <div class="modal-head">
-                <img class="modal-prof-img" id="modalImg" src="" alt="" />
-                <div class="modal-prof-info">
-                  <p class="modal-eyebrow">Professor</p>
-                  <p class="modal-name" id="modalProfName"></p>
-                  <p class="modal-subject" id="modalSubject"></p>
-                </div>
-              </div>
-              <div class="prof-modal-body">
-                <p class="modal-section-label">졸업생들을 향한 응원 메시지</p>
-                <div class="modal-message-box" id="modalMessage"></div>
-              </div>
-            </div>
-          </div>
-
-        </div>
       </div>
 
-      <footer id="site-footer" role="contentinfo">
-        <div class="container">
-          <div class="footer-inner">
-            <div class="footer-brand">
-              <p class="school-name">서원대학교</p>
-              <p class="dept-name">미디어콘텐츠학부</p>
-              <p class="exhibit-name-small">2026 졸업전시</p>
-            </div>
-            <div class="footer-info">
-              <span>충청북도 청주시 서원구 무심서로 377-3</span>
-              <span>043-299-8800</span>
-              <span>media@seowon.ac.kr</span>
-            </div>
+    </section>
+
+
+
+    <!-- ====================================
+         02. 학부 소개
+    ==================================== -->
+
+    <section class="dept-introduction" data-reveal>
+
+      <!-- 위쪽 화살 이미지 공간 -->
+      <div
+        class="dept-arrow-slot"
+        data-dept-image="arrowTop"
+      ></div>
+
+      <h2>
+        미디어콘텐츠학부
+      </h2>
+
+      <h3>
+        질문을 찾고, 방향을 설계하는 사람들
+      </h3>
+
+      <p class="dept-introduction-description">
+        미디어콘텐츠학부는 기획·디자인·영상·디지털 기술을 넘나들며
+        자신만의 시선과 가능성을 발견하는 곳입니다.<br>
+        학생들은 다양한 경험과 프로젝트를 통해 질문을 찾고,
+        방향을 조준하며, 아이디어를 자신만의 콘텐츠로 완성해 나갑니다.
+      </p>
+
+      <!-- 아래쪽 화살 이미지 공간 -->
+      <div
+        class="dept-arrow-slot"
+        data-dept-image="arrowBottom"
+      ></div>
+
+    </section>
+
+
+
+    <!-- ====================================
+         03. 미디어콘텐츠학부 교육목표
+    ==================================== -->
+
+    <section class="dept-education">
+
+      <!-- 교육목표 제목 -->
+      <div class="dept-education-header" data-reveal>
+
+        <h2>
+          미디어콘텐츠학부 교육목표
+        </h2>
+
+        <p>
+          미디어환경에 유기적으로 대응할 수 있는 첨단실용학문으로
+          실무에서 요구하는
+          <strong>‘멀티형 인재’</strong>로 성장하기 위한<br>
+          지능형·감성형·실감형 3단계 융합미디어교육과정을 통해
+          스마트미디어콘텐츠전문가를 양성합니다.
+        </p>
+
+      </div>
+
+
+      <!-- 교육목표 다이어그램 -->
+      <div class="dept-diagram-wrap" data-reveal>
+
+        <div
+          class="dept-diagram dept-image-slot"
+          data-dept-image="educationDiagram"
+          role="img"
+          aria-label="미디어콘텐츠학부 교육목표 다이어그램"
+        ></div>
+
+      </div>
+
+
+      <!-- 교육목표 상세 설명 -->
+      <div class="dept-education-grid">
+
+
+        <!-- 01 -->
+        <article
+          class="dept-goal dept-goal-red"
+          data-reveal
+        >
+
+          <div class="dept-goal-heading">
+
+            <span class="dept-goal-number">
+              01
+            </span>
+
+            <h3>
+              실무 중심 콘텐츠 전문가 교육과정
+            </h3>
+
           </div>
-          <p class="footer-copy">© 2026 서원대학교 미디어콘텐츠학부. All rights reserved.</p>
+
+          <div class="dept-goal-line"></div>
+
+          <div class="dept-goal-text">
+            <p>직무 전공별 특화 실무 교육 진행</p>
+            <p>국가직무능력표준기반 교육 커리큘럼 운영</p>
+            <p>스마트콘텐츠, 영상미디어, 게임 등 진로디자인모듈 운영</p>
+            <p>실무 중심 교수진 및 교과·비교과 프로그램 구성</p>
+          </div>
+
+        </article>
+
+
+        <!-- 02 -->
+        <article
+          class="dept-goal dept-goal-blue"
+          data-reveal
+        >
+
+          <div class="dept-goal-heading">
+
+            <span class="dept-goal-number">
+              02
+            </span>
+
+            <h3>
+              산학협력 프로젝트 활성화
+            </h3>
+
+          </div>
+
+          <div class="dept-goal-line"></div>
+
+          <div class="dept-goal-text">
+            <p>첨단융합스튜디오 운영 및 활성화</p>
+            <p>실무 프로젝트 및 취·창업 동아리와 산학협력 연계</p>
+            <p>창업캡스톤디자인 과목 연계를 통한 산학연 프로젝트 진행</p>
+            <p>공모전, 경진대회 등 현업 실무자 지도 및 컨설팅 진행</p>
+          </div>
+
+        </article>
+
+
+        <!-- 03 -->
+        <article
+          class="dept-goal dept-goal-yellow"
+          data-reveal
+        >
+
+          <div class="dept-goal-heading">
+
+            <span class="dept-goal-number">
+              03
+            </span>
+
+            <h3>
+              멀티미디어 융복합콘텐츠 연구 개발
+            </h3>
+
+          </div>
+
+          <div class="dept-goal-line"></div>
+
+          <div class="dept-goal-text">
+            <p>스마트디바이스를 활용한 스마트콘텐츠 제작 및 구현</p>
+            <p>[New Media Contents Zone] 영상미디어콘텐츠 제작</p>
+            <p>[XR Contents Zone] 3D, 게임, VR·AR, 홀로그램 개발</p>
+            <p>[Co-working Space] 콘텐츠 아이디어·아이템 개발 구현</p>
+          </div>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ====================================
+         04. 교수진 소개
+    ==================================== -->
+
+    <section class="dept-professors">
+
+      <div
+        class="dept-professors-header"
+        data-reveal
+      >
+
+        <h2>
+          PROFESSOR'S MESSAGE
+        </h2>
+
+        <p>
+          새로운 과녁을 향해 나아가는 학생들을 응원하는
+          미디어콘텐츠학부 교수진을 소개합니다.
+        </p>
+
+      </div>
+
+
+      <!-- 교수진 카드 10개 JS 자동 생성 -->
+      <div
+        class="dept-professor-grid"
+        id="dept-professor-grid"
+      ></div>
+
+    </section>
+
+
+  </main>
+
+
+
+<!-- 교수 축사 팝업 -->
+<div
+  class="dept-message-overlay"
+  id="dept-message-overlay"
+  hidden
+>
+
+  <!-- 실제 팝업 창 -->
+  <div
+    class="dept-message-panel"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="dept-message-name"
+  >
+
+    <!-- 닫기 버튼: 스크롤해도 고정 -->
+    <button
+      type="button"
+      class="dept-message-close"
+      id="dept-message-close"
+      aria-label="팝업 닫기"
+    >
+      <span aria-hidden="true">×</span>
+    </button>
+
+    <!-- 스크롤되는 내용 -->
+    <div
+      class="dept-message-frame"
+      id="dept-message-frame"
+      tabindex="-1"
+    >
+
+      <!-- 상단 로고 -->
+      <div
+        class="dept-message-logo"
+        id="dept-message-logo"
+      ></div>
+
+      <div class="dept-message-body">
+
+        <!-- 교수 사진 -->
+        <div
+          class="dept-message-photo"
+          id="dept-message-photo"
+        ></div>
+
+        <!-- 교수 축사 -->
+        <div class="dept-message-text">
+
+          <h2
+            class="dept-message-name"
+            id="dept-message-name"
+          ></h2>
+
+          <p
+            class="dept-message-position"
+            id="dept-message-position"
+          ></p>
+
+          <h3
+            class="dept-message-quote"
+            id="dept-message-quote"
+          ></h3>
+
+          <div
+            class="dept-message-content"
+            id="dept-message-content"
+          ></div>
+
         </div>
-      </footer>
+
+      </div>
 
     </div>
 
-    <script type="module" src="/sha_copy/js/department.js"></script>
-  </body>
+  </div>
+
+</div>
+
+  <!-- ======================================
+       공통 FOOTER
+  ====================================== -->
+
+  <div id="common-footer"></div>
+
+
+
+  <!-- ======================================
+       맨 위로 이동
+  ====================================== -->
+
+  <button
+    type="button"
+    class="dept-top-button"
+    id="dept-top-button"
+    aria-label="맨 위로 이동"
+  >
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="M12 21V3M4.5 10.5 12 3l7.5 7.5"
+        stroke="currentColor"
+        stroke-width="1.7"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  </button>
+
+</body>
 </html>

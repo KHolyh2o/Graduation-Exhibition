@@ -60,7 +60,7 @@
 }
 
 .common-brand-text {
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
   line-height: 1.23;
   letter-spacing: -0.055em;
@@ -71,12 +71,12 @@
 .common-nav {
   display: flex;
   align-items: center;
-  gap: 17px;
+  gap: 20px;
   height: 32px;
 }
 
 .common-nav a {
-  font-size: 12px;
+  font-size: 15px;
   font-weight: 500;
   color: #161616;
   text-decoration: none;
@@ -147,7 +147,7 @@
   outline: none;
   background: transparent;
 
-  font-size: 15px;
+  font-size: 17px;
 }
 
 .common-search-close {
@@ -418,4 +418,514 @@
   .common-footer-right {
     text-align: left;
   }
+}
+
+
+/* ==========================================
+   MOBILE HAMBURGER MENU
+========================================== */
+
+/* PC에서는 햄버거 숨김 */
+.common-menu-toggle,
+.common-mobile-menu {
+  display: none;
+}
+
+/* ==========================================
+   MOBILE (768px 이하)
+========================================== */
+
+@media (max-width: 768px) {
+
+  /* 헤더 고정 및 크기 */
+  .common-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: #fff;
+  }
+
+  .common-header .common-header-inner {
+    width: calc(100% - 40px);
+    max-width: 1160px;
+    height: 90px;
+    min-height: 90px;
+    margin: 0 auto;
+    padding: 0;
+
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  /* 로고 */
+  .common-header .common-brand {
+    width: auto;
+    min-height: 0;
+    flex-shrink: 0;
+  }
+
+  .common-header .common-logo {
+    width: 105px;
+    height: 58px;
+  }
+
+  .common-header .common-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  /* 모바일에서는 로고 옆 설명 제거 */
+  .common-header .common-brand-text {
+    display: none;
+  }
+
+  /* 오른쪽 검색 + 햄버거 */
+  .common-header .common-nav {
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 20px;
+  }
+
+  /* PC 메뉴 숨김 */
+  .common-header .common-nav > a {
+    display: none;
+  }
+
+  /* 검색 아이콘 */
+  .common-header .common-search-toggle {
+    display: grid;
+    place-items: center;
+
+    width: 34px;
+    height: 40px;
+    padding: 0;
+  }
+
+  .common-header .common-search-toggle svg {
+    width: 29px;
+    height: 29px;
+    stroke-width: 1.8;
+  }
+
+  /* 햄버거 버튼 */
+  .common-menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 42px;
+    height: 42px;
+    padding: 4px;
+
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  /* 햄버거 3줄 */
+  .common-hamburger-bars {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    width: 32px;
+    height: 25px;
+  }
+
+  .common-hamburger-bars span {
+    width: 100%;
+    height: 3px;
+
+    background: #111;
+    border-radius: 4px;
+
+    transition: transform .25s ease,
+                opacity .25s ease;
+  }
+
+  /* 햄버거 클릭 시 X 형태 */
+  .common-menu-toggle.is-open
+  .common-hamburger-bars span:nth-child(1) {
+    transform: translateY(11px) rotate(45deg);
+  }
+
+  .common-menu-toggle.is-open
+  .common-hamburger-bars span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .common-menu-toggle.is-open
+  .common-hamburger-bars span:nth-child(3) {
+    transform: translateY(-11px) rotate(-45deg);
+  }
+
+  /* 검색창 위치 */
+  .common-header .common-search-panel {
+    top: 90px;
+    width: calc(100% - 40px);
+    z-index: 1002;
+  }
+
+
+  /* ======================================
+     2번 이미지 - 흰색 메뉴
+  ====================================== */
+
+  .common-mobile-menu:not([hidden]) {
+    position: fixed;
+    top: 90px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    z-index: 1001;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 25px;
+
+    padding: 25px 20px;
+
+    background: #fff;
+    overflow-y: auto;
+
+    transition: background-color .25s ease;
+  }
+
+  .common-mobile-link {
+    display: block;
+
+    padding: 0;
+    margin: 0;
+
+    color: #111;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.4;
+
+    text-decoration: none;
+    white-space: nowrap;
+
+    transition: color .25s ease,
+                font-size .25s ease;
+  }
+
+
+/* ==========================================
+   모바일 메뉴 - 개별 호버 효과
+========================================== */
+
+@media (max-width: 768px) {
+
+  /* 메뉴 전체는 흰색 유지 */
+  .common-mobile-menu:not([hidden]) {
+    background: #fff;
+    padding: 12px 0;
+    gap: 0;
+    align-items: stretch;
+  }
+
+  /* 각 메뉴 기본 상태 */
+  .common-mobile-link {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+    height: 88px;
+    padding: 0 20px;
+
+    background: #fff;
+    color: #111;
+
+    font-size: 20px;
+    font-weight: 400;
+    text-decoration: none;
+
+    box-sizing: border-box;
+
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease,
+      font-size 0.2s ease;
+  }
+
+  /* 마우스를 올린 항목만 강조 */
+  .common-mobile-link:hover,
+  .common-mobile-link:focus-visible {
+    background: #2591b8;
+    color: #fff;
+
+    font-size: clamp(32px, 8vw, 48px);
+    font-weight: 700;
+  }
+
+}
+
+/* 작은 모바일 */
+@media (max-width: 390px) {
+  .common-mobile-link {
+    height: 78px;
+  }
+}
+
+/* ==========================================
+   MOBILE FOOTER
+   첨부 이미지 기준 레이아웃
+========================================== */
+
+@media (max-width: 768px) {
+
+  /* 푸터 전체 */
+  .common-footer {
+    width: 100%;
+    min-height: auto;
+    padding: 30px 0 35px;
+    background: #111;
+  }
+
+  /* 모바일 푸터 그리드 */
+  .common-footer .common-footer-inner {
+    width: calc(100% - 48px);
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0;
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 68%);
+    grid-template-rows: repeat(5, auto) auto;
+    column-gap: 12px;
+    row-gap: 14px;
+    align-items: start;
+  }
+
+  /* 기존 좌우 영역 해제 */
+  .common-footer .common-footer-left,
+  .common-footer .common-footer-right {
+    display: contents;
+  }
+
+  /* 텍스트 공통 */
+  .common-footer .common-footer-inner p {
+    margin: 0 !important;
+    padding: 0;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #fff;
+  }
+
+  /* ======================================
+     오른쪽 상단 - 연락처
+  ====================================== */
+
+  /* 주소 */
+  .common-footer .common-footer-right > p:nth-of-type(1) {
+    grid-column: 2;
+    grid-row: 1;
+    text-align: right;
+  }
+
+  /* 전화번호 */
+  .common-footer .common-footer-right > p:nth-of-type(2) {
+    grid-column: 2;
+    grid-row: 2;
+    text-align: right;
+  }
+
+  /* 이메일 */
+  .common-footer .common-footer-right > p:nth-of-type(3) {
+    grid-column: 2;
+    grid-row: 3;
+    text-align: right;
+  }
+
+  /* ======================================
+     중간 오른쪽 - 학교 정보
+  ====================================== */
+
+  /* 서원대학교 */
+  .common-footer .common-footer-left > p:nth-of-type(1) {
+    grid-column: 2;
+    grid-row: 4;
+
+    margin-top: 15px !important;
+    text-align: right;
+  }
+
+  /* 미디어콘텐츠학부 */
+  .common-footer .common-footer-left > p:nth-of-type(2) {
+    grid-column: 2;
+    grid-row: 5;
+    text-align: right;
+  }
+
+  /* ======================================
+     중간 왼쪽 - SNS
+  ====================================== */
+
+  .common-footer .common-footer-sns {
+    grid-column: 1;
+    grid-row: 4 / span 2;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    align-self: center;
+
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .common-footer .common-sns-link {
+    display: block;
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+  }
+
+  .common-footer .common-sns-icon,
+  .common-footer .common-sns-icon img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  /* ======================================
+     왼쪽 하단 - COPYRIGHT
+  ====================================== */
+
+  .common-footer .common-footer-copyright {
+    grid-column: 1 / -1;
+    grid-row: 6;
+
+    margin-top: 30px !important;
+    text-align: left;
+
+    font-size: 11px !important;
+    line-height: 1.6;
+  }
+
+}
+
+/* ==========================================
+   작은 모바일
+========================================== */
+
+@media (max-width: 360px) {
+
+  .common-footer .common-footer-inner {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 75%);
+    column-gap: 8px;
+  }
+
+  .common-footer .common-footer-inner p {
+    font-size: 10px;
+  }
+
+  .common-footer .common-sns-link {
+    width: 27px;
+    height: 27px;
+  }
+
+  .common-footer .common-footer-sns {
+    gap: 7px;
+  }
+
+  .common-footer .common-footer-copyright {
+    font-size: 10px !important;
+  }
+
+}
+
+/* ==========================================
+   GLOBAL PAGE TRANSITION
+========================================== */
+
+/* 페이지 처음 진입 */
+.ui-page-enter main {
+  animation: uiPageEnter 0.85s ease-out both;
+}
+
+@keyframes uiPageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+/* ==========================================
+   GLOBAL SCROLL INTERACTION
+   전체 페이지 공통
+========================================== */
+
+/* 등장 전 - 투명 + 아래 50px */
+html.fx-enabled .fx-reveal {
+  opacity: 0;
+  transform: translate3d(0, 50px, 0);
+
+  transition:
+    opacity 1.6s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 1.6s cubic-bezier(0.16, 1, 0.3, 1);
+
+  transition-delay: var(--fx-delay, 0ms);
+}
+
+/* 화면 진입 후 */
+html.fx-enabled .fx-reveal.fx-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+/* ==========================================
+   페이지 이동할 때 사라지는 효과
+========================================== */
+
+body.fx-leaving main {
+  opacity: 0;
+  transform: translateY(-15px);
+
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease;
+}
+
+/* ==========================================
+   모션 최소화 설정
+========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  html.fx-enabled .fx-reveal,
+  html.fx-enabled .fx-reveal.fx-visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  body.fx-leaving main {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
 }
