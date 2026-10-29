@@ -77,15 +77,14 @@ if (!errors && !warnings) ok(`graduates ${graduates.length}명 이상 없음`);
 console.log('\n[ projects.js ]');
 checkDuplicates(projects, 'id', 'project');
 
-const usedStudentIds = new Set();
+// 한 학생이 여러 작품을 가질 수 있고, 함께 한 작품은 studentIds 에 전원이 들어 있다
 projects.forEach((p) => {
   if (!p.title || p.title === '작품명 입력')
     warn(`${p.id} — 작품명 미입력`);
-  if (!graduateIds.has(p.studentId))
-    err(`${p.id} — graduates에 없는 studentId: "${p.studentId}"`);
-  if (usedStudentIds.has(p.studentId))
-    err(`${p.id} — studentId 중복 사용: "${p.studentId}"`);
-  else usedStudentIds.add(p.studentId);
+  (p.studentIds ?? [p.studentId]).forEach((sid) => {
+    if (!graduateIds.has(sid))
+      err(`${p.id} — graduates에 없는 studentId: "${sid}"`);
+  });
   if (p.thumbnail && !fileExists(p.thumbnail))
     warn(`${p.id} — 썸네일 없음: ${p.thumbnail}`);
   (p.proposalImages ?? []).forEach((img) => {
@@ -104,8 +103,6 @@ checkDuplicates(teamProjects, 'id', 'teamProject');
 teamProjects.forEach((t) => {
   if (!t.teamName || t.teamName === '팀명 입력')
     warn(`${t.id} — 팀명 미입력`);
-  if (!t.title || t.title === '작품명 입력')
-    warn(`${t.id} — 작품명 미입력`);
   if (!VALID_GROUPS.includes(t.group))
     err(`${t.id} — 유효하지 않은 group: "${t.group}"`);
   if (t.thumbnail && !fileExists(t.thumbnail))

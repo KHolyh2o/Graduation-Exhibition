@@ -10,13 +10,15 @@
  * CSV 컬럼 형식:
  *
  * [graduates.csv]
- *   id, studentId, name, tab, role, jobTitle, profileImage
- *   g-01, 2022001001, 홍길동, multimedia, pm, 기획자, /images/profiles/홍길동.jpg
+ *   id, studentId, name, englishName, tab, role, jobTitle, profileImage, intro, workIntro
+ *   g-01, 2022001001, 홍길동, Hong Gildong, multimedia, pm, 기획자, /images/profiles/홍길동.jpg, "프로필 자기소개", "작품소개 페이지용 자기소개"
+ *   (intro: 학생 팝업 / workIntro: 작품 상세 왼쪽 — 쉼표가 들어가는 글은 큰따옴표로 감싼다)
  *   (role: 필터용 코드 / jobTitle: 화면에 표시할 한글 직함 — 쉼표 금지, 2개면 ' · '로 구분)
  *
  * [projects.csv]
  *   id, studentId, tab, role, title, thumbnail, description, videoUrl,
  *   proposalImages, contactEmail, contactPhone
+ *   (studentId: 함께 한 작품은 세미콜론으로 구분  ex. 202311198;202311153)
  *   (proposalImages: 세미콜론으로 구분  ex. /images/a.jpg;/images/b.jpg)
  *
  * [teamProjects.csv]
@@ -33,14 +35,41 @@ const ROOT      = path.resolve(__dirname, '..');
 const SRC_DATA  = path.join(ROOT, 'src', 'data');
 
 /* ── CSV parser ──────────────────────────────────────────────────── */
-// '#'으로 시작하는 행은 주석 처리된 데이터 (__comment: true) — graduates에서만 JS 주석으로 출력
+// 따옴표 안의 쉼표·줄바꿈·"" 이스케이프를 지원한다 (자기소개 같은 긴 글 때문).
+// 첫 칸이 '#'으로 시작하는 행은 주석 처리된 데이터 (__comment: true) — graduates에서만 JS 주석으로 출력
 function parseCsv(raw) {
-  const lines = raw.trim().split(/\r?\n/);
-  const headers = lines[0].split(',').map((h) => h.trim());
-  return lines.slice(1).map((line) => {
-    const isComment = line.startsWith('#');
-    const values = (isComment ? line.slice(1) : line).split(',').map((v) => v.trim());
-    const row = Object.fromEntries(headers.map((h, i) => [h, values[i] ?? '']));
+  const records = [];
+  let record = [];
+  let cell = '';
+  let quoted = false;
+  const text = raw.replace(/^\uFEFF/, '').trim();
+
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    if (quoted) {
+      if (ch === '"' && text[i + 1] === '"') { cell += '"'; i++; }
+      else if (ch === '"') quoted = false;
+      else cell += ch;
+    } else if (ch === '"') {
+      quoted = true;
+    } else if (ch === ',') {
+      record.push(cell); cell = '';
+    } else if (ch === '\n' || ch === '\r') {
+      if (ch === '\r' && text[i + 1] === '\n') i++;
+      record.push(cell); cell = '';
+      records.push(record); record = [];
+    } else {
+      cell += ch;
+    }
+  }
+  record.push(cell);
+  records.push(record);
+
+  const headers = records[0].map((h) => h.trim());
+  return records.slice(1).map((values) => {
+    const isComment = values[0].startsWith('#');
+    const cells = values.map((v, i) => (i === 0 && isComment ? v.slice(1) : v).trim());
+    const row = Object.fromEntries(headers.map((h, i) => [h, cells[i] ?? '']));
     return isComment ? { ...row, __comment: true } : row;
   });
 }
@@ -56,12 +85,20 @@ const roleFields = (roleCell) => {
 };
 
 /* ── graduates ───────────────────────────────────────────────────── */
+// JS 작은따옴표 문자열 이스케이프 (자기소개에 ' 나 \\ 가 있어도 안전하게)
+const q = (v) => `'${String(v ?? '').replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/\r?\n/g, '\\n')}'`;
+
 function generateGraduates(rows) {
-  const entries = rows.map((r) =>
-    (r.__comment ? '  // ' : '  ') +
-    `{ id: '${r.id}', studentId: '${r.studentId}', name: '${r.name}', ` +
-    `tab: '${r.tab}', ${roleFields(r.role)}, jobTitle: '${r.jobTitle ?? ''}', profileImage: '${r.profileImage}' },`
-  );
+  const entries = rows.map((r) => {
+    const prefix = r.__comment ? '  // ' : '  ';
+    const lines = [
+      `{ id: ${q(r.id)}, studentId: ${q(r.studentId)}, name: ${q(r.name)}, englishName: ${q(r.englishName)},`,
+      `  tab: ${q(r.tab)}, ${roleFields(r.role)}, jobTitle: ${q(r.jobTitle)}, profileImage: ${q(r.profileImage)},`,
+      `  intro: ${q(r.intro)},`,
+      `  workIntro: ${q(r.workIntro)} },`,
+    ];
+    return lines.map((l, i) => (i === 0 ? prefix : prefix + '  ') + l.trimStart()).join('\n');
+  });
 
   return `export const graduates = [\n${entries.join('\n')}\n];\n\n` +
     `export const graduateByStudentId = Object.fromEntries(\n` +
@@ -74,9 +111,14 @@ function generateProjects(rows) {
     const proposals = r.proposalImages
       ? r.proposalImages.split(';').filter(Boolean).map((p) => `'${p.trim()}'`).join(', ')
       : '';
+    // studentId 칸에 ';' 로 여러 학번을 쓰면 함께 한 작품 — 첫 학번이 대표, 전원은 studentIds 로 출력
+    const ids = r.studentId.split(';').map((v) => v.trim()).filter(Boolean);
+    const idFields = ids.length > 1
+      ? `studentId: '${ids[0]}', studentIds: [${ids.map((v) => `'${v}'`).join(', ')}]`
+      : `studentId: '${ids[0] ?? ''}'`;
     return (
       `  {\n` +
-      `    id: '${r.id}', studentId: '${r.studentId}',\n` +
+      `    id: '${r.id}', ${idFields},\n` +
       `    tab: '${r.tab}', ${roleFields(r.role)},\n` +
       `    title: '${r.title}',\n` +
       `    thumbnail: '${r.thumbnail}',\n` +

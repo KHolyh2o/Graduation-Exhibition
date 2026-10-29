@@ -1,5 +1,6 @@
 // 팀 작품 23개.
-// group: projectTabs.js 팀 groups[].id ('u300' | 'hanium' | 'game')
+// group: projectTabs.js 팀 groups[].id ('u300' | 'game')  ※ 창캡 = U300 = 한이음 (같은 팀 그룹)
+// 팀 작품은 작품명 없이 teamName 만 쓴다 (title 은 비워 둠)
 // members: 팀원 배열 (수 제한 없음). phone은 공개 동의한 학생만 입력.
 //
 // 📌 이미지 파일 위치: public/images/projects/썸네일.jpg
@@ -27,74 +28,154 @@ const _make = (id, group, memberCount) => ({
 export const teamProjects = [
   // ── U300 (10팀) ──────────────────────────────────────────────────────────
   {
-    id: 't-u300-01',
-    tab: 'team',
-    group: 'u300',
-    teamName: '미래로',
-    title: '스마트 주차 공유 플랫폼',
-    thumbnail: '/images/projects/썸네일.png',
-    description:
-      '유휴 주차 공간을 공유하는 스마트 주차 플랫폼입니다. ' +
-      'IoT 센서로 실시간 주차 현황을 감지하고, 앱에서 예약·결제까지 ' +
-      '원스톱으로 처리할 수 있습니다. U300 창업 경진대회 출품작입니다.',
-    videoUrl: 'https://www.youtube.com/watch?v=rFjRsWPGZxY',
-    proposalImages: [
-      '/images/projects/proposals/제안서_1.png',
-      '/images/projects/proposals/제안서_2.png',
-    ],
-    contact: { email: 'miraero@seowon.ac.kr' },
+    id: 't-u300-01', tab: 'team', group: 'u300',
+    teamName: '이음', title: '',
+    thumbnail: '',
+    description: '',
+    videoUrl: '',
+    proposalImages: ['/images/projects/proposals/t-u300-01.webp'],
+    contact: { email: '' },
     members: [
-      { name: '김민수', role: 'PM / 기획',    studentId: '2022003001' },
-      { name: '이지원', role: 'Developer',     studentId: '2022003002' },
-      { name: '박소희', role: 'Designer',      studentId: '2022003003' },
-      { name: '최현우', role: 'Backend',       studentId: '2022003004' },
+      { name: '한지연', role: '디자인', studentId: '202311198' },
+      { name: '박다인', role: '디자인', studentId: '202311153' },
+      { name: '최명근', role: '기획', studentId: '202111492' },
+      { name: '심규현', role: '기획', studentId: '202110786' },
     ],
   },
-  _make('t-u300-02', 'u300', 3),
-  _make('t-u300-03', 'u300', 3),
-  _make('t-u300-04', 'u300', 3),
-  _make('t-u300-05', 'u300', 3),
-  _make('t-u300-06', 'u300', 4),
-  _make('t-u300-07', 'u300', 4),
-  _make('t-u300-08', 'u300', 4),
-  _make('t-u300-09', 'u300', 4),
-  _make('t-u300-10', 'u300', 4),
-
-  // ── 한이음 (10팀) ────────────────────────────────────────────────────────
   {
-    id: 't-hanium-01',
-    tab: 'team',
-    group: 'hanium',
-    teamName: '실버케어',
-    title: 'AI 기반 노인 낙상 감지 스마트 돌봄 시스템',
-    thumbnail: '/images/projects/썸네일.png',
-    description:
-      '카메라 영상을 실시간으로 분석해 낙상을 자동 감지하고 보호자에게 ' +
-      '즉시 알림을 전송하는 AI 돌봄 시스템입니다. ' +
-      'YOLOv8 포즈 추정 모델을 활용했으며 한이음 ICT 멘토링 프로젝트입니다.',
-    videoUrl: 'https://www.youtube.com/watch?v=rFjRsWPGZxY',
-    proposalImages: [
-      '/images/projects/proposals/제안서_1.png',
-      '/images/projects/proposals/제안서_2.png',
-    ],
-    contact: { email: 'silvercare@seowon.ac.kr' },
+    id: 't-u300-02', tab: 'team', group: 'u300',
+    teamName: '프릭', title: '',
+    thumbnail: '',
+    description: '',
+    videoUrl: '',
+    proposalImages: ['/images/projects/proposals/t-u300-02.webp'],
+    contact: { email: '' },
     members: [
-      { name: '윤준혁', role: 'AI / ML',       studentId: '2022003010' },
-      { name: '강다인', role: 'Frontend',       studentId: '2022003011' },
-      { name: '임도현', role: 'Backend',        studentId: '2022003012' },
-      { name: '한지민', role: 'UX 디자인',      studentId: '2022003013' },
-      { name: '오승우', role: 'Hardware / IoT', studentId: '2022003014' },
+      { name: '김성수', role: '개발', studentId: '202210246' },
+      { name: 'Botirov Asadbek', role: '기획', studentId: '202211755' },
+      { name: '변재영', role: '디자인', studentId: '202311159' },
+      { name: '한태희', role: '기획', studentId: '202311199' },
     ],
   },
-  _make('t-hanium-02', 'hanium', 4),
-  _make('t-hanium-03', 'hanium', 4),
-  _make('t-hanium-04', 'hanium', 4),
-  _make('t-hanium-05', 'hanium', 4),
-  _make('t-hanium-06', 'hanium', 5),
-  _make('t-hanium-07', 'hanium', 5),
-  _make('t-hanium-08', 'hanium', 5),
-  _make('t-hanium-09', 'hanium', 5),
-  _make('t-hanium-10', 'hanium', 5),
+  {
+    id: 't-u300-03', tab: 'team', group: 'u300',
+    teamName: '프리존', title: '',
+    thumbnail: '',
+    description: '',
+    videoUrl: '',
+    proposalImages: ['/images/projects/proposals/t-u300-03.webp'],
+    contact: { email: '' },
+    members: [
+      { name: '유성원', role: '기획', studentId: '202010966' },
+      { name: '강태구', role: '기획', studentId: '202110030' },
+      { name: '조찬혁', role: '기획', studentId: '202111439' },
+      { name: '김성민', role: '기획', studentId: '202110206' },
+    ],
+  },
+  {
+    id: 't-u300-04', tab: 'team', group: 'u300',
+    teamName: '파동', title: '',
+    thumbnail: '',
+    description: '',
+    videoUrl: '',
+    proposalImages: ['/images/projects/proposals/t-u300-04.webp'],
+    contact: { email: '' },
+    members: [
+      { name: '박희원', role: '기획', studentId: '202311158' },
+      { name: '신현아', role: '디자인', studentId: '202311164' },
+      { name: '김가영', role: '제작', studentId: '202311138' },
+      { name: '박소희', role: '제작', studentId: '202311155' },
+      { name: '최정후', role: '기획', studentId: '202311195' },
+    ],
+  },
+  {
+    id: 't-u300-05', tab: 'team', group: 'u300',
+    teamName: '미라클', title: '',
+    thumbnail: '',
+    description: '',
+    videoUrl: '',
+    proposalImages: ['/images/projects/proposals/t-u300-05.webp'],
+    contact: { email: '' },
+    members: [
+      { name: '박주원', role: '기획', studentId: '202110598' },
+      { name: '박재민', role: '기획', studentId: '202110584' },
+      { name: '육근원', role: '기획', studentId: '202311171' },
+      { name: '윤예원', role: '기획', studentId: '202311173' },
+      { name: '이세현', role: '기획', studentId: '202111042' },
+    ],
+  },
+  {
+    id: 't-u300-06', tab: 'team', group: 'u300',
+    teamName: '원피스', title: '',
+    thumbnail: '',
+    description: '',
+    videoUrl: '',
+    proposalImages: ['/images/projects/proposals/t-u300-06.webp'],
+    contact: { email: '' },
+    members: [
+      { name: '변대섭', role: '디자인', studentId: '202110667' },
+      { name: '신권철', role: '제작', studentId: '202110748' },
+      { name: '신상호', role: '기획', studentId: '202110753' },
+      { name: '연수현', role: '기획', studentId: '202311168' },
+      { name: '이경현', role: '기획', studentId: '202110979' },
+    ],
+  },
+  {
+    id: 't-u300-07', tab: 'team', group: 'u300',
+    teamName: '꼬마별', title: '',
+    thumbnail: '',
+    description: '',
+    videoUrl: '',
+    proposalImages: [],
+    contact: { email: '' },
+    members: [
+      { name: '이서영', role: '기획', studentId: '202311177' },
+    ],
+  },
+  {
+    id: 't-u300-08', tab: 'team', group: 'u300',
+    teamName: '어벤져스', title: '',
+    thumbnail: '',
+    description: '',
+    videoUrl: '',
+    proposalImages: ['/images/projects/proposals/t-u300-08.webp'],
+    contact: { email: '' },
+    members: [
+      { name: '최준영', role: '마케팅', studentId: '202011639' },
+      { name: '유세연', role: '디자인', studentId: '202311170' },
+      { name: '정소희', role: '디자인', studentId: '202211414' },
+      { name: '장초빈', role: '기획', studentId: '202311186' },
+      { name: '채미영', role: '기획', studentId: '202311189' },
+    ],
+  },
+  {
+    id: 't-u300-09', tab: 'team', group: 'u300',
+    teamName: '메모리케어', title: '',
+    thumbnail: '',
+    description: '',
+    videoUrl: '',
+    proposalImages: ['/images/projects/proposals/t-u300-09.webp'],
+    contact: { email: '' },
+    members: [
+      { name: '김지현', role: '제작', studentId: '202311148' },
+      { name: '김남준', role: '기획', studentId: '202110120' },
+    ],
+  },
+  {
+    id: 't-u300-10', tab: 'team', group: 'u300',
+    teamName: '세이프가드', title: '',
+    thumbnail: '',
+    description: '',
+    videoUrl: '',
+    proposalImages: ['/images/projects/proposals/t-u300-10.webp'],
+    contact: { email: '' },
+    members: [
+      { name: '우나경', role: '기획', studentId: '202210950' },
+      { name: '안세연', role: '기획', studentId: '202311165' },
+      { name: '이지은', role: '기획', studentId: '202211227' },
+      { name: '최지희', role: '기획', studentId: '202311196' },
+    ],
+  },
 
   // ── Game 프로젝트 (3팀) ──────────────────────────────────────────────────
   {

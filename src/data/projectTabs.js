@@ -24,7 +24,6 @@ export const PROJECT_TABS = [
     label: '팀프로젝트',
     groups: [
       { id: 'u300',   label: 'U300',          icon: '🚀' },
-      { id: 'hanium', label: '한이음',        icon: '🔗' },
       { id: 'game',   label: 'Game 프로젝트', icon: '🎮' },
     ],
   },
