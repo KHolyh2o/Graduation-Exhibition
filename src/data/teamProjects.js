@@ -1,32 +1,13 @@
-// 팀 작품 23개.
-// group: projectTabs.js 팀 groups[].id ('u300' | 'game')  ※ 창캡 = U300 = 한이음 (같은 팀 그룹)
-// 팀 작품은 작품명 없이 teamName 만 쓴다 (title 은 비워 둠)
-// members: 팀원 배열 (수 제한 없음). phone은 공개 동의한 학생만 입력.
+// 팀 작품 10팀 (창업캡스톤 = U300 = 한이음). scripts/import-drive-works.js 로 생성.
+// 팀프로젝트 탭에는 하위 카테고리가 없다 (ALL 하나). group 값은 출처 표시용.
+// 팀 작품은 작품명 없이 teamName 만 쓴다 (title 은 비워 둠).
+// members: 팀원 배열. phone은 공개 동의한 학생만 입력.
 //
 // 📌 이미지 파일 위치: public/images/projects/썸네일.jpg
 //                       public/images/projects/proposals/제안서.jpg
 // 📌 YouTube: https://www.youtube.com/watch?v=영상ID 형식으로 입력
 
-const _make = (id, group, memberCount) => ({
-  id,
-  tab: 'team',
-  group,
-  teamName: '팀명 입력',
-  title: '작품명 입력',
-  thumbnail: '',
-  description: '작품 설명을 입력하세요.',
-  videoUrl: '',
-  proposalImages: [],
-  contact: { email: 'team@seowon.ac.kr' },
-  members: Array.from({ length: memberCount }, (_, i) => ({
-    name: `팀원 ${i + 1}`,
-    role: '역할 입력',
-    studentId: '',
-  })),
-});
-
 export const teamProjects = [
-  // ── U300 (10팀) ──────────────────────────────────────────────────────────
   {
     id: 't-u300-01', tab: 'team', group: 'u300',
     teamName: '이음', title: '',
@@ -176,33 +157,4 @@ export const teamProjects = [
       { name: '최지희', role: '기획', studentId: '202311196' },
     ],
   },
-
-  // ── Game 프로젝트 (3팀) ──────────────────────────────────────────────────
-  {
-    id: 't-game-01',
-    tab: 'team',
-    group: 'game',
-    teamName: '픽셀크루',
-    title: '기억의 파편 - 2D 퍼즐 플랫포머 게임',
-    thumbnail: '/images/projects/썸네일.png',
-    description:
-      '기억을 잃은 주인공이 퍼즐을 풀며 과거를 복원하는 2D 플랫포머 게임입니다. ' +
-      'Unity로 개발했으며 픽셀아트 스타일의 직접 제작 원화와 ' +
-      '오리지널 OST를 포함한 완성형 게임입니다. 스팀 출시를 목표로 제작했습니다.',
-    videoUrl: 'https://www.youtube.com/watch?v=rFjRsWPGZxY',
-    proposalImages: [
-      '/images/projects/proposals/제안서_1.png',
-      '/images/projects/proposals/제안서_2.png',
-    ],
-    contact: { email: 'pixelcrew@seowon.ac.kr' },
-    members: [
-      { name: '송태양', role: 'Game Developer', studentId: '2022003020' },
-      { name: '노아름', role: '아트 / 원화',    studentId: '2022003021' },
-      { name: '권민찬', role: '레벨 디자인',    studentId: '2022003022' },
-      { name: '류지수', role: 'Sound / OST',    studentId: '2022003023' },
-      { name: '배현서', role: 'QA / 기획',      studentId: '2022003024' },
-    ],
-  },
-  _make('t-game-02', 'game', 5),
-  _make('t-game-03', 'game', 6),
 ];

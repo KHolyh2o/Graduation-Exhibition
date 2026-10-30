@@ -2,13 +2,9 @@ import React, { useState, useMemo } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { PROJECT_TABS, TAB_MAP, getSubCategories } from '../data/projectTabs';
 import { allWorks, getWorkAuthor, getWorkTitle, matchesSub } from '../data/works';
-import { assetUrl, FALLBACK } from '../hooks/useImageFallback';
+import { FALLBACK } from '../hooks/useImageFallback';
 import SafeImg from '../components/SafeImg';
 import './ProjectPage.css';
-
-// 카테고리 아이콘: 선택된 탭은 컬러, 나머지는 회색 (public/images/UI/category-*.webp)
-const categoryIcon = (id, active) =>
-  assetUrl(`/images/UI/category-${id === 'team' ? 'xr' : id}-${active ? 'on' : 'off'}.webp`);
 
 const matchesKeyword = (work, keyword) =>
   !keyword || `${getWorkTitle(work)} ${getWorkAuthor(work)}`.toLowerCase().includes(keyword);
@@ -64,9 +60,8 @@ const ProjectPage = () => {
                 aria-pressed={activeTab === t.id}
                 onClick={() => switchTab(t.id)}
               >
-                <span className="asset-slot category-icon">
-                  <img src={categoryIcon(t.id, activeTab === t.id)} alt="" onError={(e) => e.currentTarget.remove()} />
-                </span>
+                {/* 아이콘 이미지 자리 — sha_copy 와 같이 비워 두고 공간만 유지 */}
+                <span className="asset-slot category-icon" />
                 <span className="category-label">{t.label}</span>
               </button>
             ))}

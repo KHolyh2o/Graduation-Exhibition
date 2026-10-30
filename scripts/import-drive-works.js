@@ -28,8 +28,8 @@
  *
  * 출력:
  *   csv_data/projects.csv
- *   csv_data/teamProjects.csv  (U300 행만 교체, Game 행은 그대로)
- *   src/data/teamProjects.js   (U300 구간만 교체)
+ *   csv_data/teamProjects.csv
+ *   src/data/teamProjects.js   (창캡 팀만 — 팀프로젝트 탭은 하위 카테고리 없이 ALL 하나)
  */
 
 import fs   from 'fs';
@@ -136,20 +136,13 @@ const u300Lines = teamRows.map((t) =>
   [t.id, t.group, t.teamName, t.title, thumbOf(t.id), '', '', panelsOf(t.id).join(';'), '', ...memberCols(t.members)].join(','));
 fs.writeFileSync(
   teamCsvPath,
-  [teamLines[0], ...u300Lines, ...teamLines.slice(1).filter((l) => !l.startsWith('t-u300-'))].join('\n') + '\n',
+  [teamLines[0], ...u300Lines].join('\n') + '\n',
   'utf8',
 );
 
-// teamProjects.js — U300 구간 교체
+// teamProjects.js — 파일 전체를 생성 (팀프로젝트 탭에는 하위 카테고리가 없고 창캡 팀만 있다)
 const jsPath = path.join(ROOT, 'src', 'data', 'teamProjects.js');
-const js = fs.readFileSync(jsPath, 'utf8');
-const startMark = '  // ── U300 (10팀)';
-const endMark   = '  // ── Game';
-const start = js.indexOf(startMark);
-const end   = js.indexOf(endMark);
-if (start === -1 || end === -1) throw new Error('teamProjects.js 의 U300 구간 표식을 찾지 못했습니다.');
-
-const u300Js = teamRows.map((t) =>
+const teamJs = teamRows.map((t) =>
   `  {\n` +
   `    id: '${t.id}', tab: 'team', group: 'u300',\n` +
   `    teamName: '${t.teamName}', title: '${t.title}',\n` +
@@ -166,7 +159,15 @@ const u300Js = teamRows.map((t) =>
 
 fs.writeFileSync(
   jsPath,
-  js.slice(0, start) + `  // ── U300 (${teamRows.length}팀) ` + '─'.repeat(58) + `\n${u300Js}\n\n` + js.slice(end),
+  `// 팀 작품 ${teamRows.length}팀 (창업캡스톤 = U300 = 한이음). scripts/import-drive-works.js 로 생성.\n` +
+  `// 팀프로젝트 탭에는 하위 카테고리가 없다 (ALL 하나). group 값은 출처 표시용.\n` +
+  `// 팀 작품은 작품명 없이 teamName 만 쓴다 (title 은 비워 둠).\n` +
+  `// members: 팀원 배열. phone은 공개 동의한 학생만 입력.\n` +
+  `//\n` +
+  `// 📌 이미지 파일 위치: public/images/projects/썸네일.jpg\n` +
+  `//                       public/images/projects/proposals/제안서.jpg\n` +
+  `// 📌 YouTube: https://www.youtube.com/watch?v=영상ID 형식으로 입력\n\n` +
+  `export const teamProjects = [\n${teamJs}\n];\n`,
   'utf8',
 );
 

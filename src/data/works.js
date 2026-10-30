@@ -24,6 +24,7 @@ export const getWorkAuthor = (work) =>
 export const matchesSub = (work, subId) => {
   if (subId === 'all') return true;
   if (work.tab === 'team') return work.group === subId;
+  if (subId === 'mteam') return getWorkStudentIds(work).length > 1;   // M-team = 여럿이 함께 한 작품
   return (work.roles ?? [work.role]).includes(subId);
 };
 

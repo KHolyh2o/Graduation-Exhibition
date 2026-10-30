@@ -111,7 +111,7 @@ export const projects = [
   },
   {
     id: 'p-mm-202011639-brand', studentId: '202011639',
-    tab: 'multimedia', role: 'pm',
+    tab: 'multimedia', role: 'marketer',
     title: 'JYP엔터테이먼트',
     thumbnail: '',
     description: '',
@@ -231,7 +231,7 @@ export const projects = [
   },
   {
     id: 'p-mm-func-09', studentId: '202011639',
-    tab: 'multimedia', role: 'pm',
+    tab: 'multimedia', role: 'marketer',
     title: '채널UIUX개선',
     thumbnail: '',
     description: '',
@@ -331,7 +331,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202110786-1', studentId: '202110786',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: '대구 힙합 페스티벌',
     thumbnail: '',
     description: '',
@@ -341,7 +341,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202110786-2', studentId: '202110786',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: '닌텐도',
     thumbnail: '',
     description: '',
@@ -351,7 +351,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202110786-3', studentId: '202110786',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: '가위바위보전국일주',
     thumbnail: '',
     description: '',
@@ -361,7 +361,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202311199-1', studentId: '202311199',
-    tab: 'video', role: 'director',
+    tab: 'video', role: 'planning',
     title: '삼성 워터포지티브',
     thumbnail: '',
     description: '',
@@ -371,7 +371,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202311199-2', studentId: '202311199',
-    tab: 'video', role: 'director',
+    tab: 'video', role: 'planning',
     title: '전지적 조연 시점',
     thumbnail: '',
     description: '',
@@ -381,7 +381,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202311199-3', studentId: '202311199',
-    tab: 'video', role: 'director',
+    tab: 'video', role: 'planning',
     title: '뻘청전',
     thumbnail: '',
     description: '',
@@ -391,7 +391,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202110030-1', studentId: '202110030',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: '방송시작하겠습니다',
     thumbnail: '',
     description: '',
@@ -401,7 +401,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202110030-2', studentId: '202110030',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: '추억향수',
     thumbnail: '',
     description: '',
@@ -411,7 +411,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202110030-3', studentId: '202110030',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: '우륵문화제',
     thumbnail: '',
     description: '',
@@ -421,7 +421,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202111439-1', studentId: '202111439',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: '철이없는세상',
     thumbnail: '',
     description: '',
@@ -431,7 +431,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202111439-2', studentId: '202111439',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: 'WHAT IF',
     thumbnail: '',
     description: '',
@@ -441,7 +441,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202111439-3', studentId: '202111439',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: '간송미술관',
     thumbnail: '',
     description: '',
@@ -451,7 +451,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202110206-1', studentId: '202110206',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: 'AI실험실',
     thumbnail: '',
     description: '',
@@ -461,7 +461,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202110206-2', studentId: '202110206',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: '쇼는계속된다',
     thumbnail: '',
     description: '',
@@ -471,7 +471,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202110206-3', studentId: '202110206',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: '문경찻사발축제',
     thumbnail: '',
     description: '',
@@ -481,7 +481,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202311148-1', studentId: '202311148',
-    tab: 'video', role: 'motion',
+    tab: 'video', role: 'production',
     title: 'PREFLOW',
     thumbnail: '',
     description: '',
@@ -491,7 +491,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202311148-2', studentId: '202311148',
-    tab: 'video', role: 'motion',
+    tab: 'video', role: 'production',
     title: '행선지',
     thumbnail: '',
     description: '',
@@ -501,7 +501,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202311148-3', studentId: '202311148',
-    tab: 'video', role: 'motion',
+    tab: 'video', role: 'production',
     title: '맥도날드',
     thumbnail: '',
     description: '',
@@ -511,7 +511,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202110120-1', studentId: '202110120',
-    tab: 'video', role: 'director',
+    tab: 'video', role: 'planning',
     title: '우주항공청',
     thumbnail: '',
     description: '',
@@ -521,7 +521,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202110120-2', studentId: '202110120',
-    tab: 'video', role: 'director',
+    tab: 'video', role: 'planning',
     title: '최강의 재능',
     thumbnail: '',
     description: '',
@@ -531,7 +531,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202110120-3', studentId: '202110120',
-    tab: 'video', role: 'director',
+    tab: 'video', role: 'planning',
     title: 'DISASTER',
     thumbnail: '',
     description: '',
@@ -541,7 +541,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202311138-1', studentId: '202311138',
-    tab: 'video', role: 'motion',
+    tab: 'video', role: 'production',
     title: '이상한 변호사 우영우',
     thumbnail: '',
     description: '',
@@ -551,7 +551,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202311138-2', studentId: '202311138',
-    tab: 'video', role: 'motion',
+    tab: 'video', role: 'production',
     title: '캠퍼스 다이닝',
     thumbnail: '',
     description: '',
@@ -561,7 +561,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202311138-3', studentId: '202311138',
-    tab: 'video', role: 'motion',
+    tab: 'video', role: 'production',
     title: 'CJ ENM',
     thumbnail: '',
     description: '',
@@ -571,7 +571,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202311155-1', studentId: '202311155',
-    tab: 'video', role: 'motion',
+    tab: 'video', role: 'production',
     title: '넷플릭스 시리즈 참교육',
     thumbnail: '',
     description: '',
@@ -581,7 +581,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202311155-2', studentId: '202311155',
-    tab: 'video', role: 'motion',
+    tab: 'video', role: 'production',
     title: '야간근무자',
     thumbnail: '',
     description: '',
@@ -591,7 +591,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202311155-3', studentId: '202311155',
-    tab: 'video', role: 'motion',
+    tab: 'video', role: 'production',
     title: '뮤지컬 팬레터',
     thumbnail: '',
     description: '',
@@ -601,7 +601,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202311195-1', studentId: '202311195',
-    tab: 'video', role: 'director',
+    tab: 'video', role: 'planning',
     title: '라스트 크리스마스',
     thumbnail: '',
     description: '',
@@ -611,7 +611,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202311195-2', studentId: '202311195',
-    tab: 'video', role: 'director',
+    tab: 'video', role: 'planning',
     title: '명운',
     thumbnail: '',
     description: '',
@@ -621,7 +621,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202311195-3', studentId: '202311195',
-    tab: 'video', role: 'director',
+    tab: 'video', role: 'planning',
     title: '피어나는 자리',
     thumbnail: '',
     description: '',
@@ -631,7 +631,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202110584-1', studentId: '202110584',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: 'SmartThings',
     thumbnail: '',
     description: '',
@@ -641,7 +641,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202110584-2', studentId: '202110584',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: '모나미',
     thumbnail: '',
     description: '',
@@ -651,7 +651,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202110584-3', studentId: '202110584',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: '한국 시네마틱 필름',
     thumbnail: '',
     description: '',
@@ -661,7 +661,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202311171-1', studentId: '202311171',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: 'KIA PV5',
     thumbnail: '',
     description: '',
@@ -671,7 +671,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202311171-2', studentId: '202311171',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: '국립세종수목원',
     thumbnail: '',
     description: '',
@@ -681,7 +681,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202311171-3', studentId: '202311171',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: '뛰는 김에 동네 살리기',
     thumbnail: '',
     description: '',
@@ -691,7 +691,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202311173-1', studentId: '202311173',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: 'LAST ROLE',
     thumbnail: '',
     description: '',
@@ -701,7 +701,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202311173-2', studentId: '202311173',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: 'ROAD NOTE',
     thumbnail: '',
     description: '',
@@ -711,7 +711,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202311173-3', studentId: '202311173',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: '기지시 줄다리기축제',
     thumbnail: '',
     description: '',
@@ -721,7 +721,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202111042-1', studentId: '202111042',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: 'SPAO 콜라보레이션',
     thumbnail: '',
     description: '',
@@ -731,7 +731,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202111042-2', studentId: '202111042',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: '동두천 지역홍보 영상',
     thumbnail: '',
     description: '',
@@ -741,7 +741,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202111042-3', studentId: '202111042',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: '스위치 : 5개의 스테이지',
     thumbnail: '',
     description: '',
@@ -751,7 +751,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202110748-1', studentId: '202110748',
-    tab: 'video', role: 'director',
+    tab: 'video', role: 'production',
     title: '용혼현주',
     thumbnail: '',
     description: '',
@@ -761,7 +761,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202110748-2', studentId: '202110748',
-    tab: 'video', role: 'director',
+    tab: 'video', role: 'production',
     title: '의력 지역 홍보영상',
     thumbnail: '',
     description: '',
@@ -771,7 +771,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202110753-1', studentId: '202110753',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: '인천 F1 그랑프리 유치',
     thumbnail: '',
     description: '',
@@ -781,7 +781,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202110753-2', studentId: '202110753',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: '언블라인드',
     thumbnail: '',
     description: '',
@@ -791,7 +791,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202110753-3', studentId: '202110753',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: 'IF 유니버스 만약에말야',
     thumbnail: '',
     description: '',
@@ -801,7 +801,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202311168-1', studentId: '202311168',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: '늪에 빠진 사람들',
     thumbnail: '',
     description: '',
@@ -811,7 +811,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202311168-2', studentId: '202311168',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: '취미 흥신소',
     thumbnail: '',
     description: '',
@@ -821,7 +821,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202311168-3', studentId: '202311168',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: 'IN.com',
     thumbnail: '',
     description: '',
@@ -831,7 +831,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202110979-1', studentId: '202110979',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: 'COSRX',
     thumbnail: '',
     description: '',
@@ -841,7 +841,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202110979-2', studentId: '202110979',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: '취향이 생기는 순간',
     thumbnail: '',
     description: '',
@@ -851,7 +851,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202110979-3', studentId: '202110979',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: '수원화성문화제',
     thumbnail: '',
     description: '',
@@ -861,7 +861,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202210950-1', studentId: '202210950',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: '한 번쯤은',
     thumbnail: '',
     description: '',
@@ -871,7 +871,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202210950-2', studentId: '202210950',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: 'LANVIN',
     thumbnail: '',
     description: '',
@@ -881,7 +881,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202210950-3', studentId: '202210950',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: 'LIFE:100%',
     thumbnail: '',
     description: '',
@@ -891,7 +891,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202311165-1', studentId: '202311165',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: '댓글대로 하루',
     thumbnail: '',
     description: '',
@@ -901,7 +901,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202311165-2', studentId: '202311165',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: 'AI가 시키는대로 출근',
     thumbnail: '',
     description: '',
@@ -911,7 +911,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202311165-3', studentId: '202311165',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: '태백산 눈축제',
     thumbnail: '',
     description: '',
@@ -921,7 +921,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202211227-1', studentId: '202211227',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: '이직 했습니다',
     thumbnail: '',
     description: '',
@@ -931,7 +931,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202211227-2', studentId: '202211227',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: '오늘 뭐 할 릿?',
     thumbnail: '',
     description: '',
@@ -941,7 +941,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202211227-3', studentId: '202211227',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: '함안 낙화놀이 축제',
     thumbnail: '',
     description: '',
@@ -951,7 +951,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202311196-1', studentId: '202311196',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: '오늘뭐하지?',
     thumbnail: '',
     description: '',
@@ -961,7 +961,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202311196-2', studentId: '202311196',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: '요즘인간연구소',
     thumbnail: '',
     description: '',
@@ -971,7 +971,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202311196-3', studentId: '202311196',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: '김천김밥축제',
     thumbnail: '',
     description: '',
@@ -981,7 +981,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202311186-1', studentId: '202311186',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: 'POP WAR : 팝업 전쟁',
     thumbnail: '',
     description: '',
@@ -991,7 +991,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202311186-2', studentId: '202311186',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: '밀착선배',
     thumbnail: '',
     description: '',
@@ -1001,7 +1001,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202311186-3', studentId: '202311186',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: '참견극',
     thumbnail: '',
     description: '',
@@ -1011,7 +1011,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202311189-1', studentId: '202311189',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: '404 동아리실',
     thumbnail: '',
     description: '',
@@ -1021,7 +1021,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202311189-2', studentId: '202311189',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: 'KCC 창호',
     thumbnail: '',
     description: '',
@@ -1031,7 +1031,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202311189-3', studentId: '202311189',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: '한살림',
     thumbnail: '',
     description: '',
@@ -1041,7 +1041,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202110654-1', studentId: '202110654',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: '브랜드 디자이너 서바이벌',
     thumbnail: '',
     description: '',
@@ -1051,7 +1051,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202110654-2', studentId: '202110654',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: '위시리스트소개팅',
     thumbnail: '',
     description: '',
@@ -1061,7 +1061,7 @@ export const projects = [
   },
   {
     id: 'p-vd-202110654-3', studentId: '202110654',
-    tab: 'video', role: 'producer',
+    tab: 'video', role: 'planning',
     title: '나는솔로런',
     thumbnail: '',
     description: '',

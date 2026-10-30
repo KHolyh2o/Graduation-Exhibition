@@ -103,7 +103,7 @@ checkDuplicates(teamProjects, 'id', 'teamProject');
 teamProjects.forEach((t) => {
   if (!t.teamName || t.teamName === '팀명 입력')
     warn(`${t.id} — 팀명 미입력`);
-  if (!VALID_GROUPS.includes(t.group))
+  if (VALID_GROUPS.length > 0 && !VALID_GROUPS.includes(t.group))
     err(`${t.id} — 유효하지 않은 group: "${t.group}"`);
   if (t.thumbnail && !fileExists(t.thumbnail))
     warn(`${t.id} — 썸네일 없음: ${t.thumbnail}`);

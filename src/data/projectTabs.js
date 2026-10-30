@@ -4,28 +4,28 @@ export const PROJECT_TABS = [
   {
     id: 'multimedia',
     label: '멀티미디어',
+    // sha_copy 작품소개 필터 표기. mteam 은 직군이 아니라 "여럿이 함께 한 작품" (works.js matchesSub 참고)
     roles: [
-      { id: 'pm',     label: '기획자',   icon: '📋' },
-      { id: 'dev',    label: '개발',     icon: '💻' },
-      { id: 'design', label: '디자이너', icon: '🎨' },
+      { id: 'pm',        label: 'Project Manager', icon: '📋' },
+      { id: 'design',    label: 'Designer',        icon: '🎨' },
+      { id: 'marketer',  label: 'Marketer',        icon: '📣' },
+      { id: 'dev',       label: 'Developer',       icon: '💻' },
+      { id: 'mteam',     label: 'M-team',          icon: '🤝' },
     ],
   },
   {
     id: 'video',
     label: '영상미디어',
     roles: [
-      { id: 'producer', label: '영상 기획',   icon: '🎬' },
-      { id: 'motion',   label: '모션그래픽',  icon: '✨' },
-      { id: 'director', label: '연출 · 제작', icon: '🎥' },
+      { id: 'planning',   label: '기획', icon: '🎬' },
+      { id: 'production', label: '제작', icon: '🎥' },
     ],
   },
   {
     id: 'team',
     label: '팀프로젝트',
-    groups: [
-      { id: 'u300',   label: 'U300',          icon: '🚀' },
-      { id: 'game',   label: 'Game 프로젝트', icon: '🎮' },
-    ],
+    // 하위 카테고리 없음 — 필터는 ALL 하나만 보인다
+    groups: [],
   },
 ];
 
