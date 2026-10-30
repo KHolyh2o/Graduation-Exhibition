@@ -22,6 +22,10 @@
  *   csv_data/source/panels.json  { 작품id: ['/images/projects/proposals/xxx.webp'] }
  *   있으면 각 작품의 proposalImages(상세 페이지 세로 이미지)로 들어간다.
  *
+ * 썸네일(선택):
+ *   csv_data/source/thumbnails.json  { 작품id: '/images/project_thumnail/xxx.png' }
+ *   있으면 작품소개 카드의 대표 이미지(thumbnail)로 들어간다.
+ *
  * 출력:
  *   csv_data/projects.csv
  *   csv_data/teamProjects.csv  (U300 행만 교체, Game 행은 그대로)
@@ -42,6 +46,11 @@ const { graduateByStudentId } = await import('../src/data/graduates.js');
 const panelsPath = path.join(CSV_DIR, 'source', 'panels.json');
 const panels = fs.existsSync(panelsPath) ? JSON.parse(fs.readFileSync(panelsPath, 'utf8')) : {};
 const panelsOf = (id) => panels[id] ?? [];
+
+// 카드 대표 이미지 (없으면 비워 둠)
+const thumbsPath = path.join(CSV_DIR, 'source', 'thumbnails.json');
+const thumbnails = fs.existsSync(thumbsPath) ? JSON.parse(fs.readFileSync(thumbsPath, 'utf8')) : {};
+const thumbOf = (id) => thumbnails[id] ?? '';
 
 /* ── 입력 ────────────────────────────────────────────────────────── */
 // 이 원본 CSV 는 따옴표·쉼표 없는 단순 형식이라 split 으로 충분하다
@@ -99,7 +108,7 @@ const roleCell = (studentIds) => {
 const projectsCsv = [
   'id,studentId,tab,role,title,thumbnail,description,videoUrl,proposalImages,contactEmail,contactPhone',
   ...projects.map((p) =>
-    [p.id, p.studentIds.join(';'), p.tab, roleCell(p.studentIds), p.title, '', '', '', panelsOf(p.id).join(';'), '', ''].join(',')),
+    [p.id, p.studentIds.join(';'), p.tab, roleCell(p.studentIds), p.title, thumbOf(p.id), '', '', panelsOf(p.id).join(';'), '', ''].join(',')),
 ].join('\n') + '\n';
 fs.writeFileSync(path.join(CSV_DIR, 'projects.csv'), projectsCsv, 'utf8');
 
@@ -124,7 +133,7 @@ const memberCols = (members) =>
     return m ? [m.name, m.role, m.studentId] : ['', '', ''];
   }).flat();
 const u300Lines = teamRows.map((t) =>
-  [t.id, t.group, t.teamName, t.title, '', '', '', panelsOf(t.id).join(';'), '', ...memberCols(t.members)].join(','));
+  [t.id, t.group, t.teamName, t.title, thumbOf(t.id), '', '', panelsOf(t.id).join(';'), '', ...memberCols(t.members)].join(','));
 fs.writeFileSync(
   teamCsvPath,
   [teamLines[0], ...u300Lines, ...teamLines.slice(1).filter((l) => !l.startsWith('t-u300-'))].join('\n') + '\n',
@@ -144,7 +153,7 @@ const u300Js = teamRows.map((t) =>
   `  {\n` +
   `    id: '${t.id}', tab: 'team', group: 'u300',\n` +
   `    teamName: '${t.teamName}', title: '${t.title}',\n` +
-  `    thumbnail: '',\n` +
+  `    thumbnail: '${thumbOf(t.id)}',\n` +
   `    description: '',\n` +
   `    videoUrl: '',\n` +
   `    proposalImages: [${panelsOf(t.id).map((v) => `'${v}'`).join(', ')}],\n` +

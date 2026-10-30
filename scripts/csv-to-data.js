@@ -10,9 +10,10 @@
  * CSV 컬럼 형식:
  *
  * [graduates.csv]
- *   id, studentId, name, englishName, tab, role, jobTitle, profileImage, intro, workIntro
+ *   id, studentId, name, englishName, tab, role, jobTitle, profileImage, intro, workIntro, committeeTeam
  *   g-01, 2022001001, 홍길동, Hong Gildong, multimedia, pm, 기획자, /images/profiles/홍길동.jpg, "프로필 자기소개", "작품소개 페이지용 자기소개"
  *   (intro: 학생 팝업 / workIntro: 작품 상세 왼쪽 — 쉼표가 들어가는 글은 큰따옴표로 감싼다)
+ *   (committeeTeam: 졸업전시위원회 팀명(기획팀 등). 비어 있으면 위원회가 아님)
  *   (role: 필터용 코드 / jobTitle: 화면에 표시할 한글 직함 — 쉼표 금지, 2개면 ' · '로 구분)
  *
  * [projects.csv]
@@ -95,9 +96,11 @@ function generateGraduates(rows) {
       `{ id: ${q(r.id)}, studentId: ${q(r.studentId)}, name: ${q(r.name)}, englishName: ${q(r.englishName)},`,
       `  tab: ${q(r.tab)}, ${roleFields(r.role)}, jobTitle: ${q(r.jobTitle)}, profileImage: ${q(r.profileImage)},`,
       `  intro: ${q(r.intro)},`,
-      `  workIntro: ${q(r.workIntro)} },`,
+      `  workIntro: ${q(r.workIntro)},`,
+      ...(r.committeeTeam ? [`  committee: true, committeeTeam: ${q(r.committeeTeam)},`] : []),
+      `},`,
     ];
-    return lines.map((l, i) => (i === 0 ? prefix : prefix + '  ') + l.trimStart()).join('\n');
+    return lines.map((l, i) => (i === 0 || i === lines.length - 1 ? prefix : prefix + '  ') + l.trimStart()).join('\n');
   });
 
   return `export const graduates = [\n${entries.join('\n')}\n];\n\n` +

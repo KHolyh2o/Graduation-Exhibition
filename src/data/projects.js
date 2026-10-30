@@ -73,7 +73,7 @@ export const projects = [
     id: 'p-mm-202311164-brand', studentId: '202311164',
     tab: 'multimedia', role: 'design',
     title: '농협은행',
-    thumbnail: '',
+    thumbnail: '/images/project_thumnail/신현아_농협은행.png',
     description: '',
     videoUrl: '',
     proposalImages: ['/images/projects/proposals/p-mm-202311164-brand.webp'],
