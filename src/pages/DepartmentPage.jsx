@@ -187,7 +187,7 @@ const DepartmentPage = () => {
                   onClick={(e) => openMessage(prof, e.currentTarget)}
                 >
                   <div className="dept-professor-photo dept-image-slot">
-                    <SafeImg src={prof.photo} fallbackSrc={FALLBACK.avatar} alt={`${prof.name} 사진`} />
+                    <SafeImg src={prof.cardPhoto ?? prof.photo} fallbackSrc={FALLBACK.avatar} alt={`${prof.name} 사진`} />
                   </div>
                   <h3 className="dept-professor-name">{prof.name.replace(/ 교수$/, '')}</h3>
                   <p className="dept-professor-position">{positionOf(prof.role)}</p>

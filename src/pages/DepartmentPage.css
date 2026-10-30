@@ -1222,3 +1222,8 @@ body.dept-message-open {
 .dept-root .dept-professor-photo img {
   object-position: center top;
 }
+
+/* 축사 제목 안의 줄바꿈(\n)을 그대로 보여 준다 */
+.dept-root .dept-message-quote {
+  white-space: pre-line;
+}
