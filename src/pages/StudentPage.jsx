@@ -3,7 +3,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { graduates } from '../data/graduates';
 import { getWorksByStudent, getWorkTitle } from '../data/works';
 import SafeImg from '../components/SafeImg';
-import { FALLBACK } from '../hooks/useImageFallback';
+import { assetUrl, FALLBACK } from '../hooks/useImageFallback';
 import './StudentPage.css';
 
 const FILTERS = [
@@ -31,6 +31,7 @@ const StudentPage = () => {
   const lastTriggerRef = useRef(null);
   const closeBtnRef = useRef(null);
   const modalRef = useRef(null);
+  const scrollRef = useRef(null);   // 팝업 안에서 스크롤되는 영역
 
   const list = useMemo(() => graduates.filter((g) => matchFilter(g, filter)), [filter]);
 
@@ -57,7 +58,7 @@ const StudentPage = () => {
   useEffect(() => {
     if (!selected) return;
     document.body.style.overflow = 'hidden';
-    modalRef.current?.scrollTo(0, 0);
+    scrollRef.current?.scrollTo(0, 0);
     closeBtnRef.current?.focus({ preventScroll: true });
 
     const onKey = (e) => {
@@ -170,8 +171,10 @@ const StudentPage = () => {
           role="dialog"
           aria-modal="true"
           aria-labelledby="modalStudentName"
+          onClick={(e) => { if (e.target === e.currentTarget) closeModal(); }}   // 어두운 바깥 영역 클릭 시 닫기
         >
-          <div className="graduate-modal-inner">
+          <div className="graduate-modal-shell">
+            {/* 닫기 버튼은 스크롤해도 고정 */}
             <button
               ref={closeBtnRef}
               type="button"
@@ -183,10 +186,13 @@ const StudentPage = () => {
               <span></span>
             </button>
 
+            {/* 스크롤은 이 안에서만 */}
+            <div ref={scrollRef} className="graduate-modal-inner">
             <div className="graduate-modal-logo">
-              <div className="graduate-logo-placeholder"></div>
+              <img src={assetUrl('/images/로고.png')} alt="2026 졸업전시회 로고" onError={(e) => e.currentTarget.remove()} />
             </div>
 
+            <div className="graduate-modal-content">
             <section className="graduate-profile">
               <div className="graduate-profile-photo">
                 {selected.profileImage ? (
@@ -266,6 +272,8 @@ const StudentPage = () => {
                 )}
               </div>
             </section>
+            </div>
+            </div>
           </div>
         </div>
       )}

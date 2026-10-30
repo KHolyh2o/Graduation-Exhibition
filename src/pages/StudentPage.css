@@ -990,3 +990,456 @@ body:has(.student-page) {
     right: 12px;
   }
 }
+
+
+/* ===================================================
+   POPUP — 고정 닫기 버튼 + 스크롤되는 내용 (sha_copy student.css 추가분)
+   배경(어두운 영역)을 누르면 닫힌다
+=================================================== */
+/* ================================
+   POPUP OVERLAY
+================================ */
+
+.student-page .graduate-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 100dvh;
+  padding: 32px;
+
+  background: rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+}
+
+.student-page .graduate-modal[hidden] {
+  display: none;
+}
+
+/* 팝업 고정 영역 */
+
+.student-page .graduate-modal-shell {
+  position: relative;
+
+  width: 100%;
+  max-width: 1280px;
+  max-height: 100%;
+
+  background: #fafafa;
+}
+
+/* 스크롤은 콘텐츠에만 적용 */
+
+.student-page .graduate-modal-inner {
+  position: relative;
+
+  width: 100%;
+  max-width: none;
+  max-height: calc(100dvh - 64px);
+
+  margin: 0;
+  padding: 30px 40px 70px;
+
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* ================================
+   FIXED CLOSE BUTTON
+================================ */
+
+.student-page .graduate-modal-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  z-index: 100;
+
+  width: 38px;
+  height: 38px;
+
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.student-page .graduate-modal-close span {
+  position: absolute;
+  top: 18px;
+  left: 3px;
+
+  width: 32px;
+  height: 2px;
+
+  background: #aaa;
+  transition: background 0.2s;
+}
+
+.student-page .graduate-modal-close span:first-child {
+  transform: rotate(45deg);
+}
+
+.student-page .graduate-modal-close span:last-child {
+  transform: rotate(-45deg);
+}
+
+.student-page .graduate-modal-close:hover span {
+  background: #111;
+}
+
+/* 태블릿 */
+
+@media (max-width: 1024px) {
+  .student-page .graduate-modal {
+    padding: 20px;
+  }
+
+  .student-page .graduate-modal-inner {
+    max-height: calc(100dvh - 40px);
+    padding: 30px 24px 50px;
+  }
+}
+
+/* 모바일 */
+
+@media (max-width: 640px) {
+  .student-page .graduate-modal {
+    padding: 0;
+  }
+
+  .student-page .graduate-modal-shell {
+    max-height: 100dvh;
+  }
+
+  .student-page .graduate-modal-inner {
+    max-height: 100dvh;
+    padding: 65px 16px 40px;
+  }
+
+  .student-page .graduate-modal-close {
+    top: 15px;
+    right: 12px;
+  }
+}
+
+
+/* ==========================================
+   MOBILE STUDENT POPUP
+   600px 이하에서만 적용
+========================================== */
+
+@media (max-width: 640px) {
+
+  /* 팝업 전체 */
+  .student-page .graduate-modal {
+    padding: 0;
+    align-items: stretch;
+  }
+
+  .student-page .graduate-modal-shell {
+    width: 100%;
+    max-width: 100%;
+    height: 100dvh;
+    max-height: 100dvh;
+    background: #fafafa;
+  }
+
+  /* 팝업 내부 스크롤 */
+  .student-page .graduate-modal-inner {
+    width: 100%;
+    height: 100%;
+    max-height: 100dvh;
+
+    padding: 24px 24px 55px;
+    overflow-y: auto;
+  }
+
+  /* X 닫기 버튼 고정 */
+  .student-page .graduate-modal-close {
+    position: absolute;
+    top: 22px;
+    right: 22px;
+    z-index: 100;
+
+    width: 34px;
+    height: 34px;
+  }
+
+  .student-page .graduate-modal-close span {
+    width: 28px;
+  }
+
+
+  /* =================================
+     상단 로고
+  ================================= */
+
+  .student-page .graduate-modal-logo {
+    width: 150px;
+    height: 75px;
+
+    margin: 0 auto 30px;
+  }
+
+
+  /* =================================
+     콘텐츠 순서 변경
+  ================================= */
+
+  .student-page .graduate-modal-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* 1. 학생 프로필 */
+  .student-page .graduate-profile {
+    order: 1;
+  }
+
+  /* 2. 영상 */
+  .student-page .graduate-video-section {
+    order: 2;
+  }
+
+  /* 3. 프로젝트 */
+  .student-page .graduate-project-section {
+    order: 3;
+  }
+
+
+  /* =================================
+     학생 프로필
+  ================================= */
+
+  .student-page .graduate-profile {
+    display: grid;
+
+    grid-template-columns: 38% minmax(0, 1fr);
+    column-gap: 16px;
+    row-gap: 4px;
+
+    align-items: start;
+  }
+
+  /* 왼쪽 사진 3:4 */
+  .student-page .graduate-profile-photo {
+    grid-column: 1;
+    grid-row: 1 / 4;
+
+    width: 100%;
+    aspect-ratio: 3 / 4;
+
+    border-radius: 18px;
+    overflow: hidden;
+  }
+
+  .student-page .graduate-profile-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* 학생 정보 요소를 그리드에 직접 배치 */
+  .student-page .graduate-profile-info {
+    display: contents;
+  }
+
+  /* 이름 */
+  .student-page .graduate-name-line {
+    grid-column: 2;
+    grid-row: 1;
+
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+
+    gap: 4px 8px;
+    margin: 0;
+  }
+
+  .student-page .graduate-name {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    line-height: 1.3;
+  }
+
+  .student-page .graduate-english-name {
+    font-size: 15px;
+    color: #888;
+  }
+
+  /* 직무 */
+  .student-page .graduate-job {
+    grid-column: 2;
+    grid-row: 2;
+
+    font-size: 16px;
+    line-height: 1.4;
+    margin: 0 0 5px;
+  }
+
+  /* 자기소개 */
+  .student-page .graduate-introduction {
+    grid-column: 2;
+    grid-row: 3;
+
+    font-size: 12px;
+    line-height: 1.55;
+    color: #555;
+
+    margin: 0;
+    word-break: keep-all;
+    white-space: pre-line;
+  }
+
+
+  /* =================================
+     연락처 - 사진 아래 가로 배치
+  ================================= */
+
+  .student-page .graduate-contact {
+    grid-column: 1 / -1;
+    grid-row: 4;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+
+    gap: 12px 24px;
+    margin-top: 20px;
+  }
+
+  .student-page .graduate-contact-item {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+  }
+
+  .student-page .graduate-contact-icon {
+    width: 23px;
+    height: 23px;
+    flex-shrink: 0;
+  }
+
+  .student-page .graduate-contact-item a,
+.student-page .graduate-contact-item .contact-text {
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+
+  /* =================================
+     영상 - Project보다 위에 배치
+  ================================= */
+
+  .student-page .graduate-video-section {
+    width: 100%;
+    margin-top: 28px;
+  }
+
+  .student-page .graduate-video {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #58bde4;
+  }
+
+  .student-page .graduate-video-placeholder {
+    background: #58bde4;
+  }
+
+
+  /* =================================
+     PROJECT - 영상 아래 배치
+  ================================= */
+
+  .student-page .graduate-project-section {
+    width: 100%;
+    margin-top: 32px;
+  }
+
+  .student-page .graduate-section-title {
+    font-size: 32px;
+    font-weight: 600;
+    letter-spacing: -1px;
+
+    margin-bottom: 22px;
+  }
+
+  /* 프로젝트 2열 */
+  .student-page .graduate-project-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    column-gap: 12px;
+    row-gap: 25px;
+  }
+
+  /* 프로젝트 이미지 16:9 */
+  .student-page .graduate-project-image {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+
+    background: #707070;
+  }
+
+  .student-page .graduate-project-placeholder {
+    background: #707070;
+  }
+
+  /* 프로젝트 이름 */
+  .student-page .graduate-project-name {
+    font-size: 13px;
+    line-height: 1.5;
+    margin-top: 8px;
+  }
+
+}
+
+
+/* ==========================================
+   작은 모바일 화면 추가 조정
+========================================== */
+
+@media (max-width: 480px) {
+
+  .student-page .graduate-modal-inner {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .student-page .graduate-profile {
+    column-gap: 12px;
+  }
+
+  .student-page .graduate-name {
+    font-size: 20px;
+  }
+
+  .student-page .graduate-english-name {
+    font-size: 13px;
+  }
+
+  .student-page .graduate-job {
+    font-size: 14px;
+  }
+
+  .student-page .graduate-introduction {
+    font-size: 11px;
+  }
+
+  .student-page .graduate-contact {
+    gap: 10px 16px;
+  }
+
+  .student-page .graduate-contact-item a,
+.student-page .graduate-contact-item .contact-text {
+    font-size: 12px;
+  }
+
+}

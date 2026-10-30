@@ -15,7 +15,6 @@ body:has(.project-page) {
   --thumbnail: #d9d9d9;
 
   padding-top: var(--header-h);
-  padding-bottom: 114px;
   background: #fff;
   color: var(--text);
   font-family: "DM Sans", "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
@@ -221,18 +220,7 @@ body:has(.project-page) {
   outline-offset: 2px;
 }
 
-.project-page .project-link:hover .project-title {
-  color: var(--accent);
-}
 
-.project-page .project-title {
-  margin: 9px 0 0;
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 1.35;
-  letter-spacing: -0.055em;
-  overflow-wrap: anywhere;
-}
 
 .project-page .project-author {
   margin: 5px 0 0;
@@ -327,16 +315,13 @@ body:has(.project-page) {
     margin-top: 37px;
   }
 
-  .project-page .project-title {
-    font-size: 16px;
-  }
 
   .project-page .project-author {
     font-size: 13px;
   }
 
-  .project-page {
-    padding-bottom: 85px;
+  body:has(.project-page) .common-footer {
+    margin-top: 85px;
   }
 }
 
@@ -388,10 +373,6 @@ body:has(.project-page) {
     row-gap: 22px;
   }
 
-  .project-page .project-title {
-    margin-top: 7px;
-    font-size: 14px;
-  }
 
   .project-page .project-author {
     margin-top: 3px;
@@ -409,5 +390,155 @@ body:has(.project-page) {
 @media (prefers-reduced-motion: reduce) {
   .project-page .project-thumb img {
     transition: none;
+  }
+}
+
+/* ===================================================
+   카테고리별 테마 색 (sha_copy projectpage.css 추가분)
+   멀티미디어 빨강 / 영상미디어 파랑 / 팀프로젝트(XR 자리) 노랑
+=================================================== */
+.project-page {
+  --category-accent: #d92936;
+}
+
+.project-page[data-category="video"] {
+  --category-accent: #2591b8;
+}
+
+.project-page[data-category="team"] {
+  --category-accent: #f3d345;
+}
+
+/* 상단 카테고리 글자색 */
+.project-page .media-category:is(:hover, .is-active) .category-label {
+  color: var(--category-accent);
+}
+
+/* 하위 필터 */
+.project-page .role-button.is-active {
+  background-color: var(--category-accent);
+  color: #fff;
+}
+
+.project-page .role-button:not(.is-active):hover {
+  color: var(--category-accent);
+}
+
+/* 노란 배경에서는 검은 글씨 */
+.project-page[data-category="team"] .role-button.is-active {
+  color: #111;
+}
+
+/* ===================================================
+   PROJECT CARD — 세로형 포트폴리오 카드
+=================================================== */
+.project-page .project-card .project-link {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  aspect-ratio: 0.64;
+  background: #faf7f4;
+  border-radius: 12px;
+  overflow: hidden;
+  color: #111;
+  transition: transform 0.25s ease;
+}
+
+.project-page .project-card .project-link:hover {
+  transform: translateY(-4px);
+}
+
+/* 상단 대표 이미지는 정사각형 */
+.project-page .project-card .project-thumb {
+  aspect-ratio: 1 / 1;
+  flex-shrink: 0;
+  margin: 0;
+  border-radius: 0;
+}
+
+.project-page .project-card .project-link:hover .project-thumb {
+  outline: none;
+}
+
+.project-page .project-card .project-link:focus-visible {
+  outline: 2px solid #2591b8;
+  outline-offset: 3px;
+}
+
+/* 하단 정보 */
+.project-page .project-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  padding: 16px 17px 20px;
+}
+
+.project-page .project-brand {
+  margin: 0 0 7px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: #666;
+  overflow-wrap: anywhere;
+}
+
+.project-page .project-proposal {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.045em;
+  color: #111;
+  overflow-wrap: anywhere;
+}
+
+.project-page .project-card .project-link:hover .project-proposal {
+  color: #111;
+}
+
+.project-page .project-card .project-author {
+  margin: auto 0 0;
+  padding-top: 15px;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #666;
+}
+
+@media (max-width: 1024px) {
+  .project-page .project-card .project-link {
+    aspect-ratio: auto;
+    height: 100%;
+  }
+
+  .project-page .project-info {
+    min-height: 150px;
+    padding: 14px;
+  }
+
+  .project-page .project-proposal {
+    font-size: 17px;
+  }
+}
+
+@media (max-width: 768px) {
+  .project-page .project-info {
+    min-height: 135px;
+    padding: 12px 10px 14px;
+  }
+
+  .project-page .project-brand {
+    font-size: 11px;
+    margin-bottom: 5px;
+  }
+
+  .project-page .project-proposal {
+    font-size: 15px;
+  }
+
+  .project-page .project-card .project-author {
+    font-size: 11px;
+    padding-top: 12px;
   }
 }

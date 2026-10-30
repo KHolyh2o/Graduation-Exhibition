@@ -118,3 +118,106 @@
     font-size: 11px;
   }
 }
+
+/* ===================================================
+   MOBILE FOOTER (768px 이하) — sha_copy 모바일 레이아웃
+   왼쪽: SNS / 오른쪽: 연락처·학교 정보 / 아래: 저작권
+=================================================== */
+@media (max-width: 768px) {
+  .common-footer {
+    min-height: auto;
+    padding: 30px 0 35px;
+  }
+
+  .common-footer .common-footer-inner {
+    width: calc(100% - 48px);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 68%);
+    grid-template-rows: repeat(5, auto) auto;
+    column-gap: 12px;
+    row-gap: 14px;
+    align-items: start;
+  }
+
+  /* 기존 좌우 영역을 풀어서 그리드에 직접 배치 */
+  .common-footer .common-footer-left,
+  .common-footer .common-footer-right {
+    display: contents;
+  }
+
+  .common-footer .common-footer-inner p {
+    margin: 0 !important;
+    padding: 0;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  /* 오른쪽 위 — 주소 · 전화 · 이메일 */
+  .common-footer .common-footer-right > p:nth-of-type(1) { grid-column: 2; grid-row: 1; text-align: right; }
+  .common-footer .common-footer-right > p:nth-of-type(2) { grid-column: 2; grid-row: 2; text-align: right; }
+  .common-footer .common-footer-right > p:nth-of-type(3) { grid-column: 2; grid-row: 3; text-align: right; }
+
+  /* 가운데 오른쪽 — 학교 정보 */
+  .common-footer .common-footer-left > p:nth-of-type(1) {
+    grid-column: 2;
+    grid-row: 4;
+    margin-top: 15px !important;
+    text-align: right;
+  }
+
+  .common-footer .common-footer-left > p:nth-of-type(2) {
+    grid-column: 2;
+    grid-row: 5;
+    text-align: right;
+  }
+
+  /* 가운데 왼쪽 — SNS */
+  .common-footer .common-footer-sns {
+    grid-column: 1;
+    grid-row: 4 / span 2;
+    justify-content: flex-start;
+    align-self: center;
+    gap: 12px;
+    margin: 0;
+  }
+
+  .common-footer .common-sns-link {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+  }
+
+  /* 아래 — 저작권 */
+  .common-footer .common-footer-copyright {
+    grid-column: 1 / -1;
+    grid-row: 6;
+    margin-top: 30px !important;
+    text-align: left;
+    font-size: 11px !important;
+    line-height: 1.6;
+  }
+}
+
+@media (max-width: 480px) {
+  .common-footer .common-footer-inner {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 75%);
+    column-gap: 8px;
+  }
+
+  .common-footer .common-footer-inner p {
+    font-size: 10px;
+  }
+
+  .common-footer .common-sns-link {
+    width: 27px;
+    height: 27px;
+  }
+
+  .common-footer .common-footer-sns {
+    gap: 7px;
+  }
+
+  .common-footer .common-footer-copyright {
+    font-size: 10px !important;
+  }
+}

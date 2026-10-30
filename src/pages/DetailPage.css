@@ -8,9 +8,12 @@ body:has(.detail-page) {
   background: #fff;
 }
 
+body:has(.detail-page) .common-footer {
+  margin-top: 100px;
+}
+
 .detail-page {
   padding-top: var(--header-h);
-  padding-bottom: 100px;
   background: #fff;
   color: #161616;
   font-family: "DM Sans", "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;

@@ -57,7 +57,7 @@
 }
 
 .common-brand-text {
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
   line-height: 1.23;
   letter-spacing: -0.055em;
@@ -68,12 +68,12 @@
 .common-nav {
   display: flex;
   align-items: center;
-  gap: 17px;
+  gap: 20px;
   height: 32px;
 }
 
 .common-nav a {
-  font-size: 12px;
+  font-size: 15px;
   font-weight: 500;
   color: var(--color-ink);
   text-decoration: none;
@@ -136,7 +136,7 @@
   border: none;
   outline: none;
   background: transparent;
-  font-size: 15px;
+  font-size: 17px;
   font-family: inherit;
 }
 
@@ -156,46 +156,159 @@
   outline-offset: 4px;
 }
 
+/* 햄버거·모바일 메뉴는 PC에서 숨김 */
+.common-menu-toggle,
+.common-mobile-menu {
+  display: none;
+}
+
 /* ===================================================
-   RESPONSIVE
+   RESPONSIVE — 모바일(768px 이하): 로고 + 검색 + 햄버거
 =================================================== */
 @media (max-width: 768px) {
-  .common-nav {
-    gap: 13px;
+  :root {
+    --header-h: 90px;
   }
 
-  .common-nav a {
-    font-size: 11px;
+  .common-header-inner {
+    height: 100%;
+    padding: 0;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .common-brand {
+    width: auto;
+    min-height: 0;
+  }
+
+  .common-logo {
+    width: 105px;
+    height: 58px;
+  }
+
+  /* 모바일에서는 로고 옆 설명 제거 */
+  .common-brand-text {
+    display: none;
+  }
+
+  .common-nav {
+    width: auto;
+    height: auto;
+    justify-content: flex-end;
+    gap: 20px;
+  }
+
+  /* PC 메뉴 숨김 */
+  .common-nav > a {
+    display: none;
+  }
+
+  .common-search-toggle {
+    width: 34px;
+    height: 40px;
+  }
+
+  .common-search-toggle svg {
+    width: 29px;
+    height: 29px;
+    stroke-width: 1.8;
+  }
+
+  .common-menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    padding: 4px;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .common-hamburger-bars {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 32px;
+    height: 25px;
+  }
+
+  .common-hamburger-bars span {
+    width: 100%;
+    height: 3px;
+    background: #111;
+    border-radius: 4px;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+  }
+
+  /* 열리면 X 모양 */
+  .common-menu-toggle.is-open .common-hamburger-bars span:nth-child(1) {
+    transform: translateY(11px) rotate(45deg);
+  }
+
+  .common-menu-toggle.is-open .common-hamburger-bars span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .common-menu-toggle.is-open .common-hamburger-bars span:nth-child(3) {
+    transform: translateY(-11px) rotate(-45deg);
+  }
+
+  .common-search-panel {
+    width: calc(100% - 40px);
+    z-index: 1002;
+  }
+
+  /* 전체 화면 메뉴 — 항목에 올린 것만 파란색으로 강조 */
+  .common-mobile-menu:not([hidden]) {
+    position: fixed;
+    top: var(--header-h);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 12px 0;
+    background: #fff;
+    overflow-y: auto;
+  }
+
+  .common-mobile-link {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 88px;
+    padding: 0 20px;
+    background: #fff;
+    color: #111;
+    font-size: 20px;
+    font-weight: 400;
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease, font-size 0.2s ease;
+  }
+
+  .common-mobile-link:hover,
+  .common-mobile-link:focus-visible {
+    background: #2591b8;
+    color: #fff;
+    font-size: clamp(32px, 8vw, 48px);
+    font-weight: 700;
+  }
+
+  body.mobile-menu-open {
+    overflow: hidden;
   }
 }
 
 @media (max-width: 480px) {
-  :root {
-    --header-h: 106px;
-  }
-
-  .common-header-inner {
-    flex-wrap: wrap;
-    row-gap: 12px;
-    padding-top: 12px;
-    align-items: flex-start;
-  }
-
-  .common-brand {
-    width: 100%;
-  }
-
-  .common-logo {
-    width: 65px;
-  }
-
-  .common-brand-text {
-    font-size: 9px;
-  }
-
-  .common-nav {
-    width: 100%;
-    justify-content: space-between;
-    gap: 8px;
+  .common-mobile-link {
+    height: 78px;
   }
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import SiteEffects from './components/SiteEffects';
 import MainPage from './pages/MainPage';
 import ProjectPage from './pages/ProjectPage';
 import DetailPage from './pages/DetailPage';
@@ -16,6 +17,7 @@ function App() {
   return (
     <Router basename="/2026/">
       <div className="App">
+        <SiteEffects />
         <Navbar />
         <div className="content">
           <Routes>

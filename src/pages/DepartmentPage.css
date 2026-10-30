@@ -1,351 +1,1224 @@
 /* ===================================================
-   SECTION 1 — 학부 소개 인트로
+   DEPARTMENT / ABOUT PAGE — sha_copy/css/departmentpage.css 이식본
+   모든 선택자는 .dept-root 로 한정 (전역 충돌 방지).
+   body.page-department / body.dept-message-open 은 DepartmentPage 가 켜고 끄는 상태 클래스.
+   브레이크포인트는 표준값(1024/768/640/480)으로 맞춤.
 =================================================== */
-#dept-intro {
-  background: #FFFFFF;
-  border-bottom: 1px solid var(--color-border);
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap');
+
+/* 페이지 바탕이 흰색 — 푸터 위 여백까지 이어지게 */
+body:has(.dept-root) {
+  background: #fff;
+}
+
+/* 고정 헤더 높이만큼 아래에서 시작 */
+.dept-root {
+  padding-top: var(--header-h);
+  background: #fff;
+}
+
+/* index.css 의 전역 section 여백(--section-gap)을 쓰지 않는다 */
+.dept-root section {
+  padding: 0;
+}
+
+.dept-root button {
+  font: inherit;
+  cursor: pointer;
+}
+
+
+/* ==========================================
+   DEPARTMENT / ABOUT PAGE
+   PC 최대 너비 1160px
+========================================== */
+
+.dept-root .dept-page {
+  --dept-blue: #2591B8;
+  --dept-red: #D92936;
+  --dept-yellow: #F3D345;
+
+  width: calc(100% - 40px);
+  max-width: 1160px;
+  margin: 0 auto;
+
+  color: #161616;
+  font-family:
+    "DM Sans",
+    "Pretendard",
+    "Noto Sans KR",
+    "Apple SD Gothic Neo",
+    "Malgun Gothic",
+    sans-serif;
+}
+
+.dept-root .dept-page * {
+  box-sizing: border-box;
+}
+
+
+/* ==========================================
+   공통 이미지 영역
+========================================== */
+
+.dept-root .dept-image-slot {
+  display: block;
+  overflow: hidden;
+  background-color: #dedede;
+}
+
+.dept-root .dept-image-slot img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.dept-root .dept-image-slot.has-image {
+  background: transparent;
+}
+
+
+/* ==========================================
+   01. 졸업전시 소개
+========================================== */
+
+.dept-root .dept-hero {
+  width: 100%;
+  max-width: 1050px;
+
+  margin: 60px auto 0;
+
+  display: grid;
+  grid-template-columns: 345px minmax(0, 1fr);
+  align-items: center;
+  gap: 52px;
+}
+
+/* 포스터 이미지 */
+.dept-root .dept-poster {
+  width: 100%;
+  aspect-ratio: 0.71;
+  border-radius: 3px;
+}
+
+.dept-root .dept-poster img {
+  object-fit: contain;
+}
+
+/* 오른쪽 콘텐츠 */
+.dept-root .dept-hero-content {
+  min-width: 0;
+}
+
+/* 과녁 로고형 제목 */
+.dept-root .dept-symbol {
+  margin: 0 0 12px;
+
+  font-size: 66px;
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.08em;
+}
+
+/* 전시 소개 타이틀 */
+.dept-root .dept-hero-title {
+  margin: 0 0 26px;
+
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: -0.055em;
+  word-break: keep-all;
+}
+
+/* 파란색 강조 */
+.dept-root .dept-hero-title span {
+  color: var(--dept-blue);
+}
+
+/* 본문 */
+.dept-root .dept-hero-description {
+  margin: 0;
+
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.65;
+  letter-spacing: -0.025em;
+  word-break: keep-all;
+}
+
+/* 하단 영문 */
+.dept-root .dept-hero-caption {
+  margin-top: 34px;
+}
+
+.dept-root .dept-hero-caption p {
+  margin: 2px 0;
+
+  font-size: 13px;
+  line-height: 1.45;
+  color: #aaa;
+}
+
+
+/* ==========================================
+   02. 학부 소개
+========================================== */
+
+.dept-root .dept-introduction {
+  max-width: 1100px;
+  margin: 110px auto 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
 }
 
-.dept-intro-inner {
-  max-width: 740px;
-  margin: 0 auto;
+/* 위/아래 화살표 이미지 공간 */
+.dept-root .dept-arrow-slot {
+  display: block;
+
+  width: 105px;
+  height: 25px;
+
+  overflow: hidden;
+  background: transparent;
 }
 
-.section-eyebrow {
-  font-size: 0.72rem;
+.dept-root .dept-arrow-slot img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* 학부명 */
+.dept-root .dept-introduction h2 {
+  margin: 30px 0 7px;
+
+  font-size: 36px;
   font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--ph-text);
-  margin-bottom: 18px;
+  line-height: 1.3;
+  letter-spacing: -0.055em;
 }
 
-.dept-main-title {
-  font-size: 2.8rem;
-  font-weight: 900;
-  line-height: 1.15;
-  margin-bottom: 24px;
+/* 소제목 */
+.dept-root .dept-introduction h3 {
+  margin: 0 0 18px;
+
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: -0.03em;
+  color: var(--dept-blue);
+}
+
+/* 소개 문장 */
+.dept-root .dept-introduction-description {
+  max-width: 920px;
+  margin: 0 auto 26px;
+
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.7;
+  letter-spacing: -0.025em;
+  word-break: keep-all;
+}
+
+
+/* ==========================================
+   03. 교육목표
+========================================== */
+
+.dept-root .dept-education {
+  margin-top: 140px;
+}
+
+/* 제목 정렬 */
+.dept-root .dept-education-header {
+  width: 100%;
+  text-align: center;
+}
+
+.dept-root .dept-education-header h2 {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+
+  margin: 0 0 20px;
+
+  font-size: 31px;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.045em;
+}
+
+/* 제목 좌우 파란색 선 */
+.dept-root .dept-education-header h2::before,
+.dept-root .dept-education-header h2::after {
+  content: "";
+
+  width: 5px;
+  height: 30px;
+
+  display: block;
+  flex-shrink: 0;
+
+  background: var(--dept-blue);
+}
+
+/* 교육목표 설명 */
+.dept-root .dept-education-header p {
+  max-width: 1020px;
+  margin: 0 auto;
+
+  font-size: 16px;
+  line-height: 1.65;
+  word-break: keep-all;
+}
+
+.dept-root .dept-education-header strong {
+  font-weight: 700;
+  color: var(--dept-blue);
+}
+
+
+/* ==========================================
+   교육목표 다이어그램 이미지
+========================================== */
+
+.dept-root .dept-diagram-wrap {
+  width: 100%;
+  margin-top: 50px;
+  overflow-x: auto;
+}
+
+/* 빨간 표시된 다이어그램 영역 */
+.dept-root .dept-diagram {
+  width: 100%;
+  max-width: 1120px;
+  aspect-ratio: 2.85 / 1;
+
+  margin: 0 auto;
+  background: #efefef;
+  border-radius: 5px;
+}
+
+.dept-root .dept-diagram img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+
+/* ==========================================
+   교육목표 3개 설명 영역
+========================================== */
+
+.dept-root .dept-education-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  gap: 48px;
+  margin-top: 65px;
+}
+
+/* 각 교육목표 */
+.dept-root .dept-goal {
+  min-width: 0;
+}
+
+.dept-root .dept-goal-heading {
+  min-height: 75px;
+}
+
+/* 01 / 02 / 03 */
+.dept-root .dept-goal-number {
+  display: block;
+
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* 교육목표 이름 */
+.dept-root .dept-goal-heading h3 {
+  margin: 4px 0 0;
+
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.04em;
+  word-break: keep-all;
+}
+
+/* 구분선 */
+.dept-root .dept-goal-line {
+  width: 100%;
+  height: 1px;
+
+  margin: 15px 0 22px;
+  background: #c9c9c9;
+}
+
+/* 세부 내용 */
+.dept-root .dept-goal-text p {
+  margin: 0 0 9px;
+
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: -0.02em;
+  word-break: keep-all;
+}
+
+/* 01 빨강 */
+.dept-root .dept-goal-red .dept-goal-number {
+  color: var(--dept-red);
+}
+
+/* 02 파랑 */
+.dept-root .dept-goal-blue .dept-goal-number {
+  color: var(--dept-blue);
+}
+
+/* 03 노랑 */
+.dept-root .dept-goal-yellow .dept-goal-number {
+  color: var(--dept-yellow);
+}
+
+
+/* ==========================================
+   04. 교수진 소개
+========================================== */
+
+.dept-root .dept-professors {
+  margin-top: 160px;
+}
+
+/* 타이틀 */
+.dept-root .dept-professors-header h2 {
+  margin: 0 0 12px;
+
+  color: var(--dept-blue);
+  font-size: 39px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.035em;
+}
+
+/* 소개 문구 */
+.dept-root .dept-professors-header p {
+  margin: 0;
+
+  font-size: 16px;
+  line-height: 1.6;
+  word-break: keep-all;
+}
+
+/* 교수진 5열 x 2행 */
+.dept-root .dept-professor-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+
+  column-gap: 20px;
+  row-gap: 50px;
+
+  margin-top: 38px;
+}
+
+/* 교수 개별 카드 */
+.dept-root .dept-professor-card {
+  min-width: 0;
+  text-align: center;
+}
+
+/* 교수 사진 영역 */
+.dept-root .dept-professor-photo {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+
+  background: #dedede;
+  border-radius: 6px;
+
+  overflow: hidden;
+}
+
+.dept-root .dept-professor-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 이름 */
+.dept-root .dept-professor-name {
+  margin: 10px 0 8px;
+
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.04em;
+}
+
+/* 직책 */
+.dept-root .dept-professor-position {
+  margin: 0;
+
+  font-size: 13px;
+  font-weight: 400;
+  color: #888;
+  line-height: 1.5;
+  word-break: keep-all;
+}
+
+
+/* ==========================================
+   맨 위로 이동 버튼
+========================================== */
+
+.dept-root .dept-top-button {
+  position: fixed;
+
+  right: 28px;
+  bottom: 55px;
+  z-index: 20;
+
+  width: 46px;
+  height: 46px;
+
+  display: grid;
+  place-items: center;
+
+  border: none;
+  border-radius: 50%;
+
+  color: #111;
+  background: #fff;
+
+  cursor: pointer;
+  box-shadow: 0 2px 7px rgb(0 0 0 / 15%);
+}
+
+.dept-root .dept-top-button svg {
+  width: 28px;
+  height: 28px;
+}
+
+
+/* ==========================================
+   FOOTER 간격
+========================================== */
+
+.page-department .common-footer {
+  margin-top: 120px;
+}
+
+
+/* ==========================================
+   TABLET (769px ~ 1000px)
+========================================== */
+
+@media (max-width: 1024px) {
+
+  .dept-root .dept-hero {
+    grid-template-columns: 35% minmax(0, 1fr);
+    gap: 35px;
+  }
+
+  .dept-root .dept-hero-title {
+    font-size: 24px;
+  }
+
+  .dept-root .dept-hero-description {
+    font-size: 14px;
+  }
+
+  .dept-root .dept-education-grid {
+    gap: 25px;
+  }
+
+  .dept-root .dept-professor-grid {
+    column-gap: 14px;
+    row-gap: 35px;
+  }
+
+  .dept-root .dept-professor-name {
+    font-size: 19px;
+  }
+
+  .dept-root .dept-professor-position {
+    font-size: 11px;
+  }
+
+}
+
+
+/* ==========================================
+   MOBILE (768px 이하)
+========================================== */
+
+@media (max-width: 768px) {
+
+  /* ======================================
+     전시 소개 - 세로 배치
+  ====================================== */
+
+  .dept-root .dept-hero {
+    margin-top: 35px;
+
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .dept-root .dept-poster {
+    width: min(75%, 330px);
+    margin: 0 auto;
+  }
+
+  .dept-root .dept-hero-content {
+    text-align: left;
+  }
+
+  .dept-root .dept-symbol {
+    font-size: 52px;
+  }
+
+  .dept-root .dept-hero-title {
+    font-size: 25px;
+    margin-bottom: 20px;
+  }
+
+  .dept-root .dept-hero-description {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .dept-root .dept-hero-description br {
+    display: none;
+  }
+
+  .dept-root .dept-hero-caption {
+    margin-top: 25px;
+  }
+
+  .dept-root .dept-hero-caption p {
+    font-size: 11px;
+  }
+
+
+  /* ======================================
+     학부 소개
+  ====================================== */
+
+  .dept-root .dept-introduction {
+    margin-top: 100px;
+  }
+
+  .dept-root .dept-introduction h2 {
+    margin-top: 22px;
+    font-size: 28px;
+  }
+
+  .dept-root .dept-introduction h3 {
+    font-size: 16px;
+  }
+
+  .dept-root .dept-introduction-description {
+    font-size: 13px;
+  }
+
+  .dept-root .dept-introduction-description br {
+    display: none;
+  }
+
+
+  /* ======================================
+     교육목표
+  ====================================== */
+
+  .dept-root .dept-education {
+    margin-top: 100px;
+  }
+
+  .dept-root .dept-education-header h2 {
+    font-size: 23px;
+    gap: 9px;
+  }
+
+  .dept-root .dept-education-header h2::before,
+.dept-root .dept-education-header h2::after {
+    width: 4px;
+    height: 24px;
+  }
+
+  .dept-root .dept-education-header p {
+    font-size: 13px;
+  }
+
+  .dept-root .dept-education-header br {
+    display: none;
+  }
+
+
+  /* 다이어그램 */
+  .dept-root .dept-diagram-wrap {
+    margin-top: 35px;
+  }
+
+  .dept-root .dept-diagram {
+    min-width: 650px;
+  }
+
+
+  /* 교육목표 3개 세로 정렬 */
+  .dept-root .dept-education-grid {
+    grid-template-columns: 1fr;
+
+    gap: 35px;
+    margin-top: 45px;
+  }
+
+  .dept-root .dept-goal-heading {
+    min-height: auto;
+  }
+
+  .dept-root .dept-goal-number {
+    font-size: 28px;
+  }
+
+  .dept-root .dept-goal-heading h3 {
+    font-size: 17px;
+  }
+
+  .dept-root .dept-goal-line {
+    margin: 12px 0 17px;
+  }
+
+  .dept-root .dept-goal-text p {
+    font-size: 13px;
+  }
+
+
+  /* ======================================
+     교수진 소개
+  ====================================== */
+
+  .dept-root .dept-professors {
+    margin-top: 105px;
+  }
+
+  .dept-root .dept-professors-header h2 {
+    font-size: 28px;
+  }
+
+  .dept-root .dept-professors-header p {
+    font-size: 13px;
+  }
+
+  /* 교수진 2열 */
+  .dept-root .dept-professor-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    column-gap: 15px;
+    row-gap: 32px;
+
+    margin-top: 30px;
+  }
+
+  .dept-root .dept-professor-name {
+    font-size: 18px;
+    margin-top: 9px;
+  }
+
+  .dept-root .dept-professor-position {
+    font-size: 11px;
+  }
+
+
+  /* 맨 위로 버튼 */
+  .dept-root .dept-top-button {
+    right: 18px;
+    bottom: 20px;
+
+    width: 40px;
+    height: 40px;
+  }
+
+  /* 푸터 여백 */
+  .page-department .common-footer {
+    margin-top: 85px;
+  }
+
+}
+
+
+/* ==========================================
+   작은 모바일
+========================================== */
+
+@media (max-width: 480px) {
+
+  .dept-root .dept-symbol {
+    font-size: 46px;
+  }
+
+  .dept-root .dept-hero-title {
+    font-size: 22px;
+  }
+
+  .dept-root .dept-education-header h2 {
+    font-size: 20px;
+  }
+
+  .dept-root .dept-professors-header h2 {
+    font-size: 24px;
+  }
+
+  .dept-root .dept-professor-name {
+    font-size: 16px;
+  }
+
+  .dept-root .dept-professor-position {
+    font-size: 10px;
+  }
+
+}
+
+/* ==========================================
+   PROFESSOR POPUP - 1280px
+========================================== */
+body.dept-message-open {
+  overflow: hidden;
+}
+
+/* 배경 */
+.dept-root .dept-message-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 5000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.55);
+  overflow: hidden;
+}
+
+.dept-root .dept-message-overlay[hidden] {
+  display: none !important;
+}
+
+/* 팝업 전체 박스 */
+.dept-root .dept-message-panel {
+  position: relative;
+  width: 100%;
+  max-width: 1180px;   /* 1280보다 조금 줄임 */
+  height: 88vh;
+  height: 88dvh;
+
+  background: #fff;
+  color: #222;
+
+  border-radius: 4px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+/* 내부 스크롤 */
+.dept-root .dept-message-frame {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+
+  padding: 42px 56px 56px;
+  box-sizing: border-box;
+  scrollbar-gutter: stable;
+  outline: none;
+}
+
+/* 닫기 버튼 */
+.dept-root .dept-message-close {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  z-index: 10;
+
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+  border: none;
+  background: transparent;
+
+  color: #aaa;
+  cursor: pointer;
+}
+
+.dept-root .dept-message-close span {
+  font-size: 44px;
+  font-weight: 200;
+  line-height: 1;
+}
+
+.dept-root .dept-message-close:hover {
+  color: #111;
+}
+
+/* 상단 로고 */
+.dept-root .dept-message-logo {
+  width: 110px;
+  height: 56px;
+  margin: 0 auto 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.dept-root .dept-message-logo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* 본문 레이아웃 */
+.dept-root .dept-message-body {
+  display: grid;
+  grid-template-columns: 170px minmax(0, 1fr);
+  gap: 38px;
+  align-items: start;
+}
+
+/* 교수 사진 */
+.dept-root .dept-message-photo {
+  width: 170px;
+  aspect-ratio: 0.75;
+  overflow: hidden;
+  background: #c8c8c8;
+}
+
+.dept-root .dept-message-photo img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+/* 이름 */
+.dept-root .dept-message-name {
+  margin: 0 0 6px;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+}
+
+/* 소속/직책 */
+.dept-root .dept-message-position {
+  margin: 0 0 28px;
+  color: #666;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
   letter-spacing: -0.02em;
 }
 
-.dept-divider {
-  width: 48px;
-  height: 3px;
-  background: var(--color-text);
-  border-radius: 2px;
-  margin: 0 auto 24px;
-}
+/* ==========================================
+   축사 제목 / 본문 구분
+========================================== */
 
-.dept-sub-text {
-  font-size: 1rem;
-  color: var(--color-muted);
-  line-height: 2;
-  word-break: keep-all;
-}
+/* 제목 */
+.dept-root .dept-message-quote {
+  margin: 0 0 18px;
 
-/* ===================================================
-   SECTION 2 — 교육목표
-=================================================== */
-#edu-goal {
-  background: var(--color-bg);
-}
-
-/* 핵심역량 다이어그램 */
-.competency-diagram {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 0;
-  margin-bottom: 64px;
-}
-
-.comp-node {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 200px;
-  height: 200px;
-  border: 2px solid var(--color-border);
-  border-radius: 50%;
-  background: #FFFFFF;
-  text-align: center;
-  padding: 20px;
-  flex-shrink: 0;
-  position: relative;
-  transition: border-color var(--transition), box-shadow var(--transition);
-}
-
-.comp-node:hover {
-  border-color: var(--ph-dark);
-  box-shadow: 0 6px 24px rgba(0,0,0,0.10);
-}
-
-.comp-node-en {
-  font-size: 0.65rem;
+  color: #222;
+  font-size: 20px;
   font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--ph-text);
-  margin-bottom: 6px;
-}
-
-.comp-node-kr {
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--color-text);
-  line-height: 1.3;
-}
-
-.comp-bridge {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 0 12px;
-  flex-shrink: 0;
-}
-
-.comp-bridge-line {
-  width: 56px;
-  height: 1.5px;
-  background: var(--ph-mid);
-}
-
-.comp-bridge-tag {
-  font-size: 0.64rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  color: var(--ph-text);
-  background: var(--ph-light);
-  border: 1px solid var(--color-border);
-  border-radius: 100px;
-  padding: 3px 9px;
-  white-space: nowrap;
-  text-align: center;
-}
-
-/* 교육방향 카드 */
-.edu-cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-
-.edu-card {
-  border: 1.5px solid var(--color-border);
-  border-radius: 10px;
-  background: #FFFFFF;
-  padding: 28px 24px 32px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  transition: box-shadow var(--transition), transform var(--transition);
-}
-
-.edu-card:hover {
-  box-shadow: 0 8px 28px rgba(0,0,0,0.09);
-  transform: translateY(-4px);
-}
-
-.edu-card-num {
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--ph-text);
-}
-
-.edu-card-title {
-  font-size: 0.96rem;
-  font-weight: 700;
-  color: var(--color-text);
-  line-height: 1.5;
-  border-bottom: 1.5px solid var(--color-border);
-  padding-bottom: 16px;
-  word-break: keep-all;
-}
-
-.edu-card-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.edu-card-list li {
-  font-size: 0.85rem;
-  color: var(--color-muted);
-  line-height: 1.65;
-  padding-left: 14px;
-  position: relative;
-  word-break: keep-all;
-}
-
-.edu-card-list li::before {
-  content: '—';
-  position: absolute;
-  left: 0;
-  color: var(--ph-mid);
-  font-size: 0.72rem;
-  top: 3px;
-}
-
-/* ===================================================
-   SECTION 3 — 교수진
-=================================================== */
-#professors {
-  background: #FFFFFF;
-  border-top: 1px solid var(--color-border);
-}
-
-.prof-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 24px;
-}
-
-.prof-card {
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  padding: 20px 16px 22px;
-  border: 1.5px solid var(--color-border);
-  border-radius: 10px;
-  background: #FFFFFF;
-  transition: box-shadow var(--transition), transform var(--transition), border-color var(--transition);
-  text-align: center;
-}
-
-.prof-card:hover {
-  box-shadow: 0 8px 28px rgba(0,0,0,0.10);
-  transform: translateY(-5px);
-  border-color: var(--ph-dark);
-}
-
-.prof-img-ph {
-  width: 100%;
-  aspect-ratio: 3 / 4;
-  border-radius: 6px;
-  font-size: 0.72rem;
-  flex-shrink: 0;
-}
-
-.prof-name {
-  font-size: 0.94rem;
-  font-weight: 700;
-  color: var(--color-text);
-}
-
-.prof-subject {
-  font-size: 0.78rem;
-  color: var(--color-muted);
-  line-height: 1.5;
-  word-break: keep-all;
-}
-
-/* ===================================================
-   PROFESSOR MODAL
-=================================================== */
-.prof-modal-box {
-  max-width: 600px;
-}
-
-.modal-head {
-  display: flex;
-  gap: 20px;
-  align-items: center;
-  padding: 32px 32px 24px;
-  border-bottom: 1px solid var(--color-border);
-}
-
-.modal-prof-img {
-  width: 90px;
-  height: 110px;
-  flex-shrink: 0;
-  border-radius: 6px;
-  font-size: 0.7rem;
-}
-
-.modal-prof-info { flex: 1; }
-
-.modal-prof-info .modal-eyebrow {
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--ph-text);
-  margin-bottom: 6px;
-}
-
-.modal-prof-info .modal-name {
-  font-size: 1.4rem;
-  font-weight: 900;
-  margin-bottom: 6px;
-}
-
-.modal-prof-info .modal-subject {
-  font-size: 0.84rem;
-  color: var(--color-muted);
   line-height: 1.6;
+  letter-spacing: -0.03em;
+
+  /* 제목 느낌 강조 */
+  font-family:
+    "Noto Serif KR",
+    "Nanum Myeongjo",
+    "Times New Roman",
+    serif;
 }
 
-.prof-modal-body {
-  padding: 28px 32px 36px;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
+/* 본문 */
+.dept-root .dept-message-content {
+  color: #555;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.95;
+  letter-spacing: -0.02em;
 
-.modal-message-box {
-  background: var(--ph-light);
-  border: 1.5px dashed var(--ph-mid);
-  border-radius: var(--radius);
-  padding: 18px 20px;
-  font-size: 0.88rem;
-  color: var(--color-muted);
-  line-height: 2;
-  word-break: keep-all;
   white-space: pre-line;
+  overflow-wrap: break-word;
+
+  font-family:
+    "Pretendard",
+    "Noto Sans KR",
+    "Apple SD Gothic Neo",
+    "Malgun Gothic",
+    sans-serif;
 }
 
-.modal-message-headline {
-  margin-bottom: 14px;
-  font-size: 1rem;
-  font-weight: 700;
-  line-height: 1.7;
-  color: var(--color-text);
+/* 본문 문단 간격 느낌 */
+.dept-root .dept-message-content br + br {
+  content: "";
 }
 
-/* ===================================================
-   RESPONSIVE
-=================================================== */
+/* ==========================================
+   TABLET
+========================================== */
+
 @media (max-width: 1024px) {
-  .prof-grid  { grid-template-columns: repeat(5, 1fr); gap: 16px; }
-  .edu-cards  { grid-template-columns: repeat(2, 1fr); }
-  .comp-node  { width: 170px; height: 170px; }
+  .dept-root .dept-message-panel {
+    max-width: 960px;
+  }
+
+  .dept-root .dept-message-frame {
+    padding: 38px 36px 44px;
+  }
+
+  .dept-root .dept-message-logo {
+    width: 96px;
+    height: 50px;
+    margin-bottom: 28px;
+  }
+
+  .dept-root .dept-message-body {
+    grid-template-columns: 145px minmax(0, 1fr);
+    gap: 28px;
+  }
+
+  .dept-root .dept-message-photo {
+    width: 145px;
+  }
+
+  .dept-root .dept-message-name {
+    font-size: 24px;
+  }
+
+  .dept-root .dept-message-position {
+    font-size: 15px;
+    margin-bottom: 24px;
+  }
+
+  .dept-root .dept-message-quote {
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
+
+  .dept-root .dept-message-content {
+    font-size: 14px;
+    line-height: 1.9;
+  }
 }
+
+/* ==========================================
+   MOBILE
+========================================== */
 
 @media (max-width: 768px) {
-  .prof-grid         { grid-template-columns: repeat(2, 1fr); }
-  .edu-cards         { grid-template-columns: 1fr; }
-  .dept-main-title   { font-size: 2rem; }
-  .section-title     { font-size: 1.4rem; }
-  .competency-diagram { flex-direction: column; gap: 12px; }
-  .comp-bridge       { flex-direction: row; }
-  .comp-bridge-line  { width: 24px; }
-  .modal-head        { flex-direction: column; align-items: flex-start; }
+  .dept-root .dept-message-overlay {
+    padding: 12px;
+  }
+
+  .dept-root .dept-message-panel {
+    max-width: 100%;
+    height: 92vh;
+    height: 92dvh;
+  }
+
+  .dept-root .dept-message-frame {
+    padding: 34px 20px 34px;
+  }
+
+  .dept-root .dept-message-close {
+    top: 10px;
+    right: 10px;
+    width: 36px;
+    height: 36px;
+  }
+
+  .dept-root .dept-message-close span {
+    font-size: 36px;
+  }
+
+  .dept-root .dept-message-logo {
+    width: 86px;
+    height: 44px;
+    margin-bottom: 24px;
+  }
+
+  .dept-root .dept-message-body {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .dept-root .dept-message-photo {
+    width: 120px;
+  }
+
+  .dept-root .dept-message-name {
+    font-size: 24px;
+  }
+
+  .dept-root .dept-message-position {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  .dept-root .dept-message-quote {
+    font-size: 17px;
+    margin-bottom: 14px;
+  }
+
+  .dept-root .dept-message-content {
+    font-size: 14px;
+    line-height: 1.85;
+  }
+}
+/* ==========================================
+   PROFESSOR CARD 디자인 원상복구
+========================================== */
+
+/* 교수진 5열 × 2행 */
+.dept-root .dept-professor-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  column-gap: 20px;
+  row-gap: 50px;
+  width: 100%;
 }
 
-@media (max-width: 640px) {
-  :root { --section-gap: 60px; }
-  .prof-grid         { grid-template-columns: repeat(2, 1fr); gap: 16px; }
-  .dept-main-title   { font-size: 1.6rem; }
-  .prof-modal-body   { padding: 20px; }
-  .modal-head        { padding: 24px 20px 20px; }
+/* 교수 카드 */
+.dept-root .dept-professor-card {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  background: transparent;
+  border: none;
+}
+
+/* 버튼 기본 디자인 완전히 제거 */
+.dept-root .dept-professor-card .dept-professor-button {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+
+  color: inherit;
+  font: inherit;
+  text-align: center;
+  cursor: pointer;
+}
+
+/* 교수 사진 - 기존 정사각형 */
+.dept-root .dept-professor-button .dept-professor-photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  margin: 0;
+  padding: 0;
+
+  border: none;
+  border-radius: 6px;
+  background: #dedede;
+  overflow: hidden;
+}
+
+/* 교수 사진 원본 비율 */
+.dept-root .dept-professor-button .dept-professor-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 교수 이름 */
+.dept-root .dept-professor-button .dept-professor-name {
+  margin: 10px 0 8px;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #111;
+}
+
+/* 교수 직책 */
+.dept-root .dept-professor-button .dept-professor-position {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #888;
+}
+
+/* 호버 시 카드 크기나 배치 변경 없음 */
+.dept-root .dept-professor-button:hover .dept-professor-photo {
+  transform: none;
+  box-shadow: none;
+}
+
+/* 클릭 가능하다는 것만 색상으로 표시 */
+.dept-root .dept-professor-button:hover .dept-professor-name {
+  color: #2591B8;
+}
+
+/* 태블릿 */
+@media (max-width: 1024px) {
+  .dept-root .dept-professor-grid {
+    column-gap: 14px;
+    row-gap: 35px;
+  }
+
+  .dept-root .dept-professor-button .dept-professor-name {
+    font-size: 19px;
+  }
+
+  .dept-root .dept-professor-button .dept-professor-position {
+    font-size: 11px;
+  }
+}
+
+/* 모바일 */
+@media (max-width: 768px) {
+  .dept-root .dept-professor-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 15px;
+    row-gap: 32px;
+  }
+
+  .dept-root .dept-professor-button .dept-professor-name {
+    font-size: 18px;
+  }
+}
+
+
+/* 교수 카드 사진은 정사각형 칸에 3:4 세로 사진이 들어오므로 머리가 잘리지 않게 위쪽 기준 */
+.dept-root .dept-professor-photo img {
+  object-position: center top;
 }

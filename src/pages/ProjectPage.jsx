@@ -2,9 +2,13 @@ import React, { useState, useMemo } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { PROJECT_TABS, TAB_MAP, getSubCategories } from '../data/projectTabs';
 import { allWorks, getWorkAuthor, getWorkTitle, matchesSub } from '../data/works';
-import { FALLBACK } from '../hooks/useImageFallback';
+import { assetUrl, FALLBACK } from '../hooks/useImageFallback';
 import SafeImg from '../components/SafeImg';
 import './ProjectPage.css';
+
+// 카테고리 아이콘: 선택된 탭은 컬러, 나머지는 회색 (public/images/UI/category-*.webp)
+const categoryIcon = (id, active) =>
+  assetUrl(`/images/UI/category-${id === 'team' ? 'xr' : id}-${active ? 'on' : 'off'}.webp`);
 
 const matchesKeyword = (work, keyword) =>
   !keyword || `${getWorkTitle(work)} ${getWorkAuthor(work)}`.toLowerCase().includes(keyword);
@@ -42,7 +46,7 @@ const ProjectPage = () => {
   };
 
   return (
-    <div className="project-page">
+    <div className="project-page" data-category={activeTab}>
       <main id="work">
         <section className="intro" aria-labelledby="page-title">
           <h1 id="page-title">Portfolio</h1>
@@ -60,7 +64,9 @@ const ProjectPage = () => {
                 aria-pressed={activeTab === t.id}
                 onClick={() => switchTab(t.id)}
               >
-                <span className="asset-slot category-icon" />
+                <span className="asset-slot category-icon">
+                  <img src={categoryIcon(t.id, activeTab === t.id)} alt="" onError={(e) => e.currentTarget.remove()} />
+                </span>
                 <span className="category-label">{t.label}</span>
               </button>
             ))}
@@ -83,23 +89,30 @@ const ProjectPage = () => {
           </div>
 
           <div className="portfolio-grid" aria-live="polite">
-            {visible.map((work) => (
-              <article key={work.id} className="project-card">
-                <Link
-                  to={`/project/${work.id}`}
-                  className="project-link"
-                  aria-label={`${getWorkTitle(work)} 작품 소개 보기`}
-                >
-                  <span className="project-thumb">
-                    {work.thumbnail && (
-                      <SafeImg src={work.thumbnail} fallbackSrc={FALLBACK.image} alt="" />
-                    )}
-                  </span>
-                  <h2 className="project-title">{getWorkTitle(work)}</h2>
-                  {work.title && <p className="project-author">{getWorkAuthor(work)}</p>}
-                </Link>
-              </article>
-            ))}
+            {visible.map((work) => {
+              // 제안 이름(proposal)이 있으면 브랜드명을 위에 작게, 제안 이름을 크게. 없으면 작품명을 크게 보여 준다
+              const heading = work.proposal || getWorkTitle(work);
+              return (
+                <article key={work.id} className="project-card">
+                  <Link
+                    to={`/project/${work.id}`}
+                    className="project-link"
+                    aria-label={`${getWorkTitle(work)} ${work.proposal ?? ''} 작품 소개 보기`}
+                  >
+                    <div className="project-thumb">
+                      {work.thumbnail && (
+                        <SafeImg src={work.thumbnail} fallbackSrc={FALLBACK.image} alt={`${getWorkTitle(work)} 대표 이미지`} />
+                      )}
+                    </div>
+                    <div className="project-info">
+                      {work.proposal && <p className="project-brand">{getWorkTitle(work)}</p>}
+                      <h2 className="project-proposal">{heading}</h2>
+                      {work.title && <p className="project-author">{getWorkAuthor(work)}</p>}
+                    </div>
+                  </Link>
+                </article>
+              );
+            })}
           </div>
 
           {visible.length === 0 && (

@@ -49,24 +49,22 @@ src/
 ├── components/
 │   ├── Navbar.jsx / .css         ← 상단 네비게이션
 │   ├── Footer.jsx / .css         ← 하단 푸터
-│   ├── Modal.jsx                 ← 공통 모달 래퍼
-│   ├── PageHero.jsx              ← 서브페이지 상단 타이틀 영역
+│   ├── SiteEffects.jsx           ← 전 페이지 공통: 스크롤 등장 효과, 페이지 이동 효과
 │   ├── SafeImg.jsx               ← 이미지 에러 시 fallback 처리
 │   └── SkeletonCard.jsx / .css   ← 로딩·빈 상태 컴포넌트
 │
 ├── data/
 │   ├── graduates.js     ← 졸업생 40명 프로필
-│   ├── projects.js      ← 개인 작품 60개
-│   ├── teamProjects.js  ← 팀 작품 23개
+│   ├── projects.js      ← 개인·공동 작품 (csv_data/projects.csv 에서 생성)
+│   ├── teamProjects.js  ← 팀(U300) 작품 — 창캡 = U300 = 한이음
+│   ├── works.js         ← 작품 조회 헬퍼 (작가명·직군 필터·학생별 작품)
 │   ├── projectTabs.js   ← 탭/직군 정의 (여기만 수정하면 UI 자동 반영)
 │   ├── professors.js    ← 교수진
 │   ├── archives.js      ← 아카이브 연도별 데이터
 │   └── constants.js     ← 전시 기본 정보 (날짜, 장소 등)
 │
 ├── hooks/
-│   ├── useScrollReveal.js   ← .reveal 클래스 IntersectionObserver
-│   ├── useModal.js          ← 모달 open/close 상태
-│   ├── useCarousel.js       ← 제안서 이미지 캐러셀
+│   ├── useScrollReveal.js   ← .reveal 클래스 IntersectionObserver (GalleryPage)
 │   └── useImageFallback.js  ← assetUrl(), FALLBACK 상수
 │
 scripts/
@@ -208,7 +206,9 @@ videoUrl, proposalImages, contactEmail, contactPhone
 | 경로 | 페이지 |
 |------|--------|
 | `/` | 메인 (히어로, 전시소개, 졸업생 프로필, 아카이브) |
-| `/project` | 작품소개 (탭 필터, 작품 카드, 상세 모달) |
+| `/project` | 작품소개 (카테고리·직군 필터, 작품 카드) |
+| `/project/:id` | 작품 상세 |
+| `/student` | 졸업생 소개 (`?student=<학번>` 이면 팝업이 열림) |
 | `/department` | 학과소개 (교수진, 교육과정, 핵심 역량) |
 | `/gallery` | 준비과정 영상 |
 | `/others` | 기타 |
@@ -218,7 +218,19 @@ videoUrl, proposalImages, contactEmail, contactPhone
 
 ---
 
-## 9. sha 브랜치 작업 시 주의사항
+## 9. sha_copy → React 이식 규칙
+
+`sha_copy/` 는 디자이너(sha)가 React 없이 HTML·CSS·JS 로 작업하는 폴더다. 그쪽 변경은 **전부** `src/` 로 옮겨야 한다
+(우리 컴포넌트가 더 발전돼 있으므로 HTML 을 그대로 복사하지 말고 분해해서 우리 구조에 맞출 것).
+
+- 사용자가 지정한 페이지만이 아니라 sha_copy 전체를 `src/` 와 대조한다 (`git log -- sha_copy` 로 디자이너 커밋 확인).
+- CSS 는 페이지 클래스(`.index-root`, `.dept-root`, `.project-page` …)로 감싸서 전역 충돌을 막고, 브레이크포인트는 표준 4단계만 쓴다.
+- sha_copy 의 데이터(`js/*.js` 안의 목업)는 쓰지 않고 `src/data/*` 의 실제 데이터에 디자인을 맞춘다.
+- 이식한 것과 일부러 이식하지 않은 것(이유 포함)을 사용자에게 보고한다.
+
+---
+
+## 10. sha 브랜치 작업 시 주의사항
 
 sha 브랜치는 main 대비 다음 파일들이 **없거나 이전 버전**입니다. main에 머지하기 전에 충돌을 꼭 확인하세요.
 
@@ -244,7 +256,7 @@ sha 브랜치는 main 대비 다음 파일들이 **없거나 이전 버전**입�
 
 ---
 
-## 10. 현재 플레이스홀더 상태 (데이터 미입력)
+## 11. 현재 플레이스홀더 상태 (데이터 미입력)
 
 운영팀 자료 수집 전까지 아래는 더미 데이터 상태입니다. **수정하지 마세요.**
 
