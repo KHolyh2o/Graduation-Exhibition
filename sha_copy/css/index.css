@@ -1433,3 +1433,151 @@ body.index-student-modal-open {
 }
 
 /* 모바일 */
+
+/* ==========================================
+   INTRO 하단 텍스트 + 그라데이션
+========================================== */
+
+.index-intro-skip {
+  position: absolute;
+  top: auto;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  width: 100%;
+  height: 28%;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+
+  padding: 0 100px 100px;
+  margin: 0;
+
+  border: none;
+  border-radius: 0;
+
+  /* 위쪽은 투명, 아래쪽으로 갈수록 검정 */
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.50) 30%,
+    rgba(0, 0, 0, 0.55) 70%,
+    rgba(0, 0, 0, 0.78) 100%
+  );
+
+  color: #fff;
+  font-size: clamp(19px, 1.8vw, 25px);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.4;
+
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+
+  z-index: 2;
+  cursor: pointer;
+}
+
+.index-intro-skip:hover {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.22) 30%,
+    rgba(0, 0, 0, 0.55) 70%,
+    rgba(0, 0, 0, 0.78) 100%
+  );
+
+  color: #fff;
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .index-intro-skip {
+    height: 28%;
+    padding-bottom: 20px;
+    font-size: 20px;
+  }
+}
+.index-intro-skip span {
+  position: relative;
+  top: 50px;
+
+  text-shadow:
+    0 0 6px rgba(255, 255, 255, 0.9),
+    0 0 14px rgba(255, 255, 255, 0.5);
+}
+
+
+/* ==========================================
+   INTRO 하단 그라데이션 + 등장 효과
+========================================== */
+
+.index-intro-skip {
+  /* 더 강한 검정 그라데이션 */
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.3) 25%,
+    rgba(0, 0, 0, 0.65) 55%,
+    rgba(0, 0, 0, 0.9) 100%
+  );
+
+  /* 2초 후 등장, 1.5초 동안 서서히 표시 */
+  animation: introFadeIn 0.5s ease-out 3s both;
+}
+
+.index-intro-skip:hover {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.3) 25%,
+    rgba(0, 0, 0, 0.65) 55%,
+    rgba(0, 0, 0, 0.9) 100%
+  );
+}
+
+@keyframes introFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+/* ==========================================
+   MAIN HERO - 1160px
+========================================== */
+
+.page-index .main-hero-video {
+  width: calc(100% - 40px);
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* 메인 배너 이미지 */
+.page-index .main-hero-video > img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* 메인 영상 사용 시 */
+.page-index .main-hero-video .hero-video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* 모바일 */
+@media (max-width: 768px) {
+  .page-index .main-hero-video {
+    width: calc(100% - 32px);
+  }
+}

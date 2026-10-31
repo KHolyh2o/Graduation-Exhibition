@@ -611,7 +611,7 @@ function initIndexIntro() {
   ======================================== */
 
   // WebP 애니메이션 길이에 맞게 수정
-  const INTRO_DURATION = 7000;
+  const INTRO_DURATION = 6000;
 
   // 사라지는 효과
   const FADE_DURATION = 750;
@@ -714,7 +714,10 @@ function finishIntro() {
 
 
   /* SKIP 버튼 */
-  skip?.addEventListener("click", finishIntro);
+intro.addEventListener("click", () => {
+  finishIntro();
+});
+
 
   /* 파일 로딩 실패 등에 대비한 안전장치 */
   safetyTimer = window.setTimeout(() => {
