@@ -31,7 +31,7 @@ const CATEGORY_NAMES = {
 const FILTERS = {
   multimedia: [
     { key: "all", label: "ALL" },
-    { key: "pm", label: "Project Manager" },
+    { key: "pm", label: "Product Manager" },
     { key: "designer", label: "Designer" },
     { key: "marketer", label: "Marketer" },
     { key: "developer", label: "Developer" },
