@@ -8,16 +8,16 @@
 const DEPARTMENT_IMAGES = {
 
   // 상단 졸업전시 포스터
-  poster: "",
+  poster: "../public/images/UI/학과소개_포스터.png",
 
   // 학부 소개 위쪽 화살
-  arrowTop: "",
+  arrowTop: "../public/images/UI/학과소개화살_위.png",
 
   // 학부 소개 아래쪽 화살
-  arrowBottom: "",
+  arrowBottom: "../public/images/UI/학과소개화살_아래.png",
 
   // 교육목표 다이어그램
-  educationDiagram: ""
+  educationDiagram: "../public/images/UI/학과소개 요소.png"
 
 };
 

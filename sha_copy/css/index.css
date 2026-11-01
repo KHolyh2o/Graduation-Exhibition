@@ -1581,3 +1581,150 @@ body.index-student-modal-open {
     width: calc(100% - 32px);
   }
 }
+
+
+/* ==========================================
+   CREDIT LOGO 이미지 크기 조절
+========================================== */
+
+.page-index .credit-logo {
+  width: 245px;
+  height: 42px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.page-index .credit-logo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+
+  object-fit: contain;
+  object-position: center;
+}
+
+
+/* ==========================================
+   TARGET CARD HOVER
+   어두운 배경 + 카테고리명
+========================================== */
+
+.page-index .target-card {
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+
+/* 어두워지는 오버레이 */
+.page-index .target-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+
+  background: rgba(0, 0, 0, 0.6);
+
+  opacity: 0;
+  transition: opacity 0.35s ease;
+
+  pointer-events: none;
+}
+
+/* 중앙 카테고리 텍스트 */
+.page-index .target-card::after {
+  content: attr(data-title);
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 3;
+
+  width: 100%;
+  padding: 0 15px;
+
+  color: #fff;
+  font-size: clamp(20px, 2vw, 28px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  text-align: center;
+  white-space: nowrap;
+
+  opacity: 0;
+  transform: translate(-50%, -40%);
+
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s ease;
+
+  pointer-events: none;
+}
+
+/* 마우스 호버 / 키보드 포커스 */
+.page-index .target-card:hover::before,
+.page-index .target-card:focus-visible::before {
+  opacity: 1;
+}
+
+.page-index .target-card:hover::after,
+.page-index .target-card:focus-visible::after {
+  opacity: 1;
+  transform: translate(-50%, -50%);
+}
+
+
+/* ==========================================
+   TARGET CARD 간격 + 모서리 둥글게
+========================================== */
+
+/* 이미지 3개 사이 여백 */
+.page-index .target-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+/* 카드 외곽 */
+.page-index .target-card {
+  position: relative;
+  overflow: hidden;
+
+  border-radius: 10px;
+}
+
+/* 이미지도 카드 모서리에 맞게 */
+.page-index .target-card-image {
+  width: 100%;
+  border-radius: inherit;
+  overflow: hidden;
+}
+
+/* 호버 이미지 확대 효과 유지 */
+.page-index .target-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 태블릿 */
+@media (max-width: 768px) {
+  .page-index .target-grid {
+    gap: 12px;
+  }
+
+  .page-index .target-card {
+    border-radius: 9px;
+  }
+}
+
+/* 모바일 */
+@media (max-width: 480px) {
+  .page-index .target-grid {
+    gap: 8px;
+  }
+
+  .page-index .target-card {
+    border-radius: 7px;
+  }
+}

@@ -24,7 +24,7 @@ const INDEX_ASSETS = {
   map: "../public/images/학교지도.png",
 
   // Credit 로고
-  creditLogo: "",
+  creditLogo: "../public/images/UI/크레딧 화살.png",
 
   // 학생 슬라이드 버튼 이미지
   arrowPrev: "../public/images/UI/slide_pre.png",

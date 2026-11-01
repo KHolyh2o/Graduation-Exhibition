@@ -8,12 +8,12 @@ const COMMON_CONFIG = {
 
   // 이미지 경로
   logoImage: "../public/images/로고.png",
-  instagramImage: "",
-  youtubeImage: "",
+  instagramImage: "../public/images/UI/푸터_인스타.png",
+  youtubeImage: "../public/images/UI/푸터_유튜브.png",
 
   // SNS 링크
-  instagramURL: "",
-  youtubeURL: ""
+  instagramURL: "https://www.instagram.com/swu_mediacontents/",
+  youtubeURL: "https://www.youtube.com/@%EB%AF%B8%EB%94%94%EC%96%B4%EC%BD%98%ED%85%90%EC%B8%A0%ED%95%99%EB%B6%80"
 };
 
 /* ==========================================
