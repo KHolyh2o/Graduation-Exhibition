@@ -59,6 +59,7 @@ function createCommonHeader() {
           <a href="${base}project.html" data-page="project.html">WORK</a>
           <a href="${base}student.html" data-page="student.html">GRADUATES</a>
           <a href="${base}department.html" data-page="department.html">ABOUT</a>
+          <a href="${base}memory.html" data-page="memory.html">MEMORY</a>
           <a href="${base}archive.html" data-page="archive.html">ARCHIVE</a>
 
           <button
@@ -370,6 +371,10 @@ function initCommonMobileMenu() {
        class="common-mobile-link">
       ABOUT
     </a>
+
+    <a href="${base}memory.html" class="common-mobile-link">
+  MEMORY
+</a>
 
     <a href="${base}archive.html"
        class="common-mobile-link">
@@ -1079,3 +1084,4 @@ function increaseAllPageFontSizes() {
 
 // 공통 폰트 확대 실행
 increaseAllPageFontSizes();
+
