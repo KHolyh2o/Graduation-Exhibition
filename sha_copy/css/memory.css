@@ -521,3 +521,37 @@ body.page-memory {
     transition: none;
   }
 }
+
+/* ==========================================
+   MEMORY 포스트잇 색상 추가
+========================================== */
+
+:root {
+  --memory-red: #F4A8B0;
+  --memory-blue: #A9D9F3;
+}
+
+/* 색상 선택 버튼 */
+.memory-color-dot.red {
+  background: var(--memory-red);
+}
+
+.memory-color-dot.blue {
+  background: var(--memory-blue);
+}
+
+/* 등록된 포스트잇 */
+.memory-note[data-color="red"] {
+  --note-color: var(--memory-red);
+}
+
+.memory-note[data-color="blue"] {
+  --note-color: var(--memory-blue);
+}
+
+/* 다섯 가지 색상 정렬 */
+.memory-color-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}

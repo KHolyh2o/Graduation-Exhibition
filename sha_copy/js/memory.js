@@ -42,8 +42,13 @@
 
   if (!form || !board || !messageInput) return;
 
-  const allowedColors = ["lime", "pink", "yellow"];
-
+const allowedColors = [
+  "lime",
+  "pink",
+  "yellow",
+  "red",
+  "blue"
+];
   let messages = [];
   let database = null;
   let isSaving = false;
