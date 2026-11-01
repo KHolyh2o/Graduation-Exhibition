@@ -1728,3 +1728,60 @@ body.index-student-modal-open {
     border-radius: 7px;
   }
 }
+
+/* ==========================================
+   MOBILE STUDENT SLIDER - 1명씩 표시
+========================================== */
+
+@media (max-width: 768px) {
+
+  /* 한 페이지에 학생 카드 1개 */
+  .page-index .students-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+
+    width: min(100%, 320px);
+    margin: 0 auto;
+    gap: 0;
+  }
+
+  /* 이미지 원본 비율 유지 */
+  .page-index .student-card {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .page-index .student-card-image {
+    width: 100%;
+    aspect-ratio: 0.61;
+  }
+
+  .page-index .student-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+}
+
+/* ==========================================
+   TARGET 모바일 이미지 비율 수정
+========================================== */
+
+@media (max-width: 768px) {
+
+  .page-index .target-card-image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 0.86 / 1;
+    overflow: hidden;
+  }
+
+  .page-index .target-card-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+}

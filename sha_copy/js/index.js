@@ -309,14 +309,16 @@ function initMainStudentSlider() {
   let totalPages = 0;
 
 
-  /* 화면 크기에 따른 페이지당 학생 수 */
-  function getPageSize() {
+ 
+/* 화면 크기에 따른 페이지당 학생 수 */
+function getPageSize() {
 
-    return window.matchMedia(
-      "(max-width: 768px)"
-    ).matches ? 4 : 10;
+  return window.matchMedia(
+    "(max-width: 768px)"
+  ).matches ? 1 : 10;
 
-  }
+}
+
 
 
   /* ========================================
