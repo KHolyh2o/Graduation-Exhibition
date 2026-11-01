@@ -1785,3 +1785,278 @@ body.index-student-modal-open {
   }
 
 }
+
+
+/* ==========================================
+   INDEX INTRO - MOBILE BLACK SCREEN
+========================================== */
+
+@media (max-width: 768px) {
+
+  /* 인트로 전체 배경 검정 */
+  .index-intro {
+    background: #050505;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+  }
+
+  /* WebP 원본 비율 유지 + 중앙 배치 */
+  .index-intro-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+    object-position: center;
+
+    background: #050505;
+  }
+
+  /* 하단 검정 그라데이션 */
+  .index-intro-skip {
+    position: absolute;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    width: 100%;
+    height: 35%;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+
+    padding: 0 20px 34px;
+    box-sizing: border-box;
+
+    border: none;
+    border-radius: 0;
+
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.25) 35%,
+      rgba(0, 0, 0, 0.75) 75%,
+      rgba(0, 0, 0, 0.95) 100%
+    );
+
+    color: #fff;
+    font-size: 20px;
+    font-weight: 400;
+    text-align: center;
+
+    z-index: 2;
+    cursor: pointer;
+
+    /* 기존 2초 후 서서히 등장 */
+    animation: introFadeIn 1.5s ease-out 2s both;
+  }
+
+  /* 기존 글자 80px 이동 설정 해제 */
+  .index-intro-skip span {
+    position: relative;
+    top: 0;
+
+    text-shadow:
+      0 0 7px rgba(255, 255, 255, 0.65),
+      0 2px 8px rgba(0, 0, 0, 0.9);
+  }
+
+  /* 호버 시 배경 유지 */
+  .index-intro-skip:hover {
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.25) 35%,
+      rgba(0, 0, 0, 0.75) 75%,
+      rgba(0, 0, 0, 0.95) 100%
+    );
+    color: #fff;
+  }
+
+}
+
+/* ==========================================
+   CREDIT MOBILE - 컴팩트 버전
+========================================== */
+
+@media (max-width: 768px) {
+
+  /* 전체 영역 여백 축소 */
+  .page-index .main-credit {
+    padding: 45px 0 40px;
+  }
+
+  /* 제목 */
+  .page-index .credit-header {
+    gap: 12px;
+  }
+
+  .page-index .credit-header h2 {
+    font-size: 27px;
+  }
+
+  /* 제목 옆 로고 */
+  .page-index .credit-logo {
+    width: 155px;
+    height: 30px;
+    flex-shrink: 1;
+  }
+
+  /* 영문 설명 */
+  .page-index .credit-subtitle {
+    margin: 7px 0 18px;
+    font-size: 10px;
+  }
+
+  /* 명단 영역 공통 */
+  .page-index .credit-row {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 14px 0;
+  }
+
+  .page-index .credit-row h3 {
+    font-size: 12px;
+    line-height: 1.4;
+    white-space: nowrap;
+  }
+
+  /* 졸업전시위원회 - 2열 */
+  .page-index .credit-committee {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 10px;
+    row-gap: 9px;
+  }
+
+  /* 각 팀 한 줄 유지 */
+  .page-index .credit-team {
+    display: flex;
+    align-items: baseline;
+    gap: 7px;
+    white-space: nowrap;
+  }
+
+  .page-index .credit-team strong {
+    min-width: 0;
+    flex-shrink: 0;
+    font-size: 11px;
+    line-height: 1.5;
+  }
+
+  .page-index .credit-team span {
+    font-size: 11px;
+    line-height: 1.5;
+  }
+
+  /* 교수진 / 졸업생 명단 */
+  .page-index .credit-names,
+  .page-index .credit-graduates p {
+    font-size: 11px;
+    line-height: 1.7;
+  }
+
+  .page-index .credit-graduates p {
+    margin-bottom: 4px;
+  }
+
+}
+
+/* ==========================================
+   TARGET MOBILE - 가로형 카드 3개 세로 배치
+========================================== */
+
+@media (max-width: 768px) {
+
+  /* 이미지 3개 세로 정렬 */
+  .page-index .target-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    width: 100%;
+  }
+
+  /* 카드 전체 너비 사용 */
+  .page-index .target-card {
+    display: block;
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  /* 가로로 긴 이미지 영역 */
+  .page-index .target-card-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 2 / 1;
+    border-radius: inherit;
+    overflow: hidden;
+  }
+
+  /* 이미지 영역 꽉 채우기 */
+  .page-index .target-card-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+}
+
+/* ==========================================
+   INDEX 모바일 헤더 메뉴 표시 오류 수정
+========================================== */
+
+@media (max-width: 768px) {
+
+  /* 인트로 애니메이션으로 인한
+     헤더 레이어 충돌 방지 */
+  html.index-intro-complete
+  body.page-index #common-header {
+    position: sticky;
+    top: 0;
+    z-index: 2000;
+
+    animation: none !important;
+    transform: none !important;
+
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  /* 헤더와 버튼 클릭 가능 */
+  .page-index .common-header {
+    z-index: 2001;
+    pointer-events: auto;
+  }
+
+  .page-index .common-menu-toggle {
+    position: relative;
+    z-index: 2002;
+    pointer-events: auto;
+  }
+
+  /* 모바일 메뉴가 본문 위에 표시되도록 */
+  .page-index .common-mobile-menu:not([hidden]) {
+    position: fixed;
+
+    top: 90px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: calc(100dvh - 90px);
+
+    z-index: 2001;
+    background: #fff;
+    overflow-y: auto;
+  }
+
+}
