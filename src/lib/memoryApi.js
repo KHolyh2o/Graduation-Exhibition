@@ -1,5 +1,4 @@
 // MEMORY 응원 메시지 저장소. Supabase REST(PostgREST)를 fetch 로 직접 호출한다 (별도 패키지 없음).
-// 글은 승인 전(approved=false)으로 들어가고, 승인된 글만 조회된다 (RLS, supabase/memory.sql).
 // VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY 가 없으면 이 브라우저(localStorage)에만 저장하는 미리보기 모드.
 // supabase/memory.sql 로 테이블을 만든 뒤 .env.production 에 값을 넣는다.
 const URL = import.meta.env.VITE_SUPABASE_URL;
