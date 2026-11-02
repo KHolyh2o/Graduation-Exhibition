@@ -726,7 +726,7 @@ body:has(.student-page) {
 
 .student-page .graduate-video {
   width: 100%;
-  aspect-ratio: 728 / 836;
+  aspect-ratio: 16 / 9;
 
   background: #2992b5;
   overflow: hidden;
@@ -1345,7 +1345,7 @@ body:has(.student-page) {
 
   .student-page .graduate-video {
     width: 100%;
-    aspect-ratio: 728 / 836;
+    aspect-ratio: 16 / 9;
     background: #58bde4;
   }
 
