@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useLayoutEffect, useRef, useState, useSy
 import { Link } from 'react-router-dom';
 import { graduates } from '../data/graduates';
 import { professors } from '../data/professors';
+import { allWorks, getWorkTitle, getWorkAuthor } from '../data/works';
 import { EXHIBITION, COMMITTEE_TEAMS } from '../data/constants';
 import { assetUrl, FALLBACK } from '../hooks/useImageFallback';
 import SafeImg from '../components/SafeImg';
@@ -170,7 +171,14 @@ const TARGETS = [
   { category: 'team',       label: '팀프로젝트' },
 ];
 
+// 카테고리마다 썸네일이 있는 작품 중 하나를 무작위로 뽑는다 (메인에 들어올 때마다 바뀜)
+const pickRandomTargets = () => TARGETS.map((t) => {
+  const pool = allWorks.filter((w) => w.tab === t.category && w.thumbnail);
+  return { ...t, work: pool[Math.floor(Math.random() * pool.length)] };
+});
+
 const MainPage = () => {
+  const [targets] = useState(pickRandomTargets);
   const [showIntro, setShowIntro] = useState(
     () => !introPlayed && !window.matchMedia('(prefers-reduced-motion: reduce)').matches,
   );
@@ -240,14 +248,23 @@ const MainPage = () => {
 
             {/* 카테고리 대표 이미지 3개 — 이미지 한 장에 디자인과 글자가 포함 */}
             <div className="target-grid">
-              {TARGETS.map(({ category, label }) => (
+              {targets.map(({ category, label, work }) => (
                 <Link
                   key={category}
-                  to={`/project?category=${category}`}
+                  to={work ? `/project/${work.id}` : `/project?category=${category}`}
                   className="target-card"
-                  aria-label={`${label} 작품 보기`}
+                  aria-label={work ? `${label} · ${getWorkTitle(work)} 작품 보기` : `${label} 작품 보기`}
                 >
-                  <div className="target-card-image main-image-slot" />
+                  <div className="target-card-image main-image-slot">
+                    {work && <SafeImg src={work.thumbnail} fallbackSrc={FALLBACK.image} alt="" />}
+                  </div>
+                  {work && (
+                    <div className="target-card-caption">
+                      <span>{label}</span>
+                      <strong>{getWorkTitle(work)}</strong>
+                      <em>{getWorkAuthor(work)}</em>
+                    </div>
+                  )}
                 </Link>
               ))}
             </div>
