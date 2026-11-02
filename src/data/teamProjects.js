@@ -11,7 +11,7 @@ export const teamProjects = [
   {
     id: 't-u300-01', tab: 'team', group: 'u300',
     teamName: '이음', title: '',
-    thumbnail: '',
+    thumbnail: '/images/projects/thumbnails/t-u300-01.webp',
     description: '',
     videoUrl: '',
     proposalImages: ['/images/projects/proposals/t-u300-01.webp'],
@@ -26,7 +26,7 @@ export const teamProjects = [
   {
     id: 't-u300-02', tab: 'team', group: 'u300',
     teamName: '프릭', title: '',
-    thumbnail: '',
+    thumbnail: '/images/projects/thumbnails/t-u300-02.webp',
     description: '',
     videoUrl: '',
     proposalImages: ['/images/projects/proposals/t-u300-02.webp'],
@@ -41,7 +41,7 @@ export const teamProjects = [
   {
     id: 't-u300-03', tab: 'team', group: 'u300',
     teamName: '프리존', title: '',
-    thumbnail: '',
+    thumbnail: '/images/projects/thumbnails/t-u300-03.webp',
     description: '',
     videoUrl: '',
     proposalImages: ['/images/projects/proposals/t-u300-03.webp'],
@@ -56,7 +56,7 @@ export const teamProjects = [
   {
     id: 't-u300-04', tab: 'team', group: 'u300',
     teamName: '파동', title: '',
-    thumbnail: '',
+    thumbnail: '/images/projects/thumbnails/t-u300-04.webp',
     description: '',
     videoUrl: '',
     proposalImages: ['/images/projects/proposals/t-u300-04.webp'],
@@ -72,7 +72,7 @@ export const teamProjects = [
   {
     id: 't-u300-05', tab: 'team', group: 'u300',
     teamName: '미라클', title: '',
-    thumbnail: '',
+    thumbnail: '/images/projects/thumbnails/t-u300-05.webp',
     description: '',
     videoUrl: '',
     proposalImages: ['/images/projects/proposals/t-u300-05.webp'],
@@ -88,7 +88,7 @@ export const teamProjects = [
   {
     id: 't-u300-06', tab: 'team', group: 'u300',
     teamName: '원피스', title: '',
-    thumbnail: '',
+    thumbnail: '/images/projects/thumbnails/t-u300-06.webp',
     description: '',
     videoUrl: '',
     proposalImages: ['/images/projects/proposals/t-u300-06.webp'],
@@ -116,7 +116,7 @@ export const teamProjects = [
   {
     id: 't-u300-08', tab: 'team', group: 'u300',
     teamName: '어벤져스', title: '',
-    thumbnail: '',
+    thumbnail: '/images/projects/thumbnails/t-u300-08.webp',
     description: '',
     videoUrl: '',
     proposalImages: ['/images/projects/proposals/t-u300-08.webp'],
@@ -132,7 +132,7 @@ export const teamProjects = [
   {
     id: 't-u300-09', tab: 'team', group: 'u300',
     teamName: '메모리케어', title: '',
-    thumbnail: '',
+    thumbnail: '/images/projects/thumbnails/t-u300-09.webp',
     description: '',
     videoUrl: '',
     proposalImages: ['/images/projects/proposals/t-u300-09.webp'],
@@ -145,7 +145,7 @@ export const teamProjects = [
   {
     id: 't-u300-10', tab: 'team', group: 'u300',
     teamName: '세이프가드', title: '',
-    thumbnail: '',
+    thumbnail: '/images/projects/thumbnails/t-u300-10.webp',
     description: '',
     videoUrl: '',
     proposalImages: ['/images/projects/proposals/t-u300-10.webp'],
