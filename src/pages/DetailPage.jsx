@@ -12,7 +12,7 @@ const DetailPage = () => {
   const work = getWorkById(id);
 
   useEffect(() => {
-    window.scrollTo({ top: 0 });
+    window.scrollTo({ top: 0, behavior: 'instant' });
   }, [id]);
 
   if (!work) {

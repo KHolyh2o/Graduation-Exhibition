@@ -141,7 +141,7 @@ const SiteEffects = () => {
       document.body.classList.add('fx-leaving');
       timer = window.setTimeout(() => {
         navigate(to || '/');
-        window.scrollTo({ top: 0 });
+        window.scrollTo({ top: 0, behavior: 'instant' });
         document.body.classList.remove('fx-leaving');
         navigating = false;
       }, 400);

@@ -53,7 +53,10 @@ const GraduateModal = ({ student, onClose }) => {
   }, [student]);
 
   const studentProjects = getWorksByStudent(student.studentId);
-  const contact = studentProjects.find((p) => p.contact?.email || p.contact?.phone)?.contact;
+  // 졸업생 본인 연락처가 우선, 없으면 작품에 적힌 연락처
+  const contact = student.email || student.phone
+    ? { email: student.email, phone: student.phone }
+    : studentProjects.find((p) => p.contact?.email || p.contact?.phone)?.contact;
   const youtubeId = getYoutubeId(studentProjects.find((p) => p.videoUrl)?.videoUrl);
 
   // 변형(transform)이 걸린 부모 안에서도 화면 전체를 덮도록 body 로 옮겨 그린다
