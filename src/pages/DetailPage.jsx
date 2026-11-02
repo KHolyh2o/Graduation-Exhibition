@@ -61,7 +61,11 @@ const DetailPage = () => {
           <aside className="student-sidebar">
             {isTeam ? (
               <>
-                <div className="student-profile-photo" />
+                <div className="student-profile-photo is-team">
+                  {work.teamImage && (
+                    <SafeImg src={work.teamImage} fallbackSrc={FALLBACK.avatar} alt={`${work.teamName} 팀 프로필 사진`} />
+                  )}
+                </div>
                 <div className="student-name">
                   <strong>{work.teamName}</strong>
                 </div>
@@ -100,7 +104,7 @@ const DetailPage = () => {
             {isTeam && (
               <ul className="student-members">
                 {work.members.map((m, i) => (
-                  <li key={i}>{m.name} · {m.role}</li>
+                  <li key={i}>{m.role ? `${m.name} · ${m.role}` : m.name}</li>
                 ))}
               </ul>
             )}

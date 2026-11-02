@@ -133,7 +133,7 @@ const memberCols = (members) =>
     return m ? [m.name, m.role, m.studentId] : ['', '', ''];
   }).flat();
 const u300Lines = teamRows.map((t) =>
-  [t.id, t.group, t.teamName, t.title, thumbOf(t.id), '', '', panelsOf(t.id).join(';'), '', ...memberCols(t.members)].join(','));
+  [t.id, t.group, t.teamName, t.title, thumbOf(t.id), '', '', panelsOf(t.id).join(';'), '', `/images/teams/${t.id}.webp`, ...memberCols(t.members)].join(','));
 fs.writeFileSync(
   teamCsvPath,
   [teamLines[0], ...u300Lines].join('\n') + '\n',
@@ -150,6 +150,7 @@ const teamJs = teamRows.map((t) =>
   `    description: '',\n` +
   `    videoUrl: '',\n` +
   `    proposalImages: [${panelsOf(t.id).map((v) => `'${v}'`).join(', ')}],\n` +
+  `    teamImage: '/images/teams/${t.id}.webp',\n` +
   `    contact: { email: '' },\n` +
   `    members: [\n` +
   t.members.map((m) => `      { name: '${m.name}', role: '${m.role}', studentId: '${m.studentId}' },`).join('\n') + `\n` +

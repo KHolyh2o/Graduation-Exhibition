@@ -107,6 +107,16 @@ body:has(.detail-page) .common-footer {
   object-position: center top;
 }
 
+.detail-page .student-profile-photo.is-team {
+  aspect-ratio: 4 / 3;
+}
+
+/* 단체 사진은 잘리지 않게 전체를 보여 주고 아래쪽에 맞춘다 */
+.detail-page .student-profile-photo.is-team img {
+  object-fit: contain;
+  object-position: center bottom;
+}
+
 .detail-page .student-name {
   display: flex;
   justify-content: center;

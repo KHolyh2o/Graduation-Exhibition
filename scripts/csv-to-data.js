@@ -25,7 +25,7 @@
  *
  * [teamProjects.csv]
  *   id, group, teamName, title, thumbnail, description, videoUrl,
- *   proposalImages, contactEmail, m1_name, m1_role, m1_id, m2_name, m2_role, m2_id, ... m6_id
+ *   proposalImages, contactEmail, teamImage, m1_name, m1_role, m1_id, m2_name, m2_role, m2_id, ... m6_id
  */
 
 import fs   from 'fs';
@@ -163,6 +163,7 @@ function generateTeamProjects(rows) {
       `    description: '${r.description.replace(/'/g, "\\'")}',\n` +
       `    videoUrl: '${r.videoUrl}',\n` +
       `    proposalImages: [${proposals}],\n` +
+      (r.teamImage ? `    teamImage: '${r.teamImage}',\n` : '') +
       `    contact: { email: '${r.contactEmail}' },\n` +
       `    members: [\n      ${members.join(',\n      ')}\n    ],\n` +
       `  },`
