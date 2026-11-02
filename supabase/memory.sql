@@ -10,6 +10,9 @@ create table if not exists public.memory_messages (
 );
 
 -- 승인 방식을 쓰던 버전에서 올라오는 경우를 위해 (처음 만드는 경우엔 아무 일도 안 한다)
+-- approved 칼럼을 쓰는 정책을 먼저 지워야 칼럼을 지울 수 있다
+drop policy if exists "memory read"   on public.memory_messages;
+drop policy if exists "memory insert" on public.memory_messages;
 drop index if exists public.memory_messages_approved_idx;
 alter table public.memory_messages drop column if exists approved;
 
@@ -21,9 +24,6 @@ alter table public.memory_messages enable row level security;
 -- 방문자(anon)는 읽기·쓰기만 가능. 수정·삭제는 대시보드에서만.
 revoke all on public.memory_messages from anon, authenticated;
 grant select, insert on public.memory_messages to anon;
-
-drop policy if exists "memory read"   on public.memory_messages;
-drop policy if exists "memory insert" on public.memory_messages;
 
 create policy "memory read"   on public.memory_messages for select to anon using (true);
 create policy "memory insert" on public.memory_messages for insert to anon with check (true);
