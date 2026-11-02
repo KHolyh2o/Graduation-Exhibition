@@ -88,9 +88,9 @@ multimedia.forEach((s) => {
   });
 });
 
-// 영상미디어: 전부 개인 작품 (같은 학생의 중복 제목은 1개로)
+// 영상미디어: 전부 개인 작품 (제목이 같아도 브로슈어가 별개 페이지면 별개 작품 — 신권철 용혼현주)
 video.forEach((s) => {
-  [...new Set(s.titles.filter(Boolean))].forEach((title, i) => {
+  s.titles.filter(Boolean).forEach((title, i) => {
     projects.push({ id: `p-vd-${s.studentId}-${i + 1}`, tab: 'video', studentIds: [s.studentId], title });
   });
 });

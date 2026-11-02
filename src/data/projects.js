@@ -336,7 +336,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202110786.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202110786-1.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -346,7 +346,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202110786.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202110786-2.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -356,7 +356,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202110786.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202110786-3.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -366,7 +366,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202311199.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202311199-1.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -376,7 +376,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202311199.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202311199-2.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -386,7 +386,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202311199.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202311199-3.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -396,7 +396,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202110030.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202110030-1.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -406,7 +406,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202110030.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202110030-2.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -416,7 +416,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202110030.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202110030-3.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -426,7 +426,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202111439.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202111439-1.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -436,7 +436,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202111439.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202111439-2.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -446,7 +446,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202111439.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202111439-3.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -456,7 +456,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202110206.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202110206-1.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -466,7 +466,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202110206.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202110206-2.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -476,7 +476,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202110206.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202110206-3.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -486,7 +486,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202311148.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202311148-1.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -496,7 +496,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202311148.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202311148-2.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -506,7 +506,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202311148.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202311148-3.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -516,7 +516,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202110120.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202110120-1.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -526,7 +526,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202110120.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202110120-2.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -536,7 +536,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202110120.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202110120-3.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -546,7 +546,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202311138.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202311138-1.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -556,7 +556,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202311138.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202311138-2.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -566,7 +566,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202311138.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202311138-3.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -576,7 +576,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202311155.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202311155-1.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -586,7 +586,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202311155.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202311155-2.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -596,7 +596,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202311155.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202311155-3.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -606,7 +606,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202311195.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202311195-1.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -616,7 +616,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202311195.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202311195-2.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -626,7 +626,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202311195.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202311195-3.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -636,7 +636,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202110584.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202110584-1.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -646,7 +646,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202110584.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202110584-2.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -656,7 +656,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202110584.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202110584-3.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -666,7 +666,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202311171.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202311171-1.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -676,7 +676,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202311171.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202311171-2.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -686,7 +686,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202311171.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202311171-3.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -696,7 +696,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202311173.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202311173-1.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -706,7 +706,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202311173.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202311173-2.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -716,7 +716,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202311173.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202311173-3.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -726,7 +726,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202111042.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202111042-1.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -736,7 +736,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202111042.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202111042-2.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -746,7 +746,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202111042.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202111042-3.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -756,17 +756,27 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202110748.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202110748-1.webp'],
     contact: { email: '', phone: null },
   },
   {
     id: 'p-vd-202110748-2', studentId: '202110748',
     tab: 'video', role: 'production',
-    title: '의력 지역 홍보영상',
+    title: '의령 지역 홍보영상',
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202110748.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202110748-2.webp'],
+    contact: { email: '', phone: null },
+  },
+  {
+    id: 'p-vd-202110748-3', studentId: '202110748',
+    tab: 'video', role: 'production',
+    title: '용혼현주',
+    thumbnail: '',
+    description: '',
+    videoUrl: '',
+    proposalImages: ['/images/projects/proposals/p-vd-202110748-3.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -776,7 +786,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202110753.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202110753-1.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -786,7 +796,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202110753.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202110753-2.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -796,7 +806,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202110753.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202110753-3.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -806,7 +816,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202311168.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202311168-1.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -816,7 +826,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202311168.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202311168-2.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -826,7 +836,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202311168.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202311168-3.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -836,7 +846,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202110979.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202110979-1.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -846,7 +856,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202110979.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202110979-2.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -856,7 +866,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202110979.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202110979-3.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -866,7 +876,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202210950.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202210950-1.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -876,7 +886,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202210950.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202210950-2.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -886,7 +896,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202210950.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202210950-3.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -896,7 +906,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202311165.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202311165-1.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -906,7 +916,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202311165.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202311165-2.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -916,7 +926,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202311165.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202311165-3.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -926,7 +936,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202211227.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202211227-1.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -936,7 +946,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202211227.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202211227-2.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -946,7 +956,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202211227.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202211227-3.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -956,7 +966,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202311196.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202311196-1.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -966,7 +976,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202311196.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202311196-2.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -976,7 +986,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202311196.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202311196-3.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -986,7 +996,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202311186.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202311186-1.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -996,7 +1006,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202311186.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202311186-2.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -1006,7 +1016,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202311186.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202311186-3.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -1016,7 +1026,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202311189.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202311189-1.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -1026,7 +1036,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202311189.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202311189-2.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -1036,7 +1046,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: ['/images/projects/proposals/p-vd-202311189.webp'],
+    proposalImages: ['/images/projects/proposals/p-vd-202311189-3.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -1046,7 +1056,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: [],
+    proposalImages: ['/images/projects/proposals/p-vd-202110654-1.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -1056,7 +1066,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: [],
+    proposalImages: ['/images/projects/proposals/p-vd-202110654-2.webp'],
     contact: { email: '', phone: null },
   },
   {
@@ -1066,7 +1076,7 @@ export const projects = [
     thumbnail: '',
     description: '',
     videoUrl: '',
-    proposalImages: [],
+    proposalImages: ['/images/projects/proposals/p-vd-202110654-3.webp'],
     contact: { email: '', phone: null },
   },
 ];
