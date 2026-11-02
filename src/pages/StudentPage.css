@@ -671,11 +671,11 @@ body:has(.student-page) {
   text-decoration: none;
 }
 
-/* 프로젝트 이미지 16:9 */
+/* 프로젝트 이미지 — 작품 썸네일(728×836) 비율 그대로 */
 
 .student-page .graduate-project-image {
   width: 100%;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 728 / 836;
 
   overflow: hidden;
   background: #707070;
@@ -726,7 +726,7 @@ body:has(.student-page) {
 
 .student-page .graduate-video {
   width: 100%;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 728 / 836;
 
   background: #2992b5;
   overflow: hidden;
@@ -1345,7 +1345,7 @@ body:has(.student-page) {
 
   .student-page .graduate-video {
     width: 100%;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 728 / 836;
     background: #58bde4;
   }
 
@@ -1380,10 +1380,10 @@ body:has(.student-page) {
     row-gap: 25px;
   }
 
-  /* 프로젝트 이미지 16:9 */
+  /* 프로젝트 이미지 — 작품 썸네일(728×836) 비율 그대로 */
   .student-page .graduate-project-image {
     width: 100%;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 728 / 836;
 
     background: #707070;
   }
