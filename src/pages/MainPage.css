@@ -298,7 +298,7 @@ body.page-index {
 .index-root .target-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0 4px;
+  gap: 20px;
 }
 
 /* 카드 전체 링크 */
@@ -315,6 +315,7 @@ body.page-index {
   width: 100%;
   aspect-ratio: 0.86;
   background: #d9d9d9;
+  border-radius: 10px;   /* sha_copy: 카드 모서리 둥글게 */
 
   transition: transform 0.3s ease;
 }
@@ -959,11 +960,12 @@ body.page-index {
 
   .index-root .target-grid {
     grid-template-columns: 1fr;
-    gap: 14px;
+    gap: 16px;
   }
 
   .index-root .target-card-image {
     aspect-ratio: 1.2;
+    border-radius: 12px;
   }
 
   .index-root .main-button-wrap {
