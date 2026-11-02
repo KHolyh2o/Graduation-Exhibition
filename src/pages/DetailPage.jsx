@@ -36,6 +36,17 @@ const DetailPage = () => {
         students.flatMap((s) => getWorksByStudent(s.studentId)).map((w) => [w.id, w])
       ).values()].filter((w) => w.id !== work.id);
 
+  // 팀 작품은 팀원별로 묶어, 각자의 다른 작품으로 바로 이동할 수 있게 한다
+  const othersByMember = isTeam
+    ? work.members
+        .map((m) => ({
+          key: m.studentId ?? m.name,
+          name: m.name,
+          works: getWorksByStudent(m.studentId).filter((w) => w.id !== work.id),
+        }))
+        .filter((g) => g.works.length > 0)
+    : [];
+
   const proposals = work.proposalImages ?? [];
 
   return (
@@ -97,15 +108,27 @@ const DetailPage = () => {
             <section className="other-projects">
               <h2>Other Project</h2>
               <div className="other-project-list">
-                {others.length === 0 && (
+                {(isTeam ? othersByMember.length === 0 : others.length === 0) && (
                   <p className="other-project-empty">등록된 다른 작품이 없습니다.</p>
                 )}
-                {others.map((w) => (
-                  <Link key={w.id} to={`/project/${w.id}`} className="other-project-link">
-                    <span>{getWorkTitle(w)}</span>
-                    <span className="other-project-arrow" aria-hidden="true">›</span>
-                  </Link>
-                ))}
+                {isTeam
+                  ? othersByMember.map((g) => (
+                      <div className="other-project-group" key={g.key}>
+                        <h3 className="other-project-owner">{g.name}</h3>
+                        {g.works.map((w) => (
+                          <Link key={w.id} to={`/project/${w.id}`} className="other-project-link">
+                            <span>{getWorkTitle(w)}</span>
+                            <span className="other-project-arrow" aria-hidden="true">›</span>
+                          </Link>
+                        ))}
+                      </div>
+                    ))
+                  : others.map((w) => (
+                      <Link key={w.id} to={`/project/${w.id}`} className="other-project-link">
+                        <span>{getWorkTitle(w)}</span>
+                        <span className="other-project-arrow" aria-hidden="true">›</span>
+                      </Link>
+                    ))}
               </div>
             </section>
           </aside>

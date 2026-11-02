@@ -85,14 +85,14 @@ body:has(.detail-page) .common-footer {
 }
 
 .detail-page .student-person {
-  flex: 1 1 112px;
-  max-width: 140px;
+  flex: 1 1 130px;
+  max-width: 180px;
   min-width: 0;
 }
 
 .detail-page .student-profile-photo {
-  width: 112px;
-  height: 122px;
+  width: 100%;
+  aspect-ratio: 3 / 4;
   margin: 0 auto 16px;
   background: #dedede;
   border-radius: 8px;
@@ -104,7 +104,6 @@ body:has(.detail-page) .common-footer {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* 3:4 사진이 거의 정사각형인 박스에 들어가므로 머리가 잘리지 않게 위쪽 기준 */
   object-position: center top;
 }
 
@@ -193,6 +192,25 @@ body:has(.detail-page) .common-footer {
   font-size: 22px;
   line-height: 1;
   flex-shrink: 0;
+}
+
+.detail-page .other-project-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.detail-page .other-project-group + .other-project-group {
+  margin-top: 8px;
+}
+
+/* 팀 작품: 팀원별 소제목 */
+.detail-page .other-project-owner {
+  margin: 0;
+  text-align: right;
+  font-size: 13px;
+  font-weight: 700;
+  color: #888;
 }
 
 .detail-page .other-project-empty {

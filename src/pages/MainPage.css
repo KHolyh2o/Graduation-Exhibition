@@ -154,8 +154,9 @@ body.page-index {
 ========================================== */
 
 .index-root .main-hero-video {
-  width: 100%;
-  margin: 0;
+  width: calc(100% - 40px);
+  max-width: var(--main-width);
+  margin: 0 auto;
   padding: 0;
   overflow: hidden;
   background: #fff;
@@ -664,7 +665,13 @@ body.page-index {
 .index-root .credit-logo {
   width: 245px;
   height: 42px;
+  flex-shrink: 0;
   overflow: hidden;
+}
+
+/* 화살표 이미지는 박스에 맞춰 늘려 채운다 (cover 로 자르지 않음) */
+.index-root .credit-logo img {
+  object-fit: fill;
 }
 
 .index-root .credit-subtitle {
@@ -755,43 +762,72 @@ body.page-index {
 
 @media (max-width: 768px) {
 
+  .index-root .main-hero-video {
+    width: calc(100% - 32px);
+  }
+
   .index-root .main-credit {
-    padding: 75px 0 60px;
+    padding: 45px 0 40px;
+  }
+
+  .index-root .credit-header {
+    gap: 12px;
   }
 
   .index-root .credit-header h2 {
-    font-size: 30px;
+    font-size: 27px;
+  }
+
+  .index-root .credit-logo {
+    width: 155px;
+    height: 30px;
+    flex-shrink: 1;
+  }
+
+  .index-root .credit-subtitle {
+    margin: 7px 0 18px;
+    font-size: 10px;
   }
 
   .index-root .credit-row {
     grid-template-columns: 1fr;
-    gap: 12px;
-    padding: 20px 0;
+    gap: 10px;
+    padding: 14px 0;
   }
 
   .index-root .credit-row h3 {
-    font-size: 14px;
+    font-size: 12px;
+    line-height: 1.4;
+    white-space: nowrap;
   }
 
+  /* 졸업전시위원회 - 2열 */
   .index-root .credit-committee {
-    grid-template-columns: 1fr;
-    gap: 12px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 10px;
+    row-gap: 9px;
   }
 
   .index-root .credit-team {
-    gap: 15px;
+    gap: 7px;
   }
 
   .index-root .credit-team strong {
-    min-width: 55px;
+    min-width: 0;
+    flex-shrink: 0;
+    font-size: 11px;
+    line-height: 1.5;
   }
 
-  .index-root .credit-team strong,
-.index-root .credit-team span,
-.index-root .credit-names,
-.index-root .credit-graduates p {
-    font-size: 12px;
-    line-height: 1.9;
+  .index-root .credit-team span,
+  .index-root .credit-names,
+  .index-root .credit-graduates p {
+    font-size: 11px;
+    line-height: 1.7;
+  }
+
+  .index-root .credit-graduates p {
+    margin-bottom: 4px;
   }
 }
 
@@ -965,7 +1001,7 @@ body.page-index {
   }
 
   .index-root .target-card-image {
-    aspect-ratio: 1.2;
+    aspect-ratio: 2 / 1;
     border-radius: 12px;
   }
 
