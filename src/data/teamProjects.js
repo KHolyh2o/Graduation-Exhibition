@@ -1,4 +1,4 @@
-// 팀 작품 10팀 (창업캡스톤 = U300 = 한이음). scripts/import-drive-works.js 로 생성.
+// 팀 작품 9팀 (창업캡스톤 = U300 = 한이음). scripts/import-drive-works.js 로 생성.
 // 팀프로젝트 탭에는 하위 카테고리가 없다 (ALL 하나). group 값은 출처 표시용.
 // 팀 작품은 작품명 없이 teamName 만 쓴다 (title 은 비워 둠).
 // members: 팀원 배열. phone은 공개 동의한 학생만 입력.
@@ -103,14 +103,18 @@ export const teamProjects = [
   },
   {
     id: 't-u300-07', tab: 'team', group: 'u300',
-    teamName: '꼬마별', title: '',
-    thumbnail: '',
+    teamName: '세이프가드', title: '',
+    thumbnail: '/images/projects/thumbnails/t-u300-07.webp',
     description: '',
     videoUrl: '',
-    proposalImages: [],
+    proposalImages: ['/images/projects/proposals/t-u300-07.webp'],
     contact: { email: '' },
     members: [
       { name: '이서영', role: '기획', studentId: '202311177' },
+      { name: '우나경', role: '기획', studentId: '202210950' },
+      { name: '안세연', role: '기획', studentId: '202311165' },
+      { name: '이지은', role: '기획', studentId: '202211227' },
+      { name: '최지희', role: '기획', studentId: '202311196' },
     ],
   },
   {
@@ -140,21 +144,6 @@ export const teamProjects = [
     members: [
       { name: '김지현', role: '제작', studentId: '202311148' },
       { name: '김남준', role: '기획', studentId: '202110120' },
-    ],
-  },
-  {
-    id: 't-u300-10', tab: 'team', group: 'u300',
-    teamName: '세이프가드', title: '',
-    thumbnail: '/images/projects/thumbnails/t-u300-10.webp',
-    description: '',
-    videoUrl: '',
-    proposalImages: ['/images/projects/proposals/t-u300-10.webp'],
-    contact: { email: '' },
-    members: [
-      { name: '우나경', role: '기획', studentId: '202210950' },
-      { name: '안세연', role: '기획', studentId: '202311165' },
-      { name: '이지은', role: '기획', studentId: '202211227' },
-      { name: '최지희', role: '기획', studentId: '202311196' },
     ],
   },
 ];
