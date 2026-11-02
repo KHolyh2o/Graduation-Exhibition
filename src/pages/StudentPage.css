@@ -676,6 +676,7 @@ body:has(.student-page) {
 .student-page .graduate-project-image {
   width: 100%;
   aspect-ratio: 728 / 836;
+  border-radius: 12px;   /* 작품소개 카드(.project-card)와 같은 라운드 */
 
   overflow: hidden;
   background: #707070;
