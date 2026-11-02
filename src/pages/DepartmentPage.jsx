@@ -96,8 +96,9 @@ const DepartmentPage = () => {
 
         {/* 01. 졸업전시 소개 */}
         <section className="dept-hero" data-reveal>
-          {/* 포스터 이미지 자리 — 이미지가 정해지면 <img> 를 넣는다 */}
-          <div className="dept-poster dept-image-slot" role="img" aria-label="2026 졸업전시회 포스터" />
+          <div className="dept-poster dept-image-slot has-image" role="img" aria-label="2026 졸업전시회 포스터">
+            <img src={assetUrl('/images/UI/학과소개_포스터.png')} alt="" onError={(e) => e.currentTarget.remove()} />
+          </div>
 
           <div className="dept-hero-content">
             <h1 className="dept-symbol">과녁</h1>
@@ -121,7 +122,7 @@ const DepartmentPage = () => {
 
         {/* 02. 학부 소개 */}
         <section className="dept-introduction" data-reveal>
-          <div className="dept-arrow-slot" />
+          <div className="dept-arrow-slot"><img src={assetUrl('/images/UI/학과소개화살_위.png')} alt="" onError={(e) => e.currentTarget.remove()} /></div>
           <h2>미디어콘텐츠학부</h2>
           <h3>질문을 찾고, 방향을 설계하는 사람들</h3>
           <p className="dept-introduction-description">
@@ -130,7 +131,7 @@ const DepartmentPage = () => {
             학생들은 다양한 경험과 프로젝트를 통해 질문을 찾고,
             방향을 조준하며, 아이디어를 자신만의 콘텐츠로 완성해 나갑니다.
           </p>
-          <div className="dept-arrow-slot" />
+          <div className="dept-arrow-slot"><img src={assetUrl('/images/UI/학과소개화살_아래.png')} alt="" onError={(e) => e.currentTarget.remove()} /></div>
         </section>
 
         {/* 03. 미디어콘텐츠학부 교육목표 */}
@@ -146,8 +147,16 @@ const DepartmentPage = () => {
           </div>
 
           <div className="dept-diagram-wrap" data-reveal>
-            {/* 교육목표 다이어그램 이미지 자리 */}
-            <div className="dept-diagram dept-image-slot" role="img" aria-label="미디어콘텐츠학부 교육목표 다이어그램" />
+            {/* PC·태블릿 이미지 / 768px 이하에서는 모바일 전용 이미지 */}
+            <div className="dept-diagram dept-image-slot dept-diagram-desktop has-image" role="img" aria-label="미디어콘텐츠학부 교육목표 다이어그램">
+              <img src={assetUrl('/images/UI/학과소개 요소.png')} alt="" onError={(e) => e.currentTarget.remove()} />
+            </div>
+            <img
+              className="dept-diagram-mobile"
+              src={assetUrl('/images/UI/교육목표_모바일.png')}
+              alt="미디어콘텐츠학부 교육목표 다이어그램"
+              loading="lazy"
+            />
           </div>
 
           <div className="dept-education-grid">

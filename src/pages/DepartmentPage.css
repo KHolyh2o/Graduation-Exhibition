@@ -1227,3 +1227,32 @@ body.dept-message-open {
 .dept-root .dept-message-quote {
   white-space: pre-line;
 }
+
+
+/* ===================================================
+   교육목표 다이어그램 PC / MOBILE (sha_copy 이식)
+=================================================== */
+.dept-root .dept-diagram-mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .dept-root .dept-diagram-wrap {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .dept-root .dept-diagram.dept-diagram-desktop {
+    display: none;
+  }
+
+  .dept-root .dept-diagram-mobile {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+    object-fit: contain;
+    border-radius: 5px;
+  }
+}

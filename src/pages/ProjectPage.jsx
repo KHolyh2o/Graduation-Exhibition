@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { PROJECT_TABS, TAB_MAP, getSubCategories } from '../data/projectTabs';
 import { allWorks, getWorkAuthor, getWorkTitle, matchesSub } from '../data/works';
-import { FALLBACK } from '../hooks/useImageFallback';
+import { FALLBACK, assetUrl } from '../hooks/useImageFallback';
 import SafeImg from '../components/SafeImg';
 import './ProjectPage.css';
 
@@ -60,8 +60,11 @@ const ProjectPage = () => {
                 aria-pressed={activeTab === t.id}
                 onClick={() => switchTab(t.id)}
               >
-                {/* 아이콘 이미지 자리 — sha_copy 와 같이 비워 두고 공간만 유지 */}
-                <span className="asset-slot category-icon" />
+                {/* 선택·호버 때는 컬러, 평소에는 흑백 아이콘 */}
+                <span className="asset-slot category-icon has-bw">
+                  <img className="category-icon-bw" src={assetUrl(`/images/UI/category-${t.id}-bw.webp`)} alt="" onError={(e) => e.currentTarget.remove()} />
+                  <img className="category-icon-colored" src={assetUrl(`/images/UI/category-${t.id}.webp`)} alt="" onError={(e) => e.currentTarget.remove()} />
+                </span>
                 <span className="category-label">{t.label}</span>
               </button>
             ))}

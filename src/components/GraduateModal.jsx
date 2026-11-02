@@ -109,7 +109,7 @@ const GraduateModal = ({ student, onClose }) => {
             <div className="graduate-contact">
               <div className="graduate-contact-item">
                 <div className="graduate-contact-icon">
-                  <div className="graduate-icon-placeholder"></div>
+                  <img src={assetUrl('/images/UI/학생번호.png')} alt="" onError={(e) => e.currentTarget.remove()} />
                 </div>
                 {contact?.phone ? (
                   <a href={`tel:${contact.phone.replace(/[^\d+]/g, '')}`}>{contact.phone}</a>
@@ -120,7 +120,7 @@ const GraduateModal = ({ student, onClose }) => {
 
               <div className="graduate-contact-item">
                 <div className="graduate-contact-icon">
-                  <div className="graduate-icon-placeholder"></div>
+                  <img src={assetUrl('/images/UI/학생메일.png')} alt="" onError={(e) => e.currentTarget.remove()} />
                 </div>
                 {contact?.email ? (
                   <a href={`mailto:${contact.email}`}>{contact.email}</a>

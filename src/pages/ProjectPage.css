@@ -542,3 +542,34 @@ body:has(.project-page) {
     padding-top: 12px;
   }
 }
+
+
+/* ===================================================
+   CATEGORY ICON — 평소 흑백, 선택·호버 때 컬러 (sha_copy 이식)
+=================================================== */
+.project-page .media-category .category-icon {
+  position: relative;
+}
+
+.project-page .media-category .category-icon img {
+  position: absolute;
+  inset: 0;
+  transition: opacity 0.2s ease, filter 0.2s ease;
+}
+
+/* 흑백 이미지를 기본으로, 컬러 이미지는 숨김 */
+.project-page .media-category .category-icon-colored {
+  opacity: 0;
+}
+
+.project-page .media-category .category-icon-bw {
+  opacity: 1;
+}
+
+.project-page .media-category:is(.is-active, :hover, :focus-visible) .category-icon-colored {
+  opacity: 1;
+}
+
+.project-page .media-category:is(.is-active, :hover, :focus-visible) .category-icon-bw {
+  opacity: 0;
+}

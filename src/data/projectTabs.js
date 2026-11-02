@@ -6,7 +6,7 @@ export const PROJECT_TABS = [
     label: '멀티미디어',
     // sha_copy 작품소개 필터 표기. mteam 은 직군이 아니라 "여럿이 함께 한 작품" (works.js matchesSub 참고)
     roles: [
-      { id: 'pm',        label: 'Project Manager', icon: '📋' },
+      { id: 'pm',        label: 'Product Manager', icon: '📋' },
       { id: 'design',    label: 'Designer',        icon: '🎨' },
       { id: 'marketer',  label: 'Marketer',        icon: '📣' },
       { id: 'dev',       label: 'Developer',       icon: '💻' },

@@ -1,10 +1,11 @@
 import React from 'react';
+import { assetUrl } from '../hooks/useImageFallback';
 import './Footer.css';
 
-// SNS 주소가 정해지면 채우세요. 비어 있으면 아이콘을 표시하지 않습니다.
+// SNS 주소가 비어 있으면 아이콘을 표시하지 않습니다.
 const SNS_LINKS = [
-  { label: 'Instagram', url: '' },
-  { label: 'YouTube',   url: '' },
+  { label: 'Instagram', url: 'https://www.instagram.com/swu_mediacontents/', icon: '/images/UI/푸터_인스타.png' },
+  { label: 'YouTube',   url: 'https://www.youtube.com/@%EB%AF%B8%EB%94%94%EC%96%B4%EC%BD%98%ED%85%90%EC%B8%A0%ED%95%99%EB%B6%80', icon: '/images/UI/푸터_유튜브.png' },
 ];
 
 const Footer = () => (
@@ -25,7 +26,7 @@ const Footer = () => (
         <p>media@seowon.ac.kr</p>
 
         <div className="common-footer-sns">
-          {SNS_LINKS.filter(({ url }) => url).map(({ label, url }) => (
+          {SNS_LINKS.filter(({ url }) => url).map(({ label, url, icon }) => (
             <a
               key={label}
               className="common-sns-link"
@@ -34,7 +35,9 @@ const Footer = () => (
               target="_blank"
               rel="noopener noreferrer"
             >
-              <span className="common-sns-icon" />
+              <span className="common-sns-icon">
+                <img src={assetUrl(icon)} alt="" onError={(e) => e.currentTarget.remove()} />
+              </span>
             </a>
           ))}
         </div>

@@ -354,7 +354,9 @@ const MainPage = () => {
           <div className="credit-inner">
             <div className="credit-header">
               <h2>Credit</h2>
-              <div className="credit-logo" />
+              <div className="credit-logo">
+                <img src={assetUrl('/images/UI/크레딧 화살.png')} alt="" onError={(e) => e.currentTarget.remove()} />
+              </div>
             </div>
             <p className="credit-subtitle">2026 Media Contents Graduation · 서원대학교 미디어콘텐츠학부</p>
 
