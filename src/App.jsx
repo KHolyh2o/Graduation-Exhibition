@@ -9,6 +9,7 @@ import DetailPage from './pages/DetailPage';
 import StudentPage from './pages/StudentPage';
 import DepartmentPage from './pages/DepartmentPage';
 import GalleryPage from './pages/GalleryPage';
+import MemoryPage from './pages/MemoryPage';
 import OthersPage from './pages/OthersPage';
 import NotFoundPage from './pages/NotFoundPage';
 import './App.css';
@@ -27,6 +28,7 @@ function App() {
             <Route path="/student"    element={<StudentPage />} />
             <Route path="/department" element={<DepartmentPage />} />
             <Route path="/gallery"    element={<GalleryPage />} />
+            <Route path="/memory"     element={<MemoryPage />} />
             <Route path="/others"     element={<OthersPage />} />
             <Route path="*"           element={<NotFoundPage />} />
           </Routes>

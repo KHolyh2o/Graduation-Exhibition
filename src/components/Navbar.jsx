@@ -7,6 +7,7 @@ const MENU = [
   { to: '/project',    label: 'WORK' },
   { to: '/student',    label: 'GRADUATES' },
   { to: '/department', label: 'ABOUT' },
+  { to: '/memory',     label: 'MEMORY' },
   { to: '/others',     label: 'ARCHIVE' },
 ];
 
