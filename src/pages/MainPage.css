@@ -316,16 +316,17 @@ body.page-index {
   aspect-ratio: 0.86;
   background: #d9d9d9;
   border-radius: 10px;   /* sha_copy: 카드 모서리 둥글게 */
-
-  transition: transform 0.3s ease;
 }
 
 .index-root .target-card-image img {
   object-fit: cover;
+  transition: transform 0.3s ease;
 }
 
-.index-root .target-card:hover .target-card-image {
-  transform: scale(1.025);
+/* 확대는 이미지만 — 라운드된 틀 안에서 커지도록 (틀 자체를 키우면 카드 사각 경계에 잘려 모서리가 각진다) */
+.index-root .target-card:hover .target-card-image img,
+.index-root .target-card:focus-visible .target-card-image img {
+  transform: scale(1.05);
 }
 
 /* 작품 정보 (카테고리 · 제목 · 작가) — 썸네일 이미지에 이미 글자가 있어 겹치지 않도록 이미지 아래에 둔다 */
@@ -1148,7 +1149,7 @@ body.page-index {
 @media (prefers-reduced-motion: reduce) {
 
   .index-root .students-track,
-.index-root .target-card-image,
+.index-root .target-card-image img,
 .index-root .main-outline-button {
     transition: none;
   }
