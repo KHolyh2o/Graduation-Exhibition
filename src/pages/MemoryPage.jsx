@@ -68,7 +68,7 @@ const MemoryPage = () => {
       setText('');
       setName('');
       setColor('lime');
-      setStatus('응원 메시지가 포스트잇으로 등록됐어요!');
+      setStatus(isShared ? '메시지가 등록됐어요! 확인 후 게시판에 붙여 드릴게요.' : '응원 메시지가 포스트잇으로 등록됐어요!');
       messageRef.current?.focus();
     } catch {
       setStatus('등록에 실패했습니다. 다시 시도해 주세요.');
