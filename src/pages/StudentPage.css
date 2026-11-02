@@ -1443,3 +1443,9 @@ body:has(.student-page) {
   }
 
 }
+
+/* 메인 등 다른 페이지에서 팝업만 띄울 때 (GraduateModal) — 페이지용 상단 여백·배경은 필요 없다 */
+.student-page.student-modal-host {
+  padding-top: 0;
+  background: transparent;
+}

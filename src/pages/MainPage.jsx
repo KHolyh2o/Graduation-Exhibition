@@ -6,13 +6,14 @@ import { allWorks, getWorkTitle, getWorkAuthor } from '../data/works';
 import { EXHIBITION, COMMITTEE_TEAMS } from '../data/constants';
 import { assetUrl, FALLBACK } from '../hooks/useImageFallback';
 import SafeImg from '../components/SafeImg';
+import GraduateModal from '../components/GraduateModal';
 import './MainPage.css';
 
 /* ── 인트로 ─────────────────────────────────────────────────────────
    sha_copy index.js 의 INDEX INTRO 이식. 움직이는 WebP 를 전체 화면으로 보여 주고
-   INTRO_DURATION 이 지나거나 SKIP 을 누르면 사라진다.
+   INTRO_DURATION 이 지나거나 화면(하단 띠)을 누르면 사라진다.
    사이트 안에서 메인으로 돌아올 때마다 다시 나오지 않도록, 새로고침 전까지는 한 번만 재생한다. */
-const INTRO_DURATION = 7000;   // WebP 애니메이션 길이에 맞출 것
+const INTRO_DURATION = 6000;   // WebP 애니메이션 길이에 맞출 것
 const INTRO_FADE = 750;
 const INTRO_SAFETY = 10000;    // 로딩 실패 대비
 let introPlayed = false;
@@ -57,7 +58,7 @@ const IndexIntro = ({ onDone }) => {
   }, [finish]);
 
   return (
-    <div className={`index-intro${hiding ? ' is-hiding' : ''}`}>
+    <div className={`index-intro${hiding ? ' is-hiding' : ''}`} onClick={finish}>
       <img
         className="index-intro-image"
         src={assetUrl('/images/인트로.webp')}
@@ -67,14 +68,17 @@ const IndexIntro = ({ onDone }) => {
         onLoad={start}
         onError={finish}
       />
-      <button type="button" className="index-intro-skip" onClick={finish}>SKIP</button>
+      <button type="button" className="index-intro-skip" onClick={finish}>
+        <span>2026 졸업전시 보러가기</span>
+      </button>
     </div>
   );
 };
 
 /* ── 학생 슬라이더 ──────────────────────────────────────────────────
    학생 1명 = 명찰 이미지 1장 (public/images/명찰 사진/2026 졸업전시회 명찰_이름.png).
-   PC 10명(5×2), 모바일(768px 이하) 4명(2×2)씩 한 페이지. */
+   PC 10명(5×2), 모바일(768px 이하) 1명씩 한 페이지.
+   카드를 누르면 페이지 이동 없이 메인 위에 학생 소개 팝업이 열린다. */
 const useMediaQuery = (query) => useSyncExternalStore(
   (callback) => {
     const mq = window.matchMedia(query);
@@ -89,12 +93,20 @@ const STUDENTS = graduates.map((g) => ({
   id: g.studentId,
   name: g.name,
   image: `/images/명찰 사진/2026 졸업전시회 명찰_${g.name}.png`,
-  to: `/student?student=${g.studentId}`,
 }));
 
 const StudentSlider = () => {
+  const [openId, setOpenId] = useState(null);
+  const lastTriggerRef = useRef(null);
+  const opened = graduates.find((g) => g.studentId === openId) ?? null;
+  const closePopup = () => {
+    setOpenId(null);
+    const trigger = lastTriggerRef.current;
+    if (trigger?.isConnected) trigger.focus({ preventScroll: true });
+    lastTriggerRef.current = null;
+  };
   const isMobile = useMediaQuery('(max-width: 768px)');
-  const pageSize = isMobile ? 4 : 10;
+  const pageSize = isMobile ? 1 : 10;
   const totalPages = Math.ceil(STUDENTS.length / pageSize);
 
   // PC ↔ 모바일로 바뀌면 첫 페이지부터
@@ -124,11 +136,16 @@ const StudentSlider = () => {
                 <div className="students-grid">
                   {list.map((s) => (
                     <article className="student-card" key={s.id}>
-                      <Link className="student-card-link" to={s.to} aria-label={`${s.name} 학생 소개 보기`}>
+                      <button
+                        type="button"
+                        className="student-card-link"
+                        aria-label={`${s.name} 학생 소개 보기`}
+                        onClick={(e) => { lastTriggerRef.current = e.currentTarget; setOpenId(s.id); }}
+                      >
                         <div className="student-card-image">
                           <SafeImg src={s.image} fallbackSrc={FALLBACK.avatar} alt={`${s.name} 학생 프로필`} />
                         </div>
-                      </Link>
+                      </button>
                     </article>
                   ))}
                 </div>
@@ -149,6 +166,8 @@ const StudentSlider = () => {
       </div>
 
       <p className="main-sr-only" aria-live="polite">{`학생 슬라이드 ${page + 1} / ${totalPages}`}</p>
+
+      {opened && <GraduateModal student={opened} onClose={closePopup} />}
     </>
   );
 };

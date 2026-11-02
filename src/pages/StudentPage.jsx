@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { graduates } from '../data/graduates';
-import { getWorksByStudent, getWorkTitle } from '../data/works';
 import SafeImg from '../components/SafeImg';
-import { assetUrl, FALLBACK } from '../hooks/useImageFallback';
+import GraduateModal from '../components/GraduateModal';
+import { FALLBACK } from '../hooks/useImageFallback';
 import './StudentPage.css';
 
 const FILTERS = [
@@ -19,19 +19,11 @@ const matchFilter = (g, filter) => {
   return g.tab === filter;
 };
 
-const getYoutubeId = (url) => {
-  const m = String(url || '').match(/(?:youtu\.be\/|[?&]v=|\/embed\/)([a-zA-Z0-9_-]{11})/);
-  return m ? m[1] : '';
-};
-
 const StudentPage = () => {
   const [filter, setFilter] = useState('all');
   const [showTop, setShowTop] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const lastTriggerRef = useRef(null);
-  const closeBtnRef = useRef(null);
-  const modalRef = useRef(null);
-  const scrollRef = useRef(null);   // 팝업 안에서 스크롤되는 영역
 
   const list = useMemo(() => graduates.filter((g) => matchFilter(g, filter)), [filter]);
 
@@ -54,50 +46,11 @@ const StudentPage = () => {
     lastTriggerRef.current = null;
   };
 
-  // 팝업이 열려 있는 동안: 스크롤 잠금, 포커스 이동, ESC·Tab 처리
-  useEffect(() => {
-    if (!selected) return;
-    document.body.style.overflow = 'hidden';
-    scrollRef.current?.scrollTo(0, 0);
-    closeBtnRef.current?.focus({ preventScroll: true });
-
-    const onKey = (e) => {
-      if (e.key === 'Escape') {
-        closeModal();
-        return;
-      }
-      if (e.key !== 'Tab') return;
-      const focusable = Array.from(
-        modalRef.current.querySelectorAll('button:not([disabled]), a[href], iframe, [tabindex]:not([tabindex="-1"])')
-      ).filter((el) => el.getClientRects().length > 0);
-      if (focusable.length === 0) return;
-      const first = focusable[0];
-      const last = focusable[focusable.length - 1];
-      if (e.shiftKey && document.activeElement === first) {
-        e.preventDefault();
-        last.focus();
-      } else if (!e.shiftKey && document.activeElement === last) {
-        e.preventDefault();
-        first.focus();
-      }
-    };
-    document.addEventListener('keydown', onKey);
-    return () => {
-      document.removeEventListener('keydown', onKey);
-      document.body.style.overflow = '';
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selected]);
-
   useEffect(() => {
     const onScroll = () => setShowTop(window.scrollY > 400);
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
-
-  const studentProjects = selected ? getWorksByStudent(selected.studentId) : [];
-  const contact = studentProjects.find((p) => p.contact?.email || p.contact?.phone)?.contact;
-  const youtubeId = getYoutubeId(studentProjects.find((p) => p.videoUrl)?.videoUrl);
 
   return (
     <div className="student-page">
@@ -164,119 +117,7 @@ const StudentPage = () => {
         ↑
       </button>
 
-      {selected && (
-        <div
-          ref={modalRef}
-          className="graduate-modal"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="modalStudentName"
-          onClick={(e) => { if (e.target === e.currentTarget) closeModal(); }}   // 어두운 바깥 영역 클릭 시 닫기
-        >
-          <div className="graduate-modal-shell">
-            {/* 닫기 버튼은 스크롤해도 고정 */}
-            <button
-              ref={closeBtnRef}
-              type="button"
-              className="graduate-modal-close"
-              aria-label="팝업 닫기"
-              onClick={closeModal}
-            >
-              <span></span>
-              <span></span>
-            </button>
-
-            {/* 스크롤은 이 안에서만 */}
-            <div ref={scrollRef} className="graduate-modal-inner">
-            <div className="graduate-modal-logo">
-              <img src={assetUrl('/images/로고.png')} alt="2026 졸업전시회 로고" onError={(e) => e.currentTarget.remove()} />
-            </div>
-
-            <div className="graduate-modal-content">
-            <section className="graduate-profile">
-              <div className="graduate-profile-photo">
-                {selected.profileImage ? (
-                  <SafeImg src={selected.profileImage} fallbackSrc={FALLBACK.avatar} alt={`${selected.name} 프로필`} />
-                ) : (
-                  <div className="graduate-profile-photo-placeholder"></div>
-                )}
-              </div>
-
-              <div className="graduate-profile-info">
-                <div className="graduate-name-line">
-                  <h2 className="graduate-name" id="modalStudentName">{selected.name}</h2>
-                  <span className="graduate-english-name">{selected.englishName}</span>
-                </div>
-
-                <p className="graduate-job">{selected.jobTitle}</p>
-
-                <p className="graduate-introduction">{selected.intro}</p>
-
-                <div className="graduate-contact">
-                  <div className="graduate-contact-item">
-                    <div className="graduate-contact-icon">
-                      <div className="graduate-icon-placeholder"></div>
-                    </div>
-                    {contact?.phone ? (
-                      <a href={`tel:${contact.phone.replace(/[^\d+]/g, '')}`}>{contact.phone}</a>
-                    ) : (
-                      <span className="contact-text">전화번호 입력</span>
-                    )}
-                  </div>
-
-                  <div className="graduate-contact-item">
-                    <div className="graduate-contact-icon">
-                      <div className="graduate-icon-placeholder"></div>
-                    </div>
-                    {contact?.email ? (
-                      <a href={`mailto:${contact.email}`}>{contact.email}</a>
-                    ) : (
-                      <span className="contact-text">이메일 입력</span>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            <section className="graduate-project-section">
-              <h2 className="graduate-section-title">Project</h2>
-              <div className="graduate-project-grid">
-                {studentProjects.map((p) => (
-                  <Link className="graduate-project-card" key={p.id} to={`/project/${p.id}`}>
-                    <div className="graduate-project-image">
-                      {p.thumbnail ? (
-                        <SafeImg src={p.thumbnail} fallbackSrc={FALLBACK.image} alt={getWorkTitle(p)} />
-                      ) : (
-                        <div className="graduate-project-placeholder"></div>
-                      )}
-                    </div>
-                    <p className="graduate-project-name">{getWorkTitle(p)}</p>
-                  </Link>
-                ))}
-              </div>
-            </section>
-
-            <section className="graduate-video-section">
-              <div className="graduate-video">
-                {youtubeId ? (
-                  <iframe
-                    src={`https://www.youtube-nocookie.com/embed/${youtubeId}`}
-                    title={`${selected.name} 프로젝트 영상`}
-                    loading="lazy"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerPolicy="strict-origin-when-cross-origin"
-                    allowFullScreen
-                  ></iframe>
-                ) : (
-                  <div className="graduate-video-placeholder"></div>
-                )}
-              </div>
-            </section>
-            </div>
-            </div>
-          </div>
-        </div>
-      )}
+      {selected && <GraduateModal student={selected} onClose={closeModal} />}
     </div>
   );
 };

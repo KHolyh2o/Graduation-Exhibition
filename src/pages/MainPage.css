@@ -445,7 +445,13 @@ body.page-index {
 .index-root .student-card-link {
   display: block;
   width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  text-align: inherit;
   text-decoration: none;
+  cursor: pointer;
 }
 
 /* 학생 1명 = 완성 이미지 1장 */
@@ -1226,30 +1232,60 @@ html.index-intro-pending body.page-index
 
 
 /* ==========================================
-   SKIP 버튼
+   인트로 하단 안내 띠 — 화면 아래쪽을 덮는 검은 그라데이션이 곧 버튼
+   (sha_copy 에서는 둥근 SKIP 버튼이었다가 "2026 졸업전시 보러가기" 띠로 바뀜)
+   누르면 인트로를 건너뛰며, 시작 3초 뒤에 서서히 나타난다
 ========================================== */
 
 .index-root .index-intro-skip {
   position: absolute;
-  right: 35px;
-  bottom: 35px;
+  bottom: 0;
+  left: 0;
+  right: 0;
   z-index: 2;
 
-  padding: 10px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
 
-  border: 1px solid #777;
-  border-radius: 30px;
+  width: 100%;
+  height: 28%;
+  margin: 0;
+  padding: 0 100px 100px;
 
-  background: rgba(255,255,255,0.85);
-  color: #111;
+  border: none;
+  border-radius: 0;
 
-  font-size: 13px;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.3) 25%,
+    rgba(0, 0, 0, 0.65) 55%,
+    rgba(0, 0, 0, 0.9) 100%
+  );
+
+  color: #fff;
+  font-size: clamp(19px, 1.8vw, 25px);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.4;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
   cursor: pointer;
+
+  animation: introFadeIn 0.5s ease-out 3s both;
 }
 
-.index-root .index-intro-skip:hover {
-  background: #111;
-  color: #fff;
+.index-root .index-intro-skip span {
+  position: relative;
+  top: 50px;
+  text-shadow:
+    0 0 6px rgba(255, 255, 255, 0.9),
+    0 0 14px rgba(255, 255, 255, 0.5);
+}
+
+@keyframes introFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 
@@ -1291,12 +1327,23 @@ html.index-intro-complete body.page-index
     object-fit: contain;
   }
 
-  .index-root .index-intro-skip {
-    right: 20px;
-    bottom: 25px;
+  /* 모바일: 검정 바탕에 원본 비율로 보여 주고 띠를 더 높게 */
+  .index-root .index-intro {
+    background: #050505;
+  }
 
-    padding: 8px 16px;
-    font-size: 12px;
+  .index-root .index-intro-skip {
+    height: 35%;
+    padding: 0 20px 34px;
+    font-size: 20px;
+    animation: introFadeIn 1.5s ease-out 2s both;
+  }
+
+  .index-root .index-intro-skip span {
+    top: 0;
+    text-shadow:
+      0 0 7px rgba(255, 255, 255, 0.65),
+      0 2px 8px rgba(0, 0, 0, 0.9);
   }
 
 }
