@@ -766,15 +766,42 @@ studentGrid.addEventListener("click", event => {
 });
 
 
-/* ==========================================
-   21. 닫기 버튼
-========================================== */
 
-function closeStudentModal() {
 
-  // 학생 해시 제거
+
+function closeStudentModal(event) {
+
+  event?.preventDefault();
+  event?.stopPropagation();
+
+  const isIndexPopup =
+    new URLSearchParams(window.location.search)
+      .get("from") === "index" &&
+    window.parent !== window;
+
+  // INDEX에서 열린 학생 팝업
+  if (isIndexPopup) {
+
+    const targetOrigin =
+      window.location.protocol === "file:"
+        ? "*"
+        : window.location.origin;
+
+    // 부모 함수를 직접 호출하지 않고 메시지 전송
+    window.parent.postMessage(
+      {
+        type: "CLOSE_INDEX_STUDENT_MODAL"
+      },
+      targetOrigin
+    );
+
+    return;
+  }
+
+  // student.html에서 직접 열린 경우
   const cleanURL =
-    window.location.pathname + window.location.search;
+    window.location.pathname +
+    window.location.search;
 
   history.replaceState(null, "", cleanURL);
 
@@ -782,7 +809,17 @@ function closeStudentModal() {
 
 }
 
-modalClose.addEventListener("click", closeStudentModal);
+
+
+
+modalClose.addEventListener("click", (event) => {
+
+  event.preventDefault();
+  event.stopPropagation();
+
+  closeStudentModal(event);
+
+});
 
 
 /* ==========================================

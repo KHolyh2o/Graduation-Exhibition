@@ -58,13 +58,9 @@
   >
 
   <!-- 인트로 건너뛰기 -->
-  <button
-    type="button"
-    class="index-intro-skip"
-    id="index-intro-skip"
-  >
-    SKIP
-  </button>
+<button type="button" class="index-intro-skip" id="index-intro-skip">
+  <span>2026 졸업전시 보러가기</span>
+</button>
 
 </div>
 
@@ -189,10 +185,12 @@
             href="project.html?category=multimedia"
             class="target-card"
             aria-label="멀티미디어 작품 보기"
+              data-title="멀티미디어"
           >
             <div
               class="target-card-image main-image-slot"
               data-main-image="multimedia"
+              
             ></div>
           </a>
 
@@ -202,6 +200,7 @@
             href="project.html?category=video"
             class="target-card"
             aria-label="영상미디어 작품 보기"
+            data-title="영상미디어"
           >
             <div
               class="target-card-image main-image-slot"
@@ -214,6 +213,7 @@
           <a
             href="project.html?category=xr"
             class="target-card"
+            data-title="XR 프로젝트"
             aria-label="XR 프로젝트 작품 보기"
           >
             <div
@@ -521,6 +521,29 @@
 
 
   </main>
+
+<!-- ======================================
+     INDEX 학생 소개 팝업
+====================================== -->
+
+
+<!-- INDEX 학생 팝업 -->
+<div
+  class="index-student-overlay"
+  id="index-student-overlay"
+  hidden
+>
+  <!-- INDEX에서 직접 닫는 버튼 -->
+
+
+  <!-- 기존 student.html 팝업 불러오기 -->
+  <iframe
+    class="index-student-iframe"
+    id="index-student-iframe"
+    title="학생 소개 팝업"
+  ></iframe>
+</div>
+
 
 
   <!-- ======================================

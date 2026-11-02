@@ -6,12 +6,17 @@
    비워두면 이미지 공간만 표시
 ========================================== */
 const IMAGE_PATHS = {
-  logo: "",
-  multimedia: "",
-  video: "",
-  xr: "",
-  instagram: "",
-  youtube: ""
+   // 멀티미디어
+  multimedia: "../public/images/UI/멀티_선택.png",
+  multimediaBW: "../public/images/UI/멀티_선택x.png",
+
+  // 영상미디어
+  video: "../public/images/UI/영상_선택.png",
+  videoBW: "../public/images/UI/영상_선택x.png",
+
+  // XR 프로젝트
+  xr: "../public/images/UI/xr_선택.png",
+  xrBW: "../public/images/UI/xr_선택x.png",
 };
 
 const SOCIAL_URLS = {
@@ -31,7 +36,7 @@ const CATEGORY_NAMES = {
 const FILTERS = {
   multimedia: [
     { key: "all", label: "ALL" },
-    { key: "pm", label: "Project Manager" },
+    { key: "pm", label: "Product Manager" },
     { key: "designer", label: "Designer" },
     { key: "marketer", label: "Marketer" },
     { key: "developer", label: "Developer" },
@@ -197,23 +202,68 @@ function matchesFilter(project, filter) {
    5. 이미지 삽입
 ========================================== */
 function loadImageSlots() {
-  document
-    .querySelectorAll("[data-image-key]")
-    .forEach((slot) => {
+document
+  .querySelectorAll("[data-image-key]")
+  .forEach((slot) => {
 
-      const path = IMAGE_PATHS[slot.dataset.imageKey];
-      slot.replaceChildren();
+    const key = slot.dataset.imageKey;
+    const colorPath = IMAGE_PATHS[key];
 
-      if (!path) return;
+    slot.replaceChildren();
 
-      const img = document.createElement("img");
-      img.src = path;
-      img.alt = "";
+    if (!colorPath) return;
 
-      img.onerror = () => img.remove();
+    // 분야별 카테고리 아이콘
+    if (slot.classList.contains("category-icon")) {
 
-      slot.append(img);
-    });
+      const bwPath = IMAGE_PATHS[`${key}BW`];
+
+      slot.classList.toggle(
+        "has-bw",
+        Boolean(bwPath)
+      );
+
+      // 미선택 상태용 흑백 이미지
+      if (bwPath) {
+        const bwImage = document.createElement("img");
+
+        bwImage.src = bwPath;
+        bwImage.alt = "";
+        bwImage.className = "category-icon-bw";
+
+        bwImage.onerror = () => {
+          slot.classList.remove("has-bw");
+          bwImage.remove();
+        };
+
+        slot.appendChild(bwImage);
+      }
+
+      // 선택 / 호버 상태용 컬러 이미지
+      const colorImage = document.createElement("img");
+
+      colorImage.src = colorPath;
+      colorImage.alt = "";
+      colorImage.className = "category-icon-colored";
+
+      colorImage.onerror = () => colorImage.remove();
+
+      slot.appendChild(colorImage);
+
+      return;
+    }
+
+    // 기존 일반 이미지 처리
+    const img = document.createElement("img");
+
+    img.src = colorPath;
+    img.alt = "";
+
+    img.onerror = () => img.remove();
+
+    slot.appendChild(img);
+
+  });
 
   document
     .querySelectorAll("[data-social]")

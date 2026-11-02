@@ -24,7 +24,7 @@ const INDEX_ASSETS = {
   map: "../public/images/학교지도.png",
 
   // Credit 로고
-  creditLogo: "",
+  creditLogo: "../public/images/UI/크레딧 화살.png",
 
   // 학생 슬라이드 버튼 이미지
   arrowPrev: "../public/images/UI/slide_pre.png",
@@ -212,11 +212,27 @@ function createMainStudentCard(student) {
 
 
   /* 카드 전체 링크 */
-  const link = document.createElement("a");
 
-  link.className = "student-card-link";
+/* 학생 카드 - 페이지 이동 없는 버튼 */
+const link = document.createElement("button");
 
-  link.href = student.link;
+link.type = "button";
+link.className = "student-card-link";
+
+link.dataset.studentId = student.id;
+
+link.setAttribute(
+  "aria-label",
+  `${student.id} 학생 소개 보기`
+);
+
+
+link.dataset.studentId = student.id;
+
+link.setAttribute(
+  "aria-label",
+  `${student.id} 학생 소개 보기`
+);
 
   link.setAttribute(
     "aria-label",
@@ -293,14 +309,16 @@ function initMainStudentSlider() {
   let totalPages = 0;
 
 
-  /* 화면 크기에 따른 페이지당 학생 수 */
-  function getPageSize() {
+ 
+/* 화면 크기에 따른 페이지당 학생 수 */
+function getPageSize() {
 
-    return window.matchMedia(
-      "(max-width: 768px)"
-    ).matches ? 4 : 10;
+  return window.matchMedia(
+    "(max-width: 768px)"
+  ).matches ? 1 : 10;
 
-  }
+}
+
 
 
   /* ========================================
@@ -595,7 +613,7 @@ function initIndexIntro() {
   ======================================== */
 
   // WebP 애니메이션 길이에 맞게 수정
-  const INTRO_DURATION = 7000;
+  const INTRO_DURATION = 6000;
 
   // 사라지는 효과
   const FADE_DURATION = 750;
@@ -698,7 +716,10 @@ function finishIntro() {
 
 
   /* SKIP 버튼 */
-  skip?.addEventListener("click", finishIntro);
+intro.addEventListener("click", () => {
+  finishIntro();
+});
+
 
   /* 파일 로딩 실패 등에 대비한 안전장치 */
   safetyTimer = window.setTimeout(() => {
@@ -725,3 +746,231 @@ if (document.readyState === "loading") {
   initIndexIntro();
 
 }
+
+
+/* ==========================================
+   INDEX STUDENT POPUP
+========================================== */
+
+
+/* ==========================================
+   INDEX STUDENT POPUP - 수정본
+========================================== */
+
+function initIndexStudentPopup() {
+
+  const overlay = document.getElementById(
+    "index-student-overlay"
+  );
+
+  const iframe = document.getElementById(
+    "index-student-iframe"
+  );
+
+
+
+  const track = document.getElementById(
+    "students-track"
+  );
+
+if (!overlay || !iframe || !track) {
+  return;
+}
+
+  let lastFocusedElement = null;
+
+
+  /* ========================================
+     팝업 열기
+  ======================================== */
+
+  function openIndexStudentPopup(studentId) {
+
+    lastFocusedElement = document.activeElement;
+
+    overlay.hidden = false;
+    overlay.classList.remove("is-ready");
+
+    document.body.classList.add(
+      "index-student-modal-open"
+    );
+
+    // 기존 student.html의 학생별 팝업
+    iframe.src =
+      `student.html?from=index#${encodeURIComponent(studentId)}`;
+
+  }
+
+
+  /* ========================================
+     팝업 닫기
+     INDEX 화면 유지
+  ======================================== */
+
+
+
+/* ==========================================
+   INDEX 학생 팝업 닫기
+========================================== */
+
+function closeIndexStudentPopup() {
+
+  if (overlay.hidden) return;
+
+  // 팝업 숨기기
+  overlay.hidden = true;
+  overlay.classList.remove("is-ready");
+
+  // INDEX 스크롤 잠금 해제
+  document.body.classList.remove(
+    "index-student-modal-open"
+  );
+
+  // iframe 초기화
+  iframe.removeAttribute("src");
+
+  // 기존 학생 카드로 포커스 복귀
+  if (
+    lastFocusedElement &&
+    lastFocusedElement.isConnected
+  ) {
+    lastFocusedElement.focus({
+      preventScroll: true
+    });
+  }
+
+}
+
+/* 중요!
+   student.js에서도 INDEX 닫기 함수를
+   직접 호출할 수 있도록 등록
+*/
+
+
+
+  /* ========================================
+     학생 카드 클릭
+  ======================================== */
+
+  track.addEventListener("click", (event) => {
+
+    const button = event.target.closest(
+      ".student-card-link[data-student-id]"
+    );
+
+    if (!button) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    openIndexStudentPopup(
+      button.dataset.studentId
+    );
+
+  });
+
+
+  /* ========================================
+     INDEX의 X 버튼
+  ======================================== */
+
+
+
+
+  /* ========================================
+     iframe 로드 완료
+
+     기존 student.html의 X 버튼을 숨기고
+     INDEX가 닫기 기능을 직접 관리
+  ======================================== */
+
+ 
+/* iframe 로딩 완료 */
+iframe.addEventListener("load", () => {
+
+  if (overlay.hidden) return;
+
+  overlay.classList.add("is-ready");
+
+});
+
+
+
+  /* ========================================
+     기존 student.js에서 보내는
+     닫기 신호도 계속 지원
+  ======================================== */
+
+  window.addEventListener("message", (event) => {
+
+    if (event.source !== iframe.contentWindow) {
+      return;
+    }
+
+    if (
+      location.protocol !== "file:" &&
+      event.origin !== location.origin
+    ) {
+      return;
+    }
+
+    if (
+      event.data?.type ===
+      "CLOSE_INDEX_STUDENT_MODAL"
+    ) {
+      closeIndexStudentPopup();
+    }
+
+  });
+
+
+  /* ========================================
+     INDEX 팝업 바깥 클릭
+  ======================================== */
+
+  overlay.addEventListener("click", (event) => {
+
+    if (event.target === overlay) {
+      closeIndexStudentPopup();
+    }
+
+  });
+
+
+  /* ========================================
+     INDEX에서 ESC 누르기
+  ======================================== */
+
+  document.addEventListener("keydown", (event) => {
+
+    if (overlay.hidden) return;
+
+    if (event.key === "Escape") {
+
+      event.preventDefault();
+
+      closeIndexStudentPopup();
+
+    }
+
+  });
+
+}
+
+
+
+/* 실행 */
+if (document.readyState === "loading") {
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    initIndexStudentPopup
+  );
+
+} else {
+
+  initIndexStudentPopup();
+
+}
+
+

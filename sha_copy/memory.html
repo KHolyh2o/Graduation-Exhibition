@@ -1,0 +1,201 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <title>MEMORY | 2026 졸업전시회</title>
+
+  <!-- 공통 헤더 / 푸터 -->
+  <link rel="stylesheet" href="css/common.css">
+
+  <!-- MEMORY 전용 -->
+  <link rel="stylesheet" href="css/memory.css">
+
+  <script src="js/common.js" defer></script>
+  <script src="js/memory.js" defer></script>
+</head>
+
+<body class="page-memory">
+
+  <div id="common-header"></div>
+
+  <main class="memory-page">
+
+    <!-- 페이지 소개 -->
+    <section class="memory-hero">
+      <p class="memory-eyebrow">
+        2026 GRADUATION EXHIBITION
+      </p>
+
+      <h1>MEMORY</h1>
+
+      <p class="memory-description">
+        졸업을 축하하는 마음을 남겨주세요.<br>
+        남겨주신 메시지는 포스트잇이 되어 이곳에 기록됩니다.
+      </p>
+    </section>
+
+    <!-- 메시지 작성 -->
+    <section class="memory-write-section">
+      <div class="memory-section-heading">
+        <h2>응원 메시지 남기기</h2>
+        <p>마음을 담아 자유롭게 작성해 주세요.</p>
+      </div>
+
+      <form id="memory-form" class="memory-form">
+
+        <div class="memory-form-main">
+          <label for="memory-message">
+            MESSAGE
+          </label>
+
+          <textarea
+            id="memory-message"
+            name="message"
+            placeholder="졸업을 축하하는 메시지를 적어주세요."
+            maxlength="140"
+            required
+          ></textarea>
+
+          <div class="memory-form-bottom">
+            <input
+              type="text"
+              id="memory-name"
+              name="name"
+              maxlength="16"
+              placeholder="이름 또는 별명 (선택)"
+              aria-label="이름 또는 별명"
+            >
+
+            <span id="memory-length">
+              0 / 140
+            </span>
+          </div>
+        </div>
+
+        <div class="memory-form-side">
+
+          <fieldset class="memory-colors">
+            <legend>POST-IT COLOR</legend>
+
+            <div class="memory-color-options">
+
+<!-- 빨강 -->
+<label class="memory-color-option">
+  <input
+    type="radio"
+    name="color"
+    value="red"
+  >
+  <span class="memory-color-dot red"></span>
+  <span>빨강</span>
+</label>
+
+<!-- 파랑 -->
+<label class="memory-color-option">
+  <input
+    type="radio"
+    name="color"
+    value="blue"
+  >
+  <span class="memory-color-dot blue"></span>
+  <span>파랑</span>
+</label>
+
+              <label class="memory-color-option">
+                <input
+                  type="radio"
+                  name="color"
+                  value="lime"
+                  checked
+                >
+                <span class="memory-color-dot lime"></span>
+                <span>연두</span>
+              </label>
+
+              <label class="memory-color-option">
+                <input
+                  type="radio"
+                  name="color"
+                  value="pink"
+                >
+                <span class="memory-color-dot pink"></span>
+                <span>분홍</span>
+              </label>
+
+              <label class="memory-color-option">
+                <input
+                  type="radio"
+                  name="color"
+                  value="yellow"
+                >
+                <span class="memory-color-dot yellow"></span>
+                <span>노랑</span>
+              </label>
+
+            </div>
+          </fieldset>
+
+          <button
+            type="submit"
+            class="memory-submit"
+            id="memory-submit"
+          >
+            포스트잇 붙이기
+            <span aria-hidden="true">↗</span>
+          </button>
+
+        </div>
+
+      </form>
+
+      <p id="memory-status"
+         class="memory-status"
+         role="status"
+         aria-live="polite"></p>
+    </section>
+
+    <!-- 포스트잇 게시판 -->
+    <section class="memory-wall-section">
+
+      <div class="memory-wall-heading">
+        <div>
+          <p class="memory-wall-eyebrow">
+            WORDS FOR OUR GRADUATES
+          </p>
+          <h2>남겨진 마음들</h2>
+        </div>
+
+        <p class="memory-total">
+          <strong id="memory-count">0</strong>
+          Messages
+        </p>
+      </div>
+
+      <div
+        id="memory-board"
+        class="memory-board"
+        aria-label="응원 메시지 포스트잇 게시판"
+      ></div>
+
+      <p
+        id="memory-empty"
+        class="memory-empty"
+        hidden
+      >
+        아직 등록된 메시지가 없습니다.<br>
+        첫 번째 응원 메시지를 남겨주세요!
+      </p>
+
+    </section>
+
+  </main>
+
+  <div id="common-footer"></div>
+
+</body>
+</html>

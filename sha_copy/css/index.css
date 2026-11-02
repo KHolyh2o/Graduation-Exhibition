@@ -1303,3 +1303,760 @@ html.index-intro-complete .index-intro {
 .page-index .common-search-panel:not([hidden]) {
   z-index: 1002;
 }
+
+
+/* ==========================================
+   INDEX STUDENT CARD - 6:10
+========================================== */
+
+.page-index .student-card-image {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 6 / 10;
+
+  overflow: hidden;
+  background: #dedede;
+  border-radius: 4px;
+}
+
+.page-index .student-card-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* 기존 카드 이미지 호버 유지 */
+
+.page-index .student-card-link:hover {
+  opacity: 0.85;
+}
+
+
+/* ==========================================
+   INDEX STUDENT POPUP
+========================================== */
+
+/* 팝업 열리면 INDEX 스크롤 잠금 */
+body.index-student-modal-open {
+  overflow: hidden;
+}
+
+/* INDEX 위에 표시되는 팝업 */
+.index-student-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+
+  width: 100%;
+  height: 100dvh;
+
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.index-student-overlay[hidden] {
+  display: none !important;
+}
+
+/* 기존 학생 팝업 불러오기 */
+.index-student-iframe {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  border: none;
+  background: transparent;
+
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.index-student-overlay.is-ready
+.index-student-iframe {
+  opacity: 1;
+}
+
+
+/* INDEX 학생 카드 버튼 기본 스타일 제거 */
+.page-index .student-card-link {
+  display: block;
+  width: 100%;
+  height: auto;
+
+  padding: 0;
+  margin: 0;
+
+  border: none;
+  border-radius: 0;
+  background: transparent;
+
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+/* 기존 6:10 이미지 비율 유지 */
+.page-index .student-card-image {
+  width: 100%;
+  aspect-ratio: 6 / 10;
+}
+
+
+
+/* ==========================================
+   INDEX STUDENT POPUP CLOSE BUTTON
+========================================== */
+
+.index-student-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+}
+
+.index-student-overlay[hidden] {
+  display: none !important;
+}
+
+/* INDEX 전용 X 버튼 */
+
+
+
+
+
+/* iframe */
+.index-student-iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* 모바일 */
+
+/* ==========================================
+   INTRO 하단 텍스트 + 그라데이션
+========================================== */
+
+.index-intro-skip {
+  position: absolute;
+  top: auto;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  width: 100%;
+  height: 28%;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+
+  padding: 0 100px 100px;
+  margin: 0;
+
+  border: none;
+  border-radius: 0;
+
+  /* 위쪽은 투명, 아래쪽으로 갈수록 검정 */
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.50) 30%,
+    rgba(0, 0, 0, 0.55) 70%,
+    rgba(0, 0, 0, 0.78) 100%
+  );
+
+  color: #fff;
+  font-size: clamp(19px, 1.8vw, 25px);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.4;
+
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+
+  z-index: 2;
+  cursor: pointer;
+}
+
+.index-intro-skip:hover {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.22) 30%,
+    rgba(0, 0, 0, 0.55) 70%,
+    rgba(0, 0, 0, 0.78) 100%
+  );
+
+  color: #fff;
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .index-intro-skip {
+    height: 28%;
+    padding-bottom: 20px;
+    font-size: 20px;
+  }
+}
+.index-intro-skip span {
+  position: relative;
+  top: 50px;
+
+  text-shadow:
+    0 0 6px rgba(255, 255, 255, 0.9),
+    0 0 14px rgba(255, 255, 255, 0.5);
+}
+
+
+/* ==========================================
+   INTRO 하단 그라데이션 + 등장 효과
+========================================== */
+
+.index-intro-skip {
+  /* 더 강한 검정 그라데이션 */
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.3) 25%,
+    rgba(0, 0, 0, 0.65) 55%,
+    rgba(0, 0, 0, 0.9) 100%
+  );
+
+  /* 2초 후 등장, 1.5초 동안 서서히 표시 */
+  animation: introFadeIn 0.5s ease-out 3s both;
+}
+
+.index-intro-skip:hover {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.3) 25%,
+    rgba(0, 0, 0, 0.65) 55%,
+    rgba(0, 0, 0, 0.9) 100%
+  );
+}
+
+@keyframes introFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+/* ==========================================
+   MAIN HERO - 1160px
+========================================== */
+
+.page-index .main-hero-video {
+  width: calc(100% - 40px);
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* 메인 배너 이미지 */
+.page-index .main-hero-video > img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* 메인 영상 사용 시 */
+.page-index .main-hero-video .hero-video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* 모바일 */
+@media (max-width: 768px) {
+  .page-index .main-hero-video {
+    width: calc(100% - 32px);
+  }
+}
+
+
+/* ==========================================
+   CREDIT LOGO 이미지 크기 조절
+========================================== */
+
+.page-index .credit-logo {
+  width: 245px;
+  height: 42px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.page-index .credit-logo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+
+  object-fit: contain;
+  object-position: center;
+}
+
+
+/* ==========================================
+   TARGET CARD HOVER
+   어두운 배경 + 카테고리명
+========================================== */
+
+.page-index .target-card {
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+
+/* 어두워지는 오버레이 */
+.page-index .target-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+
+  background: rgba(0, 0, 0, 0.6);
+
+  opacity: 0;
+  transition: opacity 0.35s ease;
+
+  pointer-events: none;
+}
+
+/* 중앙 카테고리 텍스트 */
+.page-index .target-card::after {
+  content: attr(data-title);
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 3;
+
+  width: 100%;
+  padding: 0 15px;
+
+  color: #fff;
+  font-size: clamp(20px, 2vw, 28px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  text-align: center;
+  white-space: nowrap;
+
+  opacity: 0;
+  transform: translate(-50%, -40%);
+
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s ease;
+
+  pointer-events: none;
+}
+
+/* 마우스 호버 / 키보드 포커스 */
+.page-index .target-card:hover::before,
+.page-index .target-card:focus-visible::before {
+  opacity: 1;
+}
+
+.page-index .target-card:hover::after,
+.page-index .target-card:focus-visible::after {
+  opacity: 1;
+  transform: translate(-50%, -50%);
+}
+
+
+/* ==========================================
+   TARGET CARD 간격 + 모서리 둥글게
+========================================== */
+
+/* 이미지 3개 사이 여백 */
+.page-index .target-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+/* 카드 외곽 */
+.page-index .target-card {
+  position: relative;
+  overflow: hidden;
+
+  border-radius: 10px;
+}
+
+/* 이미지도 카드 모서리에 맞게 */
+.page-index .target-card-image {
+  width: 100%;
+  border-radius: inherit;
+  overflow: hidden;
+}
+
+/* 호버 이미지 확대 효과 유지 */
+.page-index .target-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 태블릿 */
+@media (max-width: 768px) {
+  .page-index .target-grid {
+    gap: 12px;
+  }
+
+  .page-index .target-card {
+    border-radius: 9px;
+  }
+}
+
+/* 모바일 */
+@media (max-width: 480px) {
+  .page-index .target-grid {
+    gap: 8px;
+  }
+
+  .page-index .target-card {
+    border-radius: 7px;
+  }
+}
+
+/* ==========================================
+   MOBILE STUDENT SLIDER - 1명씩 표시
+========================================== */
+
+@media (max-width: 768px) {
+
+  /* 한 페이지에 학생 카드 1개 */
+  .page-index .students-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+
+    width: min(100%, 320px);
+    margin: 0 auto;
+    gap: 0;
+  }
+
+  /* 이미지 원본 비율 유지 */
+  .page-index .student-card {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .page-index .student-card-image {
+    width: 100%;
+    aspect-ratio: 0.61;
+  }
+
+  .page-index .student-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+}
+
+/* ==========================================
+   TARGET 모바일 이미지 비율 수정
+========================================== */
+
+@media (max-width: 768px) {
+
+  .page-index .target-card-image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 0.86 / 1;
+    overflow: hidden;
+  }
+
+  .page-index .target-card-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+}
+
+
+/* ==========================================
+   INDEX INTRO - MOBILE BLACK SCREEN
+========================================== */
+
+@media (max-width: 768px) {
+
+  /* 인트로 전체 배경 검정 */
+  .index-intro {
+    background: #050505;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+  }
+
+  /* WebP 원본 비율 유지 + 중앙 배치 */
+  .index-intro-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+    object-position: center;
+
+    background: #050505;
+  }
+
+  /* 하단 검정 그라데이션 */
+  .index-intro-skip {
+    position: absolute;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    width: 100%;
+    height: 35%;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+
+    padding: 0 20px 34px;
+    box-sizing: border-box;
+
+    border: none;
+    border-radius: 0;
+
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.25) 35%,
+      rgba(0, 0, 0, 0.75) 75%,
+      rgba(0, 0, 0, 0.95) 100%
+    );
+
+    color: #fff;
+    font-size: 20px;
+    font-weight: 400;
+    text-align: center;
+
+    z-index: 2;
+    cursor: pointer;
+
+    /* 기존 2초 후 서서히 등장 */
+    animation: introFadeIn 1.5s ease-out 2s both;
+  }
+
+  /* 기존 글자 80px 이동 설정 해제 */
+  .index-intro-skip span {
+    position: relative;
+    top: 0;
+
+    text-shadow:
+      0 0 7px rgba(255, 255, 255, 0.65),
+      0 2px 8px rgba(0, 0, 0, 0.9);
+  }
+
+  /* 호버 시 배경 유지 */
+  .index-intro-skip:hover {
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.25) 35%,
+      rgba(0, 0, 0, 0.75) 75%,
+      rgba(0, 0, 0, 0.95) 100%
+    );
+    color: #fff;
+  }
+
+}
+
+/* ==========================================
+   CREDIT MOBILE - 컴팩트 버전
+========================================== */
+
+@media (max-width: 768px) {
+
+  /* 전체 영역 여백 축소 */
+  .page-index .main-credit {
+    padding: 45px 0 40px;
+  }
+
+  /* 제목 */
+  .page-index .credit-header {
+    gap: 12px;
+  }
+
+  .page-index .credit-header h2 {
+    font-size: 27px;
+  }
+
+  /* 제목 옆 로고 */
+  .page-index .credit-logo {
+    width: 155px;
+    height: 30px;
+    flex-shrink: 1;
+  }
+
+  /* 영문 설명 */
+  .page-index .credit-subtitle {
+    margin: 7px 0 18px;
+    font-size: 10px;
+  }
+
+  /* 명단 영역 공통 */
+  .page-index .credit-row {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 14px 0;
+  }
+
+  .page-index .credit-row h3 {
+    font-size: 12px;
+    line-height: 1.4;
+    white-space: nowrap;
+  }
+
+  /* 졸업전시위원회 - 2열 */
+  .page-index .credit-committee {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 10px;
+    row-gap: 9px;
+  }
+
+  /* 각 팀 한 줄 유지 */
+  .page-index .credit-team {
+    display: flex;
+    align-items: baseline;
+    gap: 7px;
+    white-space: nowrap;
+  }
+
+  .page-index .credit-team strong {
+    min-width: 0;
+    flex-shrink: 0;
+    font-size: 11px;
+    line-height: 1.5;
+  }
+
+  .page-index .credit-team span {
+    font-size: 11px;
+    line-height: 1.5;
+  }
+
+  /* 교수진 / 졸업생 명단 */
+  .page-index .credit-names,
+  .page-index .credit-graduates p {
+    font-size: 11px;
+    line-height: 1.7;
+  }
+
+  .page-index .credit-graduates p {
+    margin-bottom: 4px;
+  }
+
+}
+
+/* ==========================================
+   TARGET MOBILE - 가로형 카드 3개 세로 배치
+========================================== */
+
+@media (max-width: 768px) {
+
+  /* 이미지 3개 세로 정렬 */
+  .page-index .target-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    width: 100%;
+  }
+
+  /* 카드 전체 너비 사용 */
+  .page-index .target-card {
+    display: block;
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  /* 가로로 긴 이미지 영역 */
+  .page-index .target-card-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 2 / 1;
+    border-radius: inherit;
+    overflow: hidden;
+  }
+
+  /* 이미지 영역 꽉 채우기 */
+  .page-index .target-card-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+}
+
+/* ==========================================
+   INDEX 모바일 헤더 메뉴 표시 오류 수정
+========================================== */
+
+@media (max-width: 768px) {
+
+  /* 인트로 애니메이션으로 인한
+     헤더 레이어 충돌 방지 */
+  html.index-intro-complete
+  body.page-index #common-header {
+    position: sticky;
+    top: 0;
+    z-index: 2000;
+
+    animation: none !important;
+    transform: none !important;
+
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  /* 헤더와 버튼 클릭 가능 */
+  .page-index .common-header {
+    z-index: 2001;
+    pointer-events: auto;
+  }
+
+  .page-index .common-menu-toggle {
+    position: relative;
+    z-index: 2002;
+    pointer-events: auto;
+  }
+
+  /* 모바일 메뉴가 본문 위에 표시되도록 */
+  .page-index .common-mobile-menu:not([hidden]) {
+    position: fixed;
+
+    top: 90px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: calc(100dvh - 90px);
+
+    z-index: 2001;
+    background: #fff;
+    overflow-y: auto;
+  }
+
+}

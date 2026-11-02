@@ -1187,3 +1187,46 @@ body.dept-message-open {
     font-size: 18px;
   }
 }
+
+/* ==========================================
+   교육목표 다이어그램 PC / MOBILE
+========================================== */
+
+/* 기본: PC 이미지 표시 */
+.dept-diagram-desktop {
+  display: block;
+}
+
+/* 모바일 이미지 숨김 */
+.dept-diagram-mobile {
+  display: none;
+}
+
+/* 모바일 768px 이하 */
+@media (max-width: 768px) {
+
+  .dept-diagram-wrap {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* 기존 PC 이미지 숨김 */
+  .dept-diagram.dept-diagram-desktop {
+    display: none;
+  }
+
+  /* 모바일 이미지 표시 */
+  .dept-diagram-mobile {
+    display: block;
+
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+
+    margin: 0 auto;
+    object-fit: contain;
+
+    border-radius: 5px;
+  }
+
+}

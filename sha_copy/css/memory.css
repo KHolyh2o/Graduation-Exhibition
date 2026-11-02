@@ -1,0 +1,557 @@
+
+/* ==========================================
+   MEMORY PAGE
+========================================== */
+
+:root {
+  --memory-width: 1160px;
+  --memory-lime: #E4F2AF;
+  --memory-pink: #FADCE5;
+  --memory-yellow: #FFF0AD;
+}
+
+body.page-memory {
+  margin: 0;
+  background: #fff;
+  color: #171717;
+  font-family:
+    "DM Sans", "Pretendard",
+    "Noto Sans KR", "Malgun Gothic",
+    sans-serif;
+}
+
+.memory-page,
+.memory-page * {
+  box-sizing: border-box;
+}
+
+.memory-page {
+  width: calc(100% - 40px);
+  max-width: var(--memory-width);
+  margin: 0 auto;
+}
+
+/* ==========================================
+   PAGE HERO
+========================================== */
+
+.memory-hero {
+  padding: 100px 0 82px;
+  text-align: center;
+}
+
+.memory-eyebrow {
+  margin: 0 0 14px;
+  color: #888;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+}
+
+.memory-hero h1 {
+  margin: 0;
+  font-size: clamp(56px, 8vw, 100px);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.055em;
+}
+
+.memory-description {
+  margin: 26px 0 0;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.9;
+  color: #666;
+  word-break: keep-all;
+}
+
+/* ==========================================
+   MESSAGE FORM
+========================================== */
+
+.memory-write-section {
+  padding: 0 0 94px;
+}
+
+.memory-section-heading {
+  margin-bottom: 24px;
+}
+
+.memory-section-heading h2 {
+  margin: 0 0 9px;
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.memory-section-heading p {
+  margin: 0;
+  color: #888;
+  font-size: 14px;
+}
+
+.memory-form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  gap: 36px;
+
+  padding: 34px;
+  border: 1px solid #e8e8e8;
+  border-radius: 4px;
+  background: #fafafa;
+}
+
+.memory-form-main {
+  min-width: 0;
+}
+
+.memory-form-main > label,
+.memory-colors legend {
+  display: block;
+  margin-bottom: 14px;
+  color: #777;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+#memory-message {
+  display: block;
+  width: 100%;
+  min-height: 135px;
+  padding: 18px;
+
+  resize: vertical;
+
+  border: 1px solid #e3e3e3;
+  border-radius: 2px;
+  outline: none;
+
+  background: #fff;
+  color: #222;
+
+  font: inherit;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+#memory-message:focus {
+  border-color: #777;
+}
+
+#memory-message::placeholder,
+#memory-name::placeholder {
+  color: #aaa;
+}
+
+.memory-form-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+#memory-name {
+  width: min(100%, 260px);
+  padding: 9px 0;
+
+  border: none;
+  border-bottom: 1px solid #ddd;
+  border-radius: 0;
+  outline: none;
+
+  background: transparent;
+  color: #222;
+
+  font: inherit;
+  font-size: 14px;
+}
+
+#memory-name:focus {
+  border-bottom-color: #444;
+}
+
+#memory-length {
+  color: #999;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+/* 색상 선택 */
+.memory-form-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.memory-colors {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.memory-color-options {
+  display: flex;
+  gap: 14px;
+}
+
+.memory-color-option {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+
+  color: #666;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.memory-color-option input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.memory-color-dot {
+  display: block;
+  width: 55px;
+  height: 55px;
+  border: 2px solid transparent;
+  border-radius: 3px;
+  transition: transform 0.2s ease;
+}
+
+.memory-color-dot.lime {
+  background: var(--memory-lime);
+}
+
+.memory-color-dot.pink {
+  background: var(--memory-pink);
+}
+
+.memory-color-dot.yellow {
+  background: var(--memory-yellow);
+}
+
+.memory-color-option input:checked
++ .memory-color-dot {
+  outline: 2px solid #333;
+  outline-offset: 4px;
+}
+
+.memory-color-option:hover .memory-color-dot {
+  transform: translateY(-3px);
+}
+
+.memory-color-option input:focus-visible
++ .memory-color-dot {
+  outline: 3px solid #2591B8;
+  outline-offset: 4px;
+}
+
+/* 등록 버튼 */
+.memory-submit {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  min-height: 54px;
+  padding: 0 20px;
+
+  border: 0;
+  border-radius: 2px;
+  background: #171717;
+  color: #fff;
+
+  font: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+
+  transition: background 0.2s ease;
+}
+
+.memory-submit:hover {
+  background: #444;
+}
+
+.memory-submit:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+
+.memory-submit span {
+  font-size: 21px;
+  font-weight: 300;
+}
+
+.memory-status {
+  margin: 12px 0 0;
+  color: #555;
+  font-size: 13px;
+  min-height: 20px;
+}
+
+/* ==========================================
+   MEMORY BOARD
+========================================== */
+
+.memory-wall-section {
+  min-height: 500px;
+  padding: 40px 0 100px;
+  border-top: 1px solid #e8e8e8;
+}
+
+.memory-wall-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px;
+  margin-bottom: 52px;
+}
+
+.memory-wall-eyebrow {
+  margin: 0 0 10px;
+  color: #888;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+}
+
+.memory-wall-heading h2 {
+  margin: 0;
+  font-size: 33px;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+}
+
+.memory-total {
+  margin: 0;
+  color: #999;
+  font-size: 13px;
+}
+
+.memory-total strong {
+  padding-right: 5px;
+  color: #171717;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+/* 포스트잇 자동 배열 */
+.memory-board {
+  display: grid;
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 28px 24px;
+  align-items: stretch;
+  padding: 10px 4px 40px;
+}
+
+/* 포스트잇 */
+.memory-note {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 240px;
+  padding: 27px 23px 22px;
+
+  background: var(--note-color);
+  box-shadow: 2px 5px 12px rgba(0,0,0,0.09);
+  transform: rotate(var(--note-rotate, 0deg));
+
+  animation: memoryNoteAppear 0.45s ease both;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.memory-note:hover {
+  transform: translateY(-5px) rotate(0deg);
+  box-shadow: 3px 10px 18px rgba(0,0,0,0.12);
+}
+
+.memory-note[data-color="lime"] {
+  --note-color: var(--memory-lime);
+}
+
+.memory-note[data-color="pink"] {
+  --note-color: var(--memory-pink);
+}
+
+.memory-note[data-color="yellow"] {
+  --note-color: var(--memory-yellow);
+}
+
+.memory-note-message {
+  margin: 0 0 25px;
+  flex: 1;
+
+  color: #303030;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.7;
+
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: keep-all;
+}
+
+.memory-note-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+
+  font-size: 12px;
+  color: rgba(0,0,0,0.58);
+}
+
+.memory-note-author {
+  font-weight: 600;
+}
+
+.memory-empty {
+  padding: 100px 20px;
+  text-align: center;
+  color: #999;
+  font-size: 15px;
+  line-height: 2;
+}
+
+@keyframes memoryNoteAppear {
+  from {
+    opacity: 0;
+    translate: 0 16px;
+  }
+
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 1000px) {
+  .memory-board {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .memory-hero {
+    padding: 75px 0 60px;
+  }
+
+  .memory-form {
+    grid-template-columns: 1fr;
+    padding: 24px;
+    gap: 28px;
+  }
+
+  .memory-form-side {
+    gap: 30px;
+  }
+
+  .memory-board {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+    gap: 22px 16px;
+  }
+
+  .memory-wall-section {
+    padding-top: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .memory-page {
+    width: calc(100% - 32px);
+  }
+
+  .memory-hero h1 {
+    font-size: 56px;
+  }
+
+  .memory-description {
+    font-size: 14px;
+  }
+
+  .memory-wall-heading h2 {
+    font-size: 25px;
+  }
+
+  .memory-wall-heading {
+    margin-bottom: 35px;
+  }
+
+  .memory-note {
+    min-height: 210px;
+    padding: 20px 15px;
+  }
+
+  .memory-note-message {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .memory-note-footer {
+    font-size: 10px;
+  }
+
+  .memory-color-dot {
+    width: 49px;
+    height: 49px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .memory-note {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* ==========================================
+   MEMORY 포스트잇 색상 추가
+========================================== */
+
+:root {
+  --memory-red: #F4A8B0;
+  --memory-blue: #A9D9F3;
+}
+
+/* 색상 선택 버튼 */
+.memory-color-dot.red {
+  background: var(--memory-red);
+}
+
+.memory-color-dot.blue {
+  background: var(--memory-blue);
+}
+
+/* 등록된 포스트잇 */
+.memory-note[data-color="red"] {
+  --note-color: var(--memory-red);
+}
+
+.memory-note[data-color="blue"] {
+  --note-color: var(--memory-blue);
+}
+
+/* 다섯 가지 색상 정렬 */
+.memory-color-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}

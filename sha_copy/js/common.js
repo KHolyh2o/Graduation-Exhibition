@@ -8,12 +8,12 @@ const COMMON_CONFIG = {
 
   // 이미지 경로
   logoImage: "../public/images/로고.png",
-  instagramImage: "",
-  youtubeImage: "",
+  instagramImage: "../public/images/UI/푸터_인스타.png",
+  youtubeImage: "../public/images/UI/푸터_유튜브.png",
 
   // SNS 링크
-  instagramURL: "",
-  youtubeURL: ""
+  instagramURL: "https://www.instagram.com/swu_mediacontents/",
+  youtubeURL: "https://www.youtube.com/@%EB%AF%B8%EB%94%94%EC%96%B4%EC%BD%98%ED%85%90%EC%B8%A0%ED%95%99%EB%B6%80"
 };
 
 /* ==========================================
@@ -59,6 +59,7 @@ function createCommonHeader() {
           <a href="${base}project.html" data-page="project.html">WORK</a>
           <a href="${base}student.html" data-page="student.html">GRADUATES</a>
           <a href="${base}department.html" data-page="department.html">ABOUT</a>
+          <a href="${base}memory.html" data-page="memory.html">MEMORY</a>
           <a href="${base}archive.html" data-page="archive.html">ARCHIVE</a>
 
           <button
@@ -370,6 +371,10 @@ function initCommonMobileMenu() {
        class="common-mobile-link">
       ABOUT
     </a>
+
+    <a href="${base}memory.html" class="common-mobile-link">
+  MEMORY
+</a>
 
     <a href="${base}archive.html"
        class="common-mobile-link">
@@ -962,3 +967,121 @@ if (document.readyState === "loading") {
   startSiteInteraction();
 
 }
+
+
+/* ==========================================
+   GLOBAL FONT SIZE +2pt
+   모든 페이지 공통 폰트 확대
+========================================== */
+
+function increaseAllPageFontSizes() {
+
+  // 중복 적용 방지
+  if (
+    document.documentElement.dataset.fontPlusTwoPt
+    === "true"
+  ) return;
+
+  const visited = new WeakSet();
+
+  function updateSheet(sheet) {
+
+    if (!sheet || visited.has(sheet)) return;
+
+    visited.add(sheet);
+
+    let rules;
+
+    try {
+      rules = sheet.cssRules;
+    } catch {
+      // 접근할 수 없는 외부 스타일시트 제외
+      return;
+    }
+
+    function updateRules(ruleList) {
+
+      for (const rule of ruleList) {
+
+        // 일반 CSS 규칙
+        if (rule.type === 1 && rule.style) {
+
+          const original = rule.style
+            .getPropertyValue("font-size")
+            .trim();
+
+          if (!original) continue;
+
+          // 크기 키워드는 변경하지 않음
+          if (
+            /^(inherit|initial|unset|revert|revert-layer|larger|smaller|xx-small|x-small|small|medium|large|x-large|xx-large|xxx-large)$/i
+              .test(original)
+          ) {
+            continue;
+          }
+
+          // 기존 글자 크기 + 2pt
+          const increased = original === "0"
+            ? "2pt"
+            : `calc(${original} + 2pt)`;
+
+          // 브라우저가 지원하는 값인지 확인
+          if (
+            typeof CSS !== "undefined" &&
+            typeof CSS.supports === "function" &&
+            !CSS.supports("font-size", increased)
+          ) {
+            continue;
+          }
+
+          try {
+
+            const priority = rule.style
+              .getPropertyPriority("font-size");
+
+            rule.style.setProperty(
+              "font-size",
+              increased,
+              priority
+            );
+
+          } catch {
+            // 변경할 수 없는 선언은 유지
+          }
+
+        }
+
+        // 모바일 @media 등도 적용
+        if (rule.cssRules) {
+          updateRules(rule.cssRules);
+        }
+
+        // @import CSS 처리
+        if (
+          rule.type === 3 &&
+          rule.styleSheet
+        ) {
+          updateSheet(rule.styleSheet);
+        }
+
+      }
+
+    }
+
+    updateRules(rules);
+
+  }
+
+  // 연결된 모든 스타일시트 처리
+  for (const sheet of document.styleSheets) {
+    updateSheet(sheet);
+  }
+
+  document.documentElement.dataset.fontPlusTwoPt =
+    "true";
+
+}
+
+// 공통 폰트 확대 실행
+increaseAllPageFontSizes();
+
