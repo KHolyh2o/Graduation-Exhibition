@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { isShared, loadMessages, addMessage } from '../lib/memoryApi';
 import './MemoryPage.css';
 
-// sha_copy/memory.html + js/memory.js 이식.
-// 아직 공유 DB(Supabase)가 없어 현재 브라우저(localStorage)에만 저장한다 — 미리보기 모드.
-const STORAGE_KEY = 'graduation-memory-2026';
-const MAX_MESSAGES = 200;
+// sha_copy/memory.html + js/memory.js 이식. 저장은 src/lib/memoryApi.js (Supabase, 설정 전에는 localStorage).
 const MAX_LENGTH = 140;
+const REFRESH_MS = 15000;
 
 const COLORS = [
   { id: 'red',    label: '빨강' },
@@ -17,15 +16,6 @@ const COLORS = [
 const COLOR_IDS = COLORS.map((c) => c.id);
 const ANGLES = [-2, 1.5, -1, 2, 0.5, -1.5];
 
-const readMessages = () => {
-  try {
-    const parsed = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-    return Array.isArray(parsed) ? parsed : [];
-  } catch {
-    return [];
-  }
-};
-
 const formatDate = (iso) => {
   const d = new Date(iso);
   if (Number.isNaN(d.getTime())) return null;
@@ -33,48 +23,58 @@ const formatDate = (iso) => {
 };
 
 const MemoryPage = () => {
-  const [messages, setMessages] = useState(readMessages);
+  const [messages, setMessages] = useState([]);
   const [text, setText] = useState('');
   const [name, setName] = useState('');
   const [color, setColor] = useState('lime');
-  const [status, setStatus] = useState('현재는 이 브라우저에만 저장되는 미리보기 모드입니다.');
+  const [status, setStatus] = useState(isShared ? '' : '현재는 이 브라우저에만 저장되는 미리보기 모드입니다.');
+  const [saving, setSaving] = useState(false);
   const messageRef = useRef(null);
 
   useEffect(() => {
     document.title = 'MEMORY | 2026 졸업전시회';
   }, []);
 
-  const handleSubmit = (e) => {
+  // 처음 불러오고, 공유 저장소일 때는 다른 방문자가 남긴 글도 주기적으로 갱신한다
+  useEffect(() => {
+    let alive = true;
+    const refresh = () => loadMessages()
+      .then((data) => { if (alive) setMessages(data); })
+      .catch(() => { if (alive) setStatus('메시지를 불러오지 못했습니다.'); });
+    refresh();
+    if (!isShared) return () => { alive = false; };
+    const timer = setInterval(() => { if (!document.hidden) refresh(); }, REFRESH_MS);
+    return () => { alive = false; clearInterval(timer); };
+  }, []);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (saving) return;
     const message = text.trim();
     if (!message) {
       setStatus('메시지를 입력해 주세요.');
       messageRef.current?.focus();
       return;
     }
-    const next = [
-      {
-        id: Date.now(),
+    setSaving(true);
+    setStatus('메시지를 등록하고 있어요.');
+    try {
+      await addMessage({
         sender_name: name.trim() || '익명',
         message,
         color: COLOR_IDS.includes(color) ? color : 'yellow',
-        created_at: new Date().toISOString(),
-      },
-      ...messages,
-    ].slice(0, MAX_MESSAGES);
-
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+      });
+      setMessages(await loadMessages());
+      setText('');
+      setName('');
+      setColor('lime');
+      setStatus('응원 메시지가 포스트잇으로 등록됐어요!');
+      messageRef.current?.focus();
     } catch {
       setStatus('등록에 실패했습니다. 다시 시도해 주세요.');
-      return;
+    } finally {
+      setSaving(false);
     }
-    setMessages(next);
-    setText('');
-    setName('');
-    setColor('lime');
-    setStatus('응원 메시지가 포스트잇으로 등록됐어요!');
-    messageRef.current?.focus();
   };
 
   return (
@@ -144,7 +144,7 @@ const MemoryPage = () => {
                 </div>
               </fieldset>
 
-              <button type="submit" className="memory-submit">
+              <button type="submit" className="memory-submit" disabled={saving}>
                 포스트잇 붙이기
                 <span aria-hidden="true">↗</span>
               </button>
