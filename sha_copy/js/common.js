@@ -1020,10 +1020,23 @@ function increaseAllPageFontSizes() {
             continue;
           }
 
-          // 기존 글자 크기 + 2pt
-          const increased = original === "0"
-            ? "2pt"
-            : `calc(${original} + 2pt)`;
+        
+/* 헤더 / 푸터는 기존 크기 유지 */
+const selector = rule.selectorText || "";
+
+const isCommonArea =
+  selector.includes(".common-") ||
+  selector.includes("#common-") ||
+  selector.includes(".site-header") ||
+  selector.includes(".site-footer");
+
+/* 공통 영역 +2pt / 콘텐츠 +4pt */
+const fontIncrease = isCommonArea ? 2 : 4;
+
+const increased = original === "0"
+  ? `${fontIncrease}pt`
+  : `calc(${original} + ${fontIncrease}pt)`;
+
 
           // 브라우저가 지원하는 값인지 확인
           if (

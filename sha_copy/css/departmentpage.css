@@ -53,6 +53,11 @@
    01. 졸업전시 소개
 ========================================== */
 
+
+/* ==========================================
+   DEPT HERO - 가운데 정렬
+========================================== */
+
 .dept-hero {
   width: 100%;
   max-width: 1050px;
@@ -60,9 +65,31 @@
   margin: 60px auto 0;
 
   display: grid;
-  grid-template-columns: 345px minmax(0, 1fr);
+  grid-template-columns: 345px minmax(0, 580px);
+
+  justify-content: center;
   align-items: center;
   gap: 52px;
+}
+
+/* 오른쪽 소개글 */
+.dept-hero-content {
+  width: 100%;
+  min-width: 0;
+}
+
+/* 모바일 */
+@media (max-width: 768px) {
+  .dept-hero {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 30px;
+    margin: 35px auto 0;
+  }
+
+  .dept-hero-content {
+    width: 100%;
+  }
 }
 
 /* 포스터 이미지 */
@@ -1227,6 +1254,40 @@ body.dept-message-open {
     object-fit: contain;
 
     border-radius: 5px;
+  }
+
+}
+
+/* ==========================================
+   DEPT HERO - PC 중앙 정렬 수정
+========================================== */
+
+@media (min-width: 1001px) {
+
+  .dept-hero {
+    width: 100%;
+    max-width: 845px;
+    margin: 60px auto 0;
+
+    display: grid;
+    grid-template-columns: 345px minmax(0, 450px);
+    gap: 50px;
+
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* 포스터 크기 유지 */
+  .dept-poster {
+    width: 345px;
+    max-width: 100%;
+  }
+
+  /* 소개글 영역 축소 */
+  .dept-hero-content {
+    width: 100%;
+    max-width: 450px;
+    min-width: 0;
   }
 
 }
