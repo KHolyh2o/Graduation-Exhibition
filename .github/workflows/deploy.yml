@@ -5,9 +5,14 @@ on:
     branches:
       - main
 
+concurrency:
+  group: deploy
+  cancel-in-progress: true
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
 
     steps:
       - name: Checkout code
@@ -27,12 +32,13 @@ jobs:
 
       - name: Transfer files via SSH
         run: |
-          tar -czf dist.tar.gz dist/
-          sudo apt-get install -y sshpass
+          sudo apt-get install -y sshpass rsync
 
-          # 빌드 결과물 전송
-          cat dist.tar.gz | sshpass -p "${{ secrets.PASSWORD }}" ssh -o StrictHostKeyChecking=no -p ${{ secrets.SERVER_PORT }} ${{ secrets.USERNAME }}@${{ secrets.SERVER_HOST }} 'cat > /tmp/dist.tar.gz'
-
+          # 바뀐 파일만 전송 (서버의 ~/deploy-2026 을 스테이징 폴더로 사용)
+          export SSHPASS='${{ secrets.PASSWORD }}'
+          sshpass -e rsync -rz --delete --timeout=120 \
+            -e "ssh -o StrictHostKeyChecking=no -p ${{ secrets.SERVER_PORT }}" \
+            dist/ ${{ secrets.USERNAME }}@${{ secrets.SERVER_HOST }}:deploy-2026/
 
       - name: Deploy on server
         uses: appleboy/ssh-action@master
@@ -41,12 +47,12 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.SERVER_PORT }}
+          command_timeout: 10m
           script: |
             echo "${{ secrets.PASSWORD }}" | sudo -S mkdir -p /var/www/html/2026
 
-            # 빌드 결과물 배포
-            echo "${{ secrets.PASSWORD }}" | sudo -S tar -xzf /tmp/dist.tar.gz -C /var/www/html/2026/ --strip-components=1
-            echo "${{ secrets.PASSWORD }}" | sudo -S rm -f /tmp/dist.tar.gz
+            # 스테이징 → 서비스 폴더 (서버 내부 복사, 바뀐 파일만)
+            echo "${{ secrets.PASSWORD }}" | sudo -S rsync -rl --no-perms --no-owner --no-group ~/deploy-2026/ /var/www/html/2026/
 
             # nginx 설정 테스트 후 재시작 (reload 아닌 restart로 다운 상태도 복구)
             echo "${{ secrets.PASSWORD }}" | sudo -S nginx -t
