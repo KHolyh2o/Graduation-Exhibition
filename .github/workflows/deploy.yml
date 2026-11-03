@@ -34,11 +34,11 @@ jobs:
         run: |
           sudo apt-get install -y sshpass rsync
 
-          # 바뀐 파일만 전송 (서버의 ~/deploy-2026 을 스테이징 폴더로 사용)
+          # 바뀐 파일만 전송 (서버의 /tmp/deploy-2026 을 스테이징 폴더로 사용)
           export SSHPASS='${{ secrets.PASSWORD }}'
           sshpass -e rsync -rz --delete --timeout=120 \
             -e "ssh -o StrictHostKeyChecking=no -p ${{ secrets.SERVER_PORT }}" \
-            dist/ ${{ secrets.USERNAME }}@${{ secrets.SERVER_HOST }}:deploy-2026/
+            dist/ ${{ secrets.USERNAME }}@${{ secrets.SERVER_HOST }}:/tmp/deploy-2026/
 
       - name: Deploy on server
         uses: appleboy/ssh-action@master
@@ -52,7 +52,7 @@ jobs:
             echo "${{ secrets.PASSWORD }}" | sudo -S mkdir -p /var/www/html/2026
 
             # 스테이징 → 서비스 폴더 (서버 내부 복사, 바뀐 파일만)
-            echo "${{ secrets.PASSWORD }}" | sudo -S rsync -rl --no-perms --no-owner --no-group ~/deploy-2026/ /var/www/html/2026/
+            echo "${{ secrets.PASSWORD }}" | sudo -S rsync -rl --no-perms --no-owner --no-group /tmp/deploy-2026/ /var/www/html/2026/
 
             # nginx 설정 테스트 후 재시작 (reload 아닌 restart로 다운 상태도 복구)
             echo "${{ secrets.PASSWORD }}" | sudo -S nginx -t
