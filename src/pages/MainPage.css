@@ -1444,3 +1444,15 @@ html.index-intro-complete .index-intro {
   width: 100%;
   height: auto;
 }
+
+/* 배너 이미지 가장자리가 흰 배경과 딱 끊겨 보이지 않도록 사방을 부드럽게 페이드아웃 */
+.index-root .main-hero-video img {
+  -webkit-mask-image:
+    linear-gradient(to right, transparent, #000 6%, #000 94%, transparent),
+    linear-gradient(to bottom, transparent, #000 6%, #000 94%, transparent);
+  mask-image:
+    linear-gradient(to right, transparent, #000 6%, #000 94%, transparent),
+    linear-gradient(to bottom, transparent, #000 6%, #000 94%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+}
