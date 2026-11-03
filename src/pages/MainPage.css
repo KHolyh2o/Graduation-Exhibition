@@ -241,7 +241,18 @@ body.page-index {
 ========================================== */
 
 .index-root .main-target {
+  position: relative;
+  isolation: isolate;
   padding: 105px 0 90px;
+}
+
+/* 컬러 배경은 위·아래 가장자리를 페이드아웃해서 앞뒤 섹션(흰 배경)과 경계 없이 이어지게 한다 */
+.index-root .main-target::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
 
   background:
     linear-gradient(
@@ -250,6 +261,8 @@ body.page-index {
       #ffffff 50%,
       #eaf7fb 100%
     );
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 140px, #000 calc(100% - 140px), transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 140px, #000 calc(100% - 140px), transparent 100%);
 }
 
 .index-root .target-heading {
