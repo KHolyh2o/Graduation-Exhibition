@@ -8,7 +8,7 @@ const MENU = [
   { to: '/student',    label: 'GRADUATES' },
   { to: '/department', label: 'ABOUT' },
   { to: '/memory',     label: 'MEMORY' },
-  { to: '/others',     label: 'ARCHIVE' },
+  { href: 'https://media.seowon.ac.kr/archive/', label: 'ARCHIVE' },
 ];
 
 const Navbar = () => {
@@ -85,8 +85,10 @@ const Navbar = () => {
         </Link>
 
         <nav className="common-nav" aria-label="주 메뉴">
-          {MENU.map(({ to, label }) => (
-            <NavLink key={to} to={to} className={getNavClass}>{label}</NavLink>
+          {MENU.map(({ to, href, label }) => (
+            href
+              ? <a key={href} href={href}>{label}</a>
+              : <NavLink key={to} to={to} className={getNavClass}>{label}</NavLink>
           ))}
 
           <button
@@ -130,8 +132,10 @@ const Navbar = () => {
         aria-label="모바일 메뉴"
         hidden={!menuOpen}
       >
-        {MENU.map(({ to, label }) => (
-          <Link key={to} to={to} className="common-mobile-link" onClick={() => setMenuOpen(false)}>{label}</Link>
+        {MENU.map(({ to, href, label }) => (
+          href
+            ? <a key={href} href={href} className="common-mobile-link">{label}</a>
+            : <Link key={to} to={to} className="common-mobile-link" onClick={() => setMenuOpen(false)}>{label}</Link>
         ))}
       </nav>
 
