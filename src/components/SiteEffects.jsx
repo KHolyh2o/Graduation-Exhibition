@@ -131,6 +131,7 @@ const SiteEffects = () => {
       let url;
       try { url = new URL(link.href); } catch { return; }
       if (url.origin !== window.location.origin) return;                           // 외부 링크
+      if (url.pathname !== `${base}` && !url.pathname.startsWith(`${base}/`)) return;   // 앱 밖 경로(/archive/ 등)
       if (url.pathname === window.location.pathname && url.search === window.location.search) return;
 
       event.preventDefault();
