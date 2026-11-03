@@ -54,9 +54,9 @@ const GraduateModal = ({ student, onClose }) => {
 
   const studentProjects = getWorksByStudent(student.studentId);
   // 졸업생 본인 연락처가 우선, 없으면 작품에 적힌 연락처
-  const contact = student.email || student.phone
-    ? { email: student.email, phone: student.phone }
-    : studentProjects.find((p) => p.contact?.email || p.contact?.phone)?.contact;
+  const contact = student.email
+    ? { email: student.email }
+    : studentProjects.find((p) => p.contact?.email)?.contact;
   const youtubeId = getYoutubeId(studentProjects.find((p) => p.videoUrl)?.videoUrl);
 
   // 변형(transform)이 걸린 부모 안에서도 화면 전체를 덮도록 body 로 옮겨 그린다
@@ -110,17 +110,6 @@ const GraduateModal = ({ student, onClose }) => {
             <p className="graduate-introduction">{student.intro}</p>
 
             <div className="graduate-contact">
-              <div className="graduate-contact-item">
-                <div className="graduate-contact-icon">
-                  <img src={assetUrl('/images/UI/학생번호.png')} alt="" onError={(e) => e.currentTarget.remove()} />
-                </div>
-                {contact?.phone ? (
-                  <a href={`tel:${contact.phone.replace(/[^\d+]/g, '')}`}>{contact.phone}</a>
-                ) : (
-                  <span className="contact-text">전화번호 입력</span>
-                )}
-              </div>
-
               <div className="graduate-contact-item">
                 <div className="graduate-contact-icon">
                   <img src={assetUrl('/images/UI/학생메일.png')} alt="" onError={(e) => e.currentTarget.remove()} />

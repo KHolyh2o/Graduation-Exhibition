@@ -99,7 +99,7 @@ function generateGraduates(rows) {
       `  intro: ${q(r.intro)},`,
       `  workIntro: ${q(r.workIntro)},`,
       ...(r.committeeTeam ? [`  committee: true, committeeTeam: ${q(r.committeeTeam)},`] : []),
-      ...(r.email || r.phone ? [`  email: ${q(r.email)}, phone: ${q(r.phone)},`] : []),
+      ...(r.email ? [`  email: ${q(r.email)},`] : []),
       `},`,
     ];
     return lines.map((l, i) => (i === 0 || i === lines.length - 1 ? prefix : prefix + '  ') + l.trimStart()).join('\n');
