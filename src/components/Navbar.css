@@ -11,6 +11,9 @@
   z-index: 1000;
   background: var(--color-header);
   color: var(--color-ink);
+  /* 페이지마다 body 폰트·렌더링이 달라(메인만 body.page-index 로 바뀜) 헤더가 다르게 보이므로 고정한다 */
+  font-family: "DM Sans", "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
 .common-header *,
