@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { PROJECT_TABS, TAB_MAP, getSubCategories } from '../data/projectTabs';
-import { allWorks, compareByAuthor, getWorkAuthor, getWorkKind, getWorkTitle, matchesSub, WORK_KINDS } from '../data/works';
+import { allWorks, compareByAuthor, getWorkAuthor, getWorkKind, getTeamMemberNames, getWorkTitle, matchesSub, WORK_KINDS } from '../data/works';
 import { FALLBACK, assetUrl } from '../hooks/useImageFallback';
 import SafeImg from '../components/SafeImg';
 import './ProjectPage.css';
@@ -115,6 +115,7 @@ const ProjectPage = () => {
                       {work.proposal && <p className="project-brand">{getWorkTitle(work)}</p>}
                       <h2 className="project-proposal">{heading}</h2>
                       {work.title && <p className="project-author">{getWorkAuthor(work)}</p>}
+                      {work.members && <p className="project-author project-team-members">{getTeamMemberNames(work)}</p>}
                     </div>
                   </Link>
                 </article>

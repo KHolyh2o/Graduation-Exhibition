@@ -39,7 +39,7 @@ export const teamProjects = [
       { name: '김성수', role: '개발', studentId: '202210246' },
       { name: '이재상', role: '기획', studentId: '202111122' },
       { name: '한태희', role: '영상/제작', studentId: '202311199' },
-      { name: 'Botirov Asadbek', role: '디자인/제작', studentId: '202211755' }
+      { name: 'Asadbek', role: '디자인/제작', studentId: '202211755' }
     ],
   },
   {

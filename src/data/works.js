@@ -20,6 +20,9 @@ export const getWorkAuthor = (work) =>
     ? work.teamName
     : getWorkStudentIds(work).map((id) => graduateByStudentId[id]?.name ?? '-').join(', ');
 
+// 팀 작품 카드에 보여 줄 팀원 이름 (예: 한지연, 박다인, 심규현)
+export const getTeamMemberNames = (work) => work.members?.map((m) => m.name).join(', ') ?? '';
+
 // 탭 안에서 직군(개인) 또는 그룹(팀) 필터 일치 여부. 'all' 은 항상 통과
 // M-team = 여럿이 함께 한 멀티미디어 작품. 직군 탭(Designer 등)에는 나오지 않고 M-team 탭에서만 보인다
 export const isMTeamWork = (work) => work.tab === 'multimedia' && getWorkStudentIds(work).length > 1;
@@ -39,8 +42,12 @@ export const WORK_KINDS = [
 ];
 export const getWorkKind = (work) => (work.id.includes('-brand') ? 'brand' : 'improve');
 
-// 작가명(가나다) 순 비교
-export const compareByAuthor = (a, b) => getWorkAuthor(a).localeCompare(getWorkAuthor(b), 'ko');
+// 정렬 기준 이름 — 팀 작품은 팀장(역할에 '팀장'이 들어간 팀원, 없으면 첫 팀원), 그 외는 작가명
+const getSortName = (work) =>
+  work.members ? (work.members.find((m) => m.role?.includes('팀장')) ?? work.members[0])?.name ?? work.teamName : getWorkAuthor(work);
+
+// 가나다 순 비교
+export const compareByAuthor = (a, b) => getSortName(a).localeCompare(getSortName(b), 'ko');
 
 export const getSubLabel = (work) => {
   const tab = TAB_MAP[work.tab];
