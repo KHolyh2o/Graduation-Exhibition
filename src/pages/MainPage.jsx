@@ -238,10 +238,17 @@ const CrossfadeImg = ({ src }) => {
 const MainPage = () => {
   const [targets, setTargets] = useState(() => pickRandomTargets());
 
+  // 카드에 마우스를 올리거나 포커스가 있는 동안에는 작품이 바뀌지 않는다
+  const targetPausedRef = useRef(false);
+  const pauseTargets = () => { targetPausedRef.current = true; };
+  const resumeTargets = () => { targetPausedRef.current = false; };
+
   // 새로고침 없이 5초마다 대표 작품이 바뀐다 (모션 줄이기 설정이면 고정)
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
-    const timer = window.setInterval(() => setTargets((prev) => pickRandomTargets(prev)), TARGET_SHUFFLE_MS);
+    const timer = window.setInterval(() => {
+      if (!targetPausedRef.current) setTargets((prev) => pickRandomTargets(prev));
+    }, TARGET_SHUFFLE_MS);
     return () => clearInterval(timer);
   }, []);
   const [showIntro, setShowIntro] = useState(
@@ -312,7 +319,13 @@ const MainPage = () => {
             </div>
 
             {/* 카테고리 대표 이미지 3개 — 이미지 한 장에 디자인과 글자가 포함 */}
-            <div className="target-grid">
+            <div
+              className="target-grid"
+              onMouseEnter={pauseTargets}
+              onMouseLeave={resumeTargets}
+              onFocus={pauseTargets}
+              onBlur={resumeTargets}
+            >
               {targets.map(({ category, label, keyword, work }) => (
                 <Link
                   key={category}

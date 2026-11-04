@@ -94,6 +94,26 @@ body:has(.dept-root) {
   gap: 52px;
 }
 
+/* PC 에서는 포스터 + 소개글을 가운데로 모은다 (sha_copy: 1001px 이상 → 표준 1025px) */
+@media (min-width: 1025px) {
+  .dept-root .dept-hero {
+    max-width: 845px;
+    grid-template-columns: 345px minmax(0, 450px);
+    justify-content: center;
+    gap: 50px;
+  }
+
+  .dept-root .dept-poster {
+    width: 345px;
+    max-width: 100%;
+  }
+
+  .dept-root .dept-hero-content {
+    width: 100%;
+    max-width: 450px;
+  }
+}
+
 /* 포스터 이미지 */
 .dept-root .dept-poster {
   width: 100%;
