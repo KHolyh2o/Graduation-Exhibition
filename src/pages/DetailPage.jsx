@@ -36,21 +36,22 @@ const DetailPage = () => {
         students.flatMap((s) => getWorksByStudent(s.studentId)).map((w) => [w.id, w])
       ).values()].filter((w) => w.id !== work.id);
 
-  // 팀 작품은 팀원별로 묶어, 각자의 다른 작품으로 바로 이동할 수 있게 한다
-  const othersByMember = isTeam
-    ? work.members
-        .map((m) => ({
-          key: m.studentId ?? m.name,
-          name: m.name,
-          works: getWorksByStudent(m.studentId).filter((w) => w.id !== work.id),
-        }))
-        .filter((g) => g.works.length > 0)
-    : [];
+  // M-team(여럿이 함께 한 작품)은 개인 프로필 대신 팀 이미지를 쓴다
+  const isMTeam = isMTeamWork(work);
+
+  // 팀·M-team 작품은 참여자별로 묶어, 각자의 다른 작품으로 바로 이동할 수 있게 한다
+  const groupMembers = isTeam
+    ? work.members.map((m) => ({ key: m.studentId ?? m.name, name: m.name, studentId: m.studentId }))
+    : isMTeam
+      ? students.map((st) => ({ key: st.studentId, name: st.name, studentId: st.studentId }))
+      : [];
+  const othersByMember = groupMembers
+    .map((g) => ({ ...g, works: getWorksByStudent(g.studentId).filter((w) => w.id !== work.id) }))
+    .filter((g) => g.works.length > 0);
+  const isGrouped = isTeam || isMTeam;
 
   const proposals = work.proposalImages ?? [];
 
-  // M-team(여럿이 함께 한 작품)은 개인 프로필 대신 팀 이미지를 쓴다
-  const isMTeam = isMTeamWork(work);
   const kindBadge = (w) => (w.members ? '캡스톤' : isMTeamWork(w) ? 'M-team' : '');
   const renderOtherLink = (w) => (
     <Link key={w.id} to={`/project/${w.id}`} className="other-project-link">
@@ -140,10 +141,10 @@ const DetailPage = () => {
                   {getWorkTitle(work)}
                   {kindBadge(work) && <em className="other-project-badge">{kindBadge(work)}</em>}
                 </p>
-                {(isTeam ? othersByMember.length === 0 : others.length === 0) && (
+                {(isGrouped ? othersByMember.length === 0 : others.length === 0) && (
                   <p className="other-project-empty">등록된 다른 작품이 없습니다.</p>
                 )}
-                {isTeam
+                {isGrouped
                   ? othersByMember.map((g) => (
                       <div className="other-project-group" key={g.key}>
                         <h3 className="other-project-owner">{g.name}</h3>
