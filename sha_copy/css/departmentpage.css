@@ -3,7 +3,12 @@
    DEPARTMENT / ABOUT PAGE
    PC 최대 너비 1160px
 ========================================== */
-
+@font-face {
+    font-family: 'IncheonEducation';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/iceJaram-Rg.woff2') format('woff2');
+    font-weight: normal;
+    font-display: swap;
+}
 .dept-page {
   --dept-blue: #2591B8;
   --dept-red: #D92936;
@@ -948,6 +953,7 @@ body.dept-message-open {
 
   /* 제목 느낌 강조 */
   font-family:
+  "IncheonEducation",
     "Noto Serif KR",
     "Nanum Myeongjo",
     "Times New Roman",
