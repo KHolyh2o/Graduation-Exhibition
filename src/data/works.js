@@ -35,12 +35,17 @@ export const matchesSub = (work, subId) => {
   return (work.roles ?? [work.role]).includes(subId);
 };
 
-// 멀티미디어 작품 구분: 브랜드 제안(id 에 -brand) / 부분 개선 제안
+// 멀티미디어 작품 구분: 브랜드 제안(id 에 -brand) / 부분 개선 제안(-func) / 다른 디바이스(-device, 키오스크 등)
 export const WORK_KINDS = [
   { id: 'brand',   label: '브랜드 제안' },
   { id: 'improve', label: '부분 개선 제안' },
+  { id: 'device',  label: '새로운 디바이스 제안' },
 ];
-export const getWorkKind = (work) => (work.id.includes('-brand') ? 'brand' : 'improve');
+export const getWorkKind = (work) => {
+  if (work.id.includes('-brand')) return 'brand';
+  if (work.id.includes('-device')) return 'device';
+  return 'improve';
+};
 
 // 정렬 기준 이름 — 팀 작품은 팀장(역할에 '팀장'이 들어간 팀원, 없으면 첫 팀원), 그 외는 작가명
 const getSortName = (work) =>

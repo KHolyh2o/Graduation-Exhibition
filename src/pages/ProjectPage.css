@@ -187,15 +187,39 @@ body:has(.project-page) {
   margin-top: 64px;
 }
 
-/* 브랜드 제안 / 부분 개선 제안 소제목 — 검은 라벨 */
+/* 브랜드 제안 / 부분 개선 제안 / 새로운 디바이스 제안 소제목 — 포인트 막대 + 제목 + 옅어지는 선 */
 .project-page .portfolio-kind {
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  gap: 16px;
   margin: 57px 0 0;
-  padding: 6px 28px;
-  background: #000;
-  color: #fff;
-  font-size: 20px;
+  color: var(--color-ink);
+  font-size: 22px;
   font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.project-page .portfolio-kind::before {
+  content: '';
+  width: 4px;
+  height: 22px;
+  border-radius: 2px;
+  background: var(--kind-color, var(--color-target-blue));
+}
+
+.project-page .portfolio-kind[data-kind='brand']   { --kind-color: var(--color-target-blue); }
+.project-page .portfolio-kind[data-kind='improve'] { --kind-color: var(--color-target-red); }
+.project-page .portfolio-kind[data-kind='device']  { --kind-color: var(--color-target-yellow); }
+
+/* 구간 색 선 끝에 TARGET 화살촉 — 선은 삼각형 밑면에서 멈춘다 */
+.project-page .portfolio-kind::after {
+  content: '';
+  flex: 1;
+  height: 12px;
+  background:
+    linear-gradient(to top right, var(--kind-color) 50%, transparent 50%) right top / 14px 6px no-repeat,
+    linear-gradient(to bottom right, var(--kind-color) 50%, transparent 50%) right bottom / 14px 6px no-repeat,
+    linear-gradient(var(--kind-color), var(--kind-color)) left center / calc(100% - 13px) 1px no-repeat;
 }
 
 .project-page .portfolio-kind + .portfolio-grid {

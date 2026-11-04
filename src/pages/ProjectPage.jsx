@@ -94,7 +94,9 @@ const ProjectPage = () => {
           <div aria-live="polite">
             {sections.map((section) => (
               <div className="portfolio-section-group" key={section.id}>
-                {section.label && <h3 className="portfolio-kind">{section.label}</h3>}
+                {section.label && (
+                  <h3 className="portfolio-kind" data-kind={section.id}>{section.label}</h3>
+                )}
                 <div className="portfolio-grid">
                   {section.works.map((work) => {
               // 제안 이름(proposal)이 있으면 브랜드명을 위에 작게, 제안 이름을 크게. 없으면 작품명을 크게 보여 준다

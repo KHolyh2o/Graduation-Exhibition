@@ -28,6 +28,11 @@
   --color-footer:      #111111;
   --color-footer-text: #EDEDED;
 
+  /* ── TARGET 포인트 3색 (작품 구분 소제목 등) ─── */
+  --color-target-blue:   #1BA1E2;
+  --color-target-red:    #E5252A;
+  --color-target-yellow: #FFD21F;
+
   /* ── Placeholder (데이터 미입력 영역) ───────── */
   --ph-light:  #E0E0E0;
   --ph-mid:    #CCCCCC;
