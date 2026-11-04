@@ -343,32 +343,53 @@ body.page-index {
   transform: scale(1.05);
 }
 
-/* 작품 정보 (카테고리 · 제목 · 작가) — 썸네일 이미지에 이미 글자가 있어 겹치지 않도록 이미지 아래에 둔다 */
-.index-root .target-card-caption {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 16px 4px 4px;
-  color: #171717;
+/* 작품 교체 크로스페이드 — 이전 이미지 위에 새 이미지가 겹쳐 서서히 나타난다 */
+.index-root .target-card-image img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
 }
 
-.index-root .target-card-caption span {
-  font-size: 12px;
-  letter-spacing: 0.08em;
-  color: #888;
+.index-root .target-card-image img.target-fade-in {
+  animation: target-fade-in 0.8s ease both;
 }
 
-.index-root .target-card-caption strong {
-  font-size: 20px;
+@keyframes target-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Hover 시 컨셉 키워드(SIGNAL · FOCUS · TARGET) */
+.index-root .target-card-image {
+  position: relative;
+  overflow: hidden;
+}
+
+.index-root .target-card-keyword {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-size: 32px;
   font-weight: 700;
-  line-height: 1.3;
-  word-break: keep-all;
+  letter-spacing: 0.08em;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
 }
 
-.index-root .target-card-caption em {
-  font-size: 13px;
-  font-style: normal;
-  color: #666;
+.index-root .target-card:hover .target-card-keyword,
+.index-root .target-card:focus-visible .target-card-keyword {
+  opacity: 1;
+}
+
+@media (hover: none) {
+  .index-root .target-card:active .target-card-keyword {
+    opacity: 1;
+  }
 }
 
 .index-root .target-card:focus-visible {
@@ -682,9 +703,15 @@ body.page-index {
   overflow: hidden;
 }
 
-/* 화살표 이미지는 박스에 맞춰 늘려 채운다 (cover 로 자르지 않음) */
+/* 화살표 이미지(456×15)는 원본 비율 그대로 — 늘리면 깨져 보인다 */
+.index-root .credit-logo {
+  display: flex;
+  align-items: center;
+}
+
 .index-root .credit-logo img {
-  object-fit: fill;
+  height: auto;
+  object-fit: contain;
 }
 
 .index-root .credit-subtitle {
@@ -1059,10 +1086,15 @@ body.page-index {
     width: calc(100% - 52px);
   }
 
-  /* 모바일 2열 */
+  /* 모바일은 한 페이지에 1명 — 가운데에 크게 */
   .index-root .students-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 8px;
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+  }
+
+  .index-root .student-card {
+    width: 100%;
+    max-width: 300px;
   }
 
   .index-root .students-nav {

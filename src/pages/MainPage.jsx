@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useLayoutEffect, useRef, useState, useSy
 import { Link } from 'react-router-dom';
 import { graduates } from '../data/graduates';
 import { professors } from '../data/professors';
-import { allWorks, getWorkTitle, getWorkAuthor } from '../data/works';
+import { allWorks, getWorkTitle } from '../data/works';
 import { EXHIBITION, COMMITTEE_TEAMS } from '../data/constants';
 import { assetUrl, FALLBACK } from '../hooks/useImageFallback';
 import SafeImg from '../components/SafeImg';
@@ -185,19 +185,65 @@ const graduateRows = chunk(graduates.map((g) => g.name), 15);
 
 /* ── 메인 페이지 ────────────────────────────────────────────────── */
 const TARGETS = [
-  { category: 'multimedia', label: '멀티미디어' },
-  { category: 'video',      label: '영상미디어' },
-  { category: 'team',       label: '팀프로젝트' },
+  { category: 'multimedia', label: '멀티미디어', keyword: 'SIGNAL' },
+  { category: 'video',      label: '영상미디어', keyword: 'FOCUS' },
+  { category: 'team',       label: '팀프로젝트', keyword: 'TARGET' },
 ];
 
-// 카테고리마다 썸네일이 있는 작품 중 하나를 무작위로 뽑는다 (메인에 들어올 때마다 바뀜)
-const pickRandomTargets = () => TARGETS.map((t) => {
-  const pool = allWorks.filter((w) => w.tab === t.category && w.thumbnail);
+const TARGET_SHUFFLE_MS = 5000;
+
+// 카테고리마다 썸네일이 있는 작품 중 하나를 무작위로 뽑는다 (직전 작품과 겹치지 않게)
+const POOLS = TARGETS.map((t) => allWorks.filter((w) => w.tab === t.category && w.thumbnail));
+const pickRandomTargets = (prev) => TARGETS.map((t, i) => {
+  const pool = POOLS[i].length > 1 ? POOLS[i].filter((w) => w !== prev?.[i]?.work) : POOLS[i];
   return { ...t, work: pool[Math.floor(Math.random() * pool.length)] };
 });
 
+/* 작품이 바뀔 때 깜빡이지 않도록 새 이미지를 미리 불러온 뒤, 이전 이미지 위에서 서서히 나타낸다 */
+const CrossfadeImg = ({ src }) => {
+  const [layers, setLayers] = useState(() => [{ src, key: 0 }]);
+  const keyRef = useRef(0);
+
+  useEffect(() => {
+    let cancelled = false;
+    const img = new Image();
+    const show = () => {
+      if (cancelled) return;
+      setLayers((prev) => (prev[prev.length - 1].src === src ? prev : [...prev.slice(-1), { src, key: ++keyRef.current }]));
+    };
+    img.onload = show;
+    img.onerror = show;
+    img.src = assetUrl(src);
+    return () => { cancelled = true; };
+  }, [src]);
+
+  // 페이드가 끝나면 맨 아래 이전 이미지를 치운다
+  useEffect(() => {
+    if (layers.length < 2) return undefined;
+    const timer = window.setTimeout(() => setLayers((prev) => prev.slice(-1)), 900);
+    return () => clearTimeout(timer);
+  }, [layers]);
+
+  return layers.map((l, i) => (
+    <SafeImg
+      key={l.key}
+      className={i > 0 ? 'target-fade-in' : undefined}
+      src={l.src}
+      fallbackSrc={FALLBACK.image}
+      alt=""
+    />
+  ));
+};
+
 const MainPage = () => {
-  const [targets] = useState(pickRandomTargets);
+  const [targets, setTargets] = useState(() => pickRandomTargets());
+
+  // 새로고침 없이 5초마다 대표 작품이 바뀐다 (모션 줄이기 설정이면 고정)
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
+    const timer = window.setInterval(() => setTargets((prev) => pickRandomTargets(prev)), TARGET_SHUFFLE_MS);
+    return () => clearInterval(timer);
+  }, []);
   const [showIntro, setShowIntro] = useState(
     () => !introPlayed && !window.matchMedia('(prefers-reduced-motion: reduce)').matches,
   );
@@ -267,7 +313,7 @@ const MainPage = () => {
 
             {/* 카테고리 대표 이미지 3개 — 이미지 한 장에 디자인과 글자가 포함 */}
             <div className="target-grid">
-              {targets.map(({ category, label, work }) => (
+              {targets.map(({ category, label, keyword, work }) => (
                 <Link
                   key={category}
                   to={work ? `/project/${work.id}` : `/project?category=${category}`}
@@ -275,15 +321,9 @@ const MainPage = () => {
                   aria-label={work ? `${label} · ${getWorkTitle(work)} 작품 보기` : `${label} 작품 보기`}
                 >
                   <div className="target-card-image main-image-slot">
-                    {work && <SafeImg src={work.thumbnail} fallbackSrc={FALLBACK.image} alt="" />}
+                    {work && <CrossfadeImg src={work.thumbnail} />}
+                    <span className="target-card-keyword" aria-hidden="true">{keyword}</span>
                   </div>
-                  {work && (
-                    <div className="target-card-caption">
-                      <span>{label}</span>
-                      <strong>{getWorkTitle(work)}</strong>
-                      <em>{getWorkAuthor(work)}</em>
-                    </div>
-                  )}
                 </Link>
               ))}
             </div>

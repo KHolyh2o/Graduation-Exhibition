@@ -21,12 +21,26 @@ export const getWorkAuthor = (work) =>
     : getWorkStudentIds(work).map((id) => graduateByStudentId[id]?.name ?? '-').join(', ');
 
 // 탭 안에서 직군(개인) 또는 그룹(팀) 필터 일치 여부. 'all' 은 항상 통과
+// M-team = 여럿이 함께 한 멀티미디어 작품. 직군 탭(Designer 등)에는 나오지 않고 M-team 탭에서만 보인다
+export const isMTeamWork = (work) => work.tab === 'multimedia' && getWorkStudentIds(work).length > 1;
+
 export const matchesSub = (work, subId) => {
   if (subId === 'all') return true;
   if (work.tab === 'team') return work.group === subId;
-  if (subId === 'mteam') return getWorkStudentIds(work).length > 1;   // M-team = 여럿이 함께 한 작품
+  if (subId === 'mteam') return isMTeamWork(work);
+  if (isMTeamWork(work)) return false;
   return (work.roles ?? [work.role]).includes(subId);
 };
+
+// 멀티미디어 작품 구분: 브랜드 제안(id 에 -brand) / 부분 개선 제안
+export const WORK_KINDS = [
+  { id: 'brand',   label: '브랜드 제안' },
+  { id: 'improve', label: '부분 개선 제안' },
+];
+export const getWorkKind = (work) => (work.id.includes('-brand') ? 'brand' : 'improve');
+
+// 작가명(가나다) 순 비교
+export const compareByAuthor = (a, b) => getWorkAuthor(a).localeCompare(getWorkAuthor(b), 'ko');
 
 export const getSubLabel = (work) => {
   const tab = TAB_MAP[work.tab];

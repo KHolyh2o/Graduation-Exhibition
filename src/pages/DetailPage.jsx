@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { graduateByStudentId } from '../data/graduates';
 import { TAB_MAP } from '../data/projectTabs';
-import { getWorkById, getWorksByStudent, getWorkStudentIds, getWorkTitle, getSubLabel, toEmbedUrl } from '../data/works';
+import { getWorkById, getWorksByStudent, getWorkStudentIds, getWorkTitle, getSubLabel, isMTeamWork, toEmbedUrl } from '../data/works';
 import { FALLBACK } from '../hooks/useImageFallback';
 import SafeImg from '../components/SafeImg';
 import './DetailPage.css';
@@ -49,6 +49,19 @@ const DetailPage = () => {
 
   const proposals = work.proposalImages ?? [];
 
+  // M-team(여럿이 함께 한 작품)은 개인 프로필 대신 팀 이미지를 쓴다
+  const isMTeam = isMTeamWork(work);
+  const kindBadge = (w) => (w.members ? '캡스톤' : isMTeamWork(w) ? 'M-team' : '');
+  const renderOtherLink = (w) => (
+    <Link key={w.id} to={`/project/${w.id}`} className="other-project-link">
+      <span>
+        {getWorkTitle(w)}
+        {kindBadge(w) && <em className="other-project-badge">{kindBadge(w)}</em>}
+      </span>
+      <span className="other-project-arrow" aria-hidden="true">›</span>
+    </Link>
+  );
+
   return (
     <div className="detail-page">
       <main className="work-detail-page">
@@ -70,6 +83,16 @@ const DetailPage = () => {
                   <strong>{work.teamName}</strong>
                 </div>
                 <h2 className="student-role">{getSubLabel(work) || TAB_MAP[work.tab].label}</h2>
+              </>
+            ) : isMTeam ? (
+              <>
+                <div className="student-profile-photo is-team">
+                  <SafeImg src={work.teamImage} fallbackSrc={FALLBACK.avatar} alt={`${getWorkTitle(work)} 팀 프로필 사진`} />
+                </div>
+                <div className="student-name">
+                  <strong>{students.map((st) => st.name).join(', ')}</strong>
+                </div>
+                <h2 className="student-role">M-team</h2>
               </>
             ) : (
               <div className="student-group">
@@ -112,6 +135,11 @@ const DetailPage = () => {
             <section className="other-projects">
               <h2>Other Project</h2>
               <div className="other-project-list">
+                {/* 지금 보고 있는 작품 — 파란 글씨로 표시, 클릭 불가 */}
+                <p className="other-project-current" aria-current="page">
+                  {getWorkTitle(work)}
+                  {kindBadge(work) && <em className="other-project-badge">{kindBadge(work)}</em>}
+                </p>
                 {(isTeam ? othersByMember.length === 0 : others.length === 0) && (
                   <p className="other-project-empty">등록된 다른 작품이 없습니다.</p>
                 )}
@@ -119,20 +147,10 @@ const DetailPage = () => {
                   ? othersByMember.map((g) => (
                       <div className="other-project-group" key={g.key}>
                         <h3 className="other-project-owner">{g.name}</h3>
-                        {g.works.map((w) => (
-                          <Link key={w.id} to={`/project/${w.id}`} className="other-project-link">
-                            <span>{getWorkTitle(w)}</span>
-                            <span className="other-project-arrow" aria-hidden="true">›</span>
-                          </Link>
-                        ))}
+                        {g.works.map(renderOtherLink)}
                       </div>
                     ))
-                  : others.map((w) => (
-                      <Link key={w.id} to={`/project/${w.id}`} className="other-project-link">
-                        <span>{getWorkTitle(w)}</span>
-                        <span className="other-project-arrow" aria-hidden="true">›</span>
-                      </Link>
-                    ))}
+                  : others.map(renderOtherLink)}
               </div>
             </section>
           </aside>

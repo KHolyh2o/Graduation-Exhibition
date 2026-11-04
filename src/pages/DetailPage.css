@@ -198,6 +198,29 @@ body:has(.detail-page) .common-footer {
   color: #e52d42;
 }
 
+/* 현재 보고 있는 작품 — 파란 글씨, 버튼 아님 */
+.detail-page .other-project-current {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a6dff;
+  text-align: right;
+  cursor: default;
+}
+
+.detail-page .other-project-badge {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 1px 7px;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 500;
+  vertical-align: middle;
+  opacity: 0.75;
+}
+
 .detail-page .other-project-arrow {
   font-size: 22px;
   line-height: 1;

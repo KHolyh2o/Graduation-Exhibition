@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { PROJECT_TABS, TAB_MAP, getSubCategories } from '../data/projectTabs';
-import { allWorks, getWorkAuthor, getWorkTitle, matchesSub } from '../data/works';
+import { allWorks, compareByAuthor, getWorkAuthor, getWorkKind, getWorkTitle, matchesSub, WORK_KINDS } from '../data/works';
 import { FALLBACK, assetUrl } from '../hooks/useImageFallback';
 import SafeImg from '../components/SafeImg';
 import './ProjectPage.css';
@@ -30,9 +30,14 @@ const ProjectPage = () => {
   const tab = TAB_MAP[activeTab];
   const filters = [{ id: 'all', label: 'ALL' }, ...getSubCategories(tab)];
 
-  const visible = allWorks.filter(
-    (w) => w.tab === activeTab && matchesSub(w, filter) && matchesKeyword(w, keyword)
-  );
+  const visible = allWorks
+    .filter((w) => w.tab === activeTab && matchesSub(w, filter) && matchesKeyword(w, keyword))
+    .sort(compareByAuthor);
+
+  // 멀티미디어는 브랜드 제안 / 부분 개선 제안으로 나눠 보여 준다. 그 외 탭은 한 묶음
+  const sections = activeTab === 'multimedia'
+    ? WORK_KINDS.map((k) => ({ ...k, works: visible.filter((w) => getWorkKind(w) === k.id) })).filter((s) => s.works.length > 0)
+    : [{ id: 'all', label: '', works: visible }];
 
   const switchTab = (id) => {
     const next = new URLSearchParams(searchParams);
@@ -86,8 +91,12 @@ const ProjectPage = () => {
             ))}
           </div>
 
-          <div className="portfolio-grid" aria-live="polite">
-            {visible.map((work) => {
+          <div aria-live="polite">
+            {sections.map((section) => (
+              <div className="portfolio-section-group" key={section.id}>
+                {section.label && <h3 className="portfolio-kind">{section.label}</h3>}
+                <div className="portfolio-grid">
+                  {section.works.map((work) => {
               // 제안 이름(proposal)이 있으면 브랜드명을 위에 작게, 제안 이름을 크게. 없으면 작품명을 크게 보여 준다
               const heading = work.proposal || getWorkTitle(work);
               return (
@@ -111,6 +120,9 @@ const ProjectPage = () => {
                 </article>
               );
             })}
+                </div>
+              </div>
+            ))}
           </div>
 
           {visible.length === 0 && (
