@@ -485,7 +485,7 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid 
 .project-card .project-link {
   display: flex;
   flex-direction: column;
-
+height: 95%;
   width: 100%;
   aspect-ratio: 0.64;
 
