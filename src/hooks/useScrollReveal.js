@@ -12,7 +12,6 @@ const useScrollReveal = (dep, threshold = 0.12) => {
     }, { threshold });
     document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
     return () => observer.disconnect();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dep, threshold]);
 };
 

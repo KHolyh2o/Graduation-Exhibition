@@ -2,7 +2,6 @@
    PROJECT PAGE — sha_copy/css/projectpage.css 이식본
    모든 선택자는 .project-page 로 한정 (전역 충돌 방지)
 =================================================== */
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
 
 /* 페이지 바탕이 흰색이라, 푸터 위 여백까지 흰색으로 이어지게 한다 */
 body:has(.project-page) {

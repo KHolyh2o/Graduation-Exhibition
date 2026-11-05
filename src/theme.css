@@ -4,8 +4,7 @@
 =================================================== */
 
 /* ── Google Fonts ───────────────────────────────── */
-/* 폰트 교체 시 아래 @import와 --font-* 변수를 함께 변경 */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+/* 폰트 교체 시 index.html 의 Google Fonts <link> 와 --font-* 변수를 함께 변경 */
 
 :root {
   /* ── Typography ─────────────────────────────── */

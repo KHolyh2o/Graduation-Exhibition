@@ -266,3 +266,18 @@ sha 브랜치는 main 대비 다음 파일들이 **없거나 이전 버전**입�
 - `constants.js` — `theme: '테마명 입력 예정'`
 
 데이터가 들어오면 `scripts/csv-to-data.js`로 일괄 변환 후 `npm run validate`로 검증.
+
+---
+
+## 12. 글자 크기·헤더·폰트 규칙 (2026-11 정리)
+
+- **글자 확대는 `postcss.config.js` 가 빌드 때 자동 적용**한다. 헤더·푸터(`.common-` / `#common-` / `.site-header` / `.site-footer` 선택자)는 +2pt, 그 외는 +4pt.
+  sha_copy 의 `common.js`("GLOBAL FONT SIZE")와 같은 규칙이다. **CSS 에는 평소처럼 font-size 를 적고, 여기서 또 더하지 말 것.**
+  디자이너가 HTML 에 인라인 `style="font-size: …"` 로 고정한 곳은 확대가 적용되지 않으므로 JSX 도 인라인으로 맞춘다 (예: 메인 콘셉트 타이틀 `3.2rem`).
+- **sha_copy 와 맞는지는 눈이 아니라 계산값으로 확인**한다. 같은 폭에서 요소별 `getComputedStyle`(font-size·family·weight·letter-spacing) 을 두 쪽에서 뽑아 비교.
+  우리 전역 CSS(`src/index.css`)의 클래스가 sha_copy 에 없는 속성을 페이지로 새게 하지 않는지도 같이 본다.
+- 헤더·푸터 안쪽 폭은 **1160px** (sha_copy common.css). 공통 변수 `--content-max`(1180)와 다르니 바꾸지 말 것.
+- 헤더 글래스 효과는 `.common-header::before` 에 건다. 헤더 자체에 `backdrop-filter` 를 걸면 안쪽 `position: fixed` 모바일 메뉴가 깨진다.
+- 구글 폰트는 `index.html` 의 `<link>` 한 곳에서 불러온다. CSS 파일에 `@import url(googleapis…)` 를 다시 넣지 말 것(중복 요청 + `@font-face` 뒤에 오면 무시됨).
+- 메인을 뺀 페이지는 `App.jsx` 에서 `lazy()` 로 불러온다. 새 페이지도 같은 방식으로 추가.
+- `npm run lint` 는 에러 0건을 유지한다 (`sha_copy/` 는 린트 제외).
