@@ -15,6 +15,8 @@
 .memory-root {
   background: #fff;
   color: #171717;
+  /* sha_copy 는 body.page-memory 에서 지정 */
+  font-family: "DM Sans", "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif;
 }
 
 .memory-page,

@@ -2,7 +2,6 @@
    STUDENT PAGE — sha_copy/css/student.css 이식본
    모든 선택자는 .student-page 로 한정 (전역 충돌 방지)
 =================================================== */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap');
 
 /* 페이지 바탕이 흰색이라, 푸터 위 여백까지 흰색으로 이어지게 한다 */
 body:has(.student-page) {
@@ -33,6 +32,8 @@ body:has(.student-page) {
 ========================= */
 
 .student-page .page-title {
+  /* src/index.css 의 전역 .page-title(굵기 900)이 p·span 에 상속되지 않게 — sha_copy 는 기본 굵기 */
+  font-weight: 400;
   text-align: center;
   padding: 54px 20px 48px;
 }
@@ -341,10 +342,6 @@ body:has(.student-page) {
     font-size: 11px;
   }
 
-  .student-page .student-email {
-    font-size: 10px;
-  }
-
   .student-page .top-button {
     right: 16px;
     bottom: 22px;
@@ -483,17 +480,6 @@ body:has(.student-page) {
   object-fit: contain;
 }
 
-/* 로고 이미지가 없을 때 */
-
-.student-page .graduate-logo-placeholder {
-  width: 100%;
-  height: 100%;
-
-  background: #f2f2f2;
-  border: 1px dashed #ccc;
-}
-
-
 /* =================================
    STUDENT PROFILE
 ================================= */
@@ -628,15 +614,6 @@ body:has(.student-page) {
   height: 100%;
   object-fit: contain;
 }
-
-.student-page .graduate-icon-placeholder {
-  width: 100%;
-  height: 100%;
-
-  border: 1px dashed #bbb;
-  background: #e8f6fa;
-}
-
 
 /* =================================
    PROJECT SECTION

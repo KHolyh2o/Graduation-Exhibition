@@ -9,11 +9,39 @@
   width: 100%;
   height: var(--header-h);
   z-index: 1000;
-  background: var(--color-header);
   color: var(--color-ink);
   /* 페이지마다 body 폰트·렌더링이 달라(메인만 body.page-index 로 바뀜) 헤더가 다르게 보이므로 고정한다 */
   font-family: "DM Sans", "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
   -webkit-font-smoothing: antialiased;
+}
+
+/* 리퀴드 글래스 헤더 — 위는 거의 불투명한 흰색, 아래로 갈수록 투명해져 뒤의 콘텐츠가 블러로 비친다.
+   맨 위에서는 페이지 바탕(흰색)과 같은 색으로 이어지고, 스크롤되는 콘텐츠가 헤더 밑에서 뚝 잘려 보이지 않는다.
+   헤더 자체에 backdrop-filter 를 걸면 안쪽 position:fixed(모바일 메뉴)의 기준이 헤더로 바뀌어 깨지므로
+   뒤에 깔리는 ::before 에 건다. 그림자는 두지 않는다(회색 띠로 보임). */
+.common-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.97) 0%,
+    rgba(255, 255, 255, 0.8) 45%,
+    rgba(255, 255, 255, 0.42) 100%
+  );
+  -webkit-backdrop-filter: blur(18px) saturate(170%);
+  backdrop-filter: blur(18px) saturate(170%);
+  /* 유리 아래 가장자리를 살짝 잡아 주는 얇은 하이라이트 */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.55);
+  pointer-events: none;
+}
+
+/* 블러를 지원하지 않는 브라우저는 불투명 흰색으로 */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .common-header::before {
+    background: var(--color-header);
+  }
 }
 
 .common-header *,
@@ -24,7 +52,7 @@
 
 .common-header-inner {
   width: calc(100% - 40px);
-  max-width: var(--content-max);
+  max-width: 1160px; /* sha_copy common.css: 헤더·검색창 1160 */
   height: 100%;
   margin: 0 auto;
   padding-top: 8px;
@@ -114,7 +142,7 @@
 /* 검색창 */
 .common-search-panel {
   width: calc(100% - 40px);
-  max-width: var(--content-max);
+  max-width: 1160px; /* sha_copy common.css: 헤더·검색창 1160 */
   position: absolute;
   top: var(--header-h);
   left: 50%;
@@ -144,6 +172,7 @@
 }
 
 .common-search-close {
+  font-family: inherit;
   border: none;
   background: transparent;
   color: var(--color-ink);
