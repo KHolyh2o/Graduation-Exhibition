@@ -4,7 +4,12 @@
    body.page-department / body.dept-message-open 은 DepartmentPage 가 켜고 끄는 상태 클래스.
    브레이크포인트는 표준값(1024/768/640/480)으로 맞춤.
 =================================================== */
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap');
+@font-face {
+  font-family: 'IncheonEducation';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/iceJaram-Rg.woff2') format('woff2');
+  font-weight: normal;
+  font-display: swap;
+}
 
 /* 페이지 바탕이 흰색 — 푸터 위 여백까지 이어지게 */
 body:has(.dept-root) {
@@ -970,6 +975,7 @@ body.dept-message-open {
 
   /* 제목 느낌 강조 */
   font-family:
+    "IncheonEducation",
     "Noto Serif KR",
     "Nanum Myeongjo",
     "Times New Roman",

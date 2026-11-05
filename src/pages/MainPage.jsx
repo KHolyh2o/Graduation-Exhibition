@@ -273,8 +273,15 @@ const MainPage = () => {
       <main className="main-page">
 
         {/* 01. MAIN VIDEO — 영상(이미지) 안에 글자가 포함된 형태 */}
-        <section className="main-hero-video" aria-label="2026 졸업전시회 메인 영상">
-          <img src={assetUrl('/images/메인배너_수정예정.png')} alt="" />
+        <section className="main-hero-video" aria-label="2026 졸업전시회 메인 배너">
+          {/* 움직이는 WebP 배경 */}
+          <img className="main-hero-webp" src={assetUrl('/images/배너.webp')} alt="" fetchPriority="high" />
+          {/* 오른쪽 상단 : 전시회 정보 */}
+          <img className="main-banner-overlay banner-info" src={assetUrl('/images/banner-2.png')} alt="2026 서원대학교 미디어콘텐츠학부 졸업전시회" />
+          {/* 오른쪽 중앙 : 메인 타이틀 */}
+          <img className="main-banner-overlay banner-title" src={assetUrl('/images/banner-3.png')} alt="서로 다른 시선이 과녁을 겨눈다" />
+          {/* 오른쪽 하단 : 영문 전시 로고 */}
+          <img className="main-banner-overlay banner-logo" src={assetUrl('/images/banner-1.png')} alt="2026 Graduation Exhibition" />
         </section>
 
         {/* 02. EXHIBITION CONCEPT */}
@@ -282,7 +289,7 @@ const MainPage = () => {
           <div className="concept-inner">
             <div className="concept-copy">
               <p className="section-label">EXHIBITION CONCEPT</p>
-              <h2 className="concept-title">
+              <h2 className="concept-title" style={{ fontSize: '3.2rem' }}>
                 서로 다른 시선이<br />
                 <span>하나의 과녁</span>을<br />
                 겨눈다
@@ -297,8 +304,9 @@ const MainPage = () => {
               </p>
             </div>
 
-            {/* 콘셉트 이미지 자리 — 이미지가 정해지면 <img> 를 넣는다 */}
-            <div className="concept-visual main-image-slot" role="img" aria-label="전시 콘셉트 이미지" />
+            <div className="concept-visual main-image-slot has-image">
+              <img src={assetUrl('/images/배너하단.webp')} alt="전시 콘셉트 이미지" loading="lazy" />
+            </div>
           </div>
         </section>
 

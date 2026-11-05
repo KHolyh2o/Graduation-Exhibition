@@ -4,7 +4,6 @@
    body.page-index / html.index-intro-* 는 MainPage 가 켜고 끄는 상태 클래스.
    브레이크포인트는 표준값(1024/768/640/480)으로 맞춤.
 =================================================== */
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap');
 
 /* 제목용 Paperozi (Paperlogy) — sha_copy index.css 의 @font-face 중 쓰는 굵기만 */
 @font-face {
@@ -445,10 +444,9 @@ body.page-index {
 .index-root .students-heading h2 {
   margin: 0 0 18px;
   font-family: 'Paperozi', var(--font-heading);
-  font-weight: 600;
 
   font-size: clamp(30px, 3.5vw, 48px);
-  font-weight: 700;
+  font-weight: 600; /* sha_copy 는 인라인 style 로 600 */
   line-height: 1.3;
   letter-spacing: -0.055em;
   word-break: keep-all;
@@ -1189,35 +1187,15 @@ body.page-index {
     padding: 75px 0 60px;
   }
 
-  .index-root .credit-header h2 {
-    font-size: 30px;
-  }
-
   .index-root .credit-logo {
     width: 165px;
     height: 32px;
-  }
-
-  .index-root .credit-subtitle {
-    font-size: 11px;
   }
 
   .index-root .credit-row {
     grid-template-columns: 1fr;
     gap: 12px;
     padding: 17px 0;
-  }
-
-  .index-root .credit-row h3 {
-    font-size: 13px;
-  }
-
-  .index-root .credit-content {
-    gap: 8px 20px;
-  }
-
-  .index-root .credit-content p {
-    font-size: 12px;
   }
 
   /* 맨 위로 */
@@ -1520,14 +1498,31 @@ html.index-intro-complete .index-intro {
 }
 
 /* 메인 배너가 영상 대신 이미지일 때도 화면 폭에 맞춘다 (sha_copy 는 video 만 규칙이 있음) */
-.index-root .main-hero-video img {
+.index-root .main-hero-video {
+  position: relative;
+}
+
+.index-root .main-hero-video img.main-hero-webp {
   display: block;
   width: 100%;
   height: auto;
 }
 
+/* 배너 위 오버레이 3장 — 우측 끝을 헤더 콘텐츠와 맞춘다 (sha_copy index.css) */
+.index-root .main-hero-video img.main-banner-overlay {
+  position: absolute;
+  right: 0;
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 2;
+}
+.index-root .main-hero-video img.banner-info  { width: 40%; top: 6%; }
+.index-root .main-hero-video img.banner-title { width: 37%; top: 20%; }
+.index-root .main-hero-video img.banner-logo  { width: 24%; bottom: 8%; }
+
 /* 배너 이미지 가장자리가 흰 배경과 딱 끊겨 보이지 않도록 사방을 부드럽게 페이드아웃 */
-.index-root .main-hero-video img {
+.index-root .main-hero-video img.main-hero-webp {
   -webkit-mask-image:
     linear-gradient(to right, transparent, #000 6%, #000 94%, transparent),
     linear-gradient(to bottom, transparent, #000 6%, #000 94%, transparent);

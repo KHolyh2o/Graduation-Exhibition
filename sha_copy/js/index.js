@@ -13,7 +13,7 @@ const INDEX_ASSETS = {
   heroVideo: "../public/images/메인배너_수정예정.png",
 
   // 전시 콘셉트 이미지
-  concept: "",
+  concept: "../public/images/배너하단.webp",
 
   // TARGET 이미지 3개
   multimedia: "",

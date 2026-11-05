@@ -79,25 +79,48 @@
          영상 안에 글자가 포함된 형태
          HTML 텍스트 없음
     ==================================== -->
-    <section
-      class="main-hero-video"
-      aria-label="2026 졸업전시회 메인 영상"
-    ><img src="../public/images/메인배너_수정예정.png" alt="" srcset="">
+   
+<!-- ====================================
+     01. MAIN BANNER
+     WebP 배경 + 이미지 3개
+==================================== -->
 
+<section
+  class="main-hero-video"
+  aria-label="2026 졸업전시회 메인 배너"
+>
 
+  <!-- 기존 움직이는 WebP 배경 -->
+  <img
+    class="main-hero-webp"
+    src="../public/images/배너.webp"
+    alt=""
+    fetchpriority="high"
+  >
 
-      <!-- <video
-        class="hero-video"
-        id="main-hero-video"
-        autoplay
-        muted
-        loop
-        playsinline
-        preload="metadata"
-        aria-label="2026 졸업전시회 메인 비주얼"
-      ></video>-->
+  <!-- 오른쪽 상단 : 전시회 정보 -->
+  <img
+    class="main-banner-overlay banner-info"
+    src="../public/images/banner-2.png"
+    alt="2026 서원대학교 미디어콘텐츠학부 졸업전시회"
+  >
 
-    </section>
+  <!-- 오른쪽 중앙 : 메인 타이틀 -->
+  <img
+    class="main-banner-overlay banner-title"
+    src="../public/images/banner-3.png"
+    alt="서로 다른 시선이 과녁을 겨눈다"
+  >
+
+  <!-- 오른쪽 하단 : 영문 전시 로고 -->
+  <img
+    class="main-banner-overlay banner-logo"
+    src="../public/images/banner-1.png"
+    alt="2026 Graduation Exhibition"
+  >
+
+</section>
+
 
 
 
