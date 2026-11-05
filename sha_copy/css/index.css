@@ -2123,3 +2123,253 @@ body.index-student-modal-open {
   }
 
 }
+
+/* ==========================================
+   INDEX MAIN BANNER - WEBP
+========================================== */
+
+.page-index .main-hero-video {
+  width: 100%;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0;
+  overflow: hidden;
+  background: #fff;
+}
+
+.page-index .main-hero-webp {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* 모바일 */
+@media (max-width: 768px) {
+
+  .page-index .main-hero-video {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .page-index .main-hero-webp {
+    width: 100%;
+    height: auto;
+  }
+
+}
+/* CONCEPT 이미지 회색 배경 제거 */
+.page-index .concept-visual,
+.page-index .concept-visual.main-image-slot {
+  background: transparent !important;
+}
+
+
+/* ==========================================
+   INDEX MAIN BANNER
+   WEBP + 3 OVERLAY IMAGES
+========================================== */
+
+/* 전체 배너 */
+.page-index .main-hero-video {
+  position: relative;
+
+  width: 100%;
+  max-width: 1160px;
+
+  margin: 0 auto;
+  padding: 0;
+  overflow: hidden;
+
+  background: #fff;
+}
+
+/* 움직이는 WebP 배경 */
+.page-index .main-hero-webp {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  object-fit: contain;
+}
+
+/* ==========================================
+   오버레이 이미지 공통
+========================================== */
+
+.page-index .main-banner-overlay {
+  position: absolute;
+  z-index: 2;
+
+  display: block;
+  height: auto;
+
+  object-fit: contain;
+  pointer-events: none;
+}
+
+/* ==========================================
+   01. 오른쪽 상단 : 전시회 정보
+========================================== */
+
+.page-index .banner-info {
+  width: 40%;
+
+  top: 6%;
+  right: 6.25%;
+}
+
+/* ==========================================
+   02. 오른쪽 중앙 : 메인 타이틀
+========================================== */
+
+.page-index .banner-title {
+  width: 37%;
+
+  top: 18%;
+  right: 6.25%;
+}
+
+/* ==========================================
+   03. 오른쪽 하단 : 영문 로고
+========================================== */
+
+.page-index .banner-logo {
+  width: 24%;
+
+  bottom: 8.5%;
+  right: 6.25%;
+}
+
+/* ==========================================
+   모바일에서도 배너와 함께 비율 축소
+========================================== */
+
+@media (max-width: 768px) {
+
+  .page-index .main-hero-video {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .page-index .main-hero-webp {
+    width: 100%;
+    height: auto;
+  }
+
+}
+
+/* ==========================================
+   MAIN BANNER - 이미지 크기 및 위치 수정
+========================================== */
+
+/* 배너 전체 */
+.page-index .main-hero-video {
+  position: relative;
+  display: block;
+
+  width: 100%;
+  max-width: 1160px;
+  margin: 0 auto;
+
+  overflow: hidden;
+  background: #fff;
+}
+
+/* 배경 WebP */
+.page-index .main-hero-video > img.main-hero-webp {
+  position: relative;
+  display: block;
+
+  width: 100% !important;
+  height: auto !important;
+  max-width: 100%;
+
+  object-fit: contain;
+}
+
+/* 오버레이 3개 공통 */
+.page-index .main-hero-video > img.main-banner-overlay {
+  position: absolute !important;
+  z-index: 2;
+
+  display: block;
+  height: auto !important;
+  max-width: none !important;
+
+  object-fit: contain;
+  pointer-events: none;
+}
+
+/* 01. 오른쪽 상단 */
+.page-index .main-hero-video > img.banner-info {
+  width: 40% !important;
+
+  top: 6%;
+  right: 6%;
+  left: auto;
+  bottom: auto;
+}
+
+/* 02. 오른쪽 중앙 제목 */
+.page-index .main-hero-video > img.banner-title {
+  width: 37% !important;
+
+  top: 20%;
+  right: 6%;
+  left: auto;
+  bottom: auto;
+}
+
+/* 03. 오른쪽 하단 영문 로고 */
+.page-index .main-hero-video > img.banner-logo {
+  width: 24% !important;
+
+  right: 6%;
+  bottom: 8%;
+
+  left: auto;
+  top: auto;
+}
+
+/* 모바일 : 배너 크기에 맞춰 함께 축소 */
+@media (max-width: 768px) {
+  .page-index .main-hero-video {
+    width: 100%;
+  }
+}
+
+
+/* ==========================================
+   MAIN BANNER - 헤더 우측 끝 정렬
+========================================== */
+
+/* 헤더 콘텐츠와 동일한 너비 */
+.page-index .main-hero-video {
+  position: relative;
+  width: calc(100% - 40px);
+  max-width: 1160px;
+  margin: 0 auto;
+}
+
+/* 오른쪽 이미지 3개 우측 끝 통일 */
+.page-index .main-hero-video > img.banner-info,
+.page-index .main-hero-video > img.banner-title,
+.page-index .main-hero-video > img.banner-logo {
+  right: 0 !important;
+  left: auto !important;
+}
+
+/* 모바일에서도 헤더 여백과 일치 */
+@media (max-width: 768px) {
+  .page-index .main-hero-video {
+    width: 100%;
+  }
+
+  .page-index .main-hero-video > img.banner-info,
+  .page-index .main-hero-video > img.banner-title,
+  .page-index .main-hero-video > img.banner-logo {
+    right: 20px !important;
+  }
+}
