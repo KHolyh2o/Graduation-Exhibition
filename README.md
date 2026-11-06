@@ -23,6 +23,106 @@
 
 ---
 
+## 🎯 핵심 요약 — 어느 졸전이든 가져갈 기본 틀
+
+> 디자인·컨셉은 해마다 바뀌지만 **아래 5가지 틀은 어느 졸업전시 사이트에서도 그대로 쓸 수 있습니다.** 나머지 상세 설명은 이 요약 밑에 있습니다.
+
+### ① 어떤 테이블(데이터)이 필요한가
+
+서버·DB 없이 `src/data/*.js` 의 배열이 곧 테이블입니다. 졸전 사이트는 **아래 6개면 충분**합니다.
+
+| 테이블 | 파일 | 한 줄 설명 | 26년 규모 |
+|---|---|---|---|
+| **졸업생** | `graduates.js` | 프로필·직군·소개·연락처 | 40명 |
+| **작품(개인·공동)** | `projects.js` | 학생이 만든 작품 | 약 60개 |
+| **팀 작품** | `teamProjects.js` | 팀 단위 작품 (26년은 창캡/U300) | 9팀 |
+| **교수진** | `professors.js` | 사진·직책·격려사 | 10명 |
+| **아카이브** | `archives.js` | 과거 전시 연도·링크·썸네일 | 3개 |
+| **전시 정보** | `constants.js` | 제목·테마·날짜·장소·위원회 팀 목록 | 1건 |
+
+그 밖에 데이터는 아니지만 **분류 체계**를 한 파일로 따로 둡니다: `projectTabs.js` (탭·직군 정의). 필터 UI와 검증이 전부 여기서 파생됩니다. 작품 조회 규칙은 `works.js` 에 모읍니다.
+
+### ② 테이블별 속성 (최소 구성)
+
+| 테이블 | 속성 |
+|---|---|
+| **graduates** | `id`, **`studentId`(PK, 학번)**, `name`, `englishName`, `tab`·`role`(필터 코드), `jobTitle`(화면 직함), `profileImage`, `intro`(팝업용 짧은 소개), `workIntro`(작품 상세용 긴 소개), `committeeTeam`(위원회 팀, 없으면 비움), `email`, `phone` |
+| **projects** | **`id`(PK)**, `studentId` *또는* `studentIds[]`(공동 작품) → graduates 참조, `tab`, `role`/`roles[]`, `title`, `thumbnail`, `proposalImages[]`(판넬), `videoUrl`, `description`, `contact` |
+| **teamProjects** | **`id`(PK)**, `teamName`, `group`, `title`(선택), `thumbnail`, `proposalImages[]`, `teamImage`(단체사진), `videoUrl`, `description`, `members[]` = `{name, role, studentId}` → graduates 참조 |
+| **professors** | `id`, `name`, `role`(학부장·지도교수 등), `photo`, `cardPhoto`(카드용 크롭, 선택), `headline`, `message`(격려사, `\n` 줄바꿈) |
+| **archives** | `year`, `theme`, `url`(그 해 전시 사이트), `thumbnail` |
+| **EXHIBITION** (constants) | `title`, `theme`, `dateText`, `hoursText`, `place`, `address`, `total`(졸업생 수) / `COMMITTEE_TEAMS`(위원회 팀 표시 순서) |
+
+**관계 규칙 (이것만 지키면 됨)**
+- `projects.studentId(s)` 와 `teamProjects.members[].studentId` 는 반드시 `graduates.studentId` 에 존재해야 함 (1:N).
+- `tab`/`role`/`group` 은 `projectTabs.js` 에 정의된 값만 사용.
+- 이미지는 데이터에 `/images/…` 로 적고, 화면에서는 `assetUrl()`/`<SafeImg>` 로 출력.
+- 위반은 `npm run validate` 가 잡아 줌.
+
+> 사람이 고치는 **원본은 CSV**(`csv_data/`), JS 는 스크립트가 만드는 **생성물**입니다 → [§6](#6-데이터-입력-파이프라인-csv--js)
+
+### ③ 왜 React + Vite 로, 어떻게 구성했나
+
+**구성 한 줄**: *"서버 없는 정적 SPA — 데이터 JS + React 페이지 + 학교 Nginx 정적 호스팅"*
+
+```
+데이터(src/data) ──import──► 페이지(src/pages) ──조합──► 공통 컴포넌트(src/components)
+        ▲                          │
+   CSV → 변환 스크립트         React Router (라우트 1개 = 페이지 파일 1개)
+                                   │
+                         npm run build → dist/ (HTML+JS+CSS+이미지) → 학교 서버
+```
+
+| 선택 | 이유 |
+|---|---|
+| **정적 사이트 (서버·DB 없음)** | 학교 서버가 Nginx 정적 호스팅만 제공. 운영·보안·비용 부담이 없고 전시 기간 접속이 몰려도 안전 |
+| **React** | 작품 카드·필터·팝업·상세처럼 **같은 UI 를 데이터만 바꿔 반복**하는 구조라 컴포넌트가 맞음. 졸업생/작품이 바뀌어도 코드는 그대로 |
+| **Vite** | 설정이 거의 없고 개발 서버·빌드가 빠름. `base` 하나로 `/2026/` 하위 경로 배포 해결 |
+| **React Router (SPA)** | 페이지 전환이 빠르고 전환 효과를 줄 수 있음. 대신 Nginx 에 `try_files … /2026/index.html` 필요 |
+| **페이지별 `lazy()`** | 데이터가 큰 페이지(작품·졸업생)가 첫 로딩을 늦추지 않게 메인 외 페이지는 접속 때 내려받음 |
+| **순수 CSS + `theme.css` 변수** | 컨셉이 바뀌면 색·폰트·간격 변수 파일만 수정. CSS-in-JS/Tailwind 없이도 충분 |
+| **런타임 의존성 3개** | react / react-dom / react-router-dom 뿐 → 해마다 업데이트·보안 점검 부담 최소 |
+
+**어느 졸전이든 필요한 페이지**: 메인(히어로·전시안내·졸업생 슬라이더·크레딧·아카이브) / 작품소개(탭·직군 필터·카드) / 작품 상세(판넬·영상·작가 소개) / 졸업생 목록(+팝업) / 학과·교수진 / 404.
+26년에는 여기에 갤러리(준비과정 영상)와 MEMORY(응원 게시판)를 더했습니다.
+
+### ④ Git 관리 방법
+
+| 항목 | 방법 |
+|---|---|
+| **브랜치** | `main` = 통합·**배포** (push 하면 GitHub Actions 가 빌드 후 학교 서버에 자동 배포) / 작업자별 브랜치(`sha`=디자이너, `kss`=개발자)에서 작업 후 main 으로 머지 |
+| **디자이너 분리** | 디자이너는 `sha_copy/` 폴더만 수정 → 코드 충돌 최소화 ([§8](#8-sha_copy--26-졸전의-가장-큰-특수성)) |
+| **작업 시작 전** | 항상 `git pull` |
+| **머지 전 점검** | `npm run validate` (ERROR 0) → `npm run lint` (에러 0) → `npm run build` (성공) |
+| **커밋 메시지** | `feat:` / `fix:` / `refactor:` / `docs:` + 한국어 설명 (예: `feat: 작품 썸네일 112장을 webp로 연결`) |
+| **배포 사고 방지** | main push = 즉시 배포. 서버 nginx 설정·`basename`·`base` 는 건드리지 않음 ([§15](#15-절대-건드리면-안-되는-것)) |
+| **권한** | push 는 소유자 + 초대한 Collaborator 만. 배포용 서버 계정은 GitHub Secrets 에 보관 ([§18](#18-권한과-문의)) |
+| **저장소 크기 주의** | 이미지는 한 번 커밋하면 이력에 영구히 남아 저장소가 커짐 (26년 `.git` ≈ 150MB). **반드시 최적화(③ 아래 ⑤)한 뒤 커밋**하고, 같은 이미지를 반복 교체 커밋하지 말 것 |
+
+### ⑤ 용량을 많이 먹는 판넬 PNG 는 어떻게 해결했나
+
+판넬(작품 설명용 세로 대형 이미지)은 원본이 PNG/PDF 의 고해상도 이미지라 그대로 올리면 **저장소·빌드·학교 서버·방문자 로딩이 모두 무거워집니다.** 해결 방법:
+
+1. **WebP 로 변환** — PNG 를 `webp` 로 바꿔 화질 손실을 거의 없이 용량을 크게 줄임 (macOS: `brew install webp` 후 `cwebp`).
+2. **폭 1600px 로 리사이즈, 품질 q82** — 상세 페이지의 화면 폭 이상으로 클 필요가 없음. 26년 영상전공 판넬 75장이 이 기준.
+3. **작품당 한 장, 파일명 = 작품 id** — `p-vd-<학번>-<번호>.webp` 처럼 이름 규칙을 고정해 매핑을 자동화 (`csv_data/source/panels.json` 이 `작품id → 이미지경로` 연결).
+4. **썸네일은 별도 작은 이미지** — 목록은 `thumbnails/`, 상세만 `proposals/` 를 불러와 목록 로딩을 가볍게.
+5. **지연 로딩** — `<SafeImg>`(`loading="lazy"`) 로 화면에 가까워질 때만 내려받음.
+
+결과: 판넬 120여 장이 `proposals/` **약 48MB**, 썸네일 112장 약 8MB (전체 `public/images` ≈ 144MB, 그중 졸업생 프로필 사진 28MB).
+
+```bash
+# 예) PNG → 폭 1600px, 품질 82 WebP (원본은 그대로 두고 새 파일 생성)
+cwebp -q 82 -resize 1600 0 input.png -o p-vd-202110030-1.webp
+```
+> 변환 전 원본(PNG/PDF)은 저장소에 올리지 말고 드라이브에 보관하세요. 도록 PDF 처럼 더 큰 파일은 저장소가 아니라 서버에 직접 올립니다(GEArchive 방식, [§17](#17-gearchive역대-전시-아카이브와의-관계)).
+
+---
+
+## 📚 이하 상세 설명
+
+위 핵심 요약의 각 항목을 풀어 쓴 내용과, 26 졸전만의 사정(sha_copy 등)이 아래에 있습니다.
+
 ## 목차
 
 1. [한눈에 보기](#1-한눈에-보기)
@@ -679,10 +779,13 @@ vite.config.js     base: '/2026/'               ← 연도 교체 외에는 수�
 
 ## 18. 권한과 문의
 
-- 이 저장소의 `main` 에 push 하면 **곧바로 학교 서버에 배포**됩니다. 수정(push) 권한은 소유자와 소유자가 Collaborator 로 초대한 사람만 갖고, 그 외 사람은 Fork 해서 자기 복사본에서만 고칠 수 있습니다. 코드 수정 권한은 신뢰하는 사람에게만 주세요.
+- 이 저장소는 **공개(Public)** 입니다. 누구나 보고, `git clone` 이나 Code → Download ZIP 으로 내려받아 구조를 공부할 수 있습니다.
+- **수정(push)은 소유자와 소유자가 Collaborator 로 초대한 사람만** 가능합니다. 그 외 사람은 Fork 해서 자기 복사본에서만 고칠 수 있고, 이 저장소와 서버에는 영향을 줄 수 없습니다. (원본에 반영하려면 Pull Request 를 보내고 소유자가 승인해야 함)
+- `main` 에 push 하면 **곧바로 학교 서버에 배포**되므로, 코드 수정 권한(Collaborator)은 신뢰하는 사람에게만 주세요.
+- ⚠ 공개 저장소이므로 **개인정보·비밀값을 커밋하지 마세요.** 졸업생 연락처(`email`, `phone`)는 공개 동의를 받은 값만 넣고, 서버 비밀번호·`service_role` 키 등은 코드에 넣지 말고 GitHub Secrets 에만 둡니다. 한 번 커밋하면 지워도 git 이력에 남습니다.
 - 배포용 서버 계정은 GitHub **Settings → Secrets and variables → Actions** 의 `SERVER_HOST`, `SERVER_PORT`, `USERNAME`, `PASSWORD` 에 있습니다. 계정이 바뀌면 여기를 갱신해야 배포가 됩니다.
 - GEArchive 관리 화면(CMS) 로그인은 서버의 `sudo` 권한 계정만 가능합니다.
-- **문의**: 사용 중 막히면 교수님께 **2026년 졸업전시위원회에서 개발을 맡았던 남학생의 연락처를 문의**해서 연락하세요. (개발 담당은 2명이지만 한 명은 디자인 담당이라, 코딩·서버 관련 문의는 남학생이 받습니다.) GitHub 수정 권한과 서버 계정도 같은 경로로 요청하면 됩니다.
+- **문의**: 사용 중 막히면 교수님께 **2026년 졸업전시위원회에서 개발을 맡았던 남학생의 연락처를 문의**해서 연락하세요. GitHub 수정 권한과 서버 계정도 같은 경로로 요청하면 됩니다.
 
 ---
 
