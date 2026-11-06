@@ -51,7 +51,7 @@
 | **teamProjects** | **`id`(PK)**, `teamName`, `group`, `title`(선택), `thumbnail`, `proposalImages[]`, `teamImage`(단체사진), `videoUrl`, `description`, `members[]` = `{name, role, studentId}` → graduates 참조 |
 | **professors** | `id`, `name`, `role`(학부장·지도교수 등), `photo`, `cardPhoto`(카드용 크롭, 선택), `headline`, `message`(격려사, `\n` 줄바꿈) |
 | **archives** | `year`, `theme`, `url`(그 해 전시 사이트), `thumbnail` |
-| **EXHIBITION** (constants) | `title`, `theme`, `dateText`, `hoursText`, `place`, `address`, `total`(졸업생 수) / `COMMITTEE_TEAMS`(위원회 팀 표시 순서) |
+| **EXHIBITION** (constants) | `title`, `theme`, `dateText`, `hours`(날짜별 운영 시간 배열), `place`, `address`, `total`(졸업생 수) / `COMMITTEE_TEAMS`(위원회 팀 표시 순서) |
 
 **관계 규칙 (이것만 지키면 됨)**
 - `projects.studentId(s)` 와 `teamProjects.members[].studentId` 는 반드시 `graduates.studentId` 에 존재해야 함 (1:N).

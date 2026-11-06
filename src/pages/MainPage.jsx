@@ -402,7 +402,17 @@ const MainPage = () => {
                 <h3>일시</h3>
                 <div className="info-value">
                   <p className="info-date"><span>DATE</span><span>{EXHIBITION.dateText}</span></p>
-                  <p className="info-date"><span>TIME</span><span>{EXHIBITION.hoursText}</span></p>
+                  <div className="info-date info-time">
+                    <span>TIME</span>
+                    <div className="info-time-list">
+                      {EXHIBITION.hours.map((h) => (
+                        <div className="info-time-row" key={h.day}>
+                          <span className="info-time-day">{h.day}</span>
+                          <span>{h.text}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

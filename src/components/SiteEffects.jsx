@@ -41,10 +41,9 @@ const getDelay = (el) => {
     return Number.isFinite(delay) ? Math.max(0, Math.min(delay, 800)) : 0;
   }
   if (el.matches(STAGGER_CARDS)) {
-    const index = Array.from(el.parentElement.children).indexOf(el);
-    let columns = window.innerWidth <= 768 ? 2 : 5;
-    if (el.matches('.dept-goal')) columns = window.innerWidth <= 768 ? 1 : 3;
-    return (index % columns) * 120;
+    // 카드는 줄 순서와 상관없이 0~400ms 사이의 임의 지연 — 올라오는 순서가 제각각이라 자연스럽고 가볍게 보인다.
+    // (등록될 때 한 번만 정해지므로 같은 카드가 도중에 바뀌지 않는다. 새로고침하면 순서가 달라진다)
+    return Math.round(Math.random() * 400);
   }
   if (el.matches('.media-category')) {
     return Array.from(el.parentElement.children).indexOf(el) * 150;

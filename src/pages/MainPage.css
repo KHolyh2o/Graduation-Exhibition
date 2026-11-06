@@ -714,6 +714,40 @@ body.page-index {
   font-weight: 700;
 }
 
+/* 마지막 줄 아래 여백 제거 — 지도(두 행에 걸쳐 늘어남)의 아랫선이 마지막 글줄(TIME)과 맞도록 */
+.index-root .info-row:last-child {
+  margin-bottom: 0;
+}
+
+.index-root .info-value > :last-child {
+  margin-bottom: 0;
+}
+
+/* TIME — 날짜별로 운영 시간이 달라서 한 줄씩 */
+.index-root .info-time {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.index-root .info-time-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.index-root .info-time-row {
+  display: flex;
+  gap: 14px;
+}
+
+/* .info-date span:first-child(폭 52px·굵게)보다 우선하도록 선택자를 길게 */
+.index-root .info-time .info-time-row .info-time-day {
+  width: auto;
+  font-weight: 400;
+  color: #666;
+}
+
 /* 지도 이미지 — 제목(전시안내)부터 마지막 줄(TIME)까지 키운다 */
 .index-root .info-map {
   grid-column: 2;

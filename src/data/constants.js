@@ -3,7 +3,11 @@ export const EXHIBITION = {
   title: '2026 서원대학교 미디어콘텐츠학부 졸업전시',
   theme: '과녁',
   dateText: '11/16 - 11/17',
-  hoursText: '10:00 - 18:00',
+  // 날짜마다 운영 시간이 달라서 배열로 둔다 (메인 전시안내 TIME 줄이 날짜별로 한 줄씩 나온다)
+  hours: [
+    { day: '11/16', text: '10:00 - 20:00' },
+    { day: '11/17', text: '10:00 - 17:00' },
+  ],
   address: '충청북도 청주시 서원구 무심서로 377-3',
   place: '서원대학교 미래창조관 3층 상상플러스',
   addressEn: ['377-3 Musimseo-ro, Seowon-gu,', 'Cheongju-si, Chungcheongbuk-do'],
