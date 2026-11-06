@@ -236,10 +236,11 @@
   background: var(--memory-yellow);
 }
 
+/* 선택 테두리: outline 은 브라우저마다 둥글기 계산이 달라서 box-shadow 로 그린다.
+   안쪽 칸 모서리(3px) + 간격 4px = 7px, + 선 2px = 9px 로 항상 같은 중심의 둥근 모서리가 된다 */
 .memory-color-option input:checked
 + .memory-color-dot {
-  outline: 2px solid #333;
-  outline-offset: 4px;
+  box-shadow: 0 0 0 4px #fafafa, 0 0 0 6px #333;   /* #fafafa = .memory-form 배경 */
 }
 
 .memory-color-option:hover .memory-color-dot {
@@ -248,8 +249,7 @@
 
 .memory-color-option input:focus-visible
 + .memory-color-dot {
-  outline: 3px solid #2591B8;
-  outline-offset: 4px;
+  box-shadow: 0 0 0 4px #fafafa, 0 0 0 7px #2591B8;
 }
 
 /* 등록 버튼 */
@@ -549,4 +549,10 @@
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
+}
+
+/* 푸터 위 회색 띠 제거 — 푸터의 위쪽 바깥 여백(114px)에는 페이지 배경(회색 body)이 비친다.
+   MEMORY 는 흰 배경이라 여백을 없앤다 (아래 간격은 본문 padding-bottom 이 이미 준다) */
+body:has(.memory-root) .common-footer {
+  margin-top: 0;
 }

@@ -206,8 +206,8 @@ body:has(.project-page) {
   background: var(--kind-color, var(--color-target-blue));
 }
 
-.project-page .portfolio-kind[data-kind='brand']   { --kind-color: var(--color-target-blue); }
-.project-page .portfolio-kind[data-kind='improve'] { --kind-color: var(--color-target-red); }
+.project-page .portfolio-kind[data-kind='brand']   { --kind-color: var(--color-target-red); }
+.project-page .portfolio-kind[data-kind='improve'] { --kind-color: var(--color-target-blue); }
 .project-page .portfolio-kind[data-kind='device']  { --kind-color: var(--color-target-yellow); }
 
 /* 구간 색 선 끝에 TARGET 화살촉 — 선은 삼각형 밑면에서 멈춘다 */
@@ -451,9 +451,17 @@ body:has(.project-page) {
   --category-accent: #f3d345;
 }
 
-/* 상단 카테고리 글자색 */
-.project-page .media-category:is(:hover, .is-active) .category-label {
-  color: var(--category-accent);
+/* 상단 카테고리 글자색 — 선택된 탭이 아니라 "그 버튼 자신"의 색을 쓴다 (호버 시 영상미디어는 파랑, 팀은 노랑) */
+.project-page .media-category[data-category="multimedia"]:is(:hover, .is-active) .category-label {
+  color: #d92936;
+}
+
+.project-page .media-category[data-category="video"]:is(:hover, .is-active) .category-label {
+  color: #2591b8;
+}
+
+.project-page .media-category[data-category="team"]:is(:hover, .is-active) .category-label {
+  color: #f3d345;
 }
 
 /* 하위 필터 */

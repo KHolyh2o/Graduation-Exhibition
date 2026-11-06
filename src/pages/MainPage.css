@@ -597,6 +597,10 @@ body.page-index {
   object-fit: contain;
 }
 
+.index-root .students-nav-prev img {
+  transform: scaleX(-1);   /* 파란 next 이미지를 좌우 반전 */
+}
+
 .index-root .students-nav img[hidden] {
   display: none;
 }
@@ -605,9 +609,14 @@ body.page-index {
   opacity: 0.75;
 }
 
+/* 더 갈 곳이 없을 때(첫/마지막 페이지)만 회색으로 */
 .index-root .students-nav:disabled {
-  opacity: 0.35;
+  opacity: 0.6;
   cursor: default;
+}
+
+.index-root .students-nav:disabled img {
+  filter: grayscale(1);
 }
 
 
@@ -635,13 +644,29 @@ body.page-index {
 
 .index-root .info-inner {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 360px;
-  gap: 70px;
-  align-items: center;
+  grid-template-columns: minmax(0, 1fr) 480px;
+  column-gap: 70px;
+  row-gap: 0;           /* 제목과 정보 줄 사이가 벌어지지 않게 세로 간격 없음 */
+  align-items: start;
 }
 
-/* 왼쪽 콘텐츠 */
-.index-root .info-content h2 {
+/* 제목 (전시안내) — 두 칸 위로 가로지르고, 지도는 정보 줄과 같은 행에서 시작한다 */
+/* info-head 는 껍데기 — 안의 라벨(EXHIBITION)은 맨 윗줄에 혼자,
+   제목(전시안내)부터는 지도와 같은 행에서 시작한다 */
+.index-root .info-head {
+  display: contents;
+}
+
+.index-root .info-head .section-label {
+  grid-column: 1 / -1;
+}
+
+.index-root .info-head h2 {
+  grid-column: 1;
+  line-height: 1;   /* 글자 위 여백을 없애 지도 윗선이 "전시안내" 글자 윗선과 맞게 */
+}
+
+.index-root .info-head h2 {
   margin: 0 0 42px;
   font-family: 'Paperozi', var(--font-heading);
 
@@ -689,15 +714,20 @@ body.page-index {
   font-weight: 700;
 }
 
-/* 지도 이미지 */
+/* 지도 이미지 — 제목(전시안내)부터 마지막 줄(TIME)까지 키운다 */
 .index-root .info-map {
+  grid-column: 2;
+  grid-row: 2 / span 2;   /* 1행 = EXHIBITION 라벨, 2~3행 = 전시안내 제목 ~ TIME 줄 */
+  align-self: stretch;
   width: 100%;
-  aspect-ratio: 1 / 1;
+  min-height: 0;
   border-radius: 5px;
 }
 
+/* 칸 높이에 맞춰 채운다 (그림 비율 3396×2856 과 비슷해 잘리는 부분은 거의 없음) */
 .index-root .info-map img {
-  object-fit: contain;
+  height: 100%;
+  object-fit: cover;
 }
 
 
@@ -795,6 +825,21 @@ body.page-index {
 .index-root .credit-team strong {
   font-size: 13px;
   font-weight: 700;
+}
+
+/* 데스크톱: 5팀을 한 줄에. 팀명 옆에 이름을 붙이면 폭(약 1,100px)이 모자라 마지막 팀이 아랫줄로 떨어지므로,
+   팀명을 이름 위에 쌓아 팀당 폭을 줄인다. (태블릿 이하는 아래 2열 배치를 그대로 쓴다) */
+@media (min-width: 1025px) {
+  .index-root .credit-committee {
+    grid-template-columns: repeat(5, max-content);
+    column-gap: 40px;
+  }
+
+  .index-root .credit-team {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
 }
 
 .index-root .credit-team span {
@@ -988,8 +1033,8 @@ body.page-index {
 
   /* 전시안내 */
   .index-root .info-inner {
-    grid-template-columns: minmax(0, 1fr) 310px;
-    gap: 35px;
+    grid-template-columns: minmax(0, 1fr) 360px;
+    column-gap: 35px;
   }
 
 }
@@ -1150,9 +1195,13 @@ body.page-index {
     gap: 25px;
   }
 
-  .index-root .info-content h2 {
+  .index-root .info-head {
+    display: block;   /* 한 칸 배치에서는 라벨·제목을 한 덩어리로 */
+  }
+
+  .index-root .info-head h2 {
     font-size: 33px;
-    margin-bottom: 30px;
+    margin-bottom: 5px;
   }
 
   .index-root .info-row {
@@ -1174,7 +1223,10 @@ body.page-index {
   }
 
   .index-root .info-map {
+    grid-column: auto;
+    grid-row: auto;
     width: min(100%, 340px);
+    aspect-ratio: 3396 / 2856;
     margin: 10px auto 0;
   }
 

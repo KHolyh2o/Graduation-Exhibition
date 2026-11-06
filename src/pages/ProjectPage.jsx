@@ -61,6 +61,7 @@ const ProjectPage = () => {
               <button
                 key={t.id}
                 type="button"
+                data-category={t.id}
                 className={`media-category${activeTab === t.id ? ' is-active' : ''}`}
                 aria-pressed={activeTab === t.id}
                 onClick={() => switchTab(t.id)}

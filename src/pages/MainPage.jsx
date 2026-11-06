@@ -126,7 +126,8 @@ const StudentSlider = () => {
           disabled={page === 0}
           onClick={() => goTo(page - 1)}
         >
-          <img src={assetUrl('/images/UI/slide_pre.png')} alt="" onError={(e) => { e.currentTarget.hidden = true; }} />
+          {/* slide_pre.png 는 회색 이미지라, 파란 next 이미지를 CSS 로 좌우 반전해서 쓴다 */}
+          <img src={assetUrl('/images/UI/slide_next.png')} alt="" onError={(e) => { e.currentTarget.hidden = true; }} />
         </button>
 
         <div className="students-slider">
@@ -379,10 +380,12 @@ const MainPage = () => {
         {/* 05. EXHIBITION INFORMATION */}
         <section className="main-info" data-reveal>
           <div className="info-inner">
-            <div className="info-content">
+            <div className="info-head">
               <p className="section-label section-label-yellow">EXHIBITION</p>
               <h2>전시안내</h2>
+            </div>
 
+            <div className="info-content">
               <div className="info-row">
                 <h3>주소</h3>
                 <div className="info-value">
