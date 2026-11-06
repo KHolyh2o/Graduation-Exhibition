@@ -69,7 +69,8 @@ const DepartmentPage = () => {
   useEffect(() => {
     if (!selected) return undefined;
     document.body.classList.add('dept-message-open');
-    frameRef.current?.scrollTo(0, 0);
+    frameRef.current?.scrollTo(0, 0);                                        // 모바일: 팝업 전체가 스크롤
+    frameRef.current?.querySelector('.dept-message-scroll')?.scrollTo(0, 0);   // 데스크톱: 문구+본문만 스크롤
     closeBtnRef.current?.focus({ preventScroll: true });
 
     const onKey = (e) => {
@@ -195,7 +196,10 @@ const DepartmentPage = () => {
                   aria-haspopup="dialog"
                   onClick={(e) => openMessage(prof, e.currentTarget)}
                 >
-                  <div className="dept-professor-photo dept-image-slot">
+                  <div
+                    className={`dept-professor-photo dept-image-slot${prof.photoBg ? ' has-photo-bg' : ''}`}
+                    style={prof.photoBg ? { background: prof.photoBg } : undefined}
+                  >
                     <SafeImg src={prof.cardPhoto ?? prof.photo} fallbackSrc={FALLBACK.avatar} alt={`${prof.name} 사진`} />
                   </div>
                   <h3 className="dept-professor-name">{prof.name.replace(/ 교수$/, '')}</h3>
@@ -231,7 +235,10 @@ const DepartmentPage = () => {
               </div>
 
               <div className="dept-message-body">
-                <div className="dept-message-photo">
+                <div
+                  className={`dept-message-photo${selected.photoBg ? ' has-photo-bg' : ''}`}
+                  style={selected.photoBg ? { background: selected.photoBg } : undefined}
+                >
                   <SafeImg src={selected.photo} fallbackSrc={FALLBACK.avatar} alt={`${selected.name} 사진`} />
                 </div>
 
@@ -240,9 +247,12 @@ const DepartmentPage = () => {
                   <p className="dept-message-position">
                     {positionOf(selected.role).replace('미디어콘텐츠학부 ', '미디어콘텐츠학부 / ')}
                   </p>
-                  {selected.headline && <h3 className="dept-message-quote">{`“${selected.headline}”`}</h3>}
-                  <div className="dept-message-content">
-                    {selected.message || '축사 내용이 아직 등록되지 않았습니다.'}
+                  {/* 이름·직책은 고정, 이 묶음(한 줄 문구 + 본문)만 스크롤 (데스크톱) */}
+                  <div className="dept-message-scroll">
+                    {selected.headline && <h3 className="dept-message-quote">{`“${selected.headline}”`}</h3>}
+                    <div className="dept-message-content">
+                      {selected.message || '축사 내용이 아직 등록되지 않았습니다.'}
+                    </div>
                   </div>
                 </div>
               </div>

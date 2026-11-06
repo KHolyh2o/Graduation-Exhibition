@@ -1283,10 +1283,56 @@ body.dept-message-open {
   }
 }
 
-/* 교수 사진 테두리 — 배경이 투명/흰색인 사진(유해영 교수 등)이 흰 바탕에 떠 보이지 않도록 모든 교수 사진에 같은 얇은 테두리를 준다 */
-.dept-root .dept-professor-photo,
-.dept-root .dept-professor-button .dept-professor-photo,
-.dept-root .dept-message-photo {
-  box-sizing: border-box;
-  border: 1px solid var(--color-border);
+/* 사진 바탕이 흰색/투명인 교수님(photoBg 지정)은 컨테이너에 회색 바탕을 깔고,
+   사진 위에 multiply 로 올려서 흰 부분만 그 회색으로 보이게 한다 */
+.dept-root .has-photo-bg img {
+  mix-blend-mode: multiply;
+}
+
+/* ==========================================
+   PROFESSOR POPUP — 데스크톱/태블릿: 문구+본문만 스크롤
+   · 로고·왼쪽 사진·이름·직책은 고정, 그 아래(한 줄 문구 + 본문)만 스크롤한다.
+   · 스크롤바 자리(scrollbar-gutter)를 프레임에서 빼서 로고가 정확히 가운데에 온다.
+   (모바일 768px 이하는 사진이 글 위로 쌓이는 한 칸 배치라서 기존처럼 팝업 전체가 스크롤)
+========================================== */
+@media (min-width: 769px) {
+  .dept-root .dept-message-frame {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    scrollbar-gutter: auto;
+  }
+
+  .dept-root .dept-message-logo {
+    flex: none;
+  }
+
+  .dept-root .dept-message-body {
+    flex: 1;
+    min-height: 0;
+    grid-template-rows: minmax(0, 1fr);
+  }
+
+  .dept-root .dept-message-photo {
+    align-self: start;
+  }
+
+  /* 이름·직책은 고정, 그 아래(한 줄 문구 + 본문 = dept-message-scroll)만 스크롤 */
+  .dept-root .dept-message-text {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    height: 100%;
+  }
+
+  .dept-root .dept-message-text > * {
+    flex: none;
+  }
+
+  .dept-root .dept-message-text > .dept-message-scroll {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    padding-right: 14px;     /* 스크롤바와 글 사이 간격 */
+  }
 }

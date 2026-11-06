@@ -430,7 +430,7 @@ const MainPage = () => {
                 {committeeByTeam.map(({ team, names }) => (
                   <div className="credit-team" key={team}>
                     <strong>{team}</strong>
-                    <span>{names.join(' ')}</span>
+                    <span>{names.join(', ')}</span>
                   </div>
                 ))}
               </div>
