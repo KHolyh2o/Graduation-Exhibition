@@ -158,11 +158,9 @@ const DetailPage = () => {
 
           {/* 오른쪽: 작품 콘텐츠 */}
           <article className="detail-work-content">
-            <div
-              className={`detail-main-media${work.videoUrl ? '' : ' is-empty'}`}
-              aria-label="작품 대표 영상"
-            >
-              {work.videoUrl && (
+            {/* 영상 링크가 없는 작품은 회색 박스를 두지 않고 판넬(브로슈어)이 바로 위에서 시작한다 */}
+            {work.videoUrl && (
+              <div className="detail-main-media" aria-label="작품 대표 영상">
                 <iframe
                   src={toEmbedUrl(work.videoUrl)}
                   title={getWorkTitle(work)}
@@ -170,8 +168,8 @@ const DetailPage = () => {
                   allowFullScreen
                   referrerPolicy="strict-origin-when-cross-origin"
                 />
-              )}
-            </div>
+              </div>
+            )}
 
             <div
               className={`detail-poster${proposals.length ? ' has-image' : ' is-empty'}`}

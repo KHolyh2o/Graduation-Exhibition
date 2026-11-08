@@ -46,8 +46,8 @@
 
 | 테이블 | 속성 |
 |---|---|
-| **graduates** | `id`, **`studentId`(PK, 학번)**, `name`, `englishName`, `tab`·`role`(필터 코드), `jobTitle`(화면 직함), `profileImage`, `intro`(팝업용 짧은 소개), `workIntro`(작품 상세용 긴 소개), `committeeTeam`(위원회 팀, 없으면 비움), `email`, `phone` |
-| **projects** | **`id`(PK)**, `studentId` *또는* `studentIds[]`(공동 작품) → graduates 참조, `tab`, `role`/`roles[]`, `title`, `thumbnail`, `proposalImages[]`(판넬), `videoUrl`, `description`, `contact` |
+| **graduates** | `id`, **`studentId`(PK, 학번)**, `name`, `englishName`, `tab`·`role`(필터 코드), `jobTitle`(화면 직함), `profileImage`, `intro`(팝업용 짧은 소개), `workIntro`(작품 상세용 긴 소개), `committeeTeam`(위원회 팀, 없으면 비움), `email`, `phone`, **`introVideoUrl`**(1분 자기소개 YouTube, 없으면 비움) |
+| **projects** | **`id`(PK)**, `studentId` *또는* `studentIds[]`(공동 작품) → graduates 참조, `tab`, `role`/`roles[]`, `title`, `thumbnail`, `proposalImages[]`(판넬), `videoUrl`(없으면 영상 칸 없이 판넬이 바로 시작), `description`, `contact` |
 | **teamProjects** | **`id`(PK)**, `teamName`, `group`, `title`(선택), `thumbnail`, `proposalImages[]`, `teamImage`(단체사진), `videoUrl`, `description`, `members[]` = `{name, role, studentId}` → graduates 참조 |
 | **professors** | `id`, `name`, `role`(학부장·지도교수 등), `photo`, `cardPhoto`(카드용 크롭, 선택), `headline`, `message`(격려사, `\n` 줄바꿈) |
 | **archives** | `year`, `theme`, `url`(그 해 전시 사이트), `thumbnail` |
@@ -293,6 +293,7 @@ Graduation-Exhibition/
     │   ├── SiteEffects              ← 전 페이지 공통 효과: 스크롤 등장(.fx-reveal), 페이지 이동 시 페이드(.fx-leaving)
     │   ├── GraduateModal            ← 졸업생 프로필 팝업 (메인 슬라이더·졸업생 페이지·작품 상세에서 공용)
     │   ├── SafeImg                  ← 이미지 로딩 실패 시 기본 이미지로 대체
+    │   ├── ScrollTopButton          ← 맨 위로 이동 버튼 (App 에서 한 번만 마운트, 스타일은 index.css 의 .scroll-top-button 한 곳)
     │   └── SkeletonCard             ← 로딩·빈 상태 컴포넌트
     │
     ├── data/               ← ★ "DB" (§5)
@@ -356,7 +357,7 @@ Graduation-Exhibition/
 
 ### 5.3 각 데이터의 필드
 
-**graduates** (`src/data/graduates.js`, CSV 컬럼: `id, studentId, name, englishName, tab, role, jobTitle, profileImage, intro, workIntro, committeeTeam, email, phone`)
+**graduates** (`src/data/graduates.js`, CSV 컬럼: `id, studentId, name, englishName, tab, role, jobTitle, profileImage, intro, workIntro, committeeTeam, email, phone, introVideoUrl`)
 
 | 필드 | 설명 |
 |------|------|
@@ -365,6 +366,7 @@ Graduation-Exhibition/
 | `intro` | 졸업생 팝업용 짧은 소개 / `workIntro`: 작품 상세 왼쪽용 긴 소개 |
 | `committee`, `committeeTeam` | 졸업전시위원회 여부와 팀명 (기획팀/디자인팀/개발팀/영상팀/운영팀) → 메인 크레딧 섹션 |
 | `email`, `phone` | 팝업에 표시. ⚠ 개인정보 (§14) |
+| `introVideoUrl` | 학생 소개 팝업 하단에 나오는 **1분 자기소개 영상**. 이 칸만 쓰고, 비어 있으면 영상 영역이 아예 빠진다 (작품·팀 영상을 대신 보여 주지 않음) |
 
 **projects** (`src/data/projects.js`)
 
@@ -374,7 +376,7 @@ Graduation-Exhibition/
 | `tab`, `role`, `roles` | 탭/직군. 한 작품이 여러 직군이면 `roles` 배열 |
 | `studentId` / `studentIds` | 단독 / 공동 작품. 공동(2명 이상)은 **M-team** 으로 분류 |
 | `thumbnail`, `proposalImages[]` | 목록 썸네일 / 상세 세로 판넬 이미지(여러 장 가능) |
-| `videoUrl` | YouTube URL (`watch?v=ID` 형식) |
+| `videoUrl` | YouTube URL. **`https://youtu.be/영상ID` 형식으로 통일** (쇼츠 주소 `youtube.com/shorts/…` 는 사이트가 읽지 못하므로 영상ID 로 바꿔 쓸 것). 비어 있으면 작품 상세에 영상 칸이 없고 판넬이 맨 위에서 시작한다 |
 | `description`, `contact` | 설명, 연락처 |
 
 **teamProjects** (`src/data/teamProjects.js`) — 창업캡스톤 = U300 = 한이음 (§12)
@@ -448,6 +450,24 @@ src/data/projects.js 등 생성 (덮어쓰기)
    ▼
 npm run validate  →  npm run dev 로 눈으로 확인  →  npm run build
 ```
+
+### 6.1-1 ⚠ projects / teamProjects 는 CSV 로 다시 만들기 전에 확인할 것
+
+26년에는 `src/data/projects.js`, `teamProjects.js` 를 CSV 이후에 **직접 고친 부분**(제목·팀명·영상 링크 등)이 있어서, `npm run csv:projects` / `csv:teamProjects` 로 다시 만들면 현재 JS 와 **내용이 달라질 수 있습니다.** (graduates 는 CSV 와 JS 가 일치함을 확인함)
+- 다시 만들기 전에 `git status` 가 깨끗한지 보고, 만든 뒤 `git diff` 로 의도하지 않은 변경이 없는지 확인하세요.
+- 값을 고칠 때는 **JS 와 CSV 를 같은 값으로 함께** 고쳐 두면 안전합니다.
+
+### 6.1-2 영상 링크 넣는 방법 (운영팀 "유튜브 링크 정리" 엑셀)
+
+| 엑셀 종류 | 넣을 곳 |
+|---|---|
+| 자기소개 영상 | `graduates.csv` 의 `introVideoUrl` → `npm run csv:graduates csv_data/graduates.csv` |
+| 작품 영상 / 중간발표 영상 | 해당 작품의 `videoUrl` (영상전공은 작품 영상, 멀티미디어는 중간발표 영상) |
+| 창업캡스톤 | 해당 팀의 `videoUrl` |
+
+- 링크는 `https://youtu.be/영상ID` 로 정리 (`?si=…` 같은 꼬리표 제거).
+- 엑셀의 영상 제목과 작품명이 다를 수 있으므로 학생 이름 + 영상 주제로 짝을 확인하고, 애매하면 담당 학생에게 되묻기.
+- 영상이 없는 작품은 `videoUrl` 을 비워 두면 된다 (빈 박스는 나오지 않음).
 
 ### 6.2 자주 쓰는 순서
 

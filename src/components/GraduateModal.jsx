@@ -57,8 +57,8 @@ const GraduateModal = ({ student, onClose }) => {
   const contact = student.email
     ? { email: student.email }
     : studentProjects.find((p) => p.contact?.email)?.contact;
-  // 1분 자기소개 영상(graduates.js 의 introVideoUrl)이 우선, 없으면 작품 영상
-  const youtubeId = getYoutubeId(student.introVideoUrl) || getYoutubeId(studentProjects.find((p) => p.videoUrl)?.videoUrl);
+  // 팝업 영상은 1분 자기소개(graduates.js 의 introVideoUrl)만 쓴다. 작품·팀 영상은 작품 상세에 따로 있으므로 여기서 다시 보여 주지 않는다
+  const youtubeId = getYoutubeId(student.introVideoUrl);
 
   // 변형(transform)이 걸린 부모 안에서도 화면 전체를 덮도록 body 로 옮겨 그린다
   return createPortal(
@@ -143,22 +143,21 @@ const GraduateModal = ({ student, onClose }) => {
           </div>
         </section>
 
-        <section className="graduate-video-section">
-          <div className="graduate-video">
-            {youtubeId ? (
+        {/* 영상이 없으면 빈 박스를 두지 않고 영역 자체를 뺀다 */}
+        {youtubeId && (
+          <section className="graduate-video-section">
+            <div className="graduate-video">
               <iframe
                 src={`https://www.youtube-nocookie.com/embed/${youtubeId}`}
-                title={student.introVideoUrl ? `${student.name} 1분 자기소개` : `${student.name} 프로젝트 영상`}
+                title={`${student.name} 1분 자기소개`}
                 loading="lazy"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 referrerPolicy="strict-origin-when-cross-origin"
                 allowFullScreen
               ></iframe>
-            ) : (
-              <div className="graduate-video-placeholder"></div>
-            )}
-          </div>
-        </section>
+            </div>
+          </section>
+        )}
         </div>
         </div>
       </div>
