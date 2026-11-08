@@ -611,3 +611,40 @@ body:has(.project-page) {
     white-space: normal;
   }
 }
+
+/* ==========================================
+   데스크톱: 첫 화면에 작품 첫 줄이 바로 보이도록 세로 여백을 줄인다 (768px 이하 모바일은 그대로)
+   머리말(Portfolio) → 카테고리 → 필터 → 소제목 사이 간격을 합쳐 약 100px 절약.
+   (sha_copy projectpage.css 의 값보다 작게 잡은 부분이라 디자이너 수정과 겹치면 이 블록을 먼저 확인할 것)
+========================================== */
+@media (min-width: 769px) {
+  .project-page .intro {
+    margin-top: 10px;
+  }
+
+  .project-page .intro h1 {
+    font-size: 68px;
+  }
+
+  .project-page .media-section {
+    margin-top: 22px;
+  }
+
+  .project-page .role-filters {
+    margin-top: 20px;
+  }
+
+  /* 브랜드 제안 등 소제목 위 간격 */
+  .project-page .portfolio-kind {
+    margin-top: 26px;
+  }
+
+  /* 소제목이 없는 탭(영상미디어·팀프로젝트)은 필터 바로 아래에서 카드가 시작 */
+  .project-page .portfolio-grid {
+    margin-top: 28px;
+  }
+
+  .project-page .portfolio-kind + .portfolio-grid {
+    margin-top: 22px;
+  }
+}

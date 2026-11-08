@@ -1,5 +1,6 @@
-import React, { useState, useMemo } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import React, { useEffect, useMemo } from 'react';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
+import { saveProjectListUrl } from '../lib/projectListReturn';
 import { PROJECT_TABS, TAB_MAP, getSubCategories } from '../data/projectTabs';
 import { allWorks, compareByAuthor, getWorkAuthor, getWorkKind, getTeamMemberNames, getWorkTitle, matchesSub, WORK_KINDS } from '../data/works';
 import { FALLBACK, assetUrl } from '../hooks/useImageFallback';
@@ -11,11 +12,18 @@ const matchesKeyword = (work, keyword) =>
 
 const ProjectPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [filter, setFilter] = useState('all');
+  const location = useLocation();
 
-  // ?q=<검색어> (Navbar 검색), ?category=<탭 id> (상세 페이지 돌아가기)
+  // ?q=<검색어> (Navbar 검색), ?category=<탭 id>, ?role=<직군/필터 id> — 선택 상태를 전부 주소에 담아 두어서
+  // 작품 상세에 들어갔다가 돌아와도 같은 탭·필터·검색 그대로 보인다
   const keyword = (searchParams.get('q') ?? '').trim().toLowerCase();
   const categoryParam = searchParams.get('category');
+  const roleParam = searchParams.get('role');
+
+  // 지금 목록 주소를 기억 — 작품 상세의 "돌아가기"가 같은 탭·필터로 돌려보낸다
+  useEffect(() => {
+    saveProjectListUrl(`${location.pathname}${location.search}`);
+  }, [location.pathname, location.search]);
 
   // 카테고리 지정이 없고 검색 중이면, 결과가 있는 첫 탭을 연다
   const activeTab = useMemo(() => {
@@ -29,6 +37,14 @@ const ProjectPage = () => {
 
   const tab = TAB_MAP[activeTab];
   const filters = [{ id: 'all', label: 'ALL' }, ...getSubCategories(tab)];
+  // 주소의 role 이 이 탭에 없는 값이면 ALL
+  const filter = filters.some((f) => f.id === roleParam) ? roleParam : 'all';
+
+  const setFilter = (id) => {
+    const next = new URLSearchParams(searchParams);
+    if (id === 'all') next.delete('role'); else next.set('role', id);
+    setSearchParams(next, { replace: true });
+  };
 
   const visible = allWorks
     .filter((w) => w.tab === activeTab && matchesSub(w, filter) && matchesKeyword(w, keyword))
@@ -42,8 +58,8 @@ const ProjectPage = () => {
   const switchTab = (id) => {
     const next = new URLSearchParams(searchParams);
     next.set('category', id);
+    next.delete('role');   // 탭을 바꾸면 필터는 ALL 부터
     setSearchParams(next, { replace: true });
-    setFilter('all');
   };
 
   return (

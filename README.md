@@ -280,6 +280,7 @@ Graduation-Exhibition/
     ├── pages/              ← 라우트 1개 = 파일 1개 (+ 같은 이름 .css)
     │   ├── MainPage        ← 히어로, 콘셉트, TARGET 3색 카드, 졸업생 슬라이더, 전시안내/지도, 크레딧(위원회), 아카이브
     │   ├── ProjectPage     ← 작품소개: 탭(멀티미디어/영상미디어/팀) + 직군 필터 + 카드 목록
+    │   │                      선택 상태는 주소에 담음: `?category=<탭>&role=<직군>&q=<검색어>` → 작품 상세에 갔다가 "돌아가기"(또는 브라우저 뒤로가기)해도 같은 탭·필터 유지
     │   ├── DetailPage      ← 작품 상세 (/project/:id): 판넬 이미지, 영상, 작가 소개, Other Project
     │   ├── StudentPage     ← 졸업생 목록 (?student=<학번> 이면 팝업이 열림)
     │   ├── DepartmentPage  ← 학과소개: 교수진, 교육과정, 핵심 역량
@@ -291,6 +292,7 @@ Graduation-Exhibition/
     ├── components/
     │   ├── Navbar / Footer          ← 공통 헤더·푸터
     │   ├── SiteEffects              ← 전 페이지 공통 효과: 스크롤 등장(.fx-reveal), 페이지 이동 시 페이드(.fx-leaving)
+    │   │                               (이동 효과는 새 화면이 그려진 뒤에 풀어야 이전 화면 잔상이 안 생긴다)
     │   ├── GraduateModal            ← 졸업생 프로필 팝업 (메인 슬라이더·졸업생 페이지·작품 상세에서 공용)
     │   ├── SafeImg                  ← 이미지 로딩 실패 시 기본 이미지로 대체
     │   ├── VideoCarousel            ← 작품 상세의 영상 (1~2개, 2개면 점·화살표로 전환)
@@ -311,7 +313,10 @@ Graduation-Exhibition/
     │   ├── useImageFallback.js   assetUrl()(base 경로 보정), FALLBACK 상수
     │   └── useScrollReveal.js    IntersectionObserver 기반 등장 효과
     │
-    └── lib/memoryApi.js    ← Supabase REST 호출 (fetch 직접)
+    └── lib/
+        ├── memoryApi.js            ← Supabase REST 호출 (fetch 직접)
+        └── projectListReturn.js    ← 작품소개 목록 주소(탭·필터·검색어)를 세션에 기억 → 작품 상세 "돌아가기"가 그대로 복원
+                                   (SiteEffects 가 링크 클릭을 가로채 `state` 가 사라지므로 링크 state 대신 이 방식을 쓴다)
 ```
 
 ---

@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useRef } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 // sha_copy/js/common.js 의 "GLOBAL INTERACTION" 이식.
 //  1) 스크롤로 화면에 들어오면 아래에서 서서히 등장 (.fx-reveal → .fx-visible)
@@ -53,6 +53,9 @@ const getDelay = (el) => {
 
 const SiteEffects = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  // 페이지 이동 효과를 끝내는 함수 (아래 2) 효과가 만들어 두고, 주소가 바뀐 뒤에 부른다)
+  const finishLeavingRef = useRef(null);
 
   // 1) 스크롤 등장 효과
   useEffect(() => {
@@ -116,6 +119,18 @@ const SiteEffects = () => {
     const base = import.meta.env.BASE_URL.replace(/\/$/, '');   // '/2026'
     let navigating = false;
     let timer = null;
+    let safetyTimer = null;
+
+    // 새 화면이 실제로 그려진 뒤에 호출한다. 맨 위로 올리고 본문을 다시 보이게 한다.
+    // (navigate 직후에 바로 풀면, 아직 내려받는 중인 새 페이지 대신 이전 화면이 잠깐 다시 보이는 잔상이 생긴다)
+    const finishLeaving = () => {
+      window.clearTimeout(safetyTimer);
+      if (!navigating && !document.body.classList.contains('fx-leaving')) return;
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      document.body.classList.remove('fx-leaving');
+      navigating = false;
+    };
+    finishLeavingRef.current = finishLeaving;
 
     const onClick = (event) => {
       if (event.defaultPrevented || event.button !== 0) return;
@@ -141,9 +156,8 @@ const SiteEffects = () => {
       document.body.classList.add('fx-leaving');
       timer = window.setTimeout(() => {
         navigate(to || '/');
-        window.scrollTo({ top: 0, behavior: 'instant' });
-        document.body.classList.remove('fx-leaving');
-        navigating = false;
+        // 주소가 바뀌지 않거나 페이지를 못 불러오는 경우에도 화면이 숨겨진 채로 남지 않게 안전장치
+        safetyTimer = window.setTimeout(finishLeaving, 4000);
       }, 400);
     };
 
@@ -151,9 +165,17 @@ const SiteEffects = () => {
     return () => {
       document.removeEventListener('click', onClick, true);
       window.clearTimeout(timer);
+      window.clearTimeout(safetyTimer);
+      finishLeavingRef.current = null;
       document.body.classList.remove('fx-leaving');
     };
   }, [navigate]);
+
+  // 3) 주소가 바뀌어 새 화면이 그려진 다음 프레임에 이동 효과를 마무리
+  useEffect(() => {
+    const id = requestAnimationFrame(() => requestAnimationFrame(() => finishLeavingRef.current?.()));
+    return () => cancelAnimationFrame(id);
+  }, [location.pathname, location.search]);
 
   return null;
 };
