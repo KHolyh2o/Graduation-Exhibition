@@ -47,7 +47,7 @@
 | 테이블 | 속성 |
 |---|---|
 | **graduates** | `id`, **`studentId`(PK, 학번)**, `name`, `englishName`, `tab`·`role`(필터 코드), `jobTitle`(화면 직함), `profileImage`, `intro`(팝업용 짧은 소개), `workIntro`(작품 상세용 긴 소개), `committeeTeam`(위원회 팀, 없으면 비움), `email`, `phone`, **`introVideoUrl`**(1분 자기소개 YouTube, 없으면 비움) |
-| **projects** | **`id`(PK)**, `studentId` *또는* `studentIds[]`(공동 작품) → graduates 참조, `tab`, `role`/`roles[]`, `title`, `thumbnail`, `proposalImages[]`(판넬), `videoUrl`(작품 영상, 없으면 영상 칸 없이 판넬이 바로 시작), `videoUrl2`(선택, 작품 소개 영상), `description`, `contact` |
+| **projects** | **`id`(PK)**, `studentId` *또는* `studentIds[]`(공동 작품) → graduates 참조, `tab`, `role`/`roles[]`, `title`, `thumbnail`, `proposalImages[]`(판넬), `videoUrl`(작품 영상, 없으면 영상 칸 없이 판넬이 바로 시작), `videoUrl2`(선택, 작품 소개 영상), `teamImage`(선택, 공동 작품(M-team)의 단체 프로필 사진), `description`, `contact` |
 | **teamProjects** | **`id`(PK)**, `teamName`, `group`, `title`(선택), `thumbnail`, `proposalImages[]`, `teamImage`(단체사진), `videoUrl`, `description`, `members[]` = `{name, role, studentId}` → graduates 참조 |
 | **professors** | `id`, `name`, `role`(학부장·지도교수 등), `photo`, `cardPhoto`(카드용 크롭, 선택), `headline`, `message`(격려사, `\n` 줄바꿈) |
 | **archives** | `year`, `theme`, `url`(그 해 전시 사이트), `thumbnail` |
@@ -377,6 +377,7 @@ Graduation-Exhibition/
 | `tab`, `role`, `roles` | 탭/직군. 한 작품이 여러 직군이면 `roles` 배열 |
 | `studentId` / `studentIds` | 단독 / 공동 작품. 공동(2명 이상)은 **M-team** 으로 분류 |
 | `thumbnail`, `proposalImages[]` | 목록 썸네일 / 상세 세로 판넬 이미지(여러 장 가능) |
+| `teamImage` | (선택) 공동 작품(M-team)의 단체 프로필 사진 `/images/teams/<작품 id>.webp`. 배경 투명 WebP, 폭 1400px 이하로 줄여서 올린다. 작품 상세 왼쪽에 표시 |
 | `videoUrl2` | (선택) 두 번째 영상 = **작품 소개 영상**. 영상이 2개면 작품 상세 영상 아래에 점(●●)과 좌우 화살표가 생겨 넘길 수 있다 (`VideoCarousel`). **보이는 순서는 작품 소개 영상(`videoUrl2`) → 작품 영상(`videoUrl`)** (`works.js` 의 `getWorkVideos` 에서 정함). 영상은 **작품당 최대 2개** |
 | `videoUrl` | YouTube URL. **`https://youtu.be/영상ID` 형식으로 통일** (쇼츠 주소 `youtube.com/shorts/…` 는 사이트가 읽지 못하므로 영상ID 로 바꿔 쓸 것). 비어 있으면 작품 상세에 영상 칸이 없고 판넬이 맨 위에서 시작한다 |
 | `description`, `contact` | 설명, 연락처 |
@@ -421,7 +422,7 @@ Graduation-Exhibition/
 | 졸업생 프로필 | `public/images/graduates/` | `<학번>_<이름>_프로필.png` |
 | 작품 썸네일 | `public/images/projects/thumbnails/` | `<작품 id>.webp` |
 | 작품 판넬(상세) | `public/images/projects/proposals/` | `<작품 id>.webp` |
-| 팀 단체사진 | `public/images/teams/` | `<팀 id>.webp` |
+| 팀 단체사진 (U300 팀, M-team 공동 작품) | `public/images/teams/` | `<팀 id 또는 작품 id>.webp` (예: `t-u300-01.webp`, `p-mm-func-01.webp`) |
 | 교수진 | `public/images/professors/` | – |
 | 기본 이미지 | `public/images/no-image.svg`, `no-avatar.svg` | 이미지 누락 시 자동 대체 |
 

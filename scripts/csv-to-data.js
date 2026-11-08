@@ -20,7 +20,8 @@
  *
  * [projects.csv]
  *   id, studentId, tab, role, title, thumbnail, description, videoUrl,
- *   proposalImages, contactEmail, contactPhone, videoUrl2
+ *   proposalImages, contactEmail, contactPhone, videoUrl2, teamImage
+ *   (teamImage: 선택. M-team(공동 작품) 단체 프로필 사진 /images/teams/<작품id>.webp — 작품 상세 왼쪽에 표시)
  *   (videoUrl2: 선택. 작품 소개 영상 등 두 번째 영상. 있으면 작품 상세에서 영상 아래 점(●●)으로 전환)
  *   (studentId: 함께 한 작품은 세미콜론으로 구분  ex. 202311198;202311153)
  *   (proposalImages: 세미콜론으로 구분  ex. /images/a.jpg;/images/b.jpg)
@@ -134,6 +135,7 @@ function generateProjects(rows) {
       `    videoUrl: '${r.videoUrl}',\n` +
       (r.videoUrl2 ? `    videoUrl2: '${r.videoUrl2}',\n` : '') +
       `    proposalImages: [${proposals}],\n` +
+      (r.teamImage ? `    teamImage: '${r.teamImage}',\n` : '') +
       `    contact: { email: '${r.contactEmail}', phone: ${r.contactPhone ? `'${r.contactPhone}'` : 'null'} },\n` +
       `  },`
     );

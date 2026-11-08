@@ -157,6 +157,7 @@ export const projects = [
     description: '',
     videoUrl: '',
     proposalImages: ['/images/projects/proposals/p-mm-func-01.webp'],
+    teamImage: '/images/teams/p-mm-func-01.webp',
     contact: { email: '', phone: null },
   },
   {
@@ -167,6 +168,7 @@ export const projects = [
     description: '',
     videoUrl: '',
     proposalImages: ['/images/projects/proposals/p-mm-func-02.webp'],
+    teamImage: '/images/teams/p-mm-func-02.webp',
     contact: { email: '', phone: null },
   },
   {
@@ -287,6 +289,7 @@ export const projects = [
     description: '',
     videoUrl: '',
     proposalImages: ['/images/projects/proposals/p-mm-device-03.webp'],
+    teamImage: '/images/teams/p-mm-device-03.webp',
     contact: { email: '', phone: null },
   },
   {
@@ -297,6 +300,7 @@ export const projects = [
     description: '',
     videoUrl: 'https://youtu.be/PU7NmKouYUI',
     proposalImages: ['/images/projects/proposals/p-mm-device-04.webp'],
+    teamImage: '/images/teams/p-mm-device-04.webp',
     contact: { email: '', phone: null },
   },
   {
@@ -307,6 +311,7 @@ export const projects = [
     description: '',
     videoUrl: 'https://youtu.be/mRuusq3G1QM',
     proposalImages: ['/images/projects/proposals/p-mm-device-05.webp'],
+    teamImage: '/images/teams/p-mm-device-05.webp',
     contact: { email: '', phone: null },
   },
   {
