@@ -135,22 +135,6 @@ const ProjectPage = () => {
         </section>
       </main>
 
-      <button
-        type="button"
-        className="back-to-top"
-        aria-label="맨 위로 이동"
-        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-      >
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path
-            d="M12 21V3M4.5 10.5 12 3l7.5 7.5"
-            stroke="currentColor"
-            strokeWidth="1.7"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </button>
     </div>
   );
 };

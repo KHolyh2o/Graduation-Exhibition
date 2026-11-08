@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import SiteEffects from './components/SiteEffects';
+import ScrollTopButton from './components/ScrollTopButton';
 import MainPage from './pages/MainPage';
 import NotFoundPage from './pages/NotFoundPage';
 import './App.css';
@@ -38,6 +39,7 @@ function App() {
           </Suspense>
         </div>
         <Footer />
+        <ScrollTopButton />
       </div>
     </Router>
   );

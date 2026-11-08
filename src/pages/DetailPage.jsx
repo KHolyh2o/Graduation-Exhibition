@@ -185,14 +185,6 @@ const DetailPage = () => {
         </div>
       </main>
 
-      <button
-        type="button"
-        className="detail-top-button"
-        aria-label="맨 위로 이동"
-        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-      >
-        ↑
-      </button>
     </div>
   );
 };

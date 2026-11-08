@@ -221,45 +221,9 @@ body:has(.student-page) {
 }
 
 
-/* =========================
-   TOP BUTTON
-========================= */
 
-.student-page .top-button {
-  position: fixed;
-  right: 30px;
-  bottom: 45px;
-  z-index: 100;
 
-  width: 42px;
-  height: 42px;
 
-  background: #fff;
-  border: 1px solid #e6e6e6;
-  border-radius: 50%;
-
-  font-family: Arial, sans-serif;
-  font-size: 24px;
-  font-weight: 300;
-
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(10px);
-
-  transition: 0.25s ease;
-}
-
-.student-page .top-button.show {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-.student-page .top-button:hover {
-  background: #f7f7f7;
-}
 
 
 /* =========================
@@ -342,10 +306,6 @@ body:has(.student-page) {
     font-size: 11px;
   }
 
-  .student-page .top-button {
-    right: 16px;
-    bottom: 22px;
-  }
 
 }
 

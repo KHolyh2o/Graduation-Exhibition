@@ -279,29 +279,7 @@ body:has(.project-page) {
   color: #777;
 }
 
-/* --------------------------------------------------
-   맨 위로 (플로팅)
--------------------------------------------------- */
-.project-page .back-to-top {
-  position: fixed;
-  right: max(24px, calc((100vw - 1120px) / 2 - 15px));
-  bottom: 54px;
-  z-index: 5;
-  width: 46px;
-  height: 46px;
-  display: grid;
-  place-items: center;
-  color: #111;
-  background: #fff;
-  border: none;
-  border-radius: 50%;
-  box-shadow: 0 2px 6px rgb(0 0 0 / 0.17);
-}
 
-.project-page .back-to-top svg {
-  width: 29px;
-  height: 29px;
-}
 
 /* =========================
    TABLET
@@ -421,12 +399,6 @@ body:has(.project-page) {
     font-size: 12px;
   }
 
-  .project-page .back-to-top {
-    width: 40px;
-    height: 40px;
-    right: 18px;
-    bottom: 20px;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {

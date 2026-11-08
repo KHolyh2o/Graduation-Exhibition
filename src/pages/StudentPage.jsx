@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
+import React, { useState, useRef, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { graduates } from '../data/graduates';
 import SafeImg from '../components/SafeImg';
@@ -21,7 +21,6 @@ const matchFilter = (g, filter) => {
 
 const StudentPage = () => {
   const [filter, setFilter] = useState('all');
-  const [showTop, setShowTop] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const lastTriggerRef = useRef(null);
 
@@ -45,12 +44,6 @@ const StudentPage = () => {
     if (trigger?.isConnected) trigger.focus({ preventScroll: true });
     lastTriggerRef.current = null;
   };
-
-  useEffect(() => {
-    const onScroll = () => setShowTop(window.scrollY > 400);
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
 
   return (
     <div className="student-page">
@@ -108,14 +101,6 @@ const StudentPage = () => {
         </section>
       </main>
 
-      <button
-        type="button"
-        className={`top-button${showTop ? ' show' : ''}`}
-        aria-label="맨 위로 이동"
-        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-      >
-        ↑
-      </button>
 
       {selected && <GraduateModal student={selected} onClose={closeModal} />}
     </div>

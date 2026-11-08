@@ -88,3 +88,61 @@ body.fx-leaving main {
     transition: none;
   }
 }
+
+
+/* ===================================================
+   맨 위로 이동 버튼 — 전 페이지 공통 (components/ScrollTopButton.jsx)
+   디자인·위치는 여기 한 곳에서만 정한다. 페이지 CSS 에 따로 만들지 말 것.
+   400px 이상 스크롤하면 나타난다 (.show)
+=================================================== */
+.scroll-top-button {
+  position: fixed;
+  right: 25px;
+  bottom: 45px;
+  z-index: 100;
+
+  width: 45px;
+  height: 45px;
+
+  display: grid;
+  place-items: center;
+
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+
+  background: #fff;
+  color: #111;
+  cursor: pointer;
+
+  box-shadow: 0 2px 7px rgb(0 0 0 / 15%);
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+}
+
+.scroll-top-button.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.scroll-top-button:hover {
+  background: #f7f7f7;
+}
+
+.scroll-top-button svg {
+  width: 27px;
+  height: 27px;
+}
+
+@media (max-width: 1024px) {
+  .scroll-top-button {
+    width: 40px;
+    height: 40px;
+    right: 18px;
+    bottom: 20px;
+  }
+}
