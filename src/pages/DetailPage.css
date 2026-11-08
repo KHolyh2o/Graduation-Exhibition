@@ -263,11 +263,83 @@ body:has(.detail-page) .common-footer {
   gap: 18px;
 }
 
+.detail-page .detail-video {
+  width: 100%;
+}
+
 .detail-page .detail-main-media {
+  position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
   background: #dedede;
   overflow: hidden;
+}
+
+/* 영상 전환 화살표 (영상이 2개일 때만) — 영상 양옆 가운데, 유튜브 하단 조작줄과 겹치지 않게 */
+.detail-page .detail-video-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  transform: translateY(-50%);
+
+  width: 36px;
+  height: 56px;
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+
+  background: rgb(0 0 0 / 35%);
+  color: #fff;
+  font-size: 34px;
+  line-height: 1;
+  cursor: pointer;
+
+  opacity: 0;
+  transition: opacity 0.2s ease, background 0.2s ease;
+}
+
+.detail-page .detail-video-arrow.is-prev { left: 0; border-radius: 0 4px 4px 0; }
+.detail-page .detail-video-arrow.is-next { right: 0; border-radius: 4px 0 0 4px; }
+
+.detail-page .detail-main-media:hover .detail-video-arrow,
+.detail-page .detail-video-arrow:focus-visible {
+  opacity: 1;
+}
+
+.detail-page .detail-video-arrow:hover {
+  background: rgb(0 0 0 / 55%);
+}
+
+/* 영상 개수 표시 점 (●●) */
+.detail-page .detail-video-dots {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  padding: 16px 0 2px;
+}
+
+.detail-page .detail-video-dot {
+  width: 14px;
+  height: 14px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: #c9c9c9;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.detail-page .detail-video-dot:hover {
+  background: #9a9a9a;
+}
+
+.detail-page .detail-video-dot.is-active {
+  background: #444;
+  transform: scale(1.15);
+}
+
+@media (hover: none) {
+  .detail-page .detail-video-arrow { opacity: 0.85; }   /* 터치 화면은 호버가 없어 항상 보이게 */
 }
 
 .detail-page .detail-main-media iframe {
@@ -296,6 +368,17 @@ body:has(.detail-page) .common-footer {
   display: block;
   width: 100%;
   height: auto;
+}
+
+/* 영상전공 판넬(1600×2264)은 이미지 맨 위에 흰 여백이 187px(폭의 11.69%) 들어 있다.
+   멀티미디어·팀 판넬은 여백이 없으므로, 영상전공만 그만큼 위로 당겨 영상과의 간격을 같게 맞춘다.
+   (이미지 파일은 그대로 두고 화면에서만 잘라낸다. 판넬을 다시 만들 때 여백 크기가 달라지면 이 값도 맞출 것) */
+.detail-page .detail-poster[data-tab='video'].has-image {
+  overflow: hidden;
+}
+
+.detail-page .detail-poster[data-tab='video'] img:first-child {
+  margin-top: -11.69%;
 }
 
 

@@ -2,9 +2,10 @@ import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { graduateByStudentId } from '../data/graduates';
 import { TAB_MAP } from '../data/projectTabs';
-import { getWorkById, getWorksByStudent, getWorkStudentIds, getWorkTitle, getSubLabel, isMTeamWork, toEmbedUrl } from '../data/works';
+import { getWorkById, getWorksByStudent, getWorkStudentIds, getWorkTitle, getSubLabel, isMTeamWork, getWorkVideos } from '../data/works';
 import { FALLBACK } from '../hooks/useImageFallback';
 import SafeImg from '../components/SafeImg';
+import VideoCarousel from '../components/VideoCarousel';
 import './DetailPage.css';
 
 const DetailPage = () => {
@@ -158,20 +159,17 @@ const DetailPage = () => {
 
           {/* 오른쪽: 작품 콘텐츠 */}
           <article className="detail-work-content">
-            {/* 영상 링크가 없는 작품은 회색 박스를 두지 않고 판넬(브로슈어)이 바로 위에서 시작한다 */}
-            {work.videoUrl && (
-              <div className="detail-main-media" aria-label="작품 대표 영상">
-                <iframe
-                  src={toEmbedUrl(work.videoUrl)}
-                  title={getWorkTitle(work)}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                  referrerPolicy="strict-origin-when-cross-origin"
-                />
-              </div>
-            )}
+            {/* 영상 링크가 없는 작품은 영상 칸 없이 판넬(브로슈어)이 바로 위에서 시작한다.
+                영상이 2개(작품 영상 / 작품 소개 영상)면 점과 화살표로 넘긴다 */}
+            <VideoCarousel
+              key={work.id}
+              videos={getWorkVideos(work)}
+              title={getWorkTitle(work)}
+              labels={['작품 영상', '작품 소개 영상']}
+            />
 
             <div
+              data-tab={work.tab}
               className={`detail-poster${proposals.length ? ' has-image' : ' is-empty'}`}
               aria-label="작품 상세 이미지"
             >

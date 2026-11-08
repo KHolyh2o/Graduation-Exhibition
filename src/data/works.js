@@ -66,6 +66,9 @@ export const getWorksByStudent = (studentId) => [
   ...teamProjects.filter((t) => t.members?.some((m) => m.studentId === studentId)),
 ];
 
+// 작품에 붙은 영상 목록 (최대 2개: videoUrl = 작품 영상, videoUrl2 = 작품 소개 영상). 비어 있는 칸은 뺀다
+export const getWorkVideos = (work) => [work.videoUrl, work.videoUrl2].filter(Boolean);
+
 export const toEmbedUrl = (url) => {
   if (!url) return '';
   if (url.includes('/embed/')) return url;
