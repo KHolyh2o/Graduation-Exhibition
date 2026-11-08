@@ -30,6 +30,7 @@ export const graduates = [
     workIntro: '명확한 문제 정의와 탄탄한 로직 설계로 기획과 개발의 경계를 허무는 김성수입니다. 머릿속의 좋은 아이디어를 체계적으로 기획하는 것을 넘어, 실제 작동하는 서비스로 직접 개발하고 구현해 내는 과정 자체를 진심으로 즐깁니다. 기획자의 시선으로 모호함을 구체화하고, 개발자의 역량으로 최적의 해결책을 코드로 완성해 내며, AI를 주도적으로 활용하여 한 차원 더 높은 결과물을 도출합니다. 기획부터 개발까지 아우르는 넓은 시야와 실행력을 바탕으로, 사용자에게 본질적인 즐거움과 편리함을 선사하는 완성도 높은 서비스를 만들어가겠습니다.',
     committee: true, committeeTeam: '개발팀',
     email: 'holywater0116@gmail.com',
+    introVideoUrl: 'https://youtu.be/WQ3DJzTQ3Y0',
   },
   { id: 'g-06', studentId: '202311148', name: '김지현', englishName: 'Kim Jihyun',
     tab: 'video', role: 'production', jobTitle: '모션그래픽 · 영상 편집', profileImage: '/images/graduates/202311148_김지현_프로필.png',

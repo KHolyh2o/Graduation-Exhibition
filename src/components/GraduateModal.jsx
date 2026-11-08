@@ -57,7 +57,8 @@ const GraduateModal = ({ student, onClose }) => {
   const contact = student.email
     ? { email: student.email }
     : studentProjects.find((p) => p.contact?.email)?.contact;
-  const youtubeId = getYoutubeId(studentProjects.find((p) => p.videoUrl)?.videoUrl);
+  // 1분 자기소개 영상(graduates.js 의 introVideoUrl)이 우선, 없으면 작품 영상
+  const youtubeId = getYoutubeId(student.introVideoUrl) || getYoutubeId(studentProjects.find((p) => p.videoUrl)?.videoUrl);
 
   // 변형(transform)이 걸린 부모 안에서도 화면 전체를 덮도록 body 로 옮겨 그린다
   return createPortal(
@@ -147,7 +148,7 @@ const GraduateModal = ({ student, onClose }) => {
             {youtubeId ? (
               <iframe
                 src={`https://www.youtube-nocookie.com/embed/${youtubeId}`}
-                title={`${student.name} 프로젝트 영상`}
+                title={student.introVideoUrl ? `${student.name} 1분 자기소개` : `${student.name} 프로젝트 영상`}
                 loading="lazy"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 referrerPolicy="strict-origin-when-cross-origin"

@@ -145,7 +145,7 @@ export const teamProjects = [
   },
   {
     id: 't-u300-09', tab: 'team', group: 'u300',
-    teamName: '늘봄', title: '',
+    teamName: '메모리케어', title: '',
     thumbnail: '/images/projects/thumbnails/t-u300-09.webp',
     description: '치매 환자를 위한 AI 동반자 서비스',
     videoUrl: '',
