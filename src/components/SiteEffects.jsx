@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { takePendingScroll } from '../lib/projectListReturn';
 
 // sha_copy/js/common.js 의 "GLOBAL INTERACTION" 이식.
 //  1) 스크롤로 화면에 들어오면 아래에서 서서히 등장 (.fx-reveal → .fx-visible)
@@ -126,7 +127,8 @@ const SiteEffects = () => {
     const finishLeaving = () => {
       window.clearTimeout(safetyTimer);
       if (!navigating && !document.body.classList.contains('fx-leaving')) return;
-      window.scrollTo({ top: 0, behavior: 'instant' });
+      // 작품소개 목록으로 돌아오는 경우에는 있던 높이로 (그 외에는 맨 위로)
+      window.scrollTo({ top: takePendingScroll() ?? 0, behavior: 'instant' });
       document.body.classList.remove('fx-leaving');
       navigating = false;
     };

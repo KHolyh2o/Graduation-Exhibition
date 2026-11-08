@@ -20,3 +20,35 @@ export const getProjectListUrl = (workTab) => {
   } catch { /* 무시 */ }
   return null;
 };
+
+/* ── 스크롤 위치 복원 ───────────────────────────────────────────────
+   목록에서 내려가 있던 높이를 기억했다가, 작품 상세의 "돌아가기"(또는 브라우저 뒤로가기)로 돌아오면 그 높이로 되돌린다.
+   작품 소개 목록을 새로 여는 경우(메뉴 클릭 등)에는 복원하지 않고 맨 위부터 시작한다. */
+const SCROLL_KEY = 'project-list-scroll';
+const RESTORE_KEY = 'project-list-restore';
+
+// 목록 화면이 떠 있는 동안 스크롤할 때마다 호출 (주소와 함께 저장)
+export const saveListScroll = (url, y) => {
+  try { sessionStorage.setItem(SCROLL_KEY, JSON.stringify({ url, y: Math.round(y) })); } catch { /* 무시 */ }
+};
+
+// 작품 상세의 "돌아가기"를 눌렀다는 표시 (링크 이동은 새 이동(PUSH)이라 뒤로가기와 구분해야 한다)
+export const markRestoreScroll = () => {
+  try { sessionStorage.setItem(RESTORE_KEY, '1'); } catch { /* 무시 */ }
+};
+
+// 목록이 열릴 때 호출: 복원해야 하면 저장된 높이를, 아니면 null. 표시는 한 번 쓰면 지운다.
+export const takeScrollToRestore = (url, navigationType) => {
+  try {
+    const marked = sessionStorage.getItem(RESTORE_KEY) === '1';
+    sessionStorage.removeItem(RESTORE_KEY);
+    if (!marked && navigationType !== 'POP') return null;
+    const saved = JSON.parse(sessionStorage.getItem(SCROLL_KEY) ?? 'null');
+    return saved && saved.url === url && Number.isFinite(saved.y) ? saved.y : null;
+  } catch { return null; }
+};
+
+// SiteEffects 가 이동 효과를 마무리할 때 "맨 위로" 올리는데, 복원할 높이가 있으면 그 높이로 올리도록 넘겨 주는 값
+let pendingY = null;
+export const setPendingScroll = (y) => { pendingY = y; };
+export const takePendingScroll = () => { const y = pendingY; pendingY = null; return y; };

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { getProjectListUrl } from '../lib/projectListReturn';
+import { getProjectListUrl, markRestoreScroll } from '../lib/projectListReturn';
 import { graduateByStudentId } from '../data/graduates';
 import { TAB_MAP } from '../data/projectTabs';
 import { getWorkById, getWorksByStudent, getWorkStudentIds, getWorkTitle, getSubLabel, isMTeamWork, getWorkVideos } from '../data/works';
@@ -68,7 +68,11 @@ const DetailPage = () => {
   return (
     <div className="detail-page">
       <main className="work-detail-page">
-        <Link to={getProjectListUrl(work.tab) ?? `/project?category=${work.tab}`} className="work-detail-back">
+        <Link
+          to={getProjectListUrl(work.tab) ?? `/project?category=${work.tab}`}
+          className="work-detail-back"
+          onClick={markRestoreScroll}
+        >
           ← 돌아가기
         </Link>
 

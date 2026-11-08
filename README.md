@@ -315,7 +315,7 @@ Graduation-Exhibition/
     │
     └── lib/
         ├── memoryApi.js            ← Supabase REST 호출 (fetch 직접)
-        └── projectListReturn.js    ← 작품소개 목록 주소(탭·필터·검색어)를 세션에 기억 → 작품 상세 "돌아가기"가 그대로 복원
+        └── projectListReturn.js    ← 작품소개 목록 주소(탭·필터·검색어)와 스크롤 높이를 세션에 기억 → 작품 상세 "돌아가기"(·뒤로가기)가 그대로 복원
                                    (SiteEffects 가 링크 클릭을 가로채 `state` 가 사라지므로 링크 state 대신 이 방식을 쓴다)
 ```
 

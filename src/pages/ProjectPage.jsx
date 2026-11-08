@@ -1,6 +1,6 @@
-import React, { useEffect, useMemo } from 'react';
-import { Link, useLocation, useSearchParams } from 'react-router-dom';
-import { saveProjectListUrl } from '../lib/projectListReturn';
+import React, { useEffect, useLayoutEffect, useMemo } from 'react';
+import { Link, useLocation, useNavigationType, useSearchParams } from 'react-router-dom';
+import { saveProjectListUrl, saveListScroll, takeScrollToRestore, setPendingScroll } from '../lib/projectListReturn';
 import { PROJECT_TABS, TAB_MAP, getSubCategories } from '../data/projectTabs';
 import { allWorks, compareByAuthor, getWorkAuthor, getWorkKind, getTeamMemberNames, getWorkTitle, matchesSub, WORK_KINDS } from '../data/works';
 import { FALLBACK, assetUrl } from '../hooks/useImageFallback';
@@ -13,6 +13,7 @@ const matchesKeyword = (work, keyword) =>
 const ProjectPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
+  const navigationType = useNavigationType();
 
   // ?q=<검색어> (Navbar 검색), ?category=<탭 id>, ?role=<직군/필터 id> — 선택 상태를 전부 주소에 담아 두어서
   // 작품 상세에 들어갔다가 돌아와도 같은 탭·필터·검색 그대로 보인다
@@ -21,9 +22,32 @@ const ProjectPage = () => {
   const roleParam = searchParams.get('role');
 
   // 지금 목록 주소를 기억 — 작품 상세의 "돌아가기"가 같은 탭·필터로 돌려보낸다
+  const listUrl = `${location.pathname}${location.search}`;
   useEffect(() => {
-    saveProjectListUrl(`${location.pathname}${location.search}`);
-  }, [location.pathname, location.search]);
+    saveProjectListUrl(listUrl);
+  }, [listUrl]);
+
+  // 돌아왔을 때 있던 높이로 복원. 이동 효과(SiteEffects)가 이동 직후 맨 위로 올리므로, 같은 높이를 넘겨 두어 덮어쓰지 않게 한다
+  useLayoutEffect(() => {
+    const y = takeScrollToRestore(listUrl, navigationType);
+    if (y === null) return undefined;
+    window.scrollTo({ top: y, behavior: 'instant' });
+    setPendingScroll(y);
+    const clear = window.setTimeout(() => setPendingScroll(null), 1500);
+    return () => window.clearTimeout(clear);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // 스크롤할 때마다 높이를 기억 (프레임당 한 번만)
+  useEffect(() => {
+    let frame = 0;
+    const onScroll = () => {
+      if (frame) return;
+      frame = requestAnimationFrame(() => { frame = 0; saveListScroll(listUrl, window.scrollY); });
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => { window.removeEventListener('scroll', onScroll); cancelAnimationFrame(frame); };
+  }, [listUrl]);
 
   // 카테고리 지정이 없고 검색 중이면, 결과가 있는 첫 탭을 연다
   const activeTab = useMemo(() => {
