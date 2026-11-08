@@ -160,12 +160,11 @@ const DetailPage = () => {
           {/* 오른쪽: 작품 콘텐츠 */}
           <article className="detail-work-content">
             {/* 영상 링크가 없는 작품은 영상 칸 없이 판넬(브로슈어)이 바로 위에서 시작한다.
-                영상이 2개(작품 영상 / 작품 소개 영상)면 점과 화살표로 넘긴다 */}
+                영상이 2개면 점과 화살표로 넘긴다 (작품 소개 영상 → 작품 영상 순) */}
             <VideoCarousel
               key={work.id}
               videos={getWorkVideos(work)}
               title={getWorkTitle(work)}
-              labels={['작품 영상', '작품 소개 영상']}
             />
 
             <div

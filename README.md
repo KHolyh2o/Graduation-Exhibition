@@ -377,7 +377,7 @@ Graduation-Exhibition/
 | `tab`, `role`, `roles` | 탭/직군. 한 작품이 여러 직군이면 `roles` 배열 |
 | `studentId` / `studentIds` | 단독 / 공동 작품. 공동(2명 이상)은 **M-team** 으로 분류 |
 | `thumbnail`, `proposalImages[]` | 목록 썸네일 / 상세 세로 판넬 이미지(여러 장 가능) |
-| `videoUrl2` | (선택) 두 번째 영상 = **작품 소개 영상**. 영상이 2개면 작품 상세 영상 아래에 점(●●)과 좌우 화살표가 생겨 넘길 수 있다 (`VideoCarousel`). 영상은 **작품당 최대 2개** |
+| `videoUrl2` | (선택) 두 번째 영상 = **작품 소개 영상**. 영상이 2개면 작품 상세 영상 아래에 점(●●)과 좌우 화살표가 생겨 넘길 수 있다 (`VideoCarousel`). **보이는 순서는 작품 소개 영상(`videoUrl2`) → 작품 영상(`videoUrl`)** (`works.js` 의 `getWorkVideos` 에서 정함). 영상은 **작품당 최대 2개** |
 | `videoUrl` | YouTube URL. **`https://youtu.be/영상ID` 형식으로 통일** (쇼츠 주소 `youtube.com/shorts/…` 는 사이트가 읽지 못하므로 영상ID 로 바꿔 쓸 것). 비어 있으면 작품 상세에 영상 칸이 없고 판넬이 맨 위에서 시작한다 |
 | `description`, `contact` | 설명, 연락처 |
 

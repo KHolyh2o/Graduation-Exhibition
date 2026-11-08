@@ -4,23 +4,23 @@ import { toEmbedUrl } from '../data/works';
 // 작품 영상 (1~2개). 영상이 둘이면 아래 점(●●)과 좌우 화살표로 넘긴다.
 //  · 한 번에 영상 하나만 그린다 (넘기면 앞 영상은 멈춤)
 //  · 영상이 하나뿐이면 점·화살표 없이 영상만 나온다
-//  · videos: 영상 URL 배열, labels: 점·화살표에 붙일 이름 (스크린리더/툴팁용)
-const VideoCarousel = ({ videos, title, labels = [] }) => {
+//  · videos: [{ url, label }] — 화면에 보일 순서대로. label 은 점·화살표의 이름(스크린리더/툴팁용)
+const VideoCarousel = ({ videos, title }) => {
   const [index, setIndex] = useState(0);
   const count = videos.length;
   if (count === 0) return null;
 
   const current = Math.min(index, count - 1);
   const go = (next) => setIndex((next + count) % count);
-  const labelOf = (i) => labels[i] || `영상 ${i + 1}`;
+  const labelOf = (i) => videos[i].label || `영상 ${i + 1}`;
 
   return (
     <div className="detail-video">
       <div className="detail-main-media" aria-label="작품 대표 영상">
         <iframe
-          key={videos[current]}
-          src={toEmbedUrl(videos[current])}
-          title={`${title} — ${labelOf(current)}`}
+          key={videos[current].url}
+          src={toEmbedUrl(videos[current].url)}
+          title={videos[current].label ? `${title} — ${videos[current].label}` : title}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowFullScreen
           referrerPolicy="strict-origin-when-cross-origin"
@@ -50,9 +50,9 @@ const VideoCarousel = ({ videos, title, labels = [] }) => {
 
       {count > 1 && (
         <div className="detail-video-dots" role="tablist" aria-label="영상 선택">
-          {videos.map((url, i) => (
+          {videos.map((v, i) => (
             <button
-              key={url}
+              key={v.url}
               type="button"
               role="tab"
               aria-selected={i === current}
