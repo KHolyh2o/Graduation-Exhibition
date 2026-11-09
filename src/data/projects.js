@@ -228,7 +228,7 @@ export const projects = [
     thumbnail: '/images/projects/thumbnails/p-mm-func-08.webp',
     description: '',
     videoUrl: '',
-    proposalImages: [],
+    proposalImages: ['/images/projects/proposals/p-mm-func-08.webp'],
     contact: { email: '', phone: null },
   },
   {
