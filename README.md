@@ -49,7 +49,7 @@
 | **graduates** | `id`, **`studentId`(PK, 학번)**, `name`, `englishName`, `tab`·`role`(필터 코드), `jobTitle`(화면 직함), `profileImage`, `intro`(팝업용 짧은 소개), `workIntro`(작품 상세용 긴 소개), `committeeTeam`(위원회 팀, 없으면 비움), `email`, `phone`, **`introVideoUrl`**(1분 자기소개 YouTube, 없으면 비움) |
 | **projects** | **`id`(PK)**, `studentId` *또는* `studentIds[]`(공동 작품) → graduates 참조, `tab`, `role`/`roles[]`, `title`, `thumbnail`, `proposalImages[]`(판넬), `videoUrl`(작품 영상, 없으면 영상 칸 없이 판넬이 바로 시작), `videoUrl2`(선택, 작품 소개 영상), `teamImage`(선택, 공동 작품(M-team)의 단체 프로필 사진), `description`, `contact` |
 | **teamProjects** | **`id`(PK)**, `teamName`, `group`, `title`(선택), `thumbnail`, `proposalImages[]`, `teamImage`(단체사진), `videoUrl`, `description`, `members[]` = `{name, role, studentId}` → graduates 참조 |
-| **professors** | `id`, `name`, `role`(학부장·지도교수 등), `photo`, `cardPhoto`(카드용 크롭, 선택), `headline`, `message`(격려사, `\n` 줄바꿈) |
+| **professors** | `id`, `name`, `role`(학부장·지도교수·초빙강사. 초빙강사는 `name` 도 "○○○ 강사"로 적는다), `photo`, `cardPhoto`(카드용 크롭, 선택), `headline`, `message`(격려사, `\n` 줄바꿈) |
 | **archives** | `year`, `theme`, `url`(그 해 전시 사이트), `thumbnail` |
 | **EXHIBITION** (constants) | `title`, `theme`, `dateText`, `hours`(날짜별 운영 시간 배열), `place`, `address`, `total`(졸업생 수) / `COMMITTEE_TEAMS`(위원회 팀 표시 순서) |
 

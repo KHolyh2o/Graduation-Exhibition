@@ -181,7 +181,7 @@ const committeeByTeam = COMMITTEE_TEAMS
   .map((team) => ({ team, names: graduates.filter((g) => g.committeeTeam === team).map((g) => g.name) }))
   .filter((t) => t.names.length > 0);
 
-const professorNames = professors.map((p) => p.name.replace(/ 교수$/, ''));
+const professorNames = professors.map((p) => p.name.replace(/ (교수|강사)$/, ''));
 const graduateRows = chunk(graduates.map((g) => g.name), 15);
 
 /* ── 메인 페이지 ────────────────────────────────────────────────── */

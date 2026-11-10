@@ -202,7 +202,7 @@ const DepartmentPage = () => {
                   >
                     <SafeImg src={prof.cardPhoto ?? prof.photo} fallbackSrc={FALLBACK.avatar} alt={`${prof.name} 사진`} />
                   </div>
-                  <h3 className="dept-professor-name">{prof.name.replace(/ 교수$/, '')}</h3>
+                  <h3 className="dept-professor-name">{prof.name.replace(/ (교수|강사)$/, '')}</h3>
                   <p className="dept-professor-position">{positionOf(prof.role)}</p>
                 </button>
               </article>
@@ -243,7 +243,7 @@ const DepartmentPage = () => {
                 </div>
 
                 <div className="dept-message-text">
-                  <h2 className="dept-message-name" id="dept-message-name">{selected.name.replace(/ 교수$/, '')}</h2>
+                  <h2 className="dept-message-name" id="dept-message-name">{selected.name.replace(/ (교수|강사)$/, '')}</h2>
                   <p className="dept-message-position">
                     {positionOf(selected.role).replace('미디어콘텐츠학부 ', '미디어콘텐츠학부 / ')}
                   </p>
