@@ -743,9 +743,18 @@ body.page-index {
 
 /* .info-date span:first-child(폭 52px·굵게)보다 우선하도록 선택자를 길게 */
 .index-root .info-time .info-time-row .info-time-day {
-  width: auto;
+  /* 날짜 칸 폭을 고정해 두 줄의 시간이 같은 자리에서 시작하게 한다.
+     숫자마다 폭이 다른 글꼴이라 "11/16"과 "11/17"이 서로 다른 길이가 되기 때문 */
+  flex: none;
+  width: 3.4em;
   font-weight: 400;
+  font-variant-numeric: tabular-nums;
   color: #666;
+}
+
+/* 시간 숫자도 같은 폭으로 (10:00 - 19:00 / 10:00 - 17:00 의 글자가 위아래로 맞게) */
+.index-root .info-time .info-time-row {
+  font-variant-numeric: tabular-nums;
 }
 
 /* 지도 이미지 — 제목(전시안내)부터 마지막 줄(TIME)까지 키운다 */
