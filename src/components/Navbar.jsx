@@ -51,10 +51,13 @@ const Navbar = () => {
     });
   };
 
-  const closeSearch = () => {
+  // returnFocus: 닫기·ESC 로 닫을 때만 검색 아이콘으로 포커스를 돌려준다.
+  // 검색을 실행해서 닫을 때는 돌려주지 않는다 — 한글 입력 후 Enter 가 한 번 더 들어오면 아이콘 버튼이 눌려 검색창이 다시 열리기 때문
+  const closeSearch = (returnFocus = true) => {
     setSearchOpen(false);
     setKeyword('');
-    toggleRef.current?.focus();
+    if (returnFocus) toggleRef.current?.focus();
+    else inputRef.current?.blur();
   };
 
   const handleKeyDown = (e) => {
@@ -65,7 +68,7 @@ const Navbar = () => {
       const q = keyword.trim();
       if (!q) return;
       navigate(`/project?q=${encodeURIComponent(q)}`);
-      closeSearch();
+      closeSearch(false);
     }
   };
 
@@ -100,7 +103,7 @@ const Navbar = () => {
             aria-expanded={searchOpen}
             onClick={() => {
               setMenuOpen(false);
-              if (searchOpen) closeSearch(); else setSearchOpen(true);
+              if (searchOpen) closeSearch(true); else setSearchOpen(true);
             }}
           >
             <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -154,7 +157,7 @@ const Navbar = () => {
           type="button"
           className="common-search-close"
           aria-label="검색 닫기"
-          onClick={closeSearch}
+          onClick={() => closeSearch(true)}
         >
           ×
         </button>
