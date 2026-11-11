@@ -22,8 +22,7 @@ const Footer = () => (
 
       <div className="common-footer-right">
         <p>충청북도 청주시 서원구 무심서로 377-3</p>
-        <p>043-299-8800</p>
-        <p>media@seowon.ac.kr</p>
+        <p>043-299-8590</p>
 
         <div className="common-footer-sns">
           {SNS_LINKS.filter(({ url }) => url).map(({ label, url, icon }) => (
