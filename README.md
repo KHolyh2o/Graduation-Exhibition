@@ -291,7 +291,7 @@ Graduation-Exhibition/
     │
     ├── components/
     │   ├── Navbar / Footer          ← 공통 헤더·푸터
-    │   ├── SiteEffects              ← 전 페이지 공통 효과: 스크롤 등장(.fx-reveal), 페이지 이동 시 페이드(.fx-leaving)
+    │   ├── SiteEffects              ← 전 페이지 공통 효과: 스크롤 등장(.fx-reveal), 페이지 이동 시 페이드(.fx-leaving)·새 페이지 맨 위로 이동("동작 줄이기" 설정에서도 동작, 뒤로가기는 브라우저에 맡김)
     │   │                               (이동 효과는 새 화면이 그려진 뒤에 풀어야 이전 화면 잔상이 안 생긴다)
     │   ├── GraduateModal            ← 졸업생 프로필 팝업 (메인 슬라이더·졸업생 페이지·작품 상세에서 공용)
     │   ├── SafeImg                  ← 이미지 로딩 실패 시 기본 이미지로 대체

@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useNavigationType } from 'react-router-dom';
 import { takePendingScroll } from '../lib/projectListReturn';
 
 // sha_copy/js/common.js 의 "GLOBAL INTERACTION" 이식.
@@ -55,6 +55,8 @@ const getDelay = (el) => {
 const SiteEffects = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const navigationType = useNavigationType();
+  const prevPathRef = useRef(location.pathname);
   // 페이지 이동 효과를 끝내는 함수 (아래 2) 효과가 만들어 두고, 주소가 바뀐 뒤에 부른다)
   const finishLeavingRef = useRef(null);
 
@@ -126,9 +128,10 @@ const SiteEffects = () => {
     // (navigate 직후에 바로 풀면, 아직 내려받는 중인 새 페이지 대신 이전 화면이 잠깐 다시 보이는 잔상이 생긴다)
     const finishLeaving = () => {
       window.clearTimeout(safetyTimer);
+      // 작품소개 목록으로 돌아오는 경우에는 있던 높이로 (그 외에는 맨 위로). 값은 쓰든 안 쓰든 여기서 비운다
+      const restoreY = takePendingScroll();
       if (!navigating && !document.body.classList.contains('fx-leaving')) return;
-      // 작품소개 목록으로 돌아오는 경우에는 있던 높이로 (그 외에는 맨 위로)
-      window.scrollTo({ top: takePendingScroll() ?? 0, behavior: 'instant' });
+      window.scrollTo({ top: restoreY ?? 0, behavior: 'instant' });
       document.body.classList.remove('fx-leaving');
       navigating = false;
     };
@@ -175,8 +178,18 @@ const SiteEffects = () => {
 
   // 3) 주소가 바뀌어 새 화면이 그려진 다음 프레임에 이동 효과를 마무리
   useEffect(() => {
-    const id = requestAnimationFrame(() => requestAnimationFrame(() => finishLeavingRef.current?.()));
+    const pathChanged = prevPathRef.current !== location.pathname;
+    prevPathRef.current = location.pathname;
+    const id = requestAnimationFrame(() => requestAnimationFrame(() => {
+      if (document.body.classList.contains('fx-leaving')) { finishLeavingRef.current?.(); return; }
+      // 이동 효과를 거치지 않은 페이지 이동(동작 줄이기 설정, 코드로 하는 이동 등)도 새 페이지는 맨 위에서 시작한다.
+      // 뒤로가기/앞으로가기(POP)는 브라우저가 기억한 위치에 맡긴다.
+      const restoreY = takePendingScroll();
+      if (pathChanged && navigationType !== 'POP') window.scrollTo({ top: restoreY ?? 0, behavior: 'instant' });
+    }));
     return () => cancelAnimationFrame(id);
+    // navigationType 은 주소가 바뀔 때 함께 바뀌므로 의존성에 넣지 않아도 같은 시점의 값이다
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.pathname, location.search]);
 
   return null;

@@ -37,12 +37,20 @@ export const markRestoreScroll = () => {
   try { sessionStorage.setItem(RESTORE_KEY, '1'); } catch { /* 무시 */ }
 };
 
+// 이 탭에서 목록을 이미 한 번 열었는지. 페이지를 처음 불러올 때(새 탭·새로고침·주소 직접 입력)는
+// React Router 가 이동 종류를 'POP' 으로 알려 주기 때문에, 이 값 없이는 "뒤로가기"와 구분되지 않는다.
+// (새 탭은 sessionStorage 까지 복사되어 이전 탭의 높이가 남아 있을 수 있다)
+let listOpenedInThisLoad = false;
+
 // 목록이 열릴 때 호출: 복원해야 하면 저장된 높이를, 아니면 null. 표시는 한 번 쓰면 지운다.
 export const takeScrollToRestore = (url, navigationType) => {
+  const openedBefore = listOpenedInThisLoad;
+  listOpenedInThisLoad = true;
   try {
     const marked = sessionStorage.getItem(RESTORE_KEY) === '1';
     sessionStorage.removeItem(RESTORE_KEY);
-    if (!marked && navigationType !== 'POP') return null;
+    // 뒤로가기(POP)는 같은 탭에서 목록을 한 번이라도 거친 뒤일 때만 인정한다
+    if (!marked && !(navigationType === 'POP' && openedBefore)) return null;
     const saved = JSON.parse(sessionStorage.getItem(SCROLL_KEY) ?? 'null');
     return saved && saved.url === url && Number.isFinite(saved.y) ? saved.y : null;
   } catch { return null; }

@@ -34,7 +34,8 @@ const ProjectPage = () => {
     window.scrollTo({ top: y, behavior: 'instant' });
     setPendingScroll(y);
     const clear = window.setTimeout(() => setPendingScroll(null), 1500);
-    return () => window.clearTimeout(clear);
+    // 목록을 떠나면 값을 반드시 비운다 (남아 있으면 다른 페이지로 갈 때 맨 위 대신 이 높이로 올라간다)
+    return () => { window.clearTimeout(clear); setPendingScroll(null); };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
