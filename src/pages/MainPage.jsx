@@ -175,14 +175,13 @@ const StudentSlider = () => {
 
 /* ── 크레딧 ─────────────────────────────────────────────────────── */
 const SPACE = '　';   // 이름 사이 전각 공백 (sha_copy 와 동일)
-const chunk = (list, size) => Array.from({ length: Math.ceil(list.length / size) }, (_, i) => list.slice(i * size, (i + 1) * size));
 
 const committeeByTeam = COMMITTEE_TEAMS
   .map((team) => ({ team, names: graduates.filter((g) => g.committeeTeam === team).map((g) => g.name) }))
   .filter((t) => t.names.length > 0);
 
 const professorNames = professors.map((p) => p.name.replace(/ (교수|강사)$/, ''));
-const graduateRows = chunk(graduates.map((g) => g.name), 15);
+const graduateNames = graduates.map((g) => g.name);
 
 /* ── 메인 페이지 ────────────────────────────────────────────────── */
 const TARGETS = [
@@ -454,7 +453,14 @@ const MainPage = () => {
             <div className="credit-row">
               <h3>졸업생</h3>
               <div className="credit-names credit-graduates">
-                {graduateRows.map((row, i) => <p key={i}>{row.join(SPACE)}</p>)}
+                <p>
+                  {graduateNames.map((name, i) => (
+                    <React.Fragment key={name}>
+                      {i > 0 && SPACE}
+                      <span className="credit-graduate-name">{name}</span>
+                    </React.Fragment>
+                  ))}
+                </p>
               </div>
             </div>
           </div>

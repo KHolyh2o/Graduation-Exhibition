@@ -902,9 +902,14 @@ body.page-index {
 }
 
 .index-root .credit-graduates p {
-  margin: 0 0 5px;
+  margin: 0;
   font-size: 13px;
   line-height: 2;
+}
+
+/* 이름 하나는 중간에 끊기지 않게 (영문 이름 포함) — 줄바꿈은 화면 폭에 맡긴다 */
+.index-root .credit-graduate-name {
+  white-space: nowrap;
 }
 
 /* ======================================
