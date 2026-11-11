@@ -272,6 +272,49 @@ body:has(.project-page) {
   letter-spacing: -0.04em;
 }
 
+/* 검색 결과 안내 — 필터 아래, 목록 바로 위에 조용한 한 줄. "전체 작품 보기"는 강조색 텍스트 링크 */
+.project-page .search-result-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  margin: 34px 0 0;
+  padding: 0 16px;
+  font-size: 15px;
+  color: #5a5a5a;
+}
+
+.project-page .search-result-bar strong {
+  color: #202020;
+  font-weight: 700;
+}
+
+.project-page .search-result-dot {
+  color: #b5b5b5;
+}
+
+.project-page .search-result-clear {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  font: inherit;
+  font-weight: 600;
+  color: var(--category-accent-text, var(--accent));
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+
+.project-page .search-result-clear:hover,
+.project-page .search-result-clear:focus-visible {
+  text-decoration-thickness: 2px;
+}
+
+.project-page .has-search .portfolio-grid {
+  margin-top: 30px;
+}
+
 .project-page .empty-state {
   padding: 100px 10px 140px;
   text-align: center;
@@ -413,14 +456,17 @@ body:has(.project-page) {
 =================================================== */
 .project-page {
   --category-accent: #d92936;
+  --category-accent-text: #d92936;   /* 흰 배경 위 글자용 */
 }
 
 .project-page[data-category="video"] {
   --category-accent: #2591b8;
+  --category-accent-text: #2591b8;
 }
 
 .project-page[data-category="team"] {
   --category-accent: #f3d345;
+  --category-accent-text: #b8920a;   /* 노랑은 흰 배경에서 안 보여서 글자만 진하게 */
 }
 
 /* 상단 카테고리 글자색 — 선택된 탭이 아니라 "그 버튼 자신"의 색을 쓴다 (호버 시 영상미디어는 파랑, 팀은 노랑) */

@@ -83,6 +83,15 @@ const ProjectPage = () => {
     ? WORK_KINDS.map((k) => ({ ...k, works: visible.filter((w) => getWorkKind(w) === k.id) })).filter((s) => s.works.length > 0)
     : [{ id: 'all', label: '', works: visible }];
 
+  // 검색을 끝내고 전체 작품으로 돌아간다. 검색 중에 자동으로 열린 탭은 그대로 두고(category 를 주소에 고정), 검색어만 지운다
+  const rawKeyword = (searchParams.get('q') ?? '').trim();
+  const clearSearch = () => {
+    const next = new URLSearchParams(searchParams);
+    next.delete('q');
+    next.set('category', activeTab);
+    setSearchParams(next, { replace: true });
+  };
+
   const switchTab = (id) => {
     const next = new URLSearchParams(searchParams);
     next.set('category', id);
@@ -121,7 +130,7 @@ const ProjectPage = () => {
           </div>
         </section>
 
-        <section className="portfolio-section" aria-label="작품 모아보기">
+        <section className={`portfolio-section${keyword ? ' has-search' : ''}`} aria-label="작품 모아보기">
           <div className="role-filters" role="group" aria-label="작품 필터">
             {filters.map((f) => (
               <button
@@ -135,6 +144,16 @@ const ProjectPage = () => {
               </button>
             ))}
           </div>
+
+          {keyword && (
+            <p className="search-result-bar" role="status">
+              <strong>&lsquo;{rawKeyword}&rsquo;</strong> 검색 결과 {visible.length}개
+              <span className="search-result-dot" aria-hidden="true">·</span>
+              <button type="button" className="search-result-clear" onClick={clearSearch}>
+                전체 작품 보기
+              </button>
+            </p>
+          )}
 
           <div aria-live="polite">
             {sections.map((section) => (
