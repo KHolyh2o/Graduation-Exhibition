@@ -55,7 +55,7 @@ export const graduates = [
     intro: '평범함 속 새로운 장면을 발견하는 영상 제작자 박소희입니다. 콘텐츠 기획, 2D·3D 모션그래픽, AI 영상 등 다양하게 구현해 왔습니다. 비주얼로 메시지와 감정을 전달하는 제작자가 되겠습니다.',
     workIntro: '평범한 생각에서 새로운 장면을 발견해 영상으로 풀어내는 영상 제작자 박소희입니다.   콘텐츠 기획 영상과 2D·3D 모션그래픽, AI를 활용한 영상까지 다양한 방식으로 아이디어를 영상으로 구현해 왔습니다.   앞으로는 모션그래픽과 광고영상 분야에서 메시지와 감정을 효과적인 비주얼로 전달하고, 표현을 만들어가는 영상 제작자가 되겠습니다.',
     committee: true, committeeTeam: '디자인팀',
-    email: 'sohui040722@naverl.com',
+    email: 'sohui040722@naver.com',
     introVideoUrl: 'https://youtu.be/oEAXprknwu8',
   },
   { id: 'g-09', studentId: '202110584', name: '박재민', englishName: 'Park Jaemin',
