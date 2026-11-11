@@ -31,7 +31,10 @@ const ProjectPage = () => {
   useLayoutEffect(() => {
     const y = takeScrollToRestore(listUrl, navigationType);
     if (y === null) return undefined;
-    window.scrollTo({ top: y, behavior: 'instant' });
+    // 이동 효과로 본문이 가려져 있는 동안(돌아가기)에는 여기서 스크롤하지 않는다. 이 시점에 스크롤하면 브라우저가 카드 스타일을
+    // 먼저 계산해 버려서, 카드가 "투명 → 올라오기"가 아니라 이미 보이는 상태에서 시작해 등장 애니메이션이 사라진다.
+    // 높이는 SiteEffects 가 이동을 마무리할 때(pendingScroll) 맞춘다. 브라우저 뒤로가기는 가려진 적이 없으므로 바로 맞춘다.
+    if (!document.body.classList.contains('fx-leaving')) window.scrollTo({ top: y, behavior: 'instant' });
     setPendingScroll(y);
     const clear = window.setTimeout(() => setPendingScroll(null), 1500);
     // 목록을 떠나면 값을 반드시 비운다 (남아 있으면 다른 페이지로 갈 때 맨 위 대신 이 높이로 올라간다)

@@ -43,7 +43,17 @@ export const markRestoreScroll = () => {
 let listOpenedInThisLoad = false;
 
 // 목록이 열릴 때 호출: 복원해야 하면 저장된 높이를, 아니면 null. 표시는 한 번 쓰면 지운다.
+// 개발 모드(StrictMode)는 같은 화면의 effect 를 연달아 두 번 실행한다. 표시를 한 번 쓰면 지우기 때문에
+// 두 번째 호출이 "복원 안 함"으로 뒤집히지 않도록, 직전 결과를 잠깐 기억해 같은 값을 돌려준다.
+let lastTake = null;
 export const takeScrollToRestore = (url, navigationType) => {
+  if (lastTake && lastTake.url === url && Date.now() - lastTake.at < 300) return lastTake.result;
+  const result = computeScrollToRestore(url, navigationType);
+  lastTake = { url, at: Date.now(), result };
+  return result;
+};
+
+const computeScrollToRestore = (url, navigationType) => {
   const openedBefore = listOpenedInThisLoad;
   listOpenedInThisLoad = true;
   try {
