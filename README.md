@@ -47,7 +47,7 @@
 | 테이블 | 속성 |
 |---|---|
 | **graduates** | `id`, **`studentId`(PK, 학번)**, `name`, `englishName`, `tab`·`role`(필터 코드), `jobTitle`(화면 직함), `profileImage`, `intro`(팝업용 짧은 소개), `workIntro`(작품 상세용 긴 소개), `committeeTeam`(위원회 팀, 없으면 비움), `email`, `phone`, **`introVideoUrl`**(1분 자기소개 YouTube, 없으면 비움) |
-| **projects** | **`id`(PK)**, `studentId` *또는* `studentIds[]`(공동 작품) → graduates 참조, `tab`, `role`/`roles[]`, `title`, `thumbnail`, `proposalImages[]`(판넬), `videoUrl`(작품 영상, 없으면 영상 칸 없이 판넬이 바로 시작), `videoUrl2`(선택, 작품 소개 영상), `teamImage`(선택, 공동 작품(M-team)의 단체 프로필 사진), `description`, `contact` |
+| **projects** | **`id`(PK)**, `studentId` *또는* `studentIds[]`(공동 작품) → graduates 참조, `tab`, `role`/`roles[]`, `title`, `thumbnail`, `proposalImages[]`(판넬), `videoUrl`(작품 영상, 없으면 영상 칸 없이 판넬이 바로 시작), `preVideoUrl`(선택, 작품 소개 영상), `teamImage`(선택, 공동 작품(M-team)의 단체 프로필 사진), `description`, `contact` |
 | **teamProjects** | **`id`(PK)**, `teamName`, `group`, `title`(선택), `thumbnail`, `proposalImages[]`, `teamImage`(단체사진), `videoUrl`, `description`, `members[]` = `{name, role, studentId}` → graduates 참조 |
 | **professors** | `id`, `name`, `role`(학부장·지도교수·초빙강사. 초빙강사는 `name` 도 "○○○ 강사"로 적는다), `photo`, `cardPhoto`(카드용 크롭, 선택), `headline`, `message`(격려사, `\n` 줄바꿈) |
 | **archives** | `year`, `theme`, `url`(그 해 전시 사이트), `thumbnail` |
@@ -383,7 +383,7 @@ Graduation-Exhibition/
 | `studentId` / `studentIds` | 단독 / 공동 작품. 공동(2명 이상)은 **M-team** 으로 분류 |
 | `thumbnail`, `proposalImages[]` | 목록 썸네일 / 상세 세로 판넬 이미지(여러 장 가능) |
 | `teamImage` | (선택) 공동 작품(M-team)의 단체 프로필 사진 `/images/teams/<작품 id>.webp`. 배경 투명 WebP, 폭 1400px 이하로 줄여서 올린다. 작품 상세 왼쪽에 표시 |
-| `videoUrl2` | (선택) 두 번째 영상 = **작품 소개 영상**. 영상이 2개면 작품 상세 영상 아래에 점(●●)과 좌우 화살표가 생겨 넘길 수 있다 (`VideoCarousel`). **보이는 순서는 작품 소개 영상(`videoUrl2`) → 작품 영상(`videoUrl`)** (`works.js` 의 `getWorkVideos` 에서 정함). 영상은 **작품당 최대 2개** |
+| `preVideoUrl` | (선택) 두 번째 영상 = **작품 소개 영상**. 영상이 2개면 작품 상세 영상 아래에 점(●●)과 좌우 화살표가 생겨 넘길 수 있다 (`VideoCarousel`). **보이는 순서는 작품 소개 영상(`preVideoUrl`) → 작품 영상(`videoUrl`)** (`works.js` 의 `getWorkVideos` 에서 정함). 영상은 **작품당 최대 2개** |
 | `videoUrl` | YouTube URL. **`https://youtu.be/영상ID` 형식으로 통일** (쇼츠 주소 `youtube.com/shorts/…` 는 사이트가 읽지 못하므로 영상ID 로 바꿔 쓸 것). 비어 있으면 작품 상세에 영상 칸이 없고 판넬이 맨 위에서 시작한다 |
 | `description`, `contact` | 설명, 연락처 |
 
@@ -471,12 +471,12 @@ npm run validate  →  npm run dev 로 눈으로 확인  →  npm run build
 |---|---|
 | 자기소개 영상 | `graduates.csv` 의 `introVideoUrl` → `npm run csv:graduates csv_data/graduates.csv` |
 | 작품 영상 | 영상전공 작품의 `videoUrl` |
-| 중간발표 영상 (작품 소개 포함) | 영상전공은 같은 작품의 `videoUrl2`, 멀티미디어는 작품의 `videoUrl` |
+| 중간발표 영상 (작품 소개 포함) | 영상전공은 같은 작품의 `preVideoUrl`, 멀티미디어는 작품의 `videoUrl` |
 | 창업캡스톤 | 해당 팀의 `videoUrl` |
 
 - 링크는 `https://youtu.be/영상ID` 로 정리 (`?si=…` 같은 꼬리표 제거).
 - 엑셀의 영상 제목과 작품명이 다를 수 있으므로 학생 이름 + 영상 주제로 짝을 확인하고, 애매하면 담당 학생에게 되묻기.
-- 영상이 없는 작품은 `videoUrl` 을 비워 두면 된다 (빈 박스는 나오지 않음). 영상전공은 작품 영상(`videoUrl`) + 작품 소개 영상(`videoUrl2`) 두 개까지.
+- 영상이 없는 작품은 `videoUrl` 을 비워 두면 된다 (빈 박스는 나오지 않음). 영상전공은 작품 영상(`videoUrl`) + 작품 소개 영상(`preVideoUrl`) 두 개까지.
 - 영상전공 판넬 이미지는 맨 위에 흰 여백 187px 가 들어 있어 `DetailPage.css` 에서 그만큼 잘라 올린다 (멀티미디어·팀 판넬은 여백 없음). 판넬을 새로 받으면 여백 크기를 다시 확인할 것.
 
 ### 6.2 자주 쓰는 순서
@@ -745,7 +745,7 @@ push to main
 - **sha_copy 이중 관리 비용**: 이식 누락이 생기기 쉬움. 내년에는 (a) 디자이너와 처음부터 컴포넌트 단위로 협업하거나, (b) sha_copy 를 폐지하고 피그마→React 로 가는 것도 선택지.
 - **DATA_MANAGEMENT_GUIDE.md 정리** (§6.4) 및 **README 의 AI 가이드 문구** 갱신.
 - **자동 테스트 없음**: 지금은 `validate` + `lint` + `build` 가 전부. 핵심 로직(`works.js` 필터)에 단위 테스트(Vitest)를 추가하면 안전.
-- **영상이 작품당 2개를 넘길 때**: 지금은 작품 행에 `videoUrl`, `videoUrl2` 칸만 둔 단순 구조다. 영상 종류·개수가 더 늘면 `videos(id, ownerType, ownerId, kind, url)` 테이블을 따로 두는 편이 낫다.
+- **영상이 작품당 2개를 넘길 때**: 지금은 작품 행에 `videoUrl`, `preVideoUrl` 칸만 둔 단순 구조다. 영상 종류·개수가 더 늘면 `videos(id, ownerType, ownerId, kind, url)` 테이블을 따로 두는 편이 낫다.
 - **TypeScript 미사용**: 데이터 모양을 타입으로 보장하면 validate 의 상당 부분을 대체 가능.
 - **MEMORY 스팸 방지**·**관리자 삭제 UI** 없음 (§7.4).
 - **접근성/SEO**: SPA 라 검색 노출이 약함. `index.html` 의 OG 메타가 가리키는 `/images/og-image.jpg` 는 **현재 저장소에 파일이 없음** (링크 미리보기 이미지가 안 뜸) → 만들어 넣을 것. 필요하면 사전 렌더링(prerender) 도입 검토.

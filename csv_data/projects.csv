@@ -1,4 +1,4 @@
-id,studentId,tab,role,title,thumbnail,description,videoUrl,proposalImages,contactEmail,contactPhone,videoUrl2,teamImage
+id,studentId,tab,role,title,thumbnail,description,videoUrl,proposalImages,contactEmail,contactPhone,preVideoUrl,teamImage
 p-mm-202311198-brand,202311198,multimedia,pm,코웨이,/images/projects/thumbnails/p-mm-202311198-brand.webp,,https://youtu.be/5i_rIvOgtbk,/images/projects/proposals/p-mm-202311198-brand.webp,,,,
 p-mm-202311153-brand,202311153,multimedia,design,청정원,/images/projects/thumbnails/p-mm-202311153-brand.webp,,https://youtu.be/0jsPTnLejPs,/images/projects/proposals/p-mm-202311153-brand.webp,,,,
 p-mm-202111492-brand,202111492,multimedia,pm,현대백화점,/images/projects/thumbnails/p-mm-202111492-brand.webp,,https://youtu.be/BBzWTngu9DU,/images/projects/proposals/p-mm-202111492-brand.webp,,,,
@@ -44,8 +44,8 @@ p-vd-202110030-3,202110030,video,planning,우륵문화제,/images/projects/thumb
 p-vd-202111439-1,202111439,video,planning,철이없는세상,/images/projects/thumbnails/p-vd-202111439-1.webp,,https://youtu.be/m1_Jh6FnU7Q,/images/projects/proposals/p-vd-202111439-1.webp,,,https://youtu.be/ogb6d8hKCNY,
 p-vd-202111439-2,202111439,video,planning,WHAT IF,/images/projects/thumbnails/p-vd-202111439-2.webp,,https://youtu.be/EG8Gq1TvqGk,/images/projects/proposals/p-vd-202111439-2.webp,,,https://youtu.be/E3R-rN8kOEE,
 p-vd-202111439-3,202111439,video,planning,간송미술관,/images/projects/thumbnails/p-vd-202111439-3.webp,,,/images/projects/proposals/p-vd-202111439-3.webp,,,,
-p-vd-202110206-1,202110206,video,planning,AI실험실,/images/projects/thumbnails/p-vd-202110206-1.webp,,https://youtu.be/zINVjmudXVY,/images/projects/proposals/p-vd-202110206-1.webp,,,https://youtu.be/zO5N80gHorw,
-p-vd-202110206-2,202110206,video,planning,쇼는계속된다,/images/projects/thumbnails/p-vd-202110206-2.webp,,https://youtu.be/FxW7bdHza54,/images/projects/proposals/p-vd-202110206-2.webp,,,https://youtu.be/dDLTYAUENeM,
+p-vd-202110206-1,202110206,video,planning,AI실험실,/images/projects/thumbnails/p-vd-202110206-1.webp,,https://youtu.be/FxW7bdHza54,/images/projects/proposals/p-vd-202110206-1.webp,,,https://youtu.be/zO5N80gHorw,
+p-vd-202110206-2,202110206,video,planning,쇼는계속된다,/images/projects/thumbnails/p-vd-202110206-2.webp,,https://youtu.be/zINVjmudXVY,/images/projects/proposals/p-vd-202110206-2.webp,,,https://youtu.be/dDLTYAUENeM,
 p-vd-202110206-3,202110206,video,planning,문경찻사발축제,/images/projects/thumbnails/p-vd-202110206-3.webp,,,/images/projects/proposals/p-vd-202110206-3.webp,,,,
 p-vd-202311148-1,202311148,video,production,PREFLOW,/images/projects/thumbnails/p-vd-202311148-1.webp,,https://youtu.be/H4mm_gzCb1A,/images/projects/proposals/p-vd-202311148-1.webp,,,https://youtu.be/tnQ0DGHKoew,
 p-vd-202311148-2,202311148,video,production,행선지,/images/projects/thumbnails/p-vd-202311148-2.webp,,https://youtu.be/GkDOy6n6jPA,/images/projects/proposals/p-vd-202311148-2.webp,,,https://youtu.be/pP8quxSyBjA,

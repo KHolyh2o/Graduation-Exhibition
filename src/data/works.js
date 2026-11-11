@@ -67,12 +67,12 @@ export const getWorksByStudent = (studentId) => [
 ];
 
 // 작품에 붙은 영상 목록 (최대 2개) — 화면에 보이는 순서대로 [{ url, label }].
-//  videoUrl2 = 작품 소개 영상 (먼저 보인다), videoUrl = 작품 영상(소개 없는 버전). 비어 있는 칸은 뺀다.
+//  preVideoUrl = 작품 소개 영상 (먼저 보인다), videoUrl = 작품 영상(소개 없는 버전). 비어 있는 칸은 뺀다.
 //  영상이 하나뿐이면 이름(label)은 붙이지 않는다 (멀티미디어·팀 작품의 단일 영상).
 export const getWorkVideos = (work) => {
-  const both = Boolean(work.videoUrl && work.videoUrl2);
+  const both = Boolean(work.videoUrl && work.preVideoUrl);
   return [
-    work.videoUrl2 && { url: work.videoUrl2, label: '작품 소개 영상' },
+    work.preVideoUrl && { url: work.preVideoUrl, label: '작품 소개 영상' },
     work.videoUrl && { url: work.videoUrl, label: both ? '작품 영상' : '' },
   ].filter(Boolean);
 };
