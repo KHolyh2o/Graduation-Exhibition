@@ -21,7 +21,7 @@ const Footer = () => (
       </div>
 
       <div className="common-footer-right">
-        <p>충청북도 청주시 서원구 무심서로 377-3</p>
+        <p>(우)28674 충북 청주시 서원구 무심서로 377-3(모충동) 서원대학교 제1자연관 302호</p>
         <p>043-299-8590</p>
 
         <div className="common-footer-sns">
