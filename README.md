@@ -430,6 +430,7 @@ Graduation-Exhibition/
 | 팀 단체사진 (U300 팀, M-team 공동 작품) | `public/images/teams/` | `<팀 id 또는 작품 id>.webp` (예: `t-u300-01.webp`, `p-mm-func-01.webp`) |
 | 교수진 | `public/images/professors/` | – |
 | 기본 이미지 | `public/images/no-image.svg`, `no-avatar.svg` | 이미지 누락 시 자동 대체 |
+| 링크 공유 미리보기(OG) | `public/images/og-image.jpg` | 1200×630 JPG. `index.html` 의 `og:image`·`twitter:image` 가 참조. 바꾼 뒤엔 카카오 OG 캐시 초기화 필요 |
 
 - **작품 이미지는 작품 id와 같은 이름**으로 둡니다. 사람 이름·한글이 파일명에 안 들어가 인코딩 문제가 없고, 매핑이 자동입니다.
 - 판넬·썸네일은 **webp**로 변환해 용량을 줄였습니다.
